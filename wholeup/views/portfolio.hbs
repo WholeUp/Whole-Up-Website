@@ -1,0 +1,83 @@
+<!-- HERO -->
+<section class="page-hero bg-cream px-6 border-b border-black/5">
+  <div class="max-w-7xl mx-auto text-center gs-reveal">
+    <p class="text-xs font-bold tracking-[0.3em] uppercase text-primary mb-4">Case Studies</p>
+    <h1 class="text-5xl md:text-7xl font-black uppercase tracking-widest text-dark mb-6">Our <span class="text-primary">Work.</span></h1>
+    <p class="text-dark/60 font-medium text-xl max-w-3xl mx-auto">Real campaigns. Real numbers. Real businesses we've transformed.</p>
+  </div>
+</section>
+
+<!-- PORTFOLIO GRID -->
+<section class="py-24 bg-white px-6">
+  <div class="max-w-7xl mx-auto">
+    <!-- Filter -->
+    <div class="flex justify-center gap-3 mb-16 flex-wrap gs-reveal" id="filter-tabs">
+      <button onclick="filterCards('all')" class="filter-tab active-tab bg-dark text-white border border-dark px-6 py-3 rounded-xl font-bold text-sm uppercase tracking-widest transition">All</button>
+      <button onclick="filterCards('ads')" class="filter-tab border border-dark/20 text-dark px-6 py-3 rounded-xl font-bold text-sm uppercase tracking-widest hover:border-dark transition">Paid Ads</button>
+      <button onclick="filterCards('seo')" class="filter-tab border border-dark/20 text-dark px-6 py-3 rounded-xl font-bold text-sm uppercase tracking-widest hover:border-dark transition">SEO</button>
+      <button onclick="filterCards('social')" class="filter-tab border border-dark/20 text-dark px-6 py-3 rounded-xl font-bold text-sm uppercase tracking-widest hover:border-dark transition">Social Media</button>
+      <button onclick="filterCards('web')" class="filter-tab border border-dark/20 text-dark px-6 py-3 rounded-xl font-bold text-sm uppercase tracking-widest hover:border-dark transition">Web Design</button>
+    </div>
+
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8" id="portfolio-grid">
+      {{#each portfolio}}
+      <div class="portfolio-card group relative overflow-hidden rounded-[30px] {{#if dark}}bg-dark border border-white/5{{else}}bg-white border border-black/5{{/if}} shadow-lg hover:shadow-2xl transition-all duration-500 gs-reveal" data-category="{{category}}" data-tilt data-tilt-max="4">
+        <div class="h-60 flex items-center justify-center relative overflow-hidden" style="background:linear-gradient(135deg,{{gradientFrom}},{{gradientTo}})">
+          <div class="text-center z-10 p-6">
+            <div class="w-20 h-20 {{#if dark}}bg-white/10 border border-white/10{{else}}bg-white{{/if}} rounded-2xl shadow-lg flex items-center justify-center mx-auto mb-4 anim-float-1">
+              <i class="{{icon}} text-3xl" style="color:{{iconColor}}"></i>
+            </div>
+            <p class="text-xs font-bold tracking-widest uppercase" style="color:{{iconColor}}">{{categoryLabel}}</p>
+          </div>
+          <div class="absolute top-4 right-4 text-white text-[10px] font-black uppercase tracking-wider px-3 py-1 rounded-full" style="background:{{iconColor}}">{{categoryLabel}}</div>
+        </div>
+        <div class="p-8">
+          <h3 class="text-xl font-black uppercase tracking-wider {{#if dark}}text-white{{else}}text-dark{{/if}} mb-2">{{title}}</h3>
+          <p class="{{#if dark}}text-white/50{{else}}text-dark/60{{/if}} text-sm font-medium mb-4">{{description}}</p>
+          <div class="flex items-center gap-4 text-xs font-bold flex-wrap">
+            <span class="px-3 py-1.5 rounded-full" style="color:{{iconColor}};background:{{tagBg}}">{{metric1}}</span>
+            <span class="px-3 py-1.5 rounded-full {{#if dark}}bg-white/10 text-white{{else}}bg-gray-100 text-dark{{/if}}">{{metric2}}</span>
+          </div>
+        </div>
+        <div class="absolute inset-0 bg-dark/92 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-400 rounded-[30px]">
+          <div class="text-center text-white p-8">
+            <i class="fas fa-eye text-3xl mb-4" style="color:{{iconColor}}"></i>
+            <h4 class="font-black text-lg mb-3 uppercase tracking-widest">{{title}}</h4>
+            <p class="text-white/70 text-sm font-medium mb-6">{{result}}</p>
+            <div class="flex flex-wrap gap-2 justify-center">
+              {{#each services}}<span class="bg-white/10 text-white text-[10px] font-bold uppercase tracking-widest px-3 py-1.5 rounded-full">{{this}}</span>{{/each}}
+            </div>
+          </div>
+        </div>
+      </div>
+      {{/each}}
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="py-24 px-6 bg-primary relative overflow-hidden">
+  <div class="absolute inset-0 opacity-10" style="background-image:radial-gradient(#fff 1px,transparent 1px);background-size:30px 30px;"></div>
+  <div class="max-w-3xl mx-auto text-center relative z-10 gs-reveal">
+    <h2 class="text-4xl md:text-5xl font-black text-white uppercase tracking-widest mb-6">Want Results Like These?</h2>
+    <p class="text-white/80 text-lg font-medium mb-10">Book a free audit. We'll identify exactly how to drive this kind of growth for your business.</p>
+    <a href="/contact" class="bg-white text-primary px-10 py-5 rounded-xl font-black uppercase tracking-widest text-sm shadow-xl hover:bg-cream transition magnetic-btn inline-flex items-center gap-2">
+      Book Free Strategy Call <i class="fas fa-arrow-right"></i>
+    </a>
+  </div>
+</section>
+
+<script>
+function filterCards(cat) {
+  const cards = document.querySelectorAll('.portfolio-card');
+  const tabs = document.querySelectorAll('.filter-tab');
+  tabs.forEach(t => { t.classList.remove('active-tab','bg-dark','text-white','border-dark'); t.classList.add('border-dark/20','text-dark'); });
+  event.target.classList.add('active-tab','bg-dark','text-white','border-dark');
+  event.target.classList.remove('border-dark/20','text-dark');
+  cards.forEach(card => {
+    const show = cat === 'all' || card.dataset.category === cat;
+    card.style.display = show ? '' : 'none';
+    if(show) gsap.fromTo(card,{opacity:0,y:20},{opacity:1,y:0,duration:.4,ease:'power2.out'});
+  });
+}
+</script>

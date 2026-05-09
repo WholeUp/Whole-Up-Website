@@ -1,0 +1,65 @@
+<!-- HERO -->
+<section class="page-hero bg-cream px-6 border-b border-black/5">
+  <div class="max-w-7xl mx-auto text-center gs-reveal">
+    <p class="text-xs font-bold tracking-[0.3em] uppercase text-primary mb-4">Got Questions?</p>
+    <h1 class="text-5xl md:text-7xl font-black uppercase tracking-widest text-dark mb-6">We Have <span class="text-primary">Answers.</span></h1>
+    <p class="text-dark/60 font-medium text-xl max-w-3xl mx-auto">Everything you need to know about working with Wholeup.</p>
+  </div>
+</section>
+
+<!-- FAQ SECTIONS -->
+<section class="py-24 bg-white px-6">
+  <div class="max-w-4xl mx-auto">
+    {{#each faqs}}
+    <div class="mb-16 gs-reveal">
+      <h2 class="text-2xl font-black uppercase tracking-widest text-dark mb-8 pb-4 border-b-2 border-primary/20">{{category}}</h2>
+      <div class="space-y-4">
+        {{#each items}}
+        <div class="faq-item bg-cream rounded-2xl border border-black/5 overflow-hidden">
+          <button class="faq-toggle w-full flex items-center justify-between p-7 text-left" onclick="toggleFaq(this)">
+            <span class="font-black text-dark text-lg pr-8">{{q}}</span>
+            <span class="w-8 h-8 rounded-full bg-dark text-white flex items-center justify-center flex-shrink-0 transition-transform duration-300 faq-icon">
+              <i class="fas fa-plus text-xs"></i>
+            </span>
+          </button>
+          <div class="faq-answer px-7 pb-0 max-h-0 overflow-hidden transition-all duration-500">
+            <p class="text-dark/70 font-medium leading-relaxed pb-7">{{a}}</p>
+          </div>
+        </div>
+        {{/each}}
+      </div>
+    </div>
+    {{/each}}
+
+    <!-- Still have questions -->
+    <div class="mt-16 bg-cream rounded-3xl p-12 text-center border border-black/5 gs-reveal">
+      <div class="w-16 h-16 bg-primary/10 rounded-2xl flex items-center justify-center text-primary text-2xl mx-auto mb-6"><i class="fas fa-comments"></i></div>
+      <h3 class="text-2xl font-black uppercase tracking-widest text-dark mb-4">Still Have Questions?</h3>
+      <p class="text-dark/60 font-medium mb-8">Chat with our team directly — we're available Mon–Sat, 10am to 7pm IST.</p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="/contact" class="inline-flex items-center gap-2 bg-primary text-white px-8 py-4 rounded-xl font-bold uppercase tracking-widest text-sm shadow-lg hover:bg-green-600 transition magnetic-btn">
+          Book Free Call <i class="fas fa-arrow-right"></i>
+        </a>
+        <a href="https://wa.me/919426846035" target="_blank" class="inline-flex items-center gap-2 bg-[#25D366] text-white px-8 py-4 rounded-xl font-bold uppercase tracking-widest text-sm hover:bg-green-500 transition magnetic-btn">
+          <i class="fab fa-whatsapp"></i> WhatsApp Us
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+function toggleFaq(btn) {
+  const answer = btn.nextElementSibling;
+  const icon = btn.querySelector('.faq-icon');
+  const isOpen = answer.style.maxHeight && answer.style.maxHeight !== '0px';
+  // Close all
+  document.querySelectorAll('.faq-answer').forEach(a => a.style.maxHeight = '0px');
+  document.querySelectorAll('.faq-icon').forEach(i => { i.style.transform = 'rotate(0deg)'; i.innerHTML = '<i class="fas fa-plus text-xs"></i>'; });
+  if (!isOpen) {
+    answer.style.maxHeight = answer.scrollHeight + 'px';
+    icon.style.transform = 'rotate(45deg)';
+    icon.innerHTML = '<i class="fas fa-times text-xs"></i>';
+  }
+}
+</script>

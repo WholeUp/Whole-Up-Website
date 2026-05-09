@@ -1,0 +1,69 @@
+<!-- HERO -->
+<section class="page-hero bg-cream px-6 border-b border-black/5">
+  <div class="max-w-7xl mx-auto text-center gs-reveal">
+    <p class="text-xs font-bold tracking-[0.3em] uppercase text-primary mb-4">Transparent Pricing</p>
+    <h1 class="text-5xl md:text-7xl font-black uppercase tracking-widest text-dark mb-6">Simple, Honest <span class="text-primary">Pricing.</span></h1>
+    <p class="text-dark/60 font-medium text-xl max-w-3xl mx-auto">No hidden fees. No lock-in contracts. Pick the plan that fits your stage of growth — and upgrade any time.</p>
+  </div>
+</section>
+
+<!-- PRICING CARDS -->
+<section class="py-24 bg-white px-6">
+  <div class="max-w-6xl mx-auto">
+    <div class="grid md:grid-cols-3 gap-8 items-stretch">
+      {{#each pricing}}
+      <div class="relative rounded-[32px] border {{#if popular}}border-primary shadow-2xl shadow-primary/20{{else}}border-black/8 shadow-lg{{/if}} overflow-hidden gs-reveal flex flex-col" data-tilt data-tilt-max="3">
+        {{#if popular}}
+        <div class="bg-primary text-white text-[10px] font-black uppercase tracking-[0.3em] text-center py-3">⭐ Most Popular</div>
+        {{/if}}
+        <div class="p-10 flex flex-col flex-1 {{#if popular}}bg-dark text-white{{else}}bg-cream{{/if}}">
+          <div class="mb-8">
+            <h3 class="text-2xl font-black uppercase tracking-widest mb-2 {{#if popular}}text-white{{else}}text-dark{{/if}}">{{name}}</h3>
+            <p class="text-sm font-medium {{#if popular}}text-white/60{{else}}text-dark/60{{/if}} mb-6">{{tagline}}</p>
+            <div class="flex items-end gap-2 mb-2">
+              <span class="text-5xl font-black {{#if popular}}text-white{{else}}text-dark{{/if}}">₹{{price}}</span>
+              <span class="text-sm font-bold {{#if popular}}text-white/50{{else}}text-dark/50{{/if}} mb-2">/{{period}}</span>
+            </div>
+            <p class="text-xs font-bold uppercase tracking-widest {{#if popular}}text-primary{{else}}text-dark/40{{/if}}">+ Ad spend passed through at cost</p>
+          </div>
+          <div class="space-y-3 mb-8 flex-1">
+            {{#each features}}
+            <div class="flex items-start gap-3 text-sm font-medium {{#if ../popular}}text-white/80{{else}}text-dark/80{{/if}}">
+              <i class="fas fa-check-circle text-primary mt-0.5 flex-shrink-0"></i>{{this}}
+            </div>
+            {{/each}}
+            {{#each notIncluded}}
+            <div class="flex items-start gap-3 text-sm font-medium {{#if ../popular}}text-white/30{{else}}text-dark/30{{/if}}">
+              <i class="fas fa-times-circle mt-0.5 flex-shrink-0"></i>{{this}}
+            </div>
+            {{/each}}
+          </div>
+          <a href="/contact" class="block text-center py-5 rounded-xl font-black uppercase tracking-widest text-sm transition magnetic-btn {{#if popular}}bg-primary text-white hover:bg-green-500{{else}}bg-dark text-white hover:bg-primary{{/if}}">
+            {{cta}} →
+          </a>
+        </div>
+      </div>
+      {{/each}}
+    </div>
+
+    <!-- Custom note -->
+    <div class="mt-12 bg-cream border border-black/5 rounded-3xl p-10 text-center gs-reveal">
+      <h3 class="text-2xl font-black uppercase tracking-widest text-dark mb-4">Need a Custom Plan?</h3>
+      <p class="text-dark/60 font-medium mb-8 max-w-2xl mx-auto">Every business is different. We're happy to build a custom package that fits your exact goals and budget.</p>
+      <a href="/contact" class="inline-flex items-center gap-2 bg-primary text-white px-10 py-4 rounded-xl font-bold uppercase tracking-widest text-sm shadow-lg shadow-primary/30 hover:bg-green-600 transition magnetic-btn">
+        Request Custom Quote <i class="fas fa-arrow-right"></i>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ SNIPPET -->
+<section class="py-24 bg-cream px-6 border-t border-black/5">
+  <div class="max-w-3xl mx-auto text-center gs-reveal">
+    <h2 class="text-4xl font-black uppercase tracking-widest text-dark mb-4">Pricing Questions?</h2>
+    <p class="text-dark/60 font-medium mb-8">We've answered the most common ones in our FAQ.</p>
+    <a href="/faq" class="inline-flex items-center gap-2 border-2 border-dark text-dark px-8 py-4 rounded-xl font-bold uppercase tracking-widest text-sm hover:bg-dark hover:text-white transition magnetic-btn">
+      View FAQ <i class="fas fa-arrow-right"></i>
+    </a>
+  </div>
+</section>

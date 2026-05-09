@@ -1,0 +1,32 @@
+<button id="dm-chat-btn" onclick="dmToggle()" aria-label="Chat with us">
+  <span id="dm-badge">1</span>
+  <svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/></svg>
+</button>
+<div id="dm-chat-box">
+  <div id="dm-header">
+    <div class="avatar">DM</div>
+    <div class="info">
+      <div class="name">Wholeup Assistant</div>
+      <div class="status">● Online — usually replies instantly</div>
+    </div>
+    <button id="dm-close" onclick="dmToggle()">✕</button>
+  </div>
+  <div id="dm-quick">
+    <button class="dm-qbtn" onclick="dmAsk('Social media strategy chahiye')">📱 Social Media</button>
+    <button class="dm-qbtn" onclick="dmAsk('SEO kaise improve karein')">🔍 SEO Tips</button>
+    <button class="dm-qbtn" onclick="dmAsk('Pricing kya hai')">💰 Pricing</button>
+    <button class="dm-qbtn" onclick="dmAsk('Free consultation chahiye')">📞 Consultation</button>
+  </div>
+  <div id="dm-messages">
+    <div class="dm-msg">
+      <div class="dm-av bot">AI</div>
+      <div class="dm-bubble bot">Namaste! 👋 Main Wholeup ka AI Assistant hoon.<br><br>Aapki digital marketing mein kaise madad kar sakta hoon?</div>
+    </div>
+  </div>
+  <div id="dm-input-row">
+    <input id="dm-input" type="text" placeholder="Apna sawaal likhein..." onkeydown="if(event.key==='Enter')dmSend()" />
+    <button id="dm-send" onclick="dmSend()">
+      <svg viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
+    </button>
+  </div>
+</div>

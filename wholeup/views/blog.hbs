@@ -1,0 +1,53 @@
+<!-- HERO -->
+<section class="page-hero bg-cream px-6 border-b border-black/5">
+  <div class="max-w-7xl mx-auto text-center gs-reveal">
+    <p class="text-xs font-bold tracking-[0.3em] uppercase text-primary mb-4">Digital Marketing Insights</p>
+    <h1 class="text-5xl md:text-7xl font-black uppercase tracking-widest text-dark mb-6">The <span class="text-primary">Blog.</span></h1>
+    <p class="text-dark/60 font-medium text-xl max-w-3xl mx-auto">Expert strategies, tips, and case studies to help you grow your business online.</p>
+  </div>
+</section>
+
+<!-- BLOG GRID -->
+<section class="py-24 bg-white px-6">
+  <div class="max-w-7xl mx-auto">
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+      {{#each posts}}
+      <a href="/blog/{{slug}}" class="group bg-cream rounded-[28px] overflow-hidden border border-black/5 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 gs-reveal flex flex-col">
+        <div class="h-52 flex items-center justify-center relative overflow-hidden bg-gradient-to-br from-green-50 to-emerald-100">
+          <div class="absolute inset-0 opacity-30" style="background-image:radial-gradient(#16A34A33 1px,transparent 1px);background-size:20px 20px;"></div>
+          <div class="text-center z-10 p-6">
+            <div class="w-16 h-16 bg-white rounded-2xl shadow-lg flex items-center justify-center mx-auto mb-3">
+              <i class="fas fa-pen-nib text-2xl text-primary"></i>
+            </div>
+            <span class="text-[10px] font-black uppercase tracking-widest text-primary">{{category}}</span>
+          </div>
+          <div class="absolute top-4 right-4 text-white text-[10px] font-black uppercase tracking-wider px-3 py-1 rounded-full" style="background:{{categoryColor}}">{{category}}</div>
+        </div>
+        <div class="p-8 flex flex-col flex-1">
+          <div class="flex items-center gap-3 mb-4">
+            <span class="text-xs text-dark/40 font-medium">{{date}}</span>
+            <span class="w-1 h-1 rounded-full bg-dark/20"></span>
+            <span class="text-xs text-dark/40 font-medium">{{readTime}}</span>
+          </div>
+          <h2 class="text-xl font-black text-dark leading-tight mb-3 group-hover:text-primary transition">{{title}}</h2>
+          <p class="text-dark/60 text-sm font-medium leading-relaxed mb-6 flex-1">{{excerpt}}</p>
+          <div class="flex items-center gap-2 text-primary text-sm font-bold border-t border-black/5 pt-5">
+            Read Article <i class="fas fa-arrow-right text-xs group-hover:translate-x-1 transition-transform"></i>
+          </div>
+        </div>
+      </a>
+      {{/each}}
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="py-24 px-6 bg-dark">
+  <div class="max-w-3xl mx-auto text-center gs-reveal">
+    <h2 class="text-4xl font-black text-white uppercase tracking-widest mb-4">Want Us to Do This <span class="text-primary">For You?</span></h2>
+    <p class="text-white/60 font-medium mb-10">Reading about marketing is great. Having experts execute it is better. Book a free call today.</p>
+    <a href="/contact" class="inline-flex items-center gap-2 bg-primary text-white px-10 py-5 rounded-xl font-black uppercase tracking-widest text-sm shadow-lg hover:bg-green-500 transition magnetic-btn">
+      Book Free Strategy Call <i class="fas fa-arrow-right"></i>
+    </a>
+  </div>
+</section>

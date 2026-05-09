@@ -1,0 +1,69 @@
+[
+  {
+    "name": "Starter",
+    "price": "8,000",
+    "period": "month",
+    "tagline": "Perfect for small businesses getting started with digital marketing.",
+    "color": "#111111",
+    "popular": false,
+    "features": [
+      "Social Media Management (2 platforms)",
+      "8 Posts per Month",
+      "Basic SEO Audit",
+      "Monthly Performance Report",
+      "Email Support",
+      "1 Revision Round"
+    ],
+    "notIncluded": [
+      "Paid Ad Management",
+      "Content Strategy",
+      "Dedicated Account Manager"
+    ],
+    "cta": "Get Started"
+  },
+  {
+    "name": "Growth",
+    "price": "18,000",
+    "period": "month",
+    "tagline": "For growing businesses ready to scale across multiple channels.",
+    "color": "#16A34A",
+    "popular": true,
+    "features": [
+      "Social Media Management (3 platforms)",
+      "20 Posts + 8 Reels per Month",
+      "Full SEO Implementation",
+      "Google or Meta Ads Management",
+      "Dedicated Account Manager",
+      "Weekly Reports & Dashboard",
+      "Content Strategy & Calendar",
+      "Email Marketing (2 campaigns/month)"
+    ],
+    "notIncluded": [
+      "Website Development",
+      "YouTube Management"
+    ],
+    "cta": "Most Popular — Start Now"
+  },
+  {
+    "name": "Premium",
+    "price": "35,000",
+    "period": "month",
+    "tagline": "Full-funnel digital marketing for ambitious businesses.",
+    "color": "#2563EB",
+    "popular": false,
+    "features": [
+      "All Growth Plan Features",
+      "Google + Meta Ads Management",
+      "YouTube Channel Management",
+      "SEO + Content Marketing",
+      "Email Automation Setup",
+      "Landing Page Design & CRO",
+      "Brand Strategy Consultation",
+      "Priority Support (WhatsApp + Call)",
+      "Bi-weekly Strategy Calls",
+      "Unlimited Revisions"
+    ],
+    "notIncluded": [],
+    "cta": "Book a Strategy Call"
+  }
+]

@@ -1,0 +1,58 @@
+<!-- PAGE HERO -->
+<section class="page-hero bg-cream px-6 border-b border-black/5">
+  <div class="max-w-7xl mx-auto text-center gs-reveal">
+    <p class="text-xs font-bold tracking-[0.3em] uppercase text-primary mb-4">Full-Service Agency</p>
+    <h1 class="text-5xl md:text-7xl font-black uppercase tracking-widest text-dark mb-6">Our <span class="text-primary">Services.</span></h1>
+    <p class="text-dark/60 font-medium text-xl max-w-3xl mx-auto">Everything your brand needs to dominate online — strategy, execution, and measurable results. All under one roof.</p>
+  </div>
+</section>
+
+<!-- ALL SERVICES GRID -->
+<section class="py-24 bg-white px-6">
+  <div class="max-w-7xl mx-auto">
+    <div class="grid md:grid-cols-2 gap-8">
+      {{#each services}}
+      <div class="glass-card rounded-[32px] p-10 gs-reveal hover:-translate-y-1 transition-all duration-300" data-tilt data-tilt-max="3">
+        <div class="flex items-start gap-6 mb-8">
+          <div class="w-16 h-16 rounded-2xl flex items-center justify-center text-3xl flex-shrink-0" style="background:{{bgColor}};color:{{color}}">
+            <i class="{{icon}}"></i>
+          </div>
+          <div>
+            <h2 class="text-2xl font-black uppercase tracking-wider text-dark mb-1">{{title}}</h2>
+            <p class="text-sm font-bold text-primary">{{tagline}}</p>
+          </div>
+        </div>
+        <p class="text-dark/70 font-medium leading-relaxed mb-8">{{description}}</p>
+        <div class="grid grid-cols-2 gap-3 mb-8">
+          {{#each features}}
+          <div class="flex items-center gap-2 text-sm font-medium text-dark">
+            <i class="fas fa-check-circle text-primary text-xs flex-shrink-0"></i>{{this}}
+          </div>
+          {{/each}}
+        </div>
+        <div class="flex items-center justify-between pt-6 border-t border-black/5">
+          <div>
+            <p class="text-[10px] font-bold uppercase tracking-widest text-gray-400 mb-1">Typical Result</p>
+            <p class="text-lg font-black text-primary">{{result}}</p>
+          </div>
+          <a href="/services/{{slug}}" class="bg-dark text-white px-6 py-3 rounded-xl font-bold text-sm uppercase tracking-widest hover:bg-primary transition magnetic-btn">
+            Learn More →
+          </a>
+        </div>
+      </div>
+      {{/each}}
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="py-24 px-6 bg-primary relative overflow-hidden">
+  <div class="absolute inset-0 opacity-10" style="background-image:radial-gradient(#fff 1px,transparent 1px);background-size:30px 30px;"></div>
+  <div class="max-w-3xl mx-auto text-center relative z-10 gs-reveal">
+    <h2 class="text-4xl md:text-5xl font-black text-white uppercase tracking-widest mb-6">Not Sure Which Service You Need?</h2>
+    <p class="text-white/80 text-lg font-medium mb-10">Book a free consultation. We'll audit your business and tell you exactly what will drive the most growth.</p>
+    <a href="/contact" class="bg-white text-primary px-10 py-5 rounded-xl font-black uppercase tracking-widest text-sm shadow-xl hover:bg-cream transition magnetic-btn inline-flex items-center gap-2">
+      Book Free Audit <i class="fas fa-arrow-right"></i>
+    </a>
+  </div>
+</section>

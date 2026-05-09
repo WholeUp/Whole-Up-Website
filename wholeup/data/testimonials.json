@@ -1,0 +1,10 @@
+[
+  { "name": "Rahul Sharma", "company": "Mumbai Tech", "initials": "RS", "color": "bg-green-500", "rating": 5, "review": "Wholeup completely transformed our Meta Ads strategy. Sales grew by over 200% last quarter alone — genuinely impressed by their data-driven approach." },
+  { "name": "Ayesha Khan", "company": "Delhi Funnels", "initials": "AK", "color": "bg-orange-500", "rating": 4.8, "review": "Our YouTube channel was completely stagnant. Their thumbnail strategy and video SEO took our views from 50K to 600K in just 3 months." },
+  { "name": "Suresh Patel", "company": "Gujarat Ecomm", "initials": "SP", "color": "bg-blue-500", "rating": 4.5, "review": "Their SEO team is exceptional. Our top 5 keywords now rank on Google's first page — without any paid ads. Organic traffic is up 340%." },
+  { "name": "Priya Rao", "company": "Bangalore SAAS", "initials": "PR", "color": "bg-purple-500", "rating": 5, "review": "The UI/UX and web development work is absolutely world-class. Our website now gets compliments from every client we show it to." },
+  { "name": "Amit Verma", "company": "Pune Ed-Tech", "initials": "AV", "color": "bg-red-500", "rating": 4.6, "review": "Wholeup scaled our YouTube channel from 30K to 116K subscribers in 6 months. Their content strategy is unlike anything we'd seen before." },
+  { "name": "Sarah Mitchell", "company": "London Agency", "initials": "SM", "color": "bg-teal-500", "rating": 4.9, "review": "Brilliant agency with a very professional team. Our Google Ads ROAS went from 1.8x to 5.1x in just 8 weeks. Outstanding results." },
+  { "name": "James Carter", "company": "Sydney D2C Brand", "initials": "JC", "color": "bg-yellow-600", "rating": 4.4, "review": "Finally an agency that actually delivers. Our Instagram grew 3x and their reel strategy drove over 2M organic views in two months." },
+  { "name": "Neha Joshi", "company": "Ahmedabad Finance", "initials": "NJ", "color": "bg-indigo-500", "rating": 5, "review": "Top-tier in every way. From strategy to execution, everything is handled with professionalism and measurable outcomes. Highly recommend." }
+]

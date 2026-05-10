@@ -22,8 +22,8 @@
             footerbg: '#080C14'
           },
           fontFamily: {
-            sans: ['Inter', 'sans-serif'],
-            script: ['Playfair Display', 'serif']
+            sans: ['DM Sans', 'sans-serif'],
+            heading: ['Inter', 'sans-serif']
           }
         }
       }
@@ -31,7 +31,7 @@
   </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,700;0,900;1,700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <script src="https://unpkg.com/@studio-freight/lenis@1.0.33/dist/lenis.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
@@ -41,7 +41,7 @@
   <style>
     *, *::before, *::after { box-sizing:border-box; }
     html { -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale; text-rendering:optimizeLegibility; }
-    body { background-color:#FAF8F2; color:#0D0D0D; font-family:'Inter',sans-serif; overflow-x:hidden; }
+    body { background-color:#FAF8F2; color:#0D0D0D; font-family:'DM Sans',sans-serif; overflow-x:hidden; }
     h1,h2,h3,h4,h5,h6,.heading { font-family:'Inter',sans-serif; }
     @media(min-width:768px){ body{ cursor:none; } }
     html.lenis { height:auto; }
@@ -54,11 +54,11 @@
     .cursor-hover .cursor-dot { width:0; height:0; }
     .cursor-hover .cursor-shadow { width:60px; height:60px; border-color:#16A34A; background:rgba(22,163,74,.1); }
 
-    /* Global font rules — Inter everywhere */
+    /* Global font rules — Inter for headings, DM Sans for body */
     h1,h2,h3,h4,h5,h6 { font-family:'Inter',sans-serif; }
-    p, a, span, li, label, input, textarea, select, button { font-family:'Inter',sans-serif; }
+    p, a, span, li, label, input, textarea, select, button { font-family:'DM Sans',sans-serif; }
     .font-heading { font-family:'Inter',sans-serif !important; }
-    .font-body { font-family:'Inter',sans-serif !important; }
+    .font-body { font-family:'DM Sans',sans-serif !important; }
 
     /* BG Grid — subtler */
     .bg-grid { background-image:radial-gradient(rgba(0,0,0,0.06) 1px,transparent 1px); background-size:32px 32px; }

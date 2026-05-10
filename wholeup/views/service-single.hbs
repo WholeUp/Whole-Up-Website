@@ -1,79 +1,148 @@
-<!-- SERVICE HERO -->
-<section class="page-hero px-6" style="background:{{service.bgColor}}">
-  <div class="max-w-5xl mx-auto gs-reveal">
-    <a href="/services" class="inline-flex items-center gap-2 text-sm font-bold text-dark/50 hover:text-dark mb-8 transition"><i class="fas fa-arrow-left"></i> All Services</a>
-    <div class="flex items-center gap-5 mb-8">
-      <div class="w-20 h-20 rounded-3xl flex items-center justify-center text-4xl" style="background:white;color:{{service.color}}">
+<!-- SERVICE HERO — compact, properly sized -->
+<section class="page-hero px-6 relative overflow-hidden" style="background:linear-gradient(135deg,{{service.bgColor}},transparent 60%),#FAF8F2;">
+  <div class="absolute inset-0 opacity-5" style="background-image:radial-gradient(#000 1px,transparent 1px);background-size:24px 24px;"></div>
+  <div class="max-w-5xl mx-auto relative z-10">
+    <a href="/services" class="inline-flex items-center gap-2 text-xs font-semibold text-dark/50 hover:text-dark mb-8 transition" style="font-family:'Poppins',sans-serif;">
+      <i class="fas fa-arrow-left text-[10px]"></i> All Services
+    </a>
+    <div class="flex items-center gap-4 mb-6">
+      <div class="w-14 h-14 rounded-2xl flex items-center justify-center text-2xl flex-shrink-0" style="background:white;color:{{service.color}};box-shadow:0 8px 24px rgba(0,0,0,0.08);">
         <i class="{{service.icon}}"></i>
       </div>
       <div>
-        <p class="text-sm font-bold uppercase tracking-widest mb-1" style="color:{{service.color}}">{{service.result}}</p>
-        <h1 class="text-4xl md:text-5xl font-black uppercase tracking-widest text-dark">{{service.title}}</h1>
+        <p class="text-[10px] font-bold uppercase tracking-[0.2em] mb-1" style="color:{{service.color}};font-family:'Poppins',sans-serif;">{{service.result}}</p>
+        <h1 class="text-2xl md:text-3xl font-black uppercase tracking-tight text-dark leading-tight" style="font-family:'Montserrat',sans-serif;">{{service.title}}</h1>
       </div>
     </div>
-    <p class="text-2xl font-bold text-dark/80 mb-4">{{service.tagline}}</p>
-    <p class="text-lg text-dark/60 font-medium max-w-3xl">{{service.description}}</p>
+    <p class="text-base font-semibold text-dark/75 mb-3 max-w-2xl" style="font-family:'Montserrat',sans-serif;">{{service.tagline}}</p>
+    <p class="text-sm text-dark/55 font-normal max-w-2xl leading-relaxed" style="font-family:'Poppins',sans-serif;">{{service.description}}</p>
   </div>
 </section>
 
 <!-- CONTENT -->
-<section class="py-24 bg-white px-6">
-  <div class="max-w-5xl mx-auto grid md:grid-cols-3 gap-16">
+<section class="py-20 bg-white px-6">
+  <div class="max-w-5xl mx-auto grid md:grid-cols-3 gap-12">
+
+    <!-- Main content -->
     <div class="md:col-span-2">
-      <h2 class="text-3xl font-black uppercase tracking-widest text-dark mb-8">What's Included</h2>
-      <div class="space-y-4 mb-12">
+      <h2 class="text-lg font-black uppercase tracking-widest text-dark mb-6" style="font-family:'Montserrat',sans-serif;">What's Included</h2>
+      <div class="grid sm:grid-cols-2 gap-3 mb-10">
         {{#each service.features}}
-        <div class="flex items-center gap-4 p-5 bg-cream rounded-2xl border border-black/5 gs-reveal">
-          <div class="w-10 h-10 rounded-xl bg-primary flex items-center justify-center text-white flex-shrink-0"><i class="fas fa-check text-sm"></i></div>
-          <span class="font-bold text-dark">{{this}}</span>
+        <div class="flex items-center gap-3 p-4 bg-cream rounded-xl border border-black/5 gs-reveal">
+          <div class="w-8 h-8 rounded-lg bg-primary flex items-center justify-center text-white flex-shrink-0">
+            <i class="fas fa-check text-[11px]"></i>
+          </div>
+          <span class="font-medium text-dark text-sm" style="font-family:'Poppins',sans-serif;">{{this}}</span>
         </div>
         {{/each}}
       </div>
-      <div class="bg-cream rounded-3xl p-10 border border-black/5 gs-reveal">
-        <h3 class="text-2xl font-black uppercase tracking-widest text-dark mb-4">Expected Results</h3>
-        <div class="flex items-center gap-6 flex-wrap">
-          <div class="text-center">
-            <div class="text-4xl font-black text-primary mb-1">{{service.result}}</div>
-            <div class="text-sm font-bold text-dark/50 uppercase tracking-widest">Typical Outcome</div>
+
+      <!-- Results box -->
+      <div class="bg-dark rounded-2xl p-8 gs-reveal mb-10">
+        <h3 class="text-xs font-black uppercase tracking-widest text-white/50 mb-5" style="font-family:'Montserrat',sans-serif;">Typical Results</h3>
+        <div class="grid grid-cols-2 gap-6">
+          <div>
+            <p class="text-2xl font-black text-primary mb-1" style="font-family:'Montserrat',sans-serif;">{{service.result}}</p>
+            <p class="text-[10px] text-white/40 font-medium uppercase tracking-widest" style="font-family:'Poppins',sans-serif;">Typical Outcome</p>
           </div>
-          <div class="text-center">
-            <div class="text-4xl font-black text-primary mb-1">{{service.timeline}}</div>
-            <div class="text-sm font-bold text-dark/50 uppercase tracking-widest">Timeline</div>
+          <div>
+            <p class="text-xl font-black text-white mb-1" style="font-family:'Montserrat',sans-serif;">{{service.timeline}}</p>
+            <p class="text-[10px] text-white/40 font-medium uppercase tracking-widest" style="font-family:'Poppins',sans-serif;">Timeline</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Process steps -->
+      <h3 class="text-lg font-black uppercase tracking-widest text-dark mb-5 gs-reveal" style="font-family:'Montserrat',sans-serif;">Our Process</h3>
+      <div class="space-y-3 gs-reveal">
+        <div class="flex gap-4 items-start p-5 bg-cream rounded-xl border border-black/5">
+          <div class="w-7 h-7 rounded-full bg-primary text-white text-[11px] font-black flex items-center justify-center flex-shrink-0" style="font-family:'Montserrat',sans-serif;">1</div>
+          <div>
+            <p class="font-bold text-dark text-sm mb-1" style="font-family:'Montserrat',sans-serif;">Discovery & Audit</p>
+            <p class="text-xs text-dark/55 leading-relaxed" style="font-family:'Poppins',sans-serif;">We analyse your current performance, competitors, and market to identify the biggest growth opportunities for your business.</p>
+          </div>
+        </div>
+        <div class="flex gap-4 items-start p-5 bg-cream rounded-xl border border-black/5">
+          <div class="w-7 h-7 rounded-full bg-primary text-white text-[11px] font-black flex items-center justify-center flex-shrink-0" style="font-family:'Montserrat',sans-serif;">2</div>
+          <div>
+            <p class="font-bold text-dark text-sm mb-1" style="font-family:'Montserrat',sans-serif;">Custom Strategy</p>
+            <p class="text-xs text-dark/55 leading-relaxed" style="font-family:'Poppins',sans-serif;">A data-driven roadmap built around your specific goals, audience, and budget — no cookie-cutter plans.</p>
+          </div>
+        </div>
+        <div class="flex gap-4 items-start p-5 bg-cream rounded-xl border border-black/5">
+          <div class="w-7 h-7 rounded-full bg-primary text-white text-[11px] font-black flex items-center justify-center flex-shrink-0" style="font-family:'Montserrat',sans-serif;">3</div>
+          <div>
+            <p class="font-bold text-dark text-sm mb-1" style="font-family:'Montserrat',sans-serif;">Execution & Optimisation</p>
+            <p class="text-xs text-dark/55 leading-relaxed" style="font-family:'Poppins',sans-serif;">Specialists execute every deliverable with precision and continuously optimise based on live performance data.</p>
           </div>
         </div>
       </div>
     </div>
+
+    <!-- Sidebar sticky CTA -->
     <div>
-      <div class="bg-dark rounded-3xl p-8 text-white sticky top-32 gs-reveal">
-        <h3 class="text-xl font-black uppercase tracking-widest mb-4">Get Started</h3>
-        <p class="text-white/60 text-sm font-medium mb-8">Book a free strategy call and find out how we can deliver results for your business.</p>
-        <a href="/contact" class="block bg-primary text-white text-center py-4 rounded-xl font-bold uppercase tracking-widest text-sm hover:bg-green-500 transition mb-4 magnetic-btn">Book Free Call</a>
-        <a href="/pricing" class="block border border-white/20 text-white text-center py-4 rounded-xl font-bold uppercase tracking-widest text-sm hover:bg-white/10 transition magnetic-btn">View Pricing</a>
-        <div class="mt-8 pt-8 border-t border-white/10">
-          <p class="text-xs font-bold uppercase tracking-widest text-white/40 mb-4">Direct Contact</p>
-          <a href="tel:+919426846035" class="flex items-center gap-3 text-sm text-white/70 hover:text-white transition mb-3 font-medium"><i class="fas fa-phone text-primary"></i> +91 94268 46035</a>
-          <a href="mailto:wholeup.agency@gmail.com" class="flex items-center gap-3 text-sm text-white/70 hover:text-white transition font-medium"><i class="fas fa-envelope text-primary"></i> wholeup.agency@gmail.com</a>
+      <div class="bg-dark rounded-2xl p-7 text-white sticky top-32 gs-reveal">
+        <p class="text-[10px] font-bold uppercase tracking-[0.2em] text-primary mb-2" style="font-family:'Poppins',sans-serif;">Free Consultation</p>
+        <h3 class="text-base font-black uppercase tracking-tight mb-3" style="font-family:'Montserrat',sans-serif;">Let's Talk About Your Business</h3>
+        <p class="text-white/50 text-xs font-normal mb-6 leading-relaxed" style="font-family:'Poppins',sans-serif;">Book a free 30-min strategy call. We'll show you exactly how to get results like these — no obligation.</p>
+        <a href="/contact" class="block bg-primary text-white text-center py-3.5 rounded-xl font-bold uppercase tracking-widest text-xs hover:bg-green-500 transition mb-3 magnetic-btn" style="font-family:'Montserrat',sans-serif;">Book Free Call</a>
+        <a href="/pricing" class="block border border-white/15 text-white text-center py-3.5 rounded-xl font-medium uppercase tracking-widest text-xs hover:bg-white/5 transition magnetic-btn" style="font-family:'Poppins',sans-serif;">View Pricing</a>
+
+        <div class="mt-7 pt-6 border-t border-white/10 space-y-3">
+          <p class="text-[10px] font-bold uppercase tracking-widest text-white/30 mb-3" style="font-family:'Poppins',sans-serif;">Direct Contact</p>
+          <a href="tel:+919426846035" class="flex items-center gap-3 text-xs text-white/60 hover:text-white transition font-medium" style="font-family:'Poppins',sans-serif;">
+            <i class="fas fa-phone text-primary w-3"></i> +91 94268 46035
+          </a>
+          <a href="https://wa.me/919426846035" target="_blank" class="flex items-center gap-3 text-xs text-white/60 hover:text-white transition font-medium" style="font-family:'Poppins',sans-serif;">
+            <i class="fab fa-whatsapp text-primary w-3"></i> WhatsApp Chat
+          </a>
+          <a href="mailto:wholeup.agency@gmail.com" class="flex items-center gap-3 text-xs text-white/60 hover:text-white transition font-medium" style="font-family:'Poppins',sans-serif;">
+            <i class="fas fa-envelope text-primary w-3"></i> wholeup.agency@gmail.com
+          </a>
+        </div>
+
+        <!-- Mini social proof -->
+        <div class="mt-6 bg-white/5 rounded-xl p-4 border border-white/10">
+          <div class="flex text-yellow-400 text-xs gap-0.5 mb-2">
+            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+          </div>
+          <p class="text-white/55 text-[11px] leading-relaxed italic" style="font-family:'Poppins',sans-serif;">"Results spoke for themselves in the very first month working with Wholeup."</p>
+          <p class="text-primary text-[10px] font-bold mt-2 uppercase tracking-widest" style="font-family:'Poppins',sans-serif;">— Verified Client</p>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- RELATED SERVICES -->
+<!-- Related Services -->
 {{#if related}}
-<section class="py-24 bg-cream px-6 border-t border-black/5">
-  <div class="max-w-7xl mx-auto">
-    <h2 class="text-3xl font-black uppercase tracking-widest text-dark mb-12 gs-reveal">Related Services</h2>
-    <div class="grid md:grid-cols-3 gap-6">
+<section class="py-20 bg-cream px-6 border-t border-black/5">
+  <div class="max-w-5xl mx-auto">
+    <h2 class="text-base font-black uppercase tracking-widest text-dark mb-8 gs-reveal" style="font-family:'Montserrat',sans-serif;">Related Services</h2>
+    <div class="grid md:grid-cols-3 gap-5">
       {{#each related}}
-      <a href="/services/{{slug}}" class="glass-card rounded-[28px] p-8 gs-reveal block hover:-translate-y-1 transition-all">
-        <div class="w-12 h-12 rounded-2xl flex items-center justify-center text-2xl mb-5" style="background:{{bgColor}};color:{{color}}"><i class="{{icon}}"></i></div>
-        <h3 class="text-lg font-black uppercase tracking-wider text-dark mb-2">{{title}}</h3>
-        <p class="text-dark/60 text-sm font-medium mb-4">{{description}}</p>
-        <span class="text-primary text-sm font-bold">Learn More →</span>
+      <a href="/services/{{slug}}" class="glass-card rounded-2xl p-6 gs-reveal block hover:-translate-y-1 transition-all group">
+        <div class="w-10 h-10 rounded-xl flex items-center justify-center text-lg mb-4" style="background:{{bgColor}};color:{{color}}">
+          <i class="{{icon}}"></i>
+        </div>
+        <h3 class="text-sm font-black uppercase tracking-wide text-dark mb-2 group-hover:text-primary transition" style="font-family:'Montserrat',sans-serif;">{{title}}</h3>
+        <p class="text-dark/55 text-xs font-normal leading-relaxed mb-3" style="font-family:'Poppins',sans-serif;">{{description}}</p>
+        <span class="text-primary text-xs font-semibold" style="font-family:'Poppins',sans-serif;">Learn More →</span>
       </a>
       {{/each}}
     </div>
   </div>
 </section>
 {{/if}}
+
+<!-- CTA strip -->
+<section class="py-16 px-6 bg-primary relative overflow-hidden">
+  <div class="absolute inset-0 opacity-10" style="background-image:radial-gradient(#fff 1px,transparent 1px);background-size:28px 28px;"></div>
+  <div class="max-w-3xl mx-auto text-center relative z-10 gs-reveal">
+    <h2 class="text-xl md:text-2xl font-black text-white uppercase tracking-widest mb-3" style="font-family:'Montserrat',sans-serif;">Ready to Get Started?</h2>
+    <p class="text-white/70 text-sm font-normal mb-7 max-w-xl mx-auto leading-relaxed" style="font-family:'Poppins',sans-serif;">Book a free strategy call. We'll audit your business and show you exactly what results to expect — no obligation.</p>
+    <a href="/contact" class="bg-white text-primary px-8 py-4 rounded-xl font-black uppercase tracking-widest text-xs shadow-xl hover:bg-cream transition magnetic-btn inline-flex items-center gap-2" style="font-family:'Montserrat',sans-serif;">
+      Book Free Audit <i class="fas fa-arrow-right"></i>
+    </a>
+  </div>
+</section>

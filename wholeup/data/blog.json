@@ -75,6 +75,58 @@
     "date": "February 10, 2025",
     "author": "Wholeup Team",
     "image": "youtube",
-    "content": "<h2>YouTube search is a massive opportunity</h2><p>Most businesses ignore YouTube SEO, which means the opportunity for those who don't is enormous. Here's our complete ranking framework.</p><h3>Keyword research for YouTube</h3><p>Use YouTube's autocomplete, VidIQ, or TubeBuddy to find keywords with high search volume and low competition. Target long-tail keywords in your first 10 videos.</p><h3>The perfect video title formula</h3><p>Include your keyword naturally, add a power word (best, fastest, ultimate), and create curiosity. Keep it under 60 characters. Example: 'Best SEO Strategy 2025 (That Actually Works)'</p><h3>Thumbnail psychology</h3><p>High-CTR thumbnails have a clear face with emotion, bold contrasting text (max 4 words), and a visual element that creates curiosity. Test at least 2 thumbnail variants per video.</p>"
+    "content": "<h2>YouTube search is a massive opportunity</h2><p>Most businesses ignore YouTube SEO, which means the opportunity for those who don't is enormous. Here's our complete ranking framework.</p><h3>Keyword research for YouTube</h3><p>Use YouTube's autocomplete, VidIQ, or TubeBuddy to find keywords with high search volume and low competition. Target long-tail keywords in your first 10 videos.</p><h3>The perfect video title formula</h3><p>Include your keyword naturally, add a power word (best, fastest, ultimate), and create curiosity. Keep it under 60 characters.</p><h3>Thumbnail psychology</h3><p>High-CTR thumbnails have a clear face with emotion, bold contrasting text (max 4 words), and a visual element that creates curiosity. Test at least 2 thumbnail variants per video.</p>"
+  },
+  {
+    "id": 7,
+    "slug": "google-ads-india-guide",
+    "title": "Google Ads for Indian Businesses: The Complete 2025 Guide",
+    "excerpt": "Indian businesses are massively underutilizing Google Ads. Here's how to set up campaigns that generate qualified leads at the lowest possible cost in the Indian market.",
+    "category": "Paid Ads",
+    "categoryColor": "#2563EB",
+    "readTime": "10 min read",
+    "date": "January 25, 2025",
+    "author": "Wholeup Team",
+    "image": "google-ads",
+    "content": "<h2>Why Google Ads works differently in India</h2><p>The Indian digital market has unique characteristics — lower CPCs, highly price-sensitive audiences, and massive mobile-first usage. Understanding these nuances is the difference between ₹50 leads and ₹500 leads.</p><h3>Campaign structure for Indian markets</h3><p>Start with exact match keywords for your core services. Indian searchers often use colloquial terms ('best digital marketing company near me', 'SEO wala'). Include Hindi-English mixed keywords in your campaigns.</p><h3>Landing page localisation</h3><p>A landing page designed for a US audience will not convert Indian traffic. Use Hindi CTAs, show local testimonials, display WhatsApp as the primary contact method, and feature pricing in INR prominently.</p><h3>Budget allocation for Indian SMBs</h3><p>A minimum daily budget of ₹500–₹1,000 is needed to get meaningful data from Google's algorithm. Start with Search campaigns only, prove the CPL, then expand to Display and YouTube.</p><h3>Conversion tracking is non-negotiable</h3><p>Set up Google Tag Manager, track form submissions, WhatsApp clicks, phone calls, and page visits. Without proper tracking, you're flying blind.</p>"
+  },
+  {
+    "id": 8,
+    "slug": "personal-branding-linkedin",
+    "title": "How to Build a Personal Brand on LinkedIn That Generates B2B Leads",
+    "excerpt": "LinkedIn is India's most underutilised B2B lead generation platform. This guide shows you exactly how founders and professionals can turn their profile into a lead machine.",
+    "category": "Social Media",
+    "categoryColor": "#d946ef",
+    "readTime": "8 min read",
+    "date": "January 10, 2025",
+    "author": "Wholeup Team",
+    "image": "linkedin",
+    "content": "<h2>LinkedIn in 2025: the B2B goldmine</h2><p>While everyone focuses on Instagram and YouTube, LinkedIn quietly delivers the highest quality B2B leads of any social platform. Here's how to tap into it systematically.</p><h3>Profile optimisation first</h3><p>Your LinkedIn profile is your landing page. Optimize your headline (not just your job title — use keywords your ideal client searches for), your banner image, and your About section as a sales letter.</p><h3>The content strategy that builds authority</h3><p>Post 3-4 times per week. Mix: 1 personal story post, 1 educational breakdown post, 1 opinion/contrarian take, and 1 social proof/case study post. Consistency over 90 days builds unshakeable authority.</p><h3>DM outreach done right</h3><p>Do not pitch on the first message. Connect → Comment on their content → Share value → Then DM with a specific, relevant reason to connect. This sequence converts at 3-5x the cold pitch rate.</p><h3>Engagement pods and early commenting</h3><p>Comment on posts from your target audience within the first 30 minutes of them posting. Early engagement boosts reach and puts you in front of their network naturally.</p>"
+  },
+  {
+    "id": 9,
+    "slug": "local-seo-google-maps-ranking",
+    "title": "How to Rank #1 on Google Maps for Local Businesses",
+    "excerpt": "For any local business, ranking in the Google Maps 3-pack is worth more than any paid ad. Here's our step-by-step process to dominate local search.",
+    "category": "SEO",
+    "categoryColor": "#16A34A",
+    "readTime": "6 min read",
+    "date": "December 20, 2024",
+    "author": "Wholeup Team",
+    "image": "local-seo",
+    "content": "<h2>The local search opportunity</h2><p>When someone searches 'dentist near me' or 'best salon in Bandra', Google shows a map with 3 listings before any organic results. Ranking in that 3-pack for your category can completely transform a local business.</p><h3>Step 1: Perfect your Google Business Profile</h3><p>Complete every single field. Upload 20+ high-quality photos. Set your exact service area. Add all your services with descriptions. Post weekly updates. Reply to every review within 24 hours.</p><h3>Step 2: Get reviews systematically</h3><p>Reviews are the #1 ranking factor for local search. Build a simple WhatsApp template asking happy customers for a Google review and send it within 24 hours of a positive interaction.</p><h3>Step 3: Build local citations</h3><p>Get your business listed on JustDial, Sulekha, IndiaMart, Yellow Pages, and industry-specific directories. Ensure your NAP (Name, Address, Phone) is identical across all listings.</p><h3>Step 4: Local landing pages</h3><p>Create individual pages on your website targeting each city or neighbourhood you serve. These pages signal to Google the geographic relevance of your business.</p>"
+  },
+  {
+    "id": 10,
+    "slug": "shopify-vs-woocommerce-india",
+    "title": "Shopify vs WooCommerce for Indian Brands in 2025: Which One Wins?",
+    "excerpt": "Both platforms have passionate fans. But which one actually makes more sense for an Indian D2C brand launching in 2025? We break it down from real client experience.",
+    "category": "Web Design",
+    "categoryColor": "#f59e0b",
+    "readTime": "9 min read",
+    "date": "December 5, 2024",
+    "author": "Wholeup Team",
+    "image": "shopify",
+    "content": "<h2>The platform decision that shapes your entire growth</h2><p>We've built stores on both platforms for Indian clients, and the right choice depends on your team, budget, and long-term vision. Here's our honest breakdown.</p><h3>Shopify: strengths for Indian brands</h3><p>Shopify is now fully optimised for Indian payments — Razorpay, UPI, and COD all work natively. The platform is remarkably easy to manage without a developer, and their 24/7 support is genuinely helpful.</p><h3>WooCommerce: when it makes more sense</h3><p>If you need deep customisation, already have a WordPress site, or want to avoid monthly SaaS fees, WooCommerce is the better choice. It requires more technical management but gives you total control.</p><h3>Our recommendation for 2025</h3><p>For most Indian D2C brands doing 0–₹1Cr in revenue: start with Shopify. The speed to launch, built-in analytics, and app ecosystem will outweigh the monthly cost. Scale to WooCommerce or a custom solution once you've validated the model.</p><h3>The numbers</h3><p>Shopify Basic: ₹1,994/month. WooCommerce: free (but hosting + plugins typically cost ₹1,000–₹3,000/month). The price difference is negligible at early stages — choose based on team capability.</p>"
   }
 ]

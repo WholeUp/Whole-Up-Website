@@ -12,14 +12,15 @@
     "gradientFrom": "#fdf2f8",
     "gradientTo": "#f3e8ff",
     "metric1": "+83K Followers",
-    "metric2": "Instagram",
-    "description": "Viral reel strategy took the client from 2K to 85K followers in just 4 months.",
-    "result": "From 2K → 85K followers in 4 months with viral reel strategy and consistent brand identity.",
+    "metric2": "4 Months",
+    "description": "Viral reel strategy took a Mumbai skincare brand from 2K to 85K followers in just 4 months with zero paid spend.",
+    "caseInfo": "We audited the brand's existing content, rebuilt their visual identity, and launched a 5-reels-per-week strategy with hook-led scripts. Every reel followed our proven 3-second hook → value → CTA framework. Week 4 saw a 12M-view viral reel that accelerated growth overnight.",
+    "result": "2K → 85K followers in 4 months. 12M+ views on a single reel. DM inquiries up 9x.",
     "services": ["Social Media Strategy", "Reel Production", "Content Calendar", "Community Management"]
   },
   {
     "id": 2,
-    "title": "D2C Brand Scaling",
+    "title": "D2C Brand Meta Ads Scale",
     "slug": "d2c-brand-scaling",
     "category": "ads",
     "categoryLabel": "Paid Ads",
@@ -31,13 +32,14 @@
     "gradientTo": "#dbeafe",
     "metric1": "+200% Conv.",
     "metric2": "Same Budget",
-    "description": "Meta Ads restructure delivered 200% more conversions at the same ad spend for a skincare brand.",
-    "result": "Full Meta Ads account restructure — new creative testing framework, audience segmentation, and funnel optimization.",
+    "description": "Meta Ads restructure delivered 200% more conversions at identical ad spend for a Delhi skincare D2C brand.",
+    "caseInfo": "The client was spending ₹80,000/month on Meta Ads with a 1.4x ROAS. We rebuilt the entire account structure — new creative testing framework, Advantage+ Shopping campaigns, and a 3-tier funnel (TOF, MOF, BOF). The new framework hit 4.6x ROAS within 8 weeks without increasing the budget.",
+    "result": "ROAS 1.4x → 4.6x. Conversions +200%. CPL reduced by 38%. Same monthly budget.",
     "services": ["Meta Ads", "Creative Strategy", "A/B Testing", "Funnel Optimization"]
   },
   {
     "id": 3,
-    "title": "SaaS Lead Gen",
+    "title": "SaaS B2B Lead Generation",
     "slug": "saas-lead-gen",
     "category": "ads",
     "categoryLabel": "Paid Ads",
@@ -50,13 +52,14 @@
     "dark": true,
     "metric1": "5.1x ROAS",
     "metric2": "-40% CPL",
-    "description": "Google PPC campaign for B2B SaaS that delivered 5.1x ROAS with 40% lower CPL.",
-    "result": "Google Ads full-funnel build: Search, Display, Remarketing. Cut cost-per-lead by 40% within 6 weeks.",
+    "description": "Google PPC campaign for a Bangalore B2B SaaS company that delivered 5.1x ROAS and cut cost-per-lead by 40%.",
+    "caseInfo": "The SaaS client was burning budget on broad match keywords with no negative keyword list. We rebuilt from scratch — exact match keyword clusters, competitor bidding strategy, custom landing pages per ad group, and full conversion tracking via GTM. In 6 weeks, qualified demo bookings tripled.",
+    "result": "5.1x ROAS. CPL down 40%. Demo bookings 3x. Churn reduced as lead quality improved.",
     "services": ["Google Ads", "PPC Strategy", "Landing Page CRO", "Conversion Tracking"]
   },
   {
     "id": 4,
-    "title": "Local Business SEO",
+    "title": "Local Business SEO Domination",
     "slug": "local-business-seo",
     "category": "seo",
     "categoryLabel": "SEO",
@@ -67,9 +70,10 @@
     "gradientFrom": "#f0fdf4",
     "gradientTo": "#dcfce7",
     "metric1": "+340% Traffic",
-    "metric2": "#1 Rank",
-    "description": "Took a local dental clinic from page 4 to #1 on Google for 12 high-intent keywords.",
-    "result": "Complete SEO overhaul: technical fixes, local citations, Google My Business optimization, and content clusters.",
+    "metric2": "#1 Google Rank",
+    "description": "Took a Pune dental clinic from page 4 to #1 on Google for 12 high-intent local keywords in 5 months.",
+    "caseInfo": "The clinic had no Google Business Profile, duplicate citations, and a 4.8s page load time. We executed a full local SEO overhaul — technical fixes, 40+ local citation buildout, GMB optimisation with weekly posts and review management, and a content cluster targeting every service + location combination. Organic appointment bookings increased by 4x.",
+    "result": "Page 4 → #1 for 12 keywords. Organic traffic +340%. Appointment bookings 4x. GBP views 6x.",
     "services": ["Technical SEO", "Local SEO", "Google My Business", "Content Strategy"]
   },
   {
@@ -86,8 +90,9 @@
     "gradientTo": "#fee2e2",
     "metric1": "+86K Subs",
     "metric2": "6 Months",
-    "description": "Channel scaled from 30K to 116K subscribers in 6 months with our content strategy.",
-    "result": "Data-backed thumbnail redesign, strategic video SEO, and a proven 3-month content calendar built for retention.",
+    "description": "An EdTech channel scaled from 30K to 116K subscribers in 6 months with our content and SEO strategy.",
+    "caseInfo": "The channel had inconsistent upload schedules, poor thumbnails with <3% CTR, and no keyword research behind topics. We redesigned the thumbnail system (CTR jumped to 9.4%), built a 3-month content calendar targeting high-volume education search terms, and optimised all 80+ existing videos with new titles, descriptions, and tags. Watch time grew by 220%.",
+    "result": "30K → 116K subscribers. CTR 3% → 9.4%. Watch time +220%. 2 videos crossed 500K views.",
     "services": ["YouTube SEO", "Thumbnail Design", "Content Strategy", "Analytics"]
   },
   {
@@ -104,8 +109,9 @@
     "gradientTo": "#ede9fe",
     "metric1": "+180% Revenue",
     "metric2": "Launch Month",
-    "description": "Custom Shopify store with conversion-optimized UX that generated 180% more revenue from day one.",
-    "result": "Full Shopify build with custom UX, speed optimization, mobile-first design, and integrated Google/Meta pixel tracking.",
+    "description": "Custom Shopify store for a Jaipur fashion brand that generated 180% more revenue from day one vs. their old site.",
+    "caseInfo": "The old website took 8.4 seconds to load on mobile, had no trust signals, and a 7-step checkout. We rebuilt on Shopify — mobile-first design, 1.8s load time, UPI + COD payment integration, exit-intent popups, and a Klaviyo email flow for abandoned carts. The new store's conversion rate was 4.1% vs. the old site's 0.9%.",
+    "result": "Mobile load: 8.4s → 1.8s. CVR: 0.9% → 4.1%. Revenue +180% in launch month. Cart recovery 22%.",
     "services": ["Shopify Development", "UX Design", "Speed Optimization", "Conversion Tracking"]
   }
 ]

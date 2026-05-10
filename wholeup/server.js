@@ -66,7 +66,7 @@ app.get('/', (req, res) => {
     services: services.slice(0, 6),
     testimonials,
     portfolio: portfolio.slice(0, 6),
-    featuredPosts: blogPosts.slice(0, 3)
+    featuredPosts: blogPosts.slice(0, 4)
   });
 });
 

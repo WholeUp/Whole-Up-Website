@@ -139,11 +139,24 @@ railway up
 ```
 
 ### Deploy to Render
-1. Push to GitHub
-2. New Web Service → connect repo
-3. Build command: `npm install`
-4. Start command: `npm start`
-5. Add environment variables in dashboard
+1. Push to GitHub.
+2. New Web Service → connect repo.
+3. Build command: `npm install`.
+4. Start command: `npm start`.
+5. Add environment variables in the dashboard: `GEMINI_API_KEY`, `SMTP_USER`, `SMTP_PASS`.
+6. **Set up Custom Domain (`wholeup.in`)**:
+   - Go to your Web Service settings on Render.
+   - Scroll to **Custom Domains** and click **+ Add Custom Domain**.
+   - Add `wholeup.in` and click **Save**.
+   - Go to your Domain Registrar's DNS Manager (e.g., Hostinger, GoDaddy, Cloudflare, etc.) and add the following records:
+     - **A Record**:
+       - Name/Host: `@` (or leave blank)
+       - Value/Target: `216.24.57.1`
+     - **CNAME Record**:
+       - Name/Host: `www`
+       - Value/Target: Your Render subdomain (e.g., `your-app-name.onrender.com`)
+     - **Note**: Ensure you delete any existing **AAAA records** for `wholeup.in` to prevent SSL issues!
+   - Click **Verify** in the Render dashboard once DNS propagates. Render will automatically issue a free SSL certificate.
 
 ### Deploy to VPS (DigitalOcean/AWS)
 ```bash

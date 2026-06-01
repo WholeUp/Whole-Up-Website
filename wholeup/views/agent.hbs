@@ -1,0 +1,295 @@
+<div class="page-hero max-w-[1400px] mx-auto px-6">
+  
+  <!-- Header Title -->
+  <div class="mb-10 text-center md:text-left flex flex-col md:flex-row md:items-center justify-between gap-4">
+    <div>
+      <h1 class="text-3xl md:text-4xl font-black tracking-tight text-dark uppercase flex items-center gap-3 justify-center md:justify-start">
+        <i class="fas fa-robot text-primary animate-bounce"></i> Wholeup AI Agent Command Center
+      </h1>
+      <p class="text-dark/65 mt-2 font-medium">Manage captured leads, trigger AI outreach email roadmaps, and generate social media content in seconds.</p>
+    </div>
+    <div>
+      <span class="inline-flex items-center gap-2 bg-emerald-100 border border-emerald-300 text-emerald-800 font-bold px-4 py-2 rounded-full text-xs uppercase tracking-widest shadow-md shadow-emerald-500/10">
+        <span class="w-2.5 h-2.5 bg-emerald-500 rounded-full animate-ping"></span> AI Agent Status: Active (Autopilot)
+      </span>
+    </div>
+  </div>
+
+  <!-- Main Grid Dashboard -->
+  <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+    
+    <!-- Left 2-Columns: Leads & Management -->
+    <div class="lg:col-span-2 flex flex-col gap-8">
+      
+      <!-- Leads Table Board -->
+      <div class="glass-card p-6 rounded-3xl bg-white border border-black/5 shadow-xl relative overflow-hidden">
+        <div class="flex items-center justify-between border-b border-black/5 pb-4 mb-6">
+          <h2 class="text-xl font-bold tracking-tight text-dark flex items-center gap-2">
+            <i class="fas fa-user-friends text-primary"></i> Captured Leads Board
+          </h2>
+          <span class="text-xs font-bold bg-primary/10 text-primary px-3 py-1 rounded-full uppercase tracking-wider">
+            Total Leads: {{leads.length}}
+          </span>
+        </div>
+
+        {{#if leads.length}}
+          <div class="overflow-x-auto">
+            <table class="w-full text-left border-collapse">
+              <thead>
+                <tr class="border-b border-black/5 text-dark/45 font-bold uppercase text-[10px] tracking-wider">
+                  <th class="py-3 px-2">Client Details</th>
+                  <th class="py-3 px-2">Interest</th>
+                  <th class="py-3 px-2">Date Captured</th>
+                  <th class="py-3 px-2 text-right">Outreach Action</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-black/5 text-sm font-medium">
+                {{#each leads}}
+                  <tr class="hover:bg-primary/5 transition duration-150">
+                    <td class="py-4 px-2">
+                      <div class="font-bold text-dark text-base">{{this.name}}</div>
+                      <div class="text-xs text-dark/50 flex flex-col gap-0.5 mt-1">
+                        <span><i class="fas fa-phone-alt text-[10px] text-primary/60"></i> {{this.phone}}</span>
+                        {{#if this.email}}
+                          <span><i class="fas fa-envelope text-[10px] text-primary/60"></i> {{this.email}}</span>
+                        {{/if}}
+                      </div>
+                    </td>
+                    <td class="py-4 px-2">
+                      <span class="inline-block bg-primary/10 text-primary border border-primary/20 text-xs px-2.5 py-1 rounded-full font-bold uppercase tracking-wide">
+                        {{this.service}}
+                      </span>
+                    </td>
+                    <td class="py-4 px-2 text-xs text-dark/55">
+                      {{this.date}}
+                    </td>
+                    <td class="py-4 px-2 text-right">
+                      <button onclick="triggerOutreachAgent('{{@index}}', '{{this.name}}', '{{this.service}}', '{{this.email}}')" class="inline-flex items-center gap-1.5 bg-primary text-white font-bold text-xs px-3.5 py-2 rounded-full shadow-md shadow-primary/20 hover:shadow-primary/45 transition hover:-translate-y-0.5 cursor-pointer uppercase tracking-wider">
+                        <i class="fas fa-paper-plane animate-pulse"></i> Run AI Agent
+                      </button>
+                    </td>
+                  </tr>
+                {{/each}}
+              </tbody>
+            </table>
+          </div>
+        {{else}}
+          <div class="text-center py-12 px-6 flex flex-col items-center justify-center">
+            <i class="fas fa-box-open text-dark/15 text-6xl mb-4"></i>
+            <h3 class="text-lg font-bold text-dark/70">No leads captured yet</h3>
+            <p class="text-xs text-dark/45 mt-1 max-w-[300px]">Leads will automatically show up here as soon as clients interact with the chatbot or contact form!</p>
+          </div>
+        {{/if}}
+      </div>
+      
+      <!-- Social Media Copilot Studio -->
+      <div class="glass-card p-6 rounded-3xl bg-white border border-black/5 shadow-xl">
+        <div class="border-b border-black/5 pb-4 mb-6">
+          <h2 class="text-xl font-bold tracking-tight text-dark flex items-center gap-2">
+            <i class="fas fa-bullhorn text-primary animate-pulse"></i> AI Content Copilot Studio
+          </h2>
+          <p class="text-xs text-dark/50 mt-1">Ask the AI Agent to automatically brainstorm premium, high-converting social media content outlines for Wholeup.</p>
+        </div>
+
+        <div class="flex flex-col md:flex-row gap-4 mb-6">
+          <input id="copilot-topic" type="text" placeholder="Type a topic (e.g. Instagram growth tips, why SEO matters, Local SEO hacks)..." class="flex-1 border border-black/10 rounded-2xl px-5 py-3 text-sm focus:border-primary outline-none focus:ring-4 focus:ring-primary/10 transition" />
+          <button onclick="generateSocialContent()" class="bg-primary hover:bg-green-700 text-white font-bold text-xs uppercase tracking-widest px-6 py-3 rounded-2xl shadow-lg shadow-primary/20 transition cursor-pointer flex items-center justify-center gap-2 whitespace-nowrap">
+            <i class="fas fa-magic"></i> Generate Content
+          </button>
+        </div>
+
+        <!-- Content Studio Output Result -->
+        <div id="content-studio-result" class="hidden">
+          <div class="bg-primary/5 border border-primary/20 rounded-2xl p-5 relative">
+            <div class="flex items-center justify-between border-b border-primary/10 pb-3 mb-4">
+              <span class="text-xs font-bold text-primary uppercase tracking-widest flex items-center gap-1.5">
+                <i class="fas fa-check-circle animate-ping"></i> Generated Strategy Copy
+              </span>
+              <button onclick="copyContentText()" class="text-xs font-bold text-primary bg-white border border-primary/20 px-3 py-1 rounded-lg hover:bg-primary/10 transition cursor-pointer flex items-center gap-1">
+                <i class="far fa-copy"></i> Copy Content
+              </button>
+            </div>
+            <div id="copilot-output" class="text-sm font-medium leading-relaxed text-dark font-body whitespace-pre-line">
+              <!-- Content injected here -->
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Right Column: AI Agent Terminal Logs & Live Output -->
+    <div class="flex flex-col gap-8">
+      
+      <!-- AI Agent Active Terminal Console -->
+      <div class="glass-card p-6 rounded-3xl bg-slate-950 border border-slate-800 shadow-2xl text-slate-100 flex flex-col min-h-[460px] max-h-[580px] overflow-hidden">
+        <div class="flex items-center justify-between border-b border-slate-800 pb-3 mb-4">
+          <h2 class="text-xs font-bold uppercase tracking-widest text-slate-450 flex items-center gap-2">
+            <span class="w-2.5 h-2.5 bg-green-500 rounded-full animate-ping"></span> Live Agent Terminal Log
+          </h2>
+          <div class="flex gap-1.5">
+            <span class="w-2.5 h-2.5 rounded-full bg-red-500/40"></span>
+            <span class="w-2.5 h-2.5 rounded-full bg-yellow-500/40"></span>
+            <span class="w-2.5 h-2.5 rounded-full bg-green-500/40"></span>
+          </div>
+        </div>
+
+        <div id="terminal-feed" class="flex-1 overflow-y-auto font-mono text-[11px] leading-relaxed text-slate-350 flex flex-col gap-2.5 pr-2">
+          <div class="text-slate-500">// Welcome to Wholeup AI Agent Command Shell.</div>
+          <div class="text-slate-500">// Status: Autopilot listening for task triggers...</div>
+          <div class="text-slate-500">// Ready to process outreach roadmaps.</div>
+        </div>
+      </div>
+
+      <!-- Live Generated Strategy proposal preview card -->
+      <div id="proposal-preview-card" class="hidden glass-card p-6 rounded-3xl bg-white border border-black/5 shadow-xl">
+        <div class="flex items-center justify-between border-b border-black/5 pb-3 mb-4">
+          <h3 class="text-sm font-bold text-dark uppercase tracking-widest flex items-center gap-1.5">
+            <i class="far fa-file-alt text-primary"></i> Proposal Draft Preview
+          </h3>
+          <button onclick="copyProposalText()" class="text-xs font-bold text-primary bg-primary/10 border border-primary/20 px-2.5 py-1 rounded-lg hover:bg-primary/20 transition cursor-pointer flex items-center gap-1">
+            <i class="far fa-copy"></i> Copy Draft
+          </button>
+        </div>
+        <div id="proposal-output" class="text-[12px] leading-relaxed text-dark/75 bg-cream/70 border border-black/5 p-4 rounded-2xl font-body max-h-[220px] overflow-y-auto whitespace-pre-line">
+          <!-- Proposal text injected here -->
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+<!-- CSS animations and adjustments -->
+<style>
+  #terminal-feed::-webkit-scrollbar { width:4px; }
+  #terminal-feed::-webkit-scrollbar-thumb { background:rgba(255,255,255,0.1); border-radius:4px; }
+</style>
+
+<!-- Terminal Logic and Agent Script -->
+<script>
+  let activeProposalText = '';
+  let activeContentText = '';
+
+  function logToTerminal(text, type = 'info') {
+    const feed = document.getElementById('terminal-feed');
+    const div = document.createElement('div');
+    const timestamp = new Date().toLocaleTimeString();
+    
+    let color = 'text-slate-350';
+    if (type === 'success') color = 'text-emerald-400 font-bold';
+    if (type === 'warning') color = 'text-yellow-400 font-bold';
+    if (type === 'error') color = 'text-red-400 font-bold';
+    if (type === 'agent') color = 'text-primary font-bold';
+
+    div.className = `${color}`;
+    div.innerHTML = `[${timestamp}] ${text}`;
+    feed.appendChild(div);
+    feed.scrollTop = feed.scrollHeight;
+  }
+
+  async function triggerOutreachAgent(index, name, service, email) {
+    const terminal = document.getElementById('terminal-feed');
+    const proposalCard = document.getElementById('proposal-preview-card');
+    proposalCard.classList.add('hidden');
+    
+    logToTerminal(`🚀 TRIGGERED: Outreach Agent initialized for lead #${index} (${name})...`, 'agent');
+    
+    setTimeout(() => {
+      logToTerminal(`Agent: Inspecting target service profile: [${service}]...`, 'info');
+    }, 800);
+
+    setTimeout(() => {
+      logToTerminal(`Agent: Synthesizing targeted digital growth strategy & conversion optimization roadmap...`, 'info');
+    }, 1800);
+
+    setTimeout(() => {
+      logToTerminal(`Agent: Invoking Google Gemini AI Agent with sales outreaching prompt...`, 'info');
+    }, 2800);
+
+    setTimeout(async () => {
+      try {
+        const response = await fetch('/api/agent/outreach', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ index: index })
+        });
+        
+        const data = await response.json();
+        
+        if (data.success) {
+          logToTerminal(`Agent: Gemini AI generated custom professional proposal successfully!`, 'success');
+          
+          if (data.emailSent) {
+            logToTerminal(`✉️ Agent: Dispatched proposal email automatically to ${email || 'Client'}!`, 'success');
+            logToTerminal(`Agent: Outreach cycle completed successfully! ✅`, 'agent');
+          } else {
+            logToTerminal(`⚠️ Agent: SMTP credentials not set in .env. Email dispatch skipped.`, 'warning');
+            logToTerminal(`Agent: Outreach draft compiled and loaded to preview dashboard!`, 'success');
+          }
+
+          // Show proposal draft card
+          activeProposalText = data.proposal;
+          document.getElementById('proposal-output').innerText = data.proposal;
+          proposalCard.classList.remove('hidden');
+          
+        } else {
+          logToTerminal(`❌ ERROR: AI Agent failed to compile outreach. Reason: ${data.message}`, 'error');
+        }
+      } catch (err) {
+        logToTerminal(`❌ ERROR: Connection failed. ${err.message}`, 'error');
+      }
+    }, 3800);
+  }
+
+  async function generateSocialContent() {
+    const topicInput = document.getElementById('copilot-topic');
+    const topic = topicInput.value.trim();
+    if (!topic) return alert('Kripya koi topic enter karein!');
+    
+    const resultBox = document.getElementById('content-studio-result');
+    resultBox.classList.add('hidden');
+    
+    logToTerminal(`🚀 TRIGGERED: Content Copilot Agent initialized for topic: "${topic}"...`, 'agent');
+    logToTerminal(`Agent: Analyzing market trends & dynamic hashtags for digital marketing...`, 'info');
+    
+    setTimeout(() => {
+      logToTerminal(`Agent: Calling Gemini AI to write premium, high-converting social media outlines...`, 'info');
+    }, 1200);
+
+    try {
+      const response = await fetch('/api/agent/content', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ topic: topic })
+      });
+      
+      const data = await response.json();
+      
+      if (data.success) {
+        logToTerminal(`Agent: Social media content generated successfully! Loading copy...`, 'success');
+        
+        activeContentText = data.content;
+        document.getElementById('copilot-output').innerText = data.content;
+        resultBox.classList.remove('hidden');
+        topicInput.value = '';
+      } else {
+        logToTerminal(`❌ ERROR: Failed to generate content. Reason: ${data.message}`, 'error');
+      }
+    } catch(err) {
+      logToTerminal(`❌ ERROR: Connection failed. ${err.message}`, 'error');
+    }
+  }
+
+  function copyProposalText() {
+    navigator.clipboard.writeText(activeProposalText);
+    alert('Proposal draft successfully copied to clipboard! Clipboard par save ho gaya.');
+  }
+
+  function copyContentText() {
+    navigator.clipboard.writeText(activeContentText);
+    alert('Social media copy successfully copied to clipboard! Clipboard par save ho gaya.');
+  }
+</script>

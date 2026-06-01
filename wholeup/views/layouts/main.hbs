@@ -116,40 +116,41 @@
     .float-btn-label { position:absolute; right:calc(100% + 10px); top:50%; transform:translateY(-50%); white-space:nowrap; background:#111; color:white; font-size:.7rem; font-weight:700; letter-spacing:.05em; padding:.4rem .75rem; border-radius:8px; opacity:0; pointer-events:none; transition:opacity .2s; }
     .float-btn:hover .float-btn-label { opacity:1; }
 
-    /* Chatbot */
-    #dm-chat-btn { position:fixed; bottom:24px; right:24px; width:58px; height:58px; border-radius:50%; background:#185FA5; border:none; cursor:pointer; box-shadow:0 4px 16px rgba(24,95,165,.35); display:flex; align-items:center; justify-content:center; z-index:9999; transition:transform .2s,background .2s; }
-    #dm-chat-btn:hover { background:#0C447C; transform:scale(1.07); }
+    /* Chatbot - Green & Light Cream Theme */
+    #dm-chat-btn { position:fixed; bottom:24px; right:24px; width:58px; height:58px; border-radius:50%; background:#16A34A; border:none; cursor:pointer; box-shadow:0 4px 16px rgba(22,163,74,.35); display:flex; align-items:center; justify-content:center; z-index:9999; transition:transform .2s,background .2s; }
+    #dm-chat-btn:hover { background:#15803D; transform:scale(1.07); }
     #dm-chat-btn svg { width:26px; height:26px; fill:white; }
     #dm-badge { position:absolute; top:-4px; right:-4px; background:#ef4444; color:white; border-radius:50%; width:18px; height:18px; font-size:11px; font-weight:700; display:flex; align-items:center; justify-content:center; }
-    #dm-chat-box { position:fixed; bottom:92px; right:24px; width:360px; max-height:520px; background:#fff; border-radius:16px; box-shadow:0 8px 40px rgba(0,0,0,.15); display:none; flex-direction:column; z-index:9998; overflow:hidden; animation:slideUp .25s ease; }
+    #dm-chat-box { position:fixed; bottom:92px; right:24px; width:360px; max-height:520px; background:#FAF8F2; border-radius:16px; box-shadow:0 8px 40px rgba(0,0,0,.15); display:none; flex-direction:column; z-index:9998; overflow:hidden; border:1px solid rgba(22,163,74,.2); animation:slideUp .25s ease; }
     @keyframes slideUp { from{opacity:0;transform:translateY(16px)} to{opacity:1;transform:translateY(0)} }
-    #dm-header { background:#185FA5; padding:14px 16px; display:flex; align-items:center; gap:10px; color:white; }
+    #dm-header { background:#16A34A; padding:14px 16px; display:flex; align-items:center; gap:10px; color:white; }
     #dm-header .avatar { width:36px; height:36px; border-radius:50%; background:rgba(255,255,255,.2); display:flex; align-items:center; justify-content:center; font-weight:700; font-size:14px; }
     #dm-header .info .name { font-weight:700; font-size:14px; }
-    #dm-header .info .status { font-size:11px; opacity:.8; }
-    #dm-close { margin-left:auto; background:none; border:none; color:white; cursor:pointer; font-size:18px; opacity:.7; }
+    #dm-header .info .status { font-size:11px; opacity:.9; }
+    #dm-close { margin-left:auto; background:none; border:none; color:white; cursor:pointer; font-size:18px; opacity:.8; }
     #dm-close:hover { opacity:1; }
-    #dm-quick { padding:10px 12px; display:flex; gap:6px; flex-wrap:wrap; border-bottom:1px solid #f0f0f0; }
-    .dm-qbtn { background:#f0f7ff; border:1px solid #d0e4ff; border-radius:20px; padding:5px 10px; font-size:11px; cursor:pointer; color:#185FA5; font-weight:600; transition:background .2s; white-space:nowrap; }
-    .dm-qbtn:hover { background:#d0e4ff; }
+    #dm-quick { padding:10px 12px; display:flex; gap:6px; flex-wrap:wrap; border-bottom:1px solid rgba(22,163,74,.1); background:#fff; }
+    .dm-qbtn { background:#EFF8F2; border:1px solid #D1EBD6; border-radius:20px; padding:5px 10px; font-size:11px; cursor:pointer; color:#16A34A; font-weight:600; transition:all .2s; white-space:nowrap; }
+    .dm-qbtn:hover { background:#D1EBD6; }
     #dm-messages { flex:1; overflow-y:auto; padding:16px 12px; display:flex; flex-direction:column; gap:12px; }
     .dm-msg { display:flex; gap:8px; align-items:flex-end; }
     .dm-msg.user { flex-direction:row-reverse; }
     .dm-av { width:28px; height:28px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:11px; font-weight:700; flex-shrink:0; }
-    .dm-av.bot { background:#185FA5; color:white; }
-    .dm-av.user { background:#16A34A; color:white; }
+    .dm-av.bot { background:#16A34A; color:white; }
+    .dm-av.user { background:#15803D; color:white; }
     .dm-bubble { max-width:80%; padding:10px 14px; border-radius:16px; font-size:13px; line-height:1.5; }
-    .dm-bubble.bot { background:#f4f7fb; color:#222; border-bottom-left-radius:4px; }
+    .dm-bubble.bot { background:#fff; color:#2E3A2F; border-bottom-left-radius:4px; border:1px solid rgba(22,163,74,.1); }
     .dm-bubble.user { background:#16A34A; color:white; border-bottom-right-radius:4px; }
     .dm-typing { display:flex; gap:4px; padding:4px 0; }
-    .dm-typing span { width:8px; height:8px; border-radius:50%; background:#aaa; animation:typingDot 1s infinite; }
+    .dm-typing span { width:8px; height:8px; border-radius:50%; background:#16A34A; opacity:0.5; animation:typingDot 1s infinite; }
     .dm-typing span:nth-child(2) { animation-delay:.15s; }
     .dm-typing span:nth-child(3) { animation-delay:.3s; }
     @keyframes typingDot { 0%,80%,100%{transform:scale(1);opacity:.5} 40%{transform:scale(1.2);opacity:1} }
-    #dm-input-row { display:flex; padding:10px 12px; gap:8px; border-top:1px solid #f0f0f0; }
+    #dm-input-row { display:flex; padding:10px 12px; gap:8px; border-top:1px solid rgba(22,163,74,.1); background:#fff; }
     #dm-input { flex:1; border:1px solid #e2e8f0; border-radius:24px; padding:8px 14px; font-size:13px; outline:none; }
-    #dm-input:focus { border-color:#185FA5; }
-    #dm-send { width:36px; height:36px; border-radius:50%; background:#185FA5; border:none; cursor:pointer; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+    #dm-input:focus { border-color:#16A34A; box-shadow: 0 0 0 2px rgba(22,163,74,0.1); }
+    #dm-send { width:36px; height:36px; border-radius:50%; background:#16A34A; border:none; cursor:pointer; display:flex; align-items:center; justify-content:center; flex-shrink:0; transition:background .2s; }
+    #dm-send:hover { background:#15803D; }
     #dm-send svg { width:16px; height:16px; fill:white; }
 
     /* Page hero */
@@ -261,28 +262,103 @@
     else nav.style.boxShadow='none';
   });
 
-  // Chatbot
-  const DM_CONFIG = { agencyName:"Wholeup Agency", phone:"+91 94268 46035", email:"wholeup.agency@gmail.com", website:"www.wholeup.in" };
-  const DM_RESPONSES = [
-    { keys:["social media","instagram","facebook","reels","post"], reply:"Social media ke liye hum provide karte hain:\n\n✅ Daily content creation\n✅ Reels & short videos\n✅ Audience growth strategy\n✅ Paid campaigns\n\nFree consultation book karein?" },
-    { keys:["seo","google ranking","organic","search"], reply:"SEO services mein shamil hai:\n\n🔍 On-page & off-page SEO\n🔍 Local SEO (Google My Business)\n🔍 Monthly keyword reports\n🔍 Backlink building\n\nResult 3-6 mahine mein milte hain." },
-    { keys:["price","pricing","cost","kitna","charge","fees","rate"], reply:"Hamare packages:\n\n💼 Starter: ₹8,000/month\n💼 Growth: ₹18,000/month\n💼 Premium: ₹35,000/month\n\nCall karein: "+DM_CONFIG.phone },
-    { keys:["ads","google ads","meta ads","facebook ads","paid"], reply:"Paid Advertising mein hum karte hain:\n\n📢 Google Search & Display Ads\n📢 Facebook & Instagram Ads\n📢 YouTube Ads\n📢 ROI tracking\n\nMinimum budget ₹10,000/month." },
-    { keys:["consultation","contact","call","baat","milna","demo"], reply:"Consultation ke liye:\n\n📞 Call: "+DM_CONFIG.phone+"\n📧 Email: "+DM_CONFIG.email+"\n\nYa form fill karein — 24 ghante mein reply! 🙏" },
-    { keys:["hello","hi","namaste","helo","hey","hii"], reply:"Namaste! 😊 "+DM_CONFIG.agencyName+" mein aaye, swagat hai!\n\nKisi bhi digital marketing service ke baare mein poochh sakte hain!" }
-  ];
+  // Chatbot - Dynamic Gemini API with History & Interactive CTAs
   let dmOpen=false;
+  let dmHistory = []; // Local array to persist conversation turns
+
   function dmToggle(){ dmOpen=!dmOpen; document.getElementById('dm-chat-box').style.display=dmOpen?'flex':'none'; document.getElementById('dm-badge').style.display='none'; if(dmOpen) document.getElementById('dm-input').focus(); }
   function dmAsk(t){ document.getElementById('dm-input').value=t; dmSend(); }
-  function dmSend(){
+  async function dmSend(){
     const input=document.getElementById('dm-input');
     const text=input.value.trim(); if(!text) return; input.value='';
     const msgs=document.getElementById('dm-messages');
-    const uDiv=document.createElement('div'); uDiv.className='dm-msg user'; uDiv.innerHTML=`<div class="dm-av user">Ap</div><div class="dm-bubble user">${text}</div>`; msgs.appendChild(uDiv);
-    const typDiv=document.createElement('div'); typDiv.className='dm-msg'; typDiv.id='dm-typ'; typDiv.innerHTML=`<div class="dm-av bot">AI</div><div class="dm-bubble bot"><div class="dm-typing"><span></span><span></span><span></span></div></div>`; msgs.appendChild(typDiv); msgs.scrollTop=msgs.scrollHeight;
-    setTimeout(()=>{ const t=document.getElementById('dm-typ'); if(t) t.remove(); const reply=dmGetReply(text); const aDiv=document.createElement('div'); aDiv.className='dm-msg'; aDiv.innerHTML=`<div class="dm-av bot">AI</div><div class="dm-bubble bot">${reply.replace(/\n/g,'<br>')}</div>`; msgs.appendChild(aDiv); msgs.scrollTop=msgs.scrollHeight; },1200);
+    
+    // 1. Add user message to UI
+    const uDiv=document.createElement('div');
+    uDiv.className='dm-msg user';
+    uDiv.innerHTML=`<div class="dm-av user">Ap</div><div class="dm-bubble user">${escapeHtml(text)}</div>`;
+    msgs.appendChild(uDiv);
+    msgs.scrollTop=msgs.scrollHeight;
+    
+    // 2. Add typing indicator
+    const typDiv=document.createElement('div');
+    typDiv.className='dm-msg';
+    typDiv.id='dm-typ';
+    typDiv.innerHTML=`<div class="dm-av bot">AI</div><div class="dm-bubble bot"><div class="dm-typing"><span></span><span></span><span></span></div></div>`;
+    msgs.appendChild(typDiv);
+    msgs.scrollTop=msgs.scrollHeight;
+    
+    // 3. Prepare client-side user message state for history
+    const userMsg = { role: 'user', parts: [{ text: text }] };
+    
+    try {
+      const response = await fetch('/api/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ message: text, history: dmHistory })
+      });
+      
+      const data = await response.json();
+      
+      // Remove typing indicator
+      const t = document.getElementById('dm-typ');
+      if (t) t.remove();
+      
+      const reply = data.success ? data.reply : 'Maaf kijiye, humare servers temporary down hain. Kripya humse directly contact karein: +91 94268 46035!';
+      
+      // 4. Update local conversational memory history state
+      if (data.success) {
+        dmHistory.push(userMsg);
+        dmHistory.push({ role: 'model', parts: [{ text: reply }] });
+        
+        // Cap history to keep payload size reasonable (last 10 turns = 20 entries)
+        if (dmHistory.length > 20) {
+          dmHistory = dmHistory.slice(dmHistory.length - 20);
+        }
+      }
+      
+      // 5. Add bot response to UI
+      const aDiv=document.createElement('div');
+      aDiv.className='dm-msg';
+      aDiv.innerHTML=`<div class="dm-av bot">AI</div><div class="dm-bubble bot">${formatReply(reply)}</div>`;
+      msgs.appendChild(aDiv);
+      msgs.scrollTop=msgs.scrollHeight;
+    } catch(err) {
+      console.error(err);
+      const t = document.getElementById('dm-typ');
+      if (t) t.remove();
+      const aDiv=document.createElement('div');
+      aDiv.className='dm-msg';
+      aDiv.innerHTML=`<div class="dm-av bot">AI</div><div class="dm-bubble bot">Net connection me koi problem lag rahi hai. Kripya hume direct call karein: +91 94268 46035.</div>`;
+      msgs.appendChild(aDiv);
+      msgs.scrollTop=msgs.scrollHeight;
+    }
   }
-  function dmGetReply(text){ const t=text.toLowerCase(); for(const r of DM_RESPONSES){ if(r.keys.some(k=>t.includes(k))) return r.reply; } return "Shukriya! 🙏\n\n📞 "+DM_CONFIG.phone+"\n📧 "+DM_CONFIG.email; }
+
+  function escapeHtml(string) {
+    return String(string).replace(/[&<>"'`=\/]/g, function (s) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;', '/': '&#x2F;', '=': '&#x3D;' }[s];
+    });
+  }
+
+  function formatReply(text) {
+    let html = escapeHtml(text);
+    html = html.replace(/\n/g, '<br>');
+    html = html.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+    html = html.replace(/(?:^|<br>)\s*[-*]\s(.*?)(?=<br>|$)/g, function(match, p1) {
+      return '<br>• ' + p1;
+    });
+    
+    // Parse CALL_CTA tag into a gorgeous Tailwind green glowing button
+    html = html.replace(/\[CALL_CTA\]/g, `<a href="tel:+919426846035" class="inline-flex items-center gap-2 mt-3 px-4 py-2.5 bg-green-600 hover:bg-green-700 text-white font-semibold text-xs rounded-full shadow-lg shadow-green-600/25 hover:shadow-green-600/40 hover:-translate-y-0.5 active:translate-y-0 transition-all w-full justify-center cursor-pointer no-underline"><i class="fas fa-phone-alt animate-bounce"></i> +91 94268 46035 Par Call Karein</a>`);
+    
+    // Parse WHATSAPP_CTA tag into a gorgeous Tailwind emerald glowing button
+    html = html.replace(/\[WHATSAPP_CTA\]/g, `<a href="https://wa.me/919426846035" target="_blank" class="inline-flex items-center gap-2 mt-2 px-4 py-2.5 bg-emerald-500 hover:bg-emerald-600 text-white font-semibold text-xs rounded-full shadow-lg shadow-emerald-500/25 hover:shadow-emerald-500/40 hover:-translate-y-0.5 active:translate-y-0 transition-all w-full justify-center cursor-pointer no-underline"><i class="fab fa-whatsapp text-sm"></i> WhatsApp Par Message Karein</a>`);
+    
+    // Remove consecutive double br if formatting leaves them
+    html = html.replace(/(<br>){3,}/g, '<br><br>');
+    return html;
+  }
 </script>
 </body>
 </html>

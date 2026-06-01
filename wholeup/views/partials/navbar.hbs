@@ -1,7 +1,25 @@
 <nav class="fixed w-full z-50 top-0 px-6 py-4 bg-cream border-b border-black/5" id="navbar" style="transition:box-shadow 0.3s ease;">
   <div class="max-w-[1400px] mx-auto flex justify-between items-center">
     <a href="/" class="flex items-center gap-3">
-      <span class="text-primary font-black italic text-3xl">W.</span>
+      <svg class="w-9 h-9 transform hover:rotate-6 transition-transform duration-300 mr-1" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="logo-grad" x1="0%" y1="100%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#16A34A" />
+            <stop offset="100%" stop-color="#22C55E" />
+          </linearGradient>
+          <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+            <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#16A34A" flood-opacity="0.25"/>
+          </filter>
+        </defs>
+        <!-- Premium glassmorphic background card for logo icon -->
+        <rect x="12" y="12" width="76" height="76" rx="22" fill="#16A34A" fill-opacity="0.07" stroke="url(#logo-grad)" stroke-width="2.5" />
+        
+        <!-- The rising 'W' representing growth & digital marketing funnel scaling -->
+        <path d="M30 63 L41 42 L51 55 L65 30" stroke="url(#logo-grad)" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" filter="url(#glow)" />
+        
+        <!-- The arrow head indicating 'UP' in Wholeup scaling -->
+        <path d="M52 30 H65 V43" stroke="url(#logo-grad)" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" />
+      </svg>
       <h1 class="text-xl font-black tracking-tight text-dark uppercase">Wholeup</h1>
     </a>
     <div class="hidden md:flex space-x-7 text-[11px] font-semibold text-dark/65 uppercase tracking-widest">
@@ -11,6 +29,7 @@
       <a href="/pricing" class="hover:text-primary transition magnetic-btn {{#if (eq page 'pricing')}}nav-active{{/if}}">Pricing</a>
       <a href="/blog" class="hover:text-primary transition magnetic-btn {{#if (eq page 'blog')}}nav-active{{/if}}">Blog</a>
       <a href="/contact" class="hover:text-primary transition magnetic-btn {{#if (eq page 'contact')}}nav-active{{/if}}">Contact</a>
+      <a href="/admin/agent" class="hover:text-primary transition font-bold text-primary magnetic-btn {{#if (eq page 'agent')}}nav-active{{/if}} flex items-center gap-1"><i class="fas fa-robot text-xs"></i> AI Agent</a>
     </div>
     <div class="flex items-center gap-3">
       <a href="/contact" class="hidden sm:inline-flex bg-primary text-white px-5 py-2.5 rounded-full font-bold text-xs shadow-[0_4px_14px_rgba(22,163,74,0.35)] hover:shadow-[0_6px_20px_rgba(22,163,74,0.5)] transition hover:-translate-y-0.5 magnetic-btn uppercase tracking-widest">Book Free Call</a>
@@ -27,6 +46,7 @@
     <a href="/blog" onclick="toggleMobileMenu()">Blog</a>
     <a href="/faq" onclick="toggleMobileMenu()">FAQ</a>
     <a href="/contact" onclick="toggleMobileMenu()">Contact</a>
+    <a href="/admin/agent" onclick="toggleMobileMenu()" class="font-bold text-primary flex items-center gap-1.5 justify-center"><i class="fas fa-robot text-xs"></i> AI Agent</a>
     <a href="/contact" onclick="toggleMobileMenu()" style="background:#16A34A;color:white;text-align:center;">Book Free Call →</a>
   </div>
 </nav>

@@ -10,6 +10,18 @@
 <!-- PRICING CARDS -->
 <section class="py-24 bg-white px-6">
   <div class="max-w-6xl mx-auto">
+    
+    <!-- Billing Cycle Toggle Switch -->
+    <div class="flex justify-center items-center gap-4 mb-16 gs-reveal">
+      <span class="text-sm font-bold uppercase tracking-widest text-dark/70" id="label-monthly">Monthly</span>
+      <button onclick="toggleBilling()" id="billing-switch" class="w-14 h-8 bg-black/10 hover:bg-black/15 rounded-full p-1 transition-colors duration-300 focus:outline-none relative cursor-pointer" aria-label="Toggle Billing Plan">
+        <div id="switch-dot" class="w-6 h-6 bg-primary rounded-full transition-transform duration-300 shadow-md transform translate-x-0"></div>
+      </button>
+      <span class="text-sm font-bold uppercase tracking-widest text-dark/45 flex items-center gap-2" id="label-yearly">
+        Yearly <span class="bg-primary text-white text-[9px] font-black px-2 py-0.5 rounded-full uppercase tracking-wider">Save 20%</span>
+      </span>
+    </div>
+
     <div class="grid md:grid-cols-3 gap-8 items-stretch">
       {{#each pricing}}
       <div class="relative rounded-[32px] border {{#if popular}}border-primary shadow-2xl shadow-primary/20{{else}}border-black/8 shadow-lg{{/if}} overflow-hidden gs-reveal flex flex-col" data-tilt data-tilt-max="3">
@@ -20,11 +32,16 @@
           <div class="mb-8">
             <h3 class="text-2xl font-black uppercase tracking-widest mb-2 {{#if popular}}text-white{{else}}text-dark{{/if}}">{{name}}</h3>
             <p class="text-sm font-medium {{#if popular}}text-white/60{{else}}text-dark/60{{/if}} mb-6">{{tagline}}</p>
-            <div class="flex items-end gap-2 mb-2">
-              <span class="text-5xl font-black {{#if popular}}text-white{{else}}text-dark{{/if}}">₹{{price}}</span>
-              <span class="text-sm font-bold {{#if popular}}text-white/50{{else}}text-dark/50{{/if}} mb-2">/{{period}}</span>
+            <div class="flex items-end gap-2 mb-1">
+              <span class="text-5xl font-black {{#if popular}}text-white{{else}}text-dark{{/if}} price-amount" 
+                data-monthly="{{price}}" 
+                data-yearly="{{#if (eq name 'Starter')}}8,000{{/if}}{{#if (eq name 'Growth')}}17,600{{/if}}{{#if (eq name 'Premium')}}36,000{{/if}}">
+                ₹{{price}}
+              </span>
+              <span class="text-sm font-bold {{#if popular}}text-white/50{{else}}text-dark/50{{/if}} mb-2">/month</span>
             </div>
-            <p class="text-xs font-bold uppercase tracking-widest {{#if popular}}text-primary{{else}}text-dark/40{{/if}}">+ Ad spend passed through at cost</p>
+            <p class="billing-note text-[9px] opacity-0 transition-opacity duration-300 font-bold uppercase tracking-widest text-primary leading-none h-3 select-none">Billed Annually</p>
+            <p class="text-xs font-bold uppercase tracking-widest {{#if popular}}text-primary{{else}}text-dark/40{{/if}} mt-3">+ Ad spend passed through at cost</p>
           </div>
           <div class="space-y-3 mb-8 flex-1">
             {{#each features}}
@@ -67,3 +84,61 @@
     </a>
   </div>
 </section>
+
+<script>
+  let yearlyBilling = false;
+
+  function toggleBilling() {
+    yearlyBilling = !yearlyBilling;
+    
+    // Animate Switch Toggle
+    const dot = document.getElementById('switch-dot');
+    const bg = document.getElementById('billing-switch');
+    const labelMonthly = document.getElementById('label-monthly');
+    const labelYearly = document.getElementById('label-yearly');
+
+    if (yearlyBilling) {
+      dot.style.transform = 'translateX(24px)';
+      bg.classList.replace('bg-black/10', 'bg-primary/20');
+      labelMonthly.classList.replace('text-dark/70', 'text-dark/45');
+      labelYearly.classList.replace('text-dark/45', 'text-dark/70');
+    } else {
+      dot.style.transform = 'translateX(0px)';
+      bg.classList.replace('bg-primary/20', 'bg-black/10');
+      labelMonthly.classList.replace('text-dark/45', 'text-dark/70');
+      labelYearly.classList.replace('text-dark/70', 'text-dark/45');
+    }
+
+    // Update prices with smooth fade effect
+    const priceElements = document.querySelectorAll('.price-amount');
+    const notes = document.querySelectorAll('.billing-note');
+
+    priceElements.forEach((el, index) => {
+      const monthly = el.dataset.monthly;
+      const yearly = el.dataset.yearly;
+      const targetVal = yearlyBilling ? yearly : monthly;
+
+      // Simple smooth text transition
+      if (typeof gsap !== 'undefined') {
+        gsap.to(el, {
+          opacity: 0,
+          y: -5,
+          duration: 0.15,
+          onComplete: () => {
+            el.innerText = '₹' + targetVal;
+            gsap.to(el, { opacity: 1, y: 0, duration: 0.2 });
+          }
+        });
+      } else {
+        el.innerText = '₹' + targetVal;
+      }
+
+      // Show/Hide Billed Annually note
+      if (yearlyBilling) {
+        notes[index].classList.replace('opacity-0', 'opacity-100');
+      } else {
+        notes[index].classList.replace('opacity-100', 'opacity-0');
+      }
+    });
+  }
+</script>

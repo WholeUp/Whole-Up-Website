@@ -1,4 +1,28 @@
-<div class="page-hero max-w-[1400px] mx-auto px-6">
+<!-- Admin Authorization PIN Gate Overlay -->
+<div id="admin-auth-overlay" class="fixed inset-0 backdrop-blur-xl flex items-center justify-center p-6 transition-all duration-500" style="display: flex; opacity: 1; background: rgba(13, 13, 13, 0.97); z-index: 999999;">
+  <div class="max-w-md w-full p-8 rounded-[40px] text-center relative overflow-hidden shadow-2xl" style="background: #0F172A; border: 1px solid rgba(255, 255, 255, 0.1);">
+    <div class="absolute -top-12 -right-12 w-32 h-32 bg-primary/20 rounded-full blur-2xl"></div>
+    
+    <div class="w-16 h-16 bg-primary/10 border border-primary/30 rounded-full flex items-center justify-center mx-auto mb-6 text-primary text-2xl">
+      <i class="fas fa-lock" id="auth-lock-icon" style="color: #16A34A;"></i>
+    </div>
+    
+    <h2 class="text-xl font-black text-white uppercase tracking-widest mb-2">Authorization Required</h2>
+    <p class="text-slate-400 text-xs font-semibold uppercase tracking-wider mb-8">Enter PIN to access autopilot controller</p>
+    
+    <div class="space-y-4">
+      <input type="password" id="admin-pin-input" maxlength="4" placeholder="••••" class="w-full bg-white/5 border border-white/10 rounded-2xl py-4 text-center text-3xl font-bold tracking-[0.5em] text-white focus:outline-none focus:border-primary transition" style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);" onkeypress="handlePinKeyPress(event)">
+      <div id="auth-error-msg" class="text-red-400 text-xs font-bold uppercase tracking-wider hidden animate-pulse" style="color: #ef4444;">Access Denied: Invalid PIN</div>
+      
+      <button onclick="verifyAdminPIN()" class="w-full bg-primary hover:bg-green-600 text-white font-black uppercase tracking-widest text-xs py-4.5 rounded-2xl shadow-xl transition-all cursor-pointer mt-4" style="background: #16A34A; color: white;">
+        Verify Autopilot Access
+      </button>
+    </div>
+  </div>
+</div>
+
+
+<div class="page-hero max-w-[1400px] mx-auto px-6 hidden" id="dashboard-main-content">
   
   <!-- Header Title -->
   <div class="mb-10 text-center md:text-left flex flex-col md:flex-row md:items-center justify-between gap-4">
@@ -8,13 +32,16 @@
       </h1>
       <p class="text-dark/65 mt-2 font-medium">Manage captured leads, trigger AI outreach email roadmaps, and generate social media content in seconds.</p>
     </div>
-    <div>
-      <span class="inline-flex items-center gap-2 bg-emerald-100 border border-emerald-300 text-emerald-800 font-bold px-4 py-2 rounded-full text-xs uppercase tracking-widest shadow-md shadow-emerald-500/10">
+    <div class="flex items-center gap-3 justify-center md:justify-start">
+      <button onclick="logoutAdmin()" class="bg-red-500/10 hover:bg-red-500/20 text-red-500 font-bold px-4 py-2.5 rounded-full text-xs uppercase tracking-widest transition cursor-pointer">
+        <i class="fas fa-sign-out-alt"></i> Logout
+      </button>
+      <span class="inline-flex items-center gap-2 bg-emerald-100 border border-emerald-300 text-emerald-800 font-bold px-4 py-2.5 rounded-full text-xs uppercase tracking-widest shadow-md shadow-emerald-500/10">
         <span class="w-2.5 h-2.5 bg-emerald-500 rounded-full animate-ping"></span> AI Agent Status: Active (Autopilot)
       </span>
     </div>
   </div>
-
+ 
   <!-- Main Grid Dashboard -->
   <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
     
@@ -291,5 +318,155 @@
   function copyContentText() {
     navigator.clipboard.writeText(activeContentText);
     alert('Social media copy successfully copied to clipboard! Clipboard par save ho gaya.');
+  }
+
+  // --- Admin Authorization PIN Check Security Logic ---
+  const CORRECT_PIN = '1234'; // Sleek Default authorization PIN
+
+  function getAdminAuth() {
+    try {
+      return localStorage.getItem('wholeup_admin_auth');
+    } catch (e) {
+      console.warn('LocalStorage access blocked/disabled:', e);
+      return null;
+    }
+  }
+
+  function setAdminAuth(value) {
+    try {
+      localStorage.setItem('wholeup_admin_auth', value);
+    } catch (e) {
+      console.warn('LocalStorage save failed:', e);
+    }
+  }
+
+  function removeAdminAuth() {
+    try {
+      localStorage.removeItem('wholeup_admin_auth');
+    } catch (e) {
+      console.warn('LocalStorage clear failed:', e);
+    }
+  }
+
+  function checkAdminAuth() {
+    const isAuth = getAdminAuth();
+    const overlay = document.getElementById('admin-auth-overlay');
+    const mainContent = document.getElementById('dashboard-main-content');
+    
+    if (!overlay || !mainContent) {
+      console.error('Required auth DOM elements not found.');
+      return;
+    }
+
+    if (isAuth === 'true') {
+      overlay.style.opacity = '0';
+      setTimeout(() => {
+        overlay.style.display = 'none';
+      }, 500);
+      mainContent.classList.remove('hidden');
+      mainContent.style.opacity = '1'; // Default to fully visible immediately
+      
+      // Smooth fade-in if GSAP is available
+      if (typeof gsap !== 'undefined') {
+        gsap.fromTo(mainContent, { opacity: 0, y: 15 }, { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out' });
+      }
+    } else {
+      overlay.style.display = 'flex';
+      overlay.style.opacity = '1';
+      mainContent.classList.add('hidden');
+      const pinInput = document.getElementById('admin-pin-input');
+      if (pinInput) {
+        setTimeout(() => pinInput.focus(), 50);
+      }
+    }
+  }
+
+  function verifyAdminPIN() {
+    const input = document.getElementById('admin-pin-input');
+    const errorMsg = document.getElementById('auth-error-msg');
+    const lockIcon = document.getElementById('auth-lock-icon');
+    const overlay = document.getElementById('admin-auth-overlay');
+
+    if (!input || !errorMsg || !lockIcon) return;
+
+    const pin = input.value.trim();
+
+    if (pin === CORRECT_PIN) {
+      errorMsg.classList.add('hidden');
+      setAdminAuth('true');
+      
+      // Animate unlock success
+      lockIcon.className = 'fas fa-unlock text-emerald-500';
+      if (typeof gsap !== 'undefined') {
+        gsap.to(lockIcon, { scale: 1.3, duration: 0.3, yoyo: true, repeat: 1 });
+      }
+      
+      setTimeout(() => {
+        checkAdminAuth();
+      }, 600);
+    } else {
+      input.value = '';
+      errorMsg.classList.remove('hidden');
+      lockIcon.className = 'fas fa-lock text-red-500';
+      
+      // Shake animation for error feedback (target the inner dialog container)
+      const overlayCard = overlay.querySelector('div > div');
+      if (overlayCard && typeof gsap !== 'undefined') {
+        gsap.fromTo(overlayCard, 
+          { x: -10 }, 
+          { x: 10, duration: 0.08, repeat: 5, yoyo: true, onComplete: () => {
+            gsap.set(overlayCard, { x: 0 });
+            lockIcon.className = 'fas fa-lock';
+          }}
+        );
+      } else {
+        lockIcon.className = 'fas fa-lock';
+      }
+    }
+  }
+
+  function handlePinKeyPress(e) {
+    if (e.key === 'Enter') {
+      verifyAdminPIN();
+    }
+  }
+
+  function logoutAdmin() {
+    removeAdminAuth();
+    const input = document.getElementById('admin-pin-input');
+    if (input) input.value = '';
+    
+    const overlay = document.getElementById('admin-auth-overlay');
+    const mainContent = document.getElementById('dashboard-main-content');
+    
+    if (!overlay || !mainContent) return;
+
+    if (typeof gsap !== 'undefined') {
+      gsap.to(mainContent, {
+        opacity: 0,
+        y: 10,
+        duration: 0.3,
+        onComplete: () => {
+          overlay.style.display = 'flex';
+          gsap.to(overlay, { opacity: 1, duration: 0.3 });
+          mainContent.classList.add('hidden');
+          const pinInput = document.getElementById('admin-pin-input');
+          if (pinInput) setTimeout(() => pinInput.focus(), 50);
+        }
+      });
+    } else {
+      overlay.style.display = 'flex';
+      overlay.style.opacity = '1';
+      mainContent.classList.add('hidden');
+      const pinInput = document.getElementById('admin-pin-input');
+      if (pinInput) setTimeout(() => pinInput.focus(), 50);
+    }
+  }
+
+  // Run authorization check immediately or register for event if DOM is still loading
+  if (document.readyState === 'loading') {
+    window.addEventListener('DOMContentLoaded', checkAdminAuth);
+  } else {
+    checkAdminAuth();
   }
 </script>

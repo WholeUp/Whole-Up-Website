@@ -1,7 +1,7 @@
 [
   {
     "name": "Starter",
-    "price": "8,000",
+    "price": "10,000",
     "period": "month",
     "tagline": "Perfect for small businesses getting started with digital marketing.",
     "color": "#111111",
@@ -23,7 +23,7 @@
   },
   {
     "name": "Growth",
-    "price": "18,000",
+    "price": "22,000",
     "period": "month",
     "tagline": "For growing businesses ready to scale across multiple channels.",
     "color": "#16A34A",
@@ -46,7 +46,7 @@
   },
   {
     "name": "Premium",
-    "price": "35,000",
+    "price": "45,000",
     "period": "month",
     "tagline": "Full-funnel digital marketing for ambitious businesses.",
     "color": "#2563EB",

@@ -178,6 +178,30 @@
 </head>
 <body class="antialiased selection:bg-primary selection:text-white bg-grid">
 
+<div id="debug-error-panel" style="display: none; background: #fee2e2; color: #991b1b; border: 2px solid #f87171; padding: 20px; font-family: monospace; font-size: 14px; position: fixed; top: 80px; left: 20px; right: 20px; z-index: 9999999; border-radius: 12px; box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1); max-height: 400px; overflow-y: auto;">
+  <h3 style="margin-top: 0; font-weight: bold; font-size: 16px;">⚠️ Client-Side JS Error Detected:</h3>
+  <pre id="debug-error-log" style="white-space: pre-wrap; margin: 0;"></pre>
+  <button onclick="document.getElementById('debug-error-panel').style.display='none'" style="margin-top: 12px; background: #ef4444; color: white; border: none; padding: 6px 12px; border-radius: 6px; cursor: pointer; font-weight: bold;">Close Panel</button>
+</div>
+<script>
+  window.addEventListener('error', function(event) {
+    const panel = document.getElementById('debug-error-panel');
+    const log = document.getElementById('debug-error-log');
+    if (panel && log) {
+      panel.style.display = 'block';
+      log.textContent += event.message + '\n  at ' + event.filename + ':' + event.lineno + ':' + event.colno + '\n\n';
+    }
+  });
+  window.addEventListener('unhandledrejection', function(event) {
+    const panel = document.getElementById('debug-error-panel');
+    const log = document.getElementById('debug-error-log');
+    if (panel && log) {
+      panel.style.display = 'block';
+      log.textContent += 'Unhandled Promise Rejection: ' + event.reason + '\n\n';
+    }
+  });
+</script>
+
 <div id="progress-bar"></div>
 <div class="cursor-dot hidden md:block"></div>
 <div class="cursor-shadow hidden md:block"></div>
@@ -194,21 +218,31 @@
 
 <script>
   // Ultra smooth scroll
-  const lenis = new Lenis({
-    duration: 1.6,
-    easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-    smooth: true,
-    smoothTouch: false,
-    touchMultiplier: 1.5,
-    infinite: false
-  });
-  function raf(time){ lenis.raf(time); requestAnimationFrame(raf); }
-  requestAnimationFrame(raf);
+  let lenis;
+  try {
+    if (typeof Lenis !== 'undefined') {
+      lenis = new Lenis({
+        duration: 1.6,
+        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+        smooth: true,
+        smoothTouch: false,
+        touchMultiplier: 1.5,
+        infinite: false
+      });
+      function raf(time){ lenis.raf(time); requestAnimationFrame(raf); }
+      requestAnimationFrame(raf);
 
-  // Progress bar
-  lenis.on('scroll', ({progress}) => {
-    document.getElementById('progress-bar').style.width = (progress*100) + '%';
-  });
+      // Progress bar
+      const pBar = document.getElementById('progress-bar');
+      if (pBar) {
+        lenis.on('scroll', ({progress}) => {
+          pBar.style.width = (progress*100) + '%';
+        });
+      }
+    }
+  } catch (e) {
+    console.warn('Lenis failed to initialize:', e);
+  }
 
   // Cursor
   const dot = document.querySelector('.cursor-dot');
@@ -225,35 +259,65 @@
     animateCursor();
     document.querySelectorAll('a,button,.magnetic-btn').forEach(el=>{
       el.addEventListener('mouseenter',()=>document.body.classList.add('cursor-hover'));
-      el.addEventListener('mouseleave',()=>{ document.body.classList.remove('cursor-hover'); gsap.to(el,{x:0,y:0,duration:.5}); });
+      el.addEventListener('mouseleave',()=>{
+        document.body.classList.remove('cursor-hover');
+        if (typeof gsap !== 'undefined') {
+          gsap.to(el,{x:0,y:0,duration:.5});
+        }
+      });
       el.addEventListener('mousemove',e=>{
         const r=el.getBoundingClientRect();
-        gsap.to(el,{x:(e.clientX-r.left-r.width/2)*.2,y:(e.clientY-r.top-r.height/2)*.2,duration:.3});
+        if (typeof gsap !== 'undefined') {
+          gsap.to(el,{x:(e.clientX-r.left-r.width/2)*.2,y:(e.clientY-r.top-r.height/2)*.2,duration:.3});
+        }
       });
     });
   }
 
   // GSAP ScrollTrigger — ultra smooth staggered reveals
-  gsap.registerPlugin(ScrollTrigger);
-  lenis.on('scroll', ScrollTrigger.update);
-  gsap.ticker.add(time=>lenis.raf(time*1000));
-  gsap.ticker.lagSmoothing(0);
-
-  // Staggered reveal for groups
-  gsap.utils.toArray('.gs-reveal').forEach((el, i) => {
-    gsap.fromTo(el,
-      { y: 32, opacity: 0, scale: 0.98 },
-      { y: 0, opacity: 1, scale: 1, duration: 0.9, ease: 'power2.out',
-        scrollTrigger: { trigger: el, start: 'top 88%', once: true }
+  try {
+    if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+      gsap.registerPlugin(ScrollTrigger);
+      if (lenis) {
+        lenis.on('scroll', ScrollTrigger.update);
+        gsap.ticker.add(time=>lenis.raf(time*1000));
       }
-    );
-  });
+      gsap.ticker.lagSmoothing(0);
+
+      // Staggered reveal for groups
+      gsap.utils.toArray('.gs-reveal').forEach((el, i) => {
+        gsap.fromTo(el,
+          { y: 32, opacity: 0, scale: 0.98 },
+          { y: 0, opacity: 1, scale: 1, duration: 0.9, ease: 'power2.out',
+            scrollTrigger: { trigger: el, start: 'top 88%', once: true }
+          }
+        );
+      });
+    } else {
+      // Fallback: make all reveals visible immediately
+      document.querySelectorAll('.gs-reveal').forEach(el => {
+        el.style.opacity = '1';
+        el.style.transform = 'none';
+      });
+    }
+  } catch (e) {
+    console.warn('GSAP/ScrollTrigger initialization failed:', e);
+    // Fallback: make all reveals visible immediately
+    document.querySelectorAll('.gs-reveal').forEach(el => {
+      el.style.opacity = '1';
+      el.style.transform = 'none';
+    });
+  }
 
   // Enhanced VanillaTilt
-  if(window.innerWidth>=768){
-    VanillaTilt.init(document.querySelectorAll('[data-tilt]'),{
-      glare:true,'max-glare':.04,scale:1.025,speed:400,perspective:1200
-    });
+  try {
+    if(window.innerWidth>=768 && typeof VanillaTilt !== 'undefined'){
+      VanillaTilt.init(document.querySelectorAll('[data-tilt]'),{
+        glare:true,'max-glare':.04,scale:1.025,speed:400,perspective:1200
+      });
+    }
+  } catch (e) {
+    console.warn('VanillaTilt failed to initialize:', e);
   }
 
   // Mobile nav

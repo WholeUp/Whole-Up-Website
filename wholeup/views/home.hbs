@@ -208,6 +208,136 @@
   </div>
 </section>
 
+<!-- ══ ROI CALCULATOR ═══════════════════════════════════════════════════ -->
+<section class="py-32 bg-dark text-white px-6 relative overflow-hidden">
+  <div class="absolute inset-0 opacity-[0.03]" style="background-image:radial-gradient(#fff 1.5px,transparent 1.5px);background-size:24px 24px;"></div>
+  <div class="max-w-[1400px] mx-auto relative z-10">
+    <div class="text-center mb-16 gs-reveal">
+      <p class="text-xs font-bold tracking-[0.3em] uppercase text-primary mb-4">Interactive Audit</p>
+      <h2 class="text-5xl md:text-6xl font-black uppercase tracking-widest mb-4">Calculate Your <span class="text-gradient">ROI Lift.</span></h2>
+      <p class="text-white/60 font-medium text-lg max-w-2xl mx-auto">Adjust the parameters below to see how optimizing your digital marketing funnel impacts your bottom line.</p>
+    </div>
+
+    <div class="grid lg:grid-cols-5 gap-12 items-stretch">
+      <!-- Input Panel -->
+      <div class="lg:col-span-3 bg-white/5 border border-white/10 rounded-[32px] p-8 md:p-10 flex flex-col justify-between gs-reveal">
+        <div class="space-y-8">
+          <!-- Parameter 1: Monthly Spend -->
+          <div>
+            <div class="flex justify-between items-center mb-3">
+              <label class="text-sm font-bold uppercase tracking-wider text-white/80">Monthly Ad Spend</label>
+              <span class="text-xl font-black text-primary font-mono" id="val-spend">₹50,000</span>
+            </div>
+            <input type="range" min="10000" max="1000000" step="5000" value="50000" class="range-slider" id="slider-spend" oninput="calculateROI()">
+            <div class="flex justify-between text-[10px] text-white/30 font-bold uppercase mt-2">
+              <span>₹10K</span>
+              <span>₹500K</span>
+              <span>₹1M+</span>
+            </div>
+          </div>
+
+          <!-- Parameter 2: Target ROAS -->
+          <div>
+            <div class="flex justify-between items-center mb-3">
+              <label class="text-sm font-bold uppercase tracking-wider text-white/80">Estimated ROAS Multiple</label>
+              <span class="text-xl font-black text-primary font-mono" id="val-roas">3.5x</span>
+            </div>
+            <input type="range" min="1" max="10" step="0.1" value="3.5" class="range-slider" id="slider-roas" oninput="calculateROI()">
+            <div class="flex justify-between text-[10px] text-white/30 font-bold uppercase mt-2">
+              <span>1.0x (Break Even)</span>
+              <span>5.0x (Scale)</span>
+              <span>10.0x (Viral)</span>
+            </div>
+          </div>
+
+          <!-- Parameter 3: Conversion Rate -->
+          <div>
+            <div class="flex justify-between items-center mb-3">
+              <label class="text-sm font-bold uppercase tracking-wider text-white/80">Average Cost Per Lead (CPL)</label>
+              <span class="text-xl font-black text-primary font-mono" id="val-cpl">₹300</span>
+            </div>
+            <input type="range" min="50" max="2000" step="10" value="300" class="range-slider" id="slider-cpl" oninput="calculateROI()">
+            <div class="flex justify-between text-[10px] text-white/30 font-bold uppercase mt-2">
+              <span>₹50 (Low Cost)</span>
+              <span>₹1,000</span>
+              <span>₹2,000 (Premium/B2B)</span>
+            </div>
+          </div>
+        </div>
+
+        <p class="text-xs text-white/40 mt-8 border-t border-white/5 pt-6 leading-relaxed">
+          *Calculator estimates are based on average client industry metrics. Actual ROI performance depends on your product niche, conversion funnel optimization, and target audience alignment.
+        </p>
+      </div>
+
+      <!-- Result Panel -->
+      <div class="lg:col-span-2 bg-gradient-to-br from-primary/10 to-primary/20 border border-primary/20 rounded-[32px] p-8 md:p-10 flex flex-col justify-between relative overflow-hidden gs-reveal">
+        <div class="absolute -top-20 -right-20 w-48 h-48 bg-primary/20 rounded-full blur-3xl"></div>
+        
+        <div>
+          <h3 class="text-xs font-bold uppercase tracking-[0.2em] text-primary mb-6">Estimated Monthly Return</h3>
+          
+          <div class="mb-8">
+            <p class="text-xs font-bold uppercase tracking-wider text-white/50 mb-1">Generated Ad Revenue</p>
+            <p class="text-5xl md:text-6xl font-black text-white font-mono tracking-tight" id="res-revenue">₹1,75,000</p>
+          </div>
+
+          <div class="grid grid-cols-2 gap-6 mb-8 border-t border-white/10 pt-6">
+            <div>
+              <p class="text-[10px] font-bold uppercase tracking-wider text-white/50 mb-0.5">Qualified Leads</p>
+              <p class="text-2xl font-black text-primary font-mono" id="res-leads">166</p>
+            </div>
+            <div>
+              <p class="text-[10px] font-bold uppercase tracking-wider text-white/50 mb-0.5">Net Marketing Profit</p>
+              <p class="text-2xl font-black text-white font-mono" id="res-profit">₹1,25,000</p>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <a href="/contact" id="roi-cta-link" class="block w-full text-center bg-primary text-white font-black uppercase tracking-widest text-xs py-4.5 rounded-2xl shadow-xl shadow-primary/20 hover:bg-green-600 hover:shadow-primary/45 hover:-translate-y-0.5 transition-all duration-300">
+            Apply This Strategy Now →
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  function calculateROI() {
+    const spend = parseInt(document.getElementById('slider-spend').value);
+    const roas = parseFloat(document.getElementById('slider-roas').value);
+    const cpl = parseInt(document.getElementById('slider-cpl').value);
+
+    // Format display numbers
+    document.getElementById('val-spend').innerText = '₹' + spend.toLocaleString('en-IN');
+    document.getElementById('val-roas').innerText = roas.toFixed(1) + 'x';
+    document.getElementById('val-cpl').innerText = '₹' + cpl.toLocaleString('en-IN');
+
+    // Perform calculations
+    const revenue = spend * roas;
+    const leads = Math.floor(spend / cpl);
+    const profit = Math.max(0, revenue - spend);
+
+    // Update results
+    document.getElementById('res-revenue').innerText = '₹' + Math.round(revenue).toLocaleString('en-IN');
+    document.getElementById('res-leads').innerText = leads.toLocaleString('en-IN');
+    document.getElementById('res-profit').innerText = '₹' + Math.round(profit).toLocaleString('en-IN');
+
+    // Update CTA Query parameters so contact form is aware
+    const cta = document.getElementById('roi-cta-link');
+    cta.href = `/contact?spend=${spend}&roas=${roas}&cpl=${cpl}`;
+  }
+  
+  // Run once to initialize
+  window.addEventListener('DOMContentLoaded', () => {
+    if (document.getElementById('slider-spend')) {
+      calculateROI();
+    }
+  });
+</script>
+
 <!-- ══ TESTIMONIALS ══════════════════════════════════════════════════════ -->
 <section class="py-32 bg-white px-6 border-t border-black/5">
   <div class="max-w-7xl mx-auto">

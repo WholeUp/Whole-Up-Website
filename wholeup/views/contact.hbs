@@ -65,25 +65,59 @@
             </div>
           </div>
         </div>
-      </div>
-
-      <!-- Contact Form -->
+      <      <!-- Contact Form & AI Grader -->
       <div class="md:col-span-3 gs-reveal">
-        <div class="bg-cream rounded-[40px] p-10 border border-black/5 shadow-xl" data-tilt data-tilt-max="2" data-tilt-speed="1000">
-          <h3 class="text-2xl font-black uppercase tracking-widest text-dark mb-2">Request a Free Audit</h3>
-          <p class="text-dark/50 font-medium text-sm mb-8">Fill in your details and we'll get back to you within 24 hours.</p>
+        <div class="bg-cream rounded-[40px] p-10 border border-black/5 shadow-xl relative overflow-hidden" id="grader-card">
+          <!-- Glass loading screen inside card -->
+          <div id="grader-loading" class="hidden absolute inset-0 bg-cream/95 z-30 flex flex-col items-center justify-center p-8 text-center animate-fade-in">
+            <div class="w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center mb-6">
+              <i class="fas fa-robot text-primary text-3xl animate-bounce"></i>
+            </div>
+            <h3 class="text-xl font-black text-dark uppercase tracking-widest mb-3">AI Agent Analyzing Website...</h3>
+            <div class="w-64 bg-black/10 h-1.5 rounded-full overflow-hidden mb-4">
+              <div class="bg-primary h-full rounded-full animate-[shimmer_1.5s_infinite]" style="width: 50%; animation: loadingProgress 3s linear infinite;"></div>
+            </div>
+            <p class="text-dark/50 text-xs font-semibold uppercase tracking-wider animate-pulse" id="loading-status">Checking SEO structure...</p>
+          </div>
 
-          <div id="form-success" class="hidden bg-primary/10 border border-primary/30 rounded-2xl p-8 text-center mb-6">
-            <div class="w-16 h-16 bg-primary rounded-full flex items-center justify-center text-white text-2xl mx-auto mb-4"><i class="fas fa-check"></i></div>
-            <h4 class="text-xl font-black text-dark mb-2 uppercase tracking-widest">Request Received!</h4>
-            <p class="text-dark/70 font-medium">We'll contact you within 24 hours. Check your email for confirmation.</p>
+          <!-- Grader Header -->
+          <div id="grader-header">
+            <h3 class="text-2xl font-black uppercase tracking-widest text-dark mb-2">AI-Powered Website Grader</h3>
+            <p class="text-dark/50 font-medium text-sm mb-8">Enter your URL to let our AI Agent scan your site and generate a custom 30-day conversion audit report live on screen.</p>
+          </div>
+
+          <!-- Live Audit Report Screen -->
+          <div id="grader-report" class="hidden space-y-6">
+            <div class="flex items-center justify-between border-b border-black/10 pb-4">
+              <span class="inline-flex items-center gap-2 bg-primary/10 border border-primary/20 text-primary font-bold px-3.5 py-1.5 rounded-full text-[10px] uppercase tracking-widest">
+                <i class="fas fa-check-circle animate-ping"></i> Audit Report Ready
+              </span>
+              <button onclick="resetGrader()" class="text-xs font-bold text-dark/50 hover:text-primary transition uppercase tracking-wider"><i class="fas fa-redo mr-1"></i> Scan Again</button>
+            </div>
+            
+            <div class="bg-white border border-black/5 rounded-3xl p-6 shadow-sm">
+              <h4 class="font-black text-dark text-base uppercase tracking-wider mb-2" id="report-domain">example.com</h4>
+              <p class="text-xs font-semibold text-primary uppercase tracking-widest mb-4">Audit Objective: <span id="report-goal">SEO Growth</span></p>
+              
+              <div class="text-sm font-medium leading-relaxed text-dark/80 whitespace-pre-line font-body border-t border-black/5 pt-4" id="report-content">
+                <!-- Injected report content -->
+              </div>
+            </div>
+
+            <div class="bg-primary border border-primary/20 rounded-2xl p-5 text-white flex flex-col md:flex-row md:items-center justify-between gap-4">
+              <div>
+                <p class="font-bold text-sm">Want to implement this plan?</p>
+                <p class="text-white/80 text-xs">Let's hop on a call to review your audit details together.</p>
+              </div>
+              <a href="tel:+919426846035" class="bg-white text-primary text-center px-5 py-3 rounded-xl font-bold text-xs uppercase tracking-widest hover:bg-cream transition">Book Call</a>
+            </div>
           </div>
 
           <form id="contact-form" class="space-y-5">
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
               <div>
                 <label class="block text-xs font-bold uppercase tracking-widest text-dark/50 mb-2">Full Name *</label>
-                <input type="text" name="name" required placeholder="Rahul Sharma" class="w-full bg-white border border-black/10 rounded-xl px-5 py-4 text-dark focus:outline-none focus:border-primary transition font-medium">
+                <input type="text" name="name" id="form-name" required placeholder="Rahul Sharma" class="w-full bg-white border border-black/10 rounded-xl px-5 py-4 text-dark focus:outline-none focus:border-primary transition font-medium">
               </div>
               <div>
                 <label class="block text-xs font-bold uppercase tracking-widest text-dark/50 mb-2">Phone *</label>
@@ -96,34 +130,31 @@
                 <input type="email" name="email" required placeholder="rahul@business.com" class="w-full bg-white border border-black/10 rounded-xl px-5 py-4 text-dark focus:outline-none focus:border-primary transition font-medium">
               </div>
               <div>
-                <label class="block text-xs font-bold uppercase tracking-widest text-dark/50 mb-2">City</label>
-                <input type="text" name="city" placeholder="Mumbai" class="w-full bg-white border border-black/10 rounded-xl px-5 py-4 text-dark focus:outline-none focus:border-primary transition font-medium">
+                <label class="block text-xs font-bold uppercase tracking-widest text-dark/50 mb-2">Website URL *</label>
+                <input type="url" name="url" required placeholder="https://mybusiness.com" class="w-full bg-white border border-black/10 rounded-xl px-5 py-4 text-dark focus:outline-none focus:border-primary transition font-medium">
               </div>
             </div>
             <div>
-              <label class="block text-xs font-bold uppercase tracking-widest text-dark/50 mb-2">Service Interested In</label>
-              <select name="service" class="w-full bg-white border border-black/10 rounded-xl px-5 py-4 text-dark focus:outline-none focus:border-primary transition font-medium appearance-none">
-                <option value="">Select a service...</option>
-                <option>SEO & Organic Growth</option>
-                <option>Paid Advertising (Google / Meta)</option>
-                <option>Social Media Marketing</option>
-                <option>Web Design & Development</option>
-                <option>YouTube Management</option>
-                <option>Email Marketing</option>
-                <option>Full-Service Package</option>
-                <option>Not sure — need advice</option>
+              <label class="block text-xs font-bold uppercase tracking-widest text-dark/50 mb-2">Primary Marketing Goal *</label>
+              <select name="goal" required class="w-full bg-white border border-black/10 rounded-xl px-5 py-4 text-dark focus:outline-none focus:border-primary transition font-medium appearance-none">
+                <option value="">Select a goal...</option>
+                <option value="SEO & Organic traffic">SEO: Rank on Google & increase traffic</option>
+                <option value="Paid ads & Conversion Optimization">Paid Ads: Get conversions from Meta & Google</option>
+                <option value="Social Media & Reels strategy">Social Media: Build an audience & go viral</option>
+                <option value="Landing Page & Speed Audit">Web Development: Optimize load time & CVR</option>
               </select>
             </div>
             <div>
-              <label class="block text-xs font-bold uppercase tracking-widest text-dark/50 mb-2">Tell Us About Your Business *</label>
-              <textarea name="message" required rows="5" placeholder="What does your business do? What are your current marketing challenges? What results are you looking for?" class="w-full bg-white border border-black/10 rounded-xl px-5 py-4 text-dark focus:outline-none focus:border-primary transition font-medium resize-none"></textarea>
+              <label class="block text-xs font-bold uppercase tracking-widest text-dark/50 mb-2">Describe Your Business Niche & Competitors</label>
+              <textarea name="message" rows="4" placeholder="Briefly describe what your business sells, and who your competitors are..." class="w-full bg-white border border-black/10 rounded-xl px-5 py-4 text-dark focus:outline-none focus:border-primary transition font-medium resize-none"></textarea>
             </div>
             <div id="form-error" class="hidden bg-red-50 border border-red-200 text-red-700 rounded-xl px-5 py-4 text-sm font-medium"></div>
+            
             <button type="submit" id="submit-btn" class="w-full bg-dark hover:bg-primary text-white font-black uppercase tracking-widest py-5 rounded-xl shadow-lg transition flex items-center justify-center gap-3">
-              <span id="btn-text">Submit Request</span>
-              <i id="btn-icon" class="fas fa-arrow-right"></i>
+              <span>Generate Free AI Audit Report</span>
+              <i class="fas fa-arrow-right"></i>
             </button>
-            <p class="text-xs text-center text-dark/30 font-medium">🔒 Your information is 100% confidential. No spam, ever.</p>
+            <p class="text-xs text-center text-dark/30 font-medium">🔒 Free security scanned. Audits are delivered in under 10 seconds.</p>
           </form>
         </div>
       </div>
@@ -131,45 +162,97 @@
   </div>
 </section>
 
-<script>
-document.getElementById('contact-form').addEventListener('submit', async function(e) {
-  e.preventDefault();
-  const btn = document.getElementById('submit-btn');
-  const btnText = document.getElementById('btn-text');
-  const btnIcon = document.getElementById('btn-icon');
-  const errBox = document.getElementById('form-error');
-
-  btnText.textContent = 'Sending...';
-  btnIcon.className = 'fas fa-spinner fa-spin';
-  btn.disabled = true;
-  errBox.classList.add('hidden');
-
-  const formData = new FormData(this);
-  const data = Object.fromEntries(formData.entries());
-
-  try {
-    const res = await fetch('/api/contact', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(data)
-    });
-    const result = await res.json();
-    if (result.success) {
-      this.style.display = 'none';
-      document.getElementById('form-success').classList.remove('hidden');
-    } else {
-      errBox.textContent = result.message || 'Something went wrong. Please try again.';
-      errBox.classList.remove('hidden');
-      btnText.textContent = 'Submit Request';
-      btnIcon.className = 'fas fa-arrow-right';
-      btn.disabled = false;
-    }
-  } catch(err) {
-    errBox.textContent = 'Network error. Please try again or contact us directly.';
-    errBox.classList.remove('hidden');
-    btnText.textContent = 'Submit Request';
-    btnIcon.className = 'fas fa-arrow-right';
-    btn.disabled = false;
+<style>
+  @keyframes loadingProgress {
+    0% { width: 0%; }
+    30% { width: 45%; }
+    70% { width: 85%; }
+    100% { width: 100%; }
   }
-});
+</style>
+
+<script>
+  // Pre-fill parameters if redirected from ROI calculator
+  window.addEventListener('DOMContentLoaded', () => {
+    const params = new URLSearchParams(window.location.search);
+    if (params.has('spend')) {
+      const spend = params.get('spend');
+      const roas = params.get('roas');
+      const cpl = params.get('cpl');
+      const msgArea = document.querySelector('textarea[name="message"]');
+      if (msgArea) {
+        msgArea.value = `I calculated my ROI using the calculator. My parameters: Monthly Ad Spend: ₹${parseInt(spend).toLocaleString('en-IN')}, Target ROAS: ${roas}x, Average CPL: ₹${cpl}. I'd like a custom marketing strategy based on these details.`;
+      }
+    }
+  });
+
+  const statuses = [
+    'Scanning website meta tags...',
+    'Performing speed & core web vitals check...',
+    'Analyzing visual hierarchy & CTA gaps...',
+    'Running competitor ranking analysis...',
+    'AI Agent compiling marketing roadmap report...'
+  ];
+
+  let statusInterval;
+
+  function runStatusRotator() {
+    const statusText = document.getElementById('loading-status');
+    let idx = 0;
+    statusInterval = setInterval(() => {
+      idx = (idx + 1) % statuses.length;
+      statusText.textContent = statuses[idx];
+    }, 1500);
+  }
+
+  function resetGrader() {
+    document.getElementById('grader-report').classList.add('hidden');
+    document.getElementById('contact-form').classList.remove('hidden');
+    document.getElementById('grader-header').classList.remove('hidden');
+    document.getElementById('contact-form').reset();
+  }
+
+  document.getElementById('contact-form').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    const form = this;
+    const loader = document.getElementById('grader-loading');
+    const errBox = document.getElementById('form-error');
+
+    loader.classList.remove('hidden');
+    errBox.classList.add('hidden');
+    runStatusRotator();
+
+    const formData = new FormData(this);
+    const data = Object.fromEntries(formData.entries());
+
+    try {
+      const res = await fetch('/api/grader/audit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+      });
+      const result = await res.json();
+      
+      clearInterval(statusInterval);
+      loader.classList.add('hidden');
+
+      if (result.success) {
+        // Inject values and render report screen
+        form.classList.add('hidden');
+        document.getElementById('grader-header').classList.add('hidden');
+        document.getElementById('report-domain').innerText = data.url;
+        document.getElementById('report-goal').innerText = data.goal;
+        document.getElementById('report-content').innerText = result.audit;
+        document.getElementById('grader-report').classList.remove('hidden');
+      } else {
+        errBox.textContent = result.message || 'Grader failed to generate audit. Please try again.';
+        errBox.classList.remove('hidden');
+      }
+    } catch(err) {
+      clearInterval(statusInterval);
+      loader.classList.add('hidden');
+      errBox.textContent = 'Connection error. Please try again or call us directly.';
+      errBox.classList.remove('hidden');
+    }
+  });
 </script>

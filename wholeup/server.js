@@ -403,6 +403,135 @@ Lead Capture Automation:
   }
 });
 
+// ─── API: AI Website Grader & Live Audit Report ─────────────────────────────────
+app.post('/api/grader/audit', async (req, res) => {
+  const { name, email, phone, url, goal, message } = req.body;
+
+  if (!name || !email || !url || !goal) {
+    return res.status(400).json({ success: false, message: 'Required fields (Name, Email, Website URL, Goal) are missing.' });
+  }
+
+  const apiKey = process.env.GEMINI_API_KEY;
+  let auditText = '';
+
+  if (!apiKey || apiKey.trim() === '') {
+    auditText = `Namaste ${name}! 😊
+
+Thank you for requesting an audit for ${url}. Currently, our live AI grading engine is offline due to missing configuration, but we've logged your request!
+
+Here is our initial review of your objective (${goal}):
+1. 🎯 PRIMARY OPPORTUNITY: Improve page loading speeds and simplify form capture fields to increase signup conversions by up to 25%.
+2. 🔍 COMPETITOR GAP ANALYSIS: Competitors in your niche are aggressively bidding on local high-intent keywords that your brand isn't targeting yet.
+3. ⚡ 30-DAY ROADMAP: Add clean customer reviews (trust triggers), make your contact button float on mobile screen, and build localized content pages.
+
+Our human strategist will contact you within 24 hours at ${email} to deliver a custom growth roadmap!`;
+  } else {
+    try {
+      const { GoogleGenerativeAI } = require('@google/generative-ai');
+      const genAI = new GoogleGenerativeAI(apiKey);
+      const modelsToTry = ['gemini-2.5-flash', 'gemini-2.0-flash', 'gemini-2.5-flash-lite'];
+
+      const prompt = `You are a World-Class Digital Marketing Strategist and Conversion Rate Auditor for Wholeup Solutions.
+Generate an actionable, highly customized Digital Audit Report for the domain: ${url}
+Audit Objective: ${goal}
+Client Business Context / Competitor info: ${message || 'Not provided'}
+
+Please write exactly 3 distinct, professional sections. Keep it clear, concise, and direct (max 12-15 lines total):
+1. 🎯 PRIMARY OPPORTUNITY: Identify a critical marketing or UX conversion gap for a website in this niche (e.g. speed, CTA layout, or clear value proposition).
+2. 🔍 COMPETITOR GAP: Show how top competitors leverage paid search or social branding to attract their target clients.
+3. ⚡ 30-DAY GROWTH ROADMAP: Give 3 specific, step-by-step actionable optimization steps they can do right now.
+
+Maintain a confident, highly professional tone. Do not write generic placeholders. Talk directly as Wholeup Solutions. Do not mention that you cannot browse. Speak with expert authority.`;
+
+      let success = false;
+      let lastError = null;
+
+      for (const modelName of modelsToTry) {
+        try {
+          const model = genAI.getGenerativeModel({ model: modelName });
+          const result = await model.generateContent(prompt);
+          auditText = result.response.text();
+          success = true;
+          break;
+        } catch (err) {
+          console.warn(`Model ${modelName} failed for Grader. Trying next...`);
+          lastError = err;
+        }
+      }
+
+      if (!success) {
+        throw lastError || new Error('AI Grader failed to resolve.');
+      }
+    } catch(err) {
+      console.error('Grader Gemini Error:', err.message);
+      return res.status(500).json({ success: false, message: 'AI Agent failed to analyze website. Please try again later.' });
+    }
+  }
+
+  // Save lead details to leads.json
+  const fs = require('fs');
+  const logPath = path.join(__dirname, 'data/leads.json');
+  let leads = [];
+  try { leads = JSON.parse(fs.readFileSync(logPath, 'utf8')); } catch(e) { leads = []; }
+  
+  leads.push({
+    name,
+    phone: phone || 'Not provided',
+    city: 'AI Website Grader',
+    email,
+    service: `Grader: ${goal}`,
+    message: `Analyzed website: ${url}\n\nGenerated Audit Report:\n${auditText}`,
+    date: new Date().toISOString()
+  });
+  
+  fs.writeFileSync(logPath, JSON.stringify(leads, null, 2));
+
+  // Email the generated audit report to the client and notify Wholeup admin
+  try {
+    if (process.env.SMTP_USER && process.env.SMTP_PASS) {
+      const transporter = nodemailer.createTransport({
+        service: 'gmail',
+        auth: { user: process.env.SMTP_USER, pass: process.env.SMTP_PASS }
+      });
+
+      // 1. Send report to client
+      await transporter.sendMail({
+        from: `"Wholeup Solutions" <${process.env.SMTP_USER}>`,
+        to: email,
+        cc: 'wholeup.agency@gmail.com',
+        subject: `Your Free Website Growth Audit Report for ${url}`,
+        html: `
+          <div style="font-family:Inter,sans-serif;max-width:600px;margin:0 auto;color:#333;">
+            <div style="background:#16A34A;padding:32px 24px;border-radius:12px 12px 0 0;text-align:center;">
+              <h1 style="color:white;margin:0;font-size:24px;text-transform:uppercase;letter-spacing:1px;">Growth Audit Report</h1>
+              <p style="color:rgba(255,255,255,0.85);margin:8px 0 0 0;font-size:14px;">Custom Strategy for ${url}</p>
+            </div>
+            <div style="background:#fafafa;padding:24px;border-radius:0 0 12px 12px;border:1px solid #eee;line-height:1.6;">
+              <p>Hello <strong>${name}</strong>,</p>
+              <p>Our AI marketing agent has analyzed your website details and generated your custom growth audit based on your objective of <strong>${goal}</strong>:</p>
+              
+              <div style="background:white;padding:20px;border-radius:8px;border:1px solid #e5e7eb;margin:20px 0;white-space:pre-line;">
+                ${auditText}
+              </div>
+
+              <p>We'll follow up with you within 24 hours to schedule a free 30-minute consultation call to walk you through these recommendations and answer any questions.</p>
+              
+              <div style="text-align:center;margin-top:24px;">
+                <a href="tel:+919426846035" style="background:#16A34A;color:white;padding:12px 24px;text-decoration:none;border-radius:6px;font-weight:bold;font-size:14px;display:inline-block;">Call Us Directly</a>
+              </div>
+            </div>
+          </div>
+        `
+      });
+      console.log('✉️ Grader Audit email sent to client successfully!');
+    }
+  } catch (emailErr) {
+    console.error('Grader Email delivery error:', emailErr.message);
+  }
+
+  res.json({ success: true, audit: auditText });
+});
+
 // ─── AI Agent Admin Dashboard ──────────────────────────────────────────────────
 app.get('/admin/agent', (req, res) => {
   const fs = require('fs');

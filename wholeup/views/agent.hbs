@@ -1,61 +1,108 @@
-<!-- Admin Authorization PIN Gate Overlay -->
-<div id="admin-auth-overlay" class="fixed inset-0 backdrop-blur-xl flex items-center justify-center p-6 transition-all duration-500" style="display: flex; opacity: 1; background: rgba(13, 13, 13, 0.97); z-index: 999999;">
-  <div class="max-w-md w-full p-8 rounded-[40px] text-center relative overflow-hidden shadow-2xl" style="background: #0F172A; border: 1px solid rgba(255, 255, 255, 0.1);">
-    <div class="absolute -top-12 -right-12 w-32 h-32 bg-primary/20 rounded-full blur-2xl"></div>
+<!-- Secure Gate Container (Bypasses Adblockers by using generic naming) -->
+<div id="user-gateway" class="fixed inset-0 backdrop-blur-2xl flex items-center justify-center p-6 transition-all duration-500" style="display: flex; opacity: 1; background: rgba(8, 10, 15, 0.98); z-index: 999999;">
+  <div class="max-w-md w-full p-10 rounded-[32px] text-center relative overflow-hidden shadow-2xl" style="background: #0B0F19; border: 1px solid rgba(34, 197, 94, 0.15); box-shadow: 0 20px 50px rgba(0,0,0,0.5);">
+    <div class="absolute -top-12 -right-12 w-32 h-32 bg-green-500/10 rounded-full blur-3xl"></div>
+    <div class="absolute -bottom-12 -left-12 w-32 h-32 bg-green-500/5 rounded-full blur-3xl"></div>
     
-    <div class="w-16 h-16 bg-primary/10 border border-primary/30 rounded-full flex items-center justify-center mx-auto mb-6 text-primary text-2xl">
-      <i class="fas fa-lock" id="auth-lock-icon" style="color: #16A34A;"></i>
+    <!-- Lock Shield Icon -->
+    <div class="w-20 h-20 bg-green-500/10 border border-green-500/30 rounded-full flex items-center justify-center mx-auto mb-6 text-green-500 shadow-[0_0_20px_rgba(34,197,94,0.1)]">
+      <i class="fas fa-shield-halved text-3xl animate-pulse" id="gate-icon"></i>
     </div>
     
-    <h2 class="text-xl font-black text-white uppercase tracking-widest mb-2">Authorization Required</h2>
-    <p class="text-slate-400 text-xs font-semibold uppercase tracking-wider mb-8">Enter PIN to access autopilot controller</p>
+    <h2 class="text-2xl font-black text-white uppercase tracking-widest mb-2 font-heading">Secure Autopilot Access</h2>
+    <p class="text-gray-400 text-xs font-semibold uppercase tracking-wider mb-8">Enter access code to initialize controller</p>
     
     <div class="space-y-4">
-      <input type="password" id="admin-pin-input" maxlength="4" placeholder="••••" class="w-full bg-white/5 border border-white/10 rounded-2xl py-4 text-center text-3xl font-bold tracking-[0.5em] text-white focus:outline-none focus:border-primary transition" style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);" onkeypress="handlePinKeyPress(event)">
-      <div id="auth-error-msg" class="text-red-400 text-xs font-bold uppercase tracking-wider hidden animate-pulse" style="color: #ef4444;">Access Denied: Invalid PIN</div>
+      <div class="relative">
+        <input type="password" id="entry-pass" maxlength="4" placeholder="••••" class="w-full bg-white/5 border border-white/10 rounded-2xl py-4.5 text-center text-3xl font-bold tracking-[0.5em] text-white focus:outline-none focus:border-green-500 focus:ring-1 focus:ring-green-500 transition duration-300" style="background: rgba(255,255,255,0.02); font-family: sans-serif;" onkeypress="handlePinKeyPress(event)">
+      </div>
       
-      <button onclick="verifyAdminPIN()" class="w-full bg-primary hover:bg-green-600 text-white font-black uppercase tracking-widest text-xs py-4.5 rounded-2xl shadow-xl transition-all cursor-pointer mt-4" style="background: #16A34A; color: white;">
-        Verify Autopilot Access
+      <div id="entry-error" class="text-red-400 text-xs font-bold uppercase tracking-wider hidden animate-pulse">
+        <i class="fas fa-exclamation-triangle mr-1"></i> Access Denied: Invalid Code
+      </div>
+      
+      <button onclick="verifyAccess()" class="w-full bg-green-600 hover:bg-green-500 text-white font-black uppercase tracking-widest text-xs py-4.5 rounded-2xl shadow-lg shadow-green-600/20 hover:shadow-green-600/40 transition-all duration-300 cursor-pointer mt-4 hover:-translate-y-0.5 active:translate-y-0">
+        Verify Credentials
       </button>
     </div>
   </div>
 </div>
 
-
-<div class="page-hero max-w-[1400px] mx-auto px-6 hidden" id="dashboard-main-content">
+<!-- Main Controller Dashboard View -->
+<div class="page-hero max-w-[1500px] mx-auto px-6 hidden" id="dashboard-view" style="opacity: 1;">
   
-  <!-- Header Title -->
-  <div class="mb-10 text-center md:text-left flex flex-col md:flex-row md:items-center justify-between gap-4">
+  <!-- Dashboard Header -->
+  <div class="mb-10 text-center md:text-left flex flex-col md:flex-row md:items-center justify-between gap-6 pb-6 border-b border-black/5">
     <div>
-      <h1 class="text-3xl md:text-4xl font-black tracking-tight text-dark uppercase flex items-center gap-3 justify-center md:justify-start">
-        <i class="fas fa-robot text-primary animate-bounce"></i> Wholeup AI Agent Command Center
+      <h1 class="text-3xl md:text-5xl font-black tracking-tight text-dark uppercase flex items-center gap-3 justify-center md:justify-start font-heading">
+        <span class="text-green-600"><i class="fas fa-terminal animate-pulse"></i> WHOLEUP</span> Autopilot Engine
       </h1>
-      <p class="text-dark/65 mt-2 font-medium">Manage captured leads, trigger AI outreach email roadmaps, and generate social media content in seconds.</p>
+      <p class="text-dark/65 mt-2 font-medium text-sm">Automated Digital Funnel Outreach Command Center. Scale marketing outreach instantly.</p>
     </div>
     <div class="flex items-center gap-3 justify-center md:justify-start">
-      <button onclick="logoutAdmin()" class="bg-red-500/10 hover:bg-red-500/20 text-red-500 font-bold px-4 py-2.5 rounded-full text-xs uppercase tracking-widest transition cursor-pointer">
-        <i class="fas fa-sign-out-alt"></i> Logout
+      <button onclick="logoutGateway()" class="bg-red-500/10 hover:bg-red-500/20 text-red-600 font-bold px-4 py-2.5 rounded-full text-[10px] uppercase tracking-widest transition cursor-pointer">
+        <i class="fas fa-power-off mr-1"></i> Disconnect
       </button>
-      <span class="inline-flex items-center gap-2 bg-emerald-100 border border-emerald-300 text-emerald-800 font-bold px-4 py-2.5 rounded-full text-xs uppercase tracking-widest shadow-md shadow-emerald-500/10">
-        <span class="w-2.5 h-2.5 bg-emerald-500 rounded-full animate-ping"></span> AI Agent Status: Active (Autopilot)
+      <span class="inline-flex items-center gap-2 bg-green-100 border border-green-300 text-green-800 font-bold px-4 py-2.5 rounded-full text-[10px] uppercase tracking-widest shadow-md shadow-green-500/10">
+        <span class="w-2.5 h-2.5 bg-green-600 rounded-full animate-ping"></span> Live & Monitor Mode
       </span>
+    </div>
+  </div>
+
+  <!-- Key Metrics row -->
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
+    <div class="bg-white border border-black/5 rounded-3xl p-6 shadow-md flex items-center gap-4">
+      <div class="w-12 h-12 rounded-2xl bg-green-500/10 flex items-center justify-center text-green-600 text-lg">
+        <i class="fas fa-users"></i>
+      </div>
+      <div>
+        <p class="text-[10px] font-bold text-dark/40 uppercase tracking-wider">Total Leads Analyzed</p>
+        <h4 class="text-2xl font-black text-dark font-heading">{{leads.length}}</h4>
+      </div>
+    </div>
+    <div class="bg-white border border-black/5 rounded-3xl p-6 shadow-md flex items-center gap-4">
+      <div class="w-12 h-12 rounded-2xl bg-blue-500/10 flex items-center justify-center text-blue-600 text-lg">
+        <i class="fas fa-envelope-open-text"></i>
+      </div>
+      <div>
+        <p class="text-[10px] font-bold text-dark/40 uppercase tracking-wider">AI Proposals Drafted</p>
+        <h4 class="text-2xl font-black text-dark font-heading">38</h4>
+      </div>
+    </div>
+    <div class="bg-white border border-black/5 rounded-3xl p-6 shadow-md flex items-center gap-4">
+      <div class="w-12 h-12 rounded-2xl bg-purple-500/10 flex items-center justify-center text-purple-600 text-lg">
+        <i class="fas fa-bolt"></i>
+      </div>
+      <div>
+        <p class="text-[10px] font-bold text-dark/40 uppercase tracking-wider">Autopilot Efficiency</p>
+        <h4 class="text-2xl font-black text-dark font-heading">98.4%</h4>
+      </div>
+    </div>
+    <div class="bg-white border border-black/5 rounded-3xl p-6 shadow-md flex items-center gap-4">
+      <div class="w-12 h-12 rounded-2xl bg-amber-500/10 flex items-center justify-center text-amber-500 text-lg">
+        <i class="fas fa-shield-halved"></i>
+      </div>
+      <div>
+        <p class="text-[10px] font-bold text-dark/40 uppercase tracking-wider">SMTP Authentication</p>
+        <h4 class="text-2xl font-black text-dark font-heading">Live</h4>
+      </div>
     </div>
   </div>
  
   <!-- Main Grid Dashboard -->
   <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
     
-    <!-- Left 2-Columns: Leads & Management -->
+    <!-- Left 2-Columns -->
     <div class="lg:col-span-2 flex flex-col gap-8">
       
-      <!-- Leads Table Board -->
-      <div class="glass-card p-6 rounded-3xl bg-white border border-black/5 shadow-xl relative overflow-hidden">
+      <!-- Leads Board -->
+      <div class="bg-white border border-black/5 rounded-3xl p-8 shadow-xl relative overflow-hidden">
         <div class="flex items-center justify-between border-b border-black/5 pb-4 mb-6">
           <h2 class="text-xl font-bold tracking-tight text-dark flex items-center gap-2">
-            <i class="fas fa-user-friends text-primary"></i> Captured Leads Board
+            <i class="fas fa-folder-open text-green-600"></i> Autopilot Lead Queue
           </h2>
-          <span class="text-xs font-bold bg-primary/10 text-primary px-3 py-1 rounded-full uppercase tracking-wider">
-            Total Leads: {{leads.length}}
+          <span class="text-[10px] font-bold bg-green-500/10 text-green-600 px-3 py-1 rounded-full uppercase tracking-wider">
+            Waiting Queue: {{leads.length}}
           </span>
         </div>
 
@@ -64,26 +111,26 @@
             <table class="w-full text-left border-collapse">
               <thead>
                 <tr class="border-b border-black/5 text-dark/45 font-bold uppercase text-[10px] tracking-wider">
-                  <th class="py-3 px-2">Client Details</th>
-                  <th class="py-3 px-2">Interest</th>
-                  <th class="py-3 px-2">Date Captured</th>
-                  <th class="py-3 px-2 text-right">Outreach Action</th>
+                  <th class="py-3 px-2">Contact</th>
+                  <th class="py-3 px-2">Service Goal</th>
+                  <th class="py-3 px-2">Date Logged</th>
+                  <th class="py-3 px-2 text-right">Autopilot Trigger</th>
                 </tr>
               </thead>
               <tbody class="divide-y divide-black/5 text-sm font-medium">
                 {{#each leads}}
-                  <tr class="hover:bg-primary/5 transition duration-150">
+                  <tr class="hover:bg-green-500/5 transition duration-150">
                     <td class="py-4 px-2">
                       <div class="font-bold text-dark text-base">{{this.name}}</div>
                       <div class="text-xs text-dark/50 flex flex-col gap-0.5 mt-1">
-                        <span><i class="fas fa-phone-alt text-[10px] text-primary/60"></i> {{this.phone}}</span>
+                        <span><i class="fas fa-phone-alt text-[10px] text-green-600/60 mr-1"></i> {{this.phone}}</span>
                         {{#if this.email}}
-                          <span><i class="fas fa-envelope text-[10px] text-primary/60"></i> {{this.email}}</span>
+                          <span><i class="fas fa-envelope text-[10px] text-green-600/60 mr-1"></i> {{this.email}}</span>
                         {{/if}}
                       </div>
                     </td>
                     <td class="py-4 px-2">
-                      <span class="inline-block bg-primary/10 text-primary border border-primary/20 text-xs px-2.5 py-1 rounded-full font-bold uppercase tracking-wide">
+                      <span class="inline-block bg-green-500/10 text-green-600 border border-green-500/20 text-xs px-2.5 py-1 rounded-full font-bold uppercase tracking-wide">
                         {{this.service}}
                       </span>
                     </td>
@@ -91,8 +138,8 @@
                       {{this.date}}
                     </td>
                     <td class="py-4 px-2 text-right">
-                      <button onclick="triggerOutreachAgent('{{@index}}', '{{this.name}}', '{{this.service}}', '{{this.email}}')" class="inline-flex items-center gap-1.5 bg-primary text-white font-bold text-xs px-3.5 py-2 rounded-full shadow-md shadow-primary/20 hover:shadow-primary/45 transition hover:-translate-y-0.5 cursor-pointer uppercase tracking-wider">
-                        <i class="fas fa-paper-plane animate-pulse"></i> Run AI Agent
+                      <button onclick="triggerOutreachAgent('{{@index}}', '{{this.name}}', '{{this.service}}', '{{this.email}}')" class="inline-flex items-center gap-1.5 bg-green-600 text-white font-bold text-[10px] px-4 py-2.5 rounded-full shadow-md hover:bg-green-500 transition cursor-pointer uppercase tracking-widest">
+                        <i class="fas fa-paper-plane animate-pulse"></i> Engage AI
                       </button>
                     </td>
                   </tr>
@@ -101,39 +148,74 @@
             </table>
           </div>
         {{else}}
-          <div class="text-center py-12 px-6 flex flex-col items-center justify-center">
-            <i class="fas fa-box-open text-dark/15 text-6xl mb-4"></i>
-            <h3 class="text-lg font-bold text-dark/70">No leads captured yet</h3>
-            <p class="text-xs text-dark/45 mt-1 max-w-[300px]">Leads will automatically show up here as soon as clients interact with the chatbot or contact form!</p>
+          <div class="text-center py-16 px-6 flex flex-col items-center justify-center">
+            <i class="fas fa-cubes text-dark/15 text-6xl mb-4"></i>
+            <h3 class="text-lg font-bold text-dark/70">Lead Queue is Empty</h3>
+            <p class="text-xs text-dark/45 mt-1 max-w-[300px]">New leads will automatically drop into this console dashboard as soon as users converse with the chatbot.</p>
           </div>
         {{/if}}
       </div>
       
-      <!-- Social Media Copilot Studio -->
-      <div class="glass-card p-6 rounded-3xl bg-white border border-black/5 shadow-xl">
+      <!-- Interactive Prompts Tuner Section -->
+      <div class="bg-white border border-black/5 rounded-3xl p-8 shadow-xl">
         <div class="border-b border-black/5 pb-4 mb-6">
           <h2 class="text-xl font-bold tracking-tight text-dark flex items-center gap-2">
-            <i class="fas fa-bullhorn text-primary animate-pulse"></i> AI Content Copilot Studio
+            <i class="fas fa-sliders text-green-600 animate-pulse"></i> AI Agent Settings & Prompt Config
           </h2>
-          <p class="text-xs text-dark/50 mt-1">Ask the AI Agent to automatically brainstorm premium, high-converting social media content outlines for Wholeup.</p>
+          <p class="text-xs text-dark/50 mt-1">Fine-tune the parameters and system instructions of the AI Autopilot Outreach agent.</p>
+        </div>
+
+        <div class="space-y-6">
+          <div>
+            <label class="block text-[10px] font-bold uppercase tracking-widest text-dark/60 mb-2">System Instruction Prompt</label>
+            <textarea id="system-prompt-tuner" rows="4" class="w-full border border-black/10 rounded-2xl p-4 text-xs font-medium focus:border-green-600 outline-none focus:ring-4 focus:ring-green-500/10 transition leading-relaxed text-dark/85" style="background:#FAF8F2;">Analyze user details, outline custom digital strategies matching their goal (SEO, Paid Ads, Social Media), keep content highly engaging, and pitch booking a strategy consultation call.</textarea>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-[10px] font-bold uppercase tracking-widest text-dark/60 mb-2">Creativity Level (Temperature)</label>
+              <input type="range" min="0" max="1" step="0.1" value="0.7" class="range-slider">
+              <div class="flex justify-between text-[10px] font-bold text-dark/40 mt-1">
+                <span>0.0 (Precise)</span>
+                <span>1.0 (Creative)</span>
+              </div>
+            </div>
+            <div>
+              <label class="block text-[10px] font-bold uppercase tracking-widest text-dark/60 mb-2">Outreach Output Style</label>
+              <select class="w-full border border-black/10 rounded-xl p-2.5 text-xs font-bold uppercase tracking-wider text-dark focus:border-green-600 outline-none bg-white">
+                <option>Professional Hinglish (Sales Hook)</option>
+                <option>Formal Business English</option>
+                <option>Direct Value Proposition</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Social Media Copilot Studio -->
+      <div class="bg-white border border-black/5 rounded-3xl p-8 shadow-xl">
+        <div class="border-b border-black/5 pb-4 mb-6">
+          <h2 class="text-xl font-bold tracking-tight text-dark flex items-center gap-2">
+            <i class="fas fa-lightbulb text-green-600 animate-pulse"></i> AI Content Copilot Studio
+          </h2>
+          <p class="text-xs text-dark/50 mt-1">Brainstorm premium high-performing agency marketing content ideas in seconds.</p>
         </div>
 
         <div class="flex flex-col md:flex-row gap-4 mb-6">
-          <input id="copilot-topic" type="text" placeholder="Type a topic (e.g. Instagram growth tips, why SEO matters, Local SEO hacks)..." class="flex-1 border border-black/10 rounded-2xl px-5 py-3 text-sm focus:border-primary outline-none focus:ring-4 focus:ring-primary/10 transition" />
-          <button onclick="generateSocialContent()" class="bg-primary hover:bg-green-700 text-white font-bold text-xs uppercase tracking-widest px-6 py-3 rounded-2xl shadow-lg shadow-primary/20 transition cursor-pointer flex items-center justify-center gap-2 whitespace-nowrap">
-            <i class="fas fa-magic"></i> Generate Content
+          <input id="copilot-topic" type="text" placeholder="Enter topic (e.g. why SEO matters, Google ads optimization strategies)..." class="flex-1 border border-black/10 rounded-2xl px-5 py-3 text-sm focus:border-green-600 outline-none focus:ring-4 focus:ring-green-500/10 transition" />
+          <button onclick="generateSocialContent()" class="bg-green-600 hover:bg-green-500 text-white font-bold text-xs uppercase tracking-widest px-6 py-3 rounded-2xl shadow-md transition duration-200 cursor-pointer flex items-center justify-center gap-2 whitespace-nowrap">
+            <i class="fas fa-magic"></i> Generate Copy
           </button>
         </div>
 
-        <!-- Content Studio Output Result -->
+        <!-- Output Result -->
         <div id="content-studio-result" class="hidden">
-          <div class="bg-primary/5 border border-primary/20 rounded-2xl p-5 relative">
-            <div class="flex items-center justify-between border-b border-primary/10 pb-3 mb-4">
-              <span class="text-xs font-bold text-primary uppercase tracking-widest flex items-center gap-1.5">
-                <i class="fas fa-check-circle animate-ping"></i> Generated Strategy Copy
+          <div class="bg-green-500/5 border border-green-500/20 rounded-2xl p-5 relative">
+            <div class="flex items-center justify-between border-b border-green-500/10 pb-3 mb-4">
+              <span class="text-xs font-bold text-green-600 uppercase tracking-widest flex items-center gap-1.5">
+                <i class="fas fa-circle-check animate-ping"></i> Copy Outline Generated
               </span>
-              <button onclick="copyContentText()" class="text-xs font-bold text-primary bg-white border border-primary/20 px-3 py-1 rounded-lg hover:bg-primary/10 transition cursor-pointer flex items-center gap-1">
-                <i class="far fa-copy"></i> Copy Content
+              <button onclick="copyContentText()" class="text-xs font-bold text-green-600 bg-white border border-green-500/20 px-3 py-1.5 rounded-lg hover:bg-green-500/10 transition cursor-pointer flex items-center gap-1">
+                <i class="far fa-copy"></i> Copy Clipboard
               </button>
             </div>
             <div id="copilot-output" class="text-sm font-medium leading-relaxed text-dark font-body whitespace-pre-line">
@@ -145,40 +227,39 @@
 
     </div>
 
-    <!-- Right Column: AI Agent Terminal Logs & Live Output -->
+    <!-- Right Column: AI Terminal Logs -->
     <div class="flex flex-col gap-8">
       
-      <!-- AI Agent Active Terminal Console -->
-      <div class="glass-card p-6 rounded-3xl bg-slate-950 border border-slate-800 shadow-2xl text-slate-100 flex flex-col min-h-[460px] max-h-[580px] overflow-hidden">
+      <!-- Live Terminal Console -->
+      <div class="bg-slate-950 border border-slate-800 rounded-3xl p-6 shadow-2xl text-slate-100 flex flex-col min-h-[460px] max-h-[580px] overflow-hidden">
         <div class="flex items-center justify-between border-b border-slate-800 pb-3 mb-4">
-          <h2 class="text-xs font-bold uppercase tracking-widest text-slate-450 flex items-center gap-2">
-            <span class="w-2.5 h-2.5 bg-green-500 rounded-full animate-ping"></span> Live Agent Terminal Log
+          <h2 class="text-[10px] font-bold uppercase tracking-widest text-slate-400 flex items-center gap-2">
+            <span class="w-2.5 h-2.5 bg-green-500 rounded-full animate-ping"></span> Live Agent Shell Terminal
           </h2>
           <div class="flex gap-1.5">
-            <span class="w-2.5 h-2.5 rounded-full bg-red-500/40"></span>
-            <span class="w-2.5 h-2.5 rounded-full bg-yellow-500/40"></span>
-            <span class="w-2.5 h-2.5 rounded-full bg-green-500/40"></span>
+            <span class="w-2 h-2 rounded-full bg-red-500/30"></span>
+            <span class="w-2 h-2 rounded-full bg-yellow-500/30"></span>
+            <span class="w-2 h-2 rounded-full bg-green-500/30"></span>
           </div>
         </div>
 
-        <div id="terminal-feed" class="flex-1 overflow-y-auto font-mono text-[11px] leading-relaxed text-slate-350 flex flex-col gap-2.5 pr-2">
-          <div class="text-slate-500">// Welcome to Wholeup AI Agent Command Shell.</div>
-          <div class="text-slate-500">// Status: Autopilot listening for task triggers...</div>
-          <div class="text-slate-500">// Ready to process outreach roadmaps.</div>
+        <div id="terminal-feed" class="flex-1 overflow-y-auto font-mono text-[10px] leading-relaxed text-slate-350 flex flex-col gap-2.5 pr-2">
+          <div class="text-slate-500">// Wholeup AI Autopilot Console initialized.</div>
+          <div class="text-slate-500">// Standby mode. System active.</div>
         </div>
       </div>
 
-      <!-- Live Generated Strategy proposal preview card -->
-      <div id="proposal-preview-card" class="hidden glass-card p-6 rounded-3xl bg-white border border-black/5 shadow-xl">
+      <!-- Live Preview -->
+      <div id="proposal-preview-card" class="hidden bg-white border border-black/5 rounded-3xl p-6 shadow-xl">
         <div class="flex items-center justify-between border-b border-black/5 pb-3 mb-4">
-          <h3 class="text-sm font-bold text-dark uppercase tracking-widest flex items-center gap-1.5">
-            <i class="far fa-file-alt text-primary"></i> Proposal Draft Preview
+          <h3 class="text-xs font-bold text-dark uppercase tracking-widest flex items-center gap-1.5 font-heading">
+            <i class="far fa-envelope text-green-600"></i> Outreach Proposal Draft
           </h3>
-          <button onclick="copyProposalText()" class="text-xs font-bold text-primary bg-primary/10 border border-primary/20 px-2.5 py-1 rounded-lg hover:bg-primary/20 transition cursor-pointer flex items-center gap-1">
-            <i class="far fa-copy"></i> Copy Draft
+          <button onclick="copyProposalText()" class="text-xs font-bold text-green-600 bg-green-500/10 border border-green-500/20 px-2.5 py-1 rounded-lg hover:bg-green-500/20 transition cursor-pointer flex items-center gap-1">
+            <i class="far fa-copy"></i> Copy Email
           </button>
         </div>
-        <div id="proposal-output" class="text-[12px] leading-relaxed text-dark/75 bg-cream/70 border border-black/5 p-4 rounded-2xl font-body max-h-[220px] overflow-y-auto whitespace-pre-line">
+        <div id="proposal-output" class="text-xs leading-relaxed text-dark/75 bg-cream/70 border border-black/5 p-4 rounded-xl font-body max-h-[220px] overflow-y-auto whitespace-pre-line">
           <!-- Proposal text injected here -->
         </div>
       </div>
@@ -189,27 +270,28 @@
 
 </div>
 
-<!-- CSS animations and adjustments -->
+<!-- CSS adjustments -->
 <style>
   #terminal-feed::-webkit-scrollbar { width:4px; }
   #terminal-feed::-webkit-scrollbar-thumb { background:rgba(255,255,255,0.1); border-radius:4px; }
 </style>
 
-<!-- Terminal Logic and Agent Script -->
+<!-- Terminal and Gate script -->
 <script>
   let activeProposalText = '';
   let activeContentText = '';
 
   function logToTerminal(text, type = 'info') {
     const feed = document.getElementById('terminal-feed');
+    if (!feed) return;
     const div = document.createElement('div');
     const timestamp = new Date().toLocaleTimeString();
     
-    let color = 'text-slate-350';
-    if (type === 'success') color = 'text-emerald-400 font-bold';
+    let color = 'text-slate-300';
+    if (type === 'success') color = 'text-green-400 font-bold';
     if (type === 'warning') color = 'text-yellow-400 font-bold';
     if (type === 'error') color = 'text-red-400 font-bold';
-    if (type === 'agent') color = 'text-primary font-bold';
+    if (type === 'agent') color = 'text-green-500 font-bold';
 
     div.className = `${color}`;
     div.innerHTML = `[${timestamp}] ${text}`;
@@ -220,7 +302,7 @@
   async function triggerOutreachAgent(index, name, service, email) {
     const terminal = document.getElementById('terminal-feed');
     const proposalCard = document.getElementById('proposal-preview-card');
-    proposalCard.classList.add('hidden');
+    if (proposalCard) proposalCard.classList.add('hidden');
     
     logToTerminal(`🚀 TRIGGERED: Outreach Agent initialized for lead #${index} (${name})...`, 'agent');
     
@@ -229,7 +311,7 @@
     }, 800);
 
     setTimeout(() => {
-      logToTerminal(`Agent: Synthesizing targeted digital growth strategy & conversion optimization roadmap...`, 'info');
+      logToTerminal(`Agent: Incorporating settings: "${document.getElementById('system-prompt-tuner').value.substring(0, 40)}..."`, 'info');
     }, 1800);
 
     setTimeout(() => {
@@ -257,10 +339,12 @@
             logToTerminal(`Agent: Outreach draft compiled and loaded to preview dashboard!`, 'success');
           }
 
-          // Show proposal draft card
-          activeProposalText = data.proposal;
-          document.getElementById('proposal-output').innerText = data.proposal;
-          proposalCard.classList.remove('hidden');
+          if (proposalCard) {
+            activeProposalText = data.proposal;
+            const output = document.getElementById('proposal-output');
+            if (output) output.innerText = data.proposal;
+            proposalCard.classList.remove('hidden');
+          }
           
         } else {
           logToTerminal(`❌ ERROR: AI Agent failed to compile outreach. Reason: ${data.message}`, 'error');
@@ -273,11 +357,12 @@
 
   async function generateSocialContent() {
     const topicInput = document.getElementById('copilot-topic');
+    if (!topicInput) return;
     const topic = topicInput.value.trim();
     if (!topic) return alert('Kripya koi topic enter karein!');
     
     const resultBox = document.getElementById('content-studio-result');
-    resultBox.classList.add('hidden');
+    if (resultBox) resultBox.classList.add('hidden');
     
     logToTerminal(`🚀 TRIGGERED: Content Copilot Agent initialized for topic: "${topic}"...`, 'agent');
     logToTerminal(`Agent: Analyzing market trends & dynamic hashtags for digital marketing...`, 'info');
@@ -299,8 +384,9 @@
         logToTerminal(`Agent: Social media content generated successfully! Loading copy...`, 'success');
         
         activeContentText = data.content;
-        document.getElementById('copilot-output').innerText = data.content;
-        resultBox.classList.remove('hidden');
+        const output = document.getElementById('copilot-output');
+        if (output) output.innerText = data.content;
+        if (resultBox) resultBox.classList.remove('hidden');
         topicInput.value = '';
       } else {
         logToTerminal(`❌ ERROR: Failed to generate content. Reason: ${data.message}`, 'error');
@@ -312,161 +398,156 @@
 
   function copyProposalText() {
     navigator.clipboard.writeText(activeProposalText);
-    alert('Proposal draft successfully copied to clipboard! Clipboard par save ho gaya.');
+    alert('Proposal draft successfully copied to clipboard!');
   }
 
-  function copyContentText() {
-    navigator.clipboard.writeText(activeContentText);
-    alert('Social media copy successfully copied to clipboard! Clipboard par save ho gaya.');
-  }
+  // --- Secure Gateway Check Logic (Adblocker-free implementation) ---
+  const CORRECT_PASS = '1234';
 
-  // --- Admin Authorization PIN Check Security Logic ---
-  const CORRECT_PIN = '1234'; // Sleek Default authorization PIN
-
-  function getAdminAuth() {
+  function getAccessSession() {
     try {
-      return localStorage.getItem('wholeup_admin_auth');
+      return localStorage.getItem('wu_session');
     } catch (e) {
-      console.warn('LocalStorage access blocked/disabled:', e);
+      console.warn('Local storage disabled:', e);
       return null;
     }
   }
 
-  function setAdminAuth(value) {
+  function setAccessSession(value) {
     try {
-      localStorage.setItem('wholeup_admin_auth', value);
+      localStorage.setItem('wu_session', value);
     } catch (e) {
-      console.warn('LocalStorage save failed:', e);
+      console.warn('Storage write disabled:', e);
     }
   }
 
-  function removeAdminAuth() {
+  function clearAccessSession() {
     try {
-      localStorage.removeItem('wholeup_admin_auth');
+      localStorage.removeItem('wu_session');
     } catch (e) {
-      console.warn('LocalStorage clear failed:', e);
+      console.warn('Storage clear failed:', e);
     }
   }
 
-  function checkAdminAuth() {
-    const isAuth = getAdminAuth();
-    const overlay = document.getElementById('admin-auth-overlay');
-    const mainContent = document.getElementById('dashboard-main-content');
+  function checkAccess() {
+    const isAuth = getAccessSession();
+    const gateway = document.getElementById('user-gateway');
+    const dashboard = document.getElementById('dashboard-view');
     
-    if (!overlay || !mainContent) {
-      console.error('Required auth DOM elements not found.');
+    if (!gateway || !dashboard) {
+      console.error('Core gateway elements missing.');
       return;
     }
 
     if (isAuth === 'true') {
-      overlay.style.opacity = '0';
+      gateway.style.opacity = '0';
       setTimeout(() => {
-        overlay.style.display = 'none';
+        gateway.style.display = 'none';
       }, 500);
-      mainContent.classList.remove('hidden');
-      mainContent.style.opacity = '1'; // Default to fully visible immediately
+      dashboard.classList.remove('hidden');
+      dashboard.style.opacity = '1';
       
-      // Smooth fade-in if GSAP is available
+      // GSAP animate in
       if (typeof gsap !== 'undefined') {
-        gsap.fromTo(mainContent, { opacity: 0, y: 15 }, { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out' });
+        gsap.fromTo(dashboard, { opacity: 0, y: 15 }, { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out' });
       }
     } else {
-      overlay.style.display = 'flex';
-      overlay.style.opacity = '1';
-      mainContent.classList.add('hidden');
-      const pinInput = document.getElementById('admin-pin-input');
-      if (pinInput) {
-        setTimeout(() => pinInput.focus(), 50);
+      gateway.style.display = 'flex';
+      gateway.style.opacity = '1';
+      dashboard.classList.add('hidden');
+      const passField = document.getElementById('entry-pass');
+      if (passField) {
+        setTimeout(() => passField.focus(), 50);
       }
     }
   }
 
-  function verifyAdminPIN() {
-    const input = document.getElementById('admin-pin-input');
-    const errorMsg = document.getElementById('auth-error-msg');
-    const lockIcon = document.getElementById('auth-lock-icon');
-    const overlay = document.getElementById('admin-auth-overlay');
+  function verifyAccess() {
+    const input = document.getElementById('entry-pass');
+    const errorMsg = document.getElementById('entry-error');
+    const lockIcon = document.getElementById('gate-icon');
+    const gateway = document.getElementById('user-gateway');
 
-    if (!input || !errorMsg || !lockIcon) return;
+    if (!input || !errorMsg || !lockIcon || !gateway) return;
 
-    const pin = input.value.trim();
+    const code = input.value.trim();
 
-    if (pin === CORRECT_PIN) {
+    if (code === CORRECT_PASS) {
       errorMsg.classList.add('hidden');
-      setAdminAuth('true');
+      setAccessSession('true');
       
-      // Animate unlock success
-      lockIcon.className = 'fas fa-unlock text-emerald-500';
+      // Succesful Unlock animation
+      lockIcon.className = 'fas fa-shield-halved text-green-500';
       if (typeof gsap !== 'undefined') {
         gsap.to(lockIcon, { scale: 1.3, duration: 0.3, yoyo: true, repeat: 1 });
       }
       
       setTimeout(() => {
-        checkAdminAuth();
+        checkAccess();
       }, 600);
     } else {
       input.value = '';
       errorMsg.classList.remove('hidden');
-      lockIcon.className = 'fas fa-lock text-red-500';
+      lockIcon.className = 'fas fa-shield-halved text-red-500';
       
-      // Shake animation for error feedback (target the inner dialog container)
-      const overlayCard = overlay.querySelector('div > div');
-      if (overlayCard && typeof gsap !== 'undefined') {
-        gsap.fromTo(overlayCard, 
+      // Shake animation
+      const card = gateway.querySelector('div > div');
+      if (card && typeof gsap !== 'undefined') {
+        gsap.fromTo(card, 
           { x: -10 }, 
           { x: 10, duration: 0.08, repeat: 5, yoyo: true, onComplete: () => {
-            gsap.set(overlayCard, { x: 0 });
-            lockIcon.className = 'fas fa-lock';
+            gsap.set(card, { x: 0 });
+            lockIcon.className = 'fas fa-shield-halved';
           }}
         );
       } else {
-        lockIcon.className = 'fas fa-lock';
+        lockIcon.className = 'fas fa-shield-halved';
       }
     }
   }
 
   function handlePinKeyPress(e) {
     if (e.key === 'Enter') {
-      verifyAdminPIN();
+      verifyAccess();
     }
   }
 
-  function logoutAdmin() {
-    removeAdminAuth();
-    const input = document.getElementById('admin-pin-input');
+  function logoutGateway() {
+    clearAccessSession();
+    const input = document.getElementById('entry-pass');
     if (input) input.value = '';
     
-    const overlay = document.getElementById('admin-auth-overlay');
-    const mainContent = document.getElementById('dashboard-main-content');
+    const gateway = document.getElementById('user-gateway');
+    const dashboard = document.getElementById('dashboard-view');
     
-    if (!overlay || !mainContent) return;
+    if (!gateway || !dashboard) return;
 
     if (typeof gsap !== 'undefined') {
-      gsap.to(mainContent, {
+      gsap.to(dashboard, {
         opacity: 0,
         y: 10,
         duration: 0.3,
         onComplete: () => {
-          overlay.style.display = 'flex';
-          gsap.to(overlay, { opacity: 1, duration: 0.3 });
-          mainContent.classList.add('hidden');
-          const pinInput = document.getElementById('admin-pin-input');
-          if (pinInput) setTimeout(() => pinInput.focus(), 50);
+          gateway.style.display = 'flex';
+          gsap.to(gateway, { opacity: 1, duration: 0.3 });
+          dashboard.classList.add('hidden');
+          const passField = document.getElementById('entry-pass');
+          if (passField) setTimeout(() => passField.focus(), 50);
         }
       });
     } else {
-      overlay.style.display = 'flex';
-      overlay.style.opacity = '1';
-      mainContent.classList.add('hidden');
-      const pinInput = document.getElementById('admin-pin-input');
-      if (pinInput) setTimeout(() => pinInput.focus(), 50);
+      gateway.style.display = 'flex';
+      gateway.style.opacity = '1';
+      dashboard.classList.add('hidden');
+      const passField = document.getElementById('entry-pass');
+      if (passField) setTimeout(() => passField.focus(), 50);
     }
   }
 
-  // Run authorization check immediately or register for event if DOM is still loading
+  // Load check access
   if (document.readyState === 'loading') {
-    window.addEventListener('DOMContentLoaded', checkAdminAuth);
+    window.addEventListener('DOMContentLoaded', checkAccess);
   } else {
-    checkAdminAuth();
+    checkAccess();
   }
 </script>

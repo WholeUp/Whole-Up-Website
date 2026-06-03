@@ -534,6 +534,10 @@ Maintain a confident, highly professional tone. Do not write generic placeholder
 
 // ─── AI Agent Admin Dashboard ──────────────────────────────────────────────────
 app.get('/admin/agent', (req, res) => {
+  if (req.query.pass !== 'wholeup2026') {
+    return res.status(404).render('404', { title: 'Page Not Found | Wholeup', page: '404' });
+  }
+
   const fs = require('fs');
   const logPath = path.join(__dirname, 'data/leads.json');
   let leads = [];

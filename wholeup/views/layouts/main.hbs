@@ -185,31 +185,27 @@
     <div class="relative" id="loader-logo-wrap">
       <svg class="w-64 h-64 md:w-80 md:h-80" viewBox="0 0 1000 700" fill="none" xmlns="http://www.w3.org/2000/svg">
         <defs>
+          <!-- Shadow Filter for Overlap Depth -->
+          <filter id="overlap-shadow" x="-30%" y="-30%" width="160%" height="160%">
+            <feDropShadow dx="-12" dy="12" stdDeviation="16" flood-color="#0D0D0D" flood-opacity="0.35"/>
+          </filter>
+
           <!-- Dark Charcoal Gradient for left wing with userSpaceOnUse -->
-          <linearGradient id="charcoal-loader-grad" x1="180" y1="240" x2="465" y2="560" gradientUnits="userSpaceOnUse">
+          <linearGradient id="charcoal-loader-grad" x1="180" y1="270" x2="465" y2="590" gradientUnits="userSpaceOnUse">
             <stop offset="0%" stop-color="#2D2D2D" />
             <stop offset="100%" stop-color="#121212" />
           </linearGradient>
           
           <!-- Bright Green Gradient for right wing and arrowhead with userSpaceOnUse -->
-          <linearGradient id="green-loader-grad" x1="465" y1="560" x2="800" y2="130" gradientUnits="userSpaceOnUse">
+          <linearGradient id="green-loader-grad" x1="465" y1="590" x2="900" y2="100" gradientUnits="userSpaceOnUse">
             <stop offset="0%" stop-color="#1E521F" />
             <stop offset="60%" stop-color="#4EAB30" />
             <stop offset="100%" stop-color="#55C235" />
           </linearGradient>
         </defs>
 
-        <!-- Left Black Wing -->
-        <path d="M 180 240 C 180 240, 260 560, 330 560 C 400 560, 440 450, 465 350" 
-              stroke="url(#charcoal-loader-grad)" 
-              stroke-width="105" 
-              stroke-linecap="round" 
-              stroke-linejoin="round" 
-              id="loader-left-wing" 
-              style="stroke-dasharray: 600; stroke-dashoffset: 600;" />
-
-        <!-- Right Green Wing (Ends at 800, 130 for extra height / growth) -->
-        <path d="M 465 350 C 455 390, 500 560, 570 560 C 640 560, 710 330, 800 130" 
+        <!-- Right Green Wing (Rendered first so it is in the background) -->
+        <path d="M 465 380 C 455 420, 500 590, 570 590 C 640 590, 710 350, 790 210" 
               stroke="url(#green-loader-grad)" 
               stroke-width="105" 
               stroke-linecap="round" 
@@ -217,29 +213,27 @@
               id="loader-right-wing" 
               style="stroke-dasharray: 600; stroke-dashoffset: 600;" />
 
-        <!-- Brand-Authentic Stroke Arrow Head (V-shape pointing top-right, matching navbar logo) -->
-        <path d="M 680 130 H 800 V 250" 
-              stroke="url(#green-loader-grad)" 
+        <!-- Left Black Wing (Rendered on top of green wing, with shadow filter) -->
+        <path d="M 180 270 C 180 270, 260 590, 330 590 C 400 590, 440 480, 465 380" 
+              stroke="url(#charcoal-loader-grad)" 
               stroke-width="105" 
               stroke-linecap="round" 
               stroke-linejoin="round" 
-              fill="none"
-              id="loader-arrow-head" 
-              style="transform: scale(0); transform-origin: 800px 130px;" />
+              filter="url(#overlap-shadow)"
+              id="loader-left-wing" 
+              style="stroke-dasharray: 600; stroke-dashoffset: 600;" />
 
-        <!-- Sparkle Stars (Top Right) -->
-        <g id="loader-stars-group">
-          <!-- Large Sparkle Star -->
-          <path d="M 930 30 Q 930 70 970 70 Q 930 70 930 110 Q 930 70 890 70 Q 930 70 930 30" 
-                fill="#55C235" 
-                id="loader-star-large" 
-                style="transform: scale(0); transform-origin: 930px 70px;" />
-          <!-- Small Sparkle Star -->
-          <path d="M 880 15 Q 880 30 895 30 Q 880 30 880 45 Q 880 30 865 30 Q 880 30 880 15" 
-                fill="#4EAB30" 
-                id="loader-star-small" 
-                style="transform: scale(0); transform-origin: 880px 30px;" />
-        </g>
+        <!-- Solid Arrow Head (Polygon matching the image ditto to ditto) -->
+        <polygon points="730,150 900,100 840,260 790,210" 
+                 fill="url(#green-loader-grad)"
+                 id="loader-arrow-head" 
+                 style="transform: scale(0); transform-origin: 790px 210px;" />
+
+        <!-- Single Sparkle Star (Top Right) -->
+        <path d="M 950 15 Q 950 50 985 50 Q 950 50 950 85 Q 950 50 915 50 Q 950 50 950 15" 
+              fill="#55C235" 
+              id="loader-star" 
+              style="transform: scale(0); transform-origin: 950px 50px;" />
       </svg>
     </div>
   </div>
@@ -536,20 +530,13 @@
         ease: 'back.out(2.5)'
       }, "-=0.1");
 
-      // 4. Sparkle Stars Pop In, Spin/Scale and Shine
-      tl.to('#loader-star-large', {
+      // 4. Sparkle Star Pop In, Spin/Scale and Shine
+      tl.to('#loader-star', {
         scale: 1,
         rotation: 45,
         duration: 0.5,
         ease: 'back.out(2.2)'
-      }, "-=0.25");
-
-      tl.to('#loader-star-small', {
-        scale: 1,
-        rotation: -45,
-        duration: 0.5,
-        ease: 'back.out(2.2)'
-      }, "-=0.4");
+      }, "-=0.2");
     });
 
     // Forced delay logic on Window Load

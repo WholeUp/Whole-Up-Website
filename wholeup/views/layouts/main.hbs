@@ -229,7 +229,7 @@
                  style="opacity: 0;" />
 
         <!-- Single Sparkle Star (Top Right) -->
-        <path d="M 950 15 Q 950 50 985 50 Q 950 50 950 85 Q 950 50 915 50 Q 950 50 950 15" 
+        <path d="M 880 25 Q 880 60 915 60 Q 880 60 880 95 Q 880 60 845 60 Q 880 60 880 25" 
               fill="#55C235" 
               id="loader-star" 
               style="opacity: 0;" />
@@ -521,7 +521,7 @@
 
       // Cross-browser safe initialization of scale and origin
       gsap.set('#loader-arrow-head', { scale: 0, transformOrigin: '790px 210px', opacity: 1 });
-      gsap.set('#loader-star', { scale: 0, transformOrigin: '950px 50px', opacity: 1 });
+      gsap.set('#loader-star', { scale: 0, transformOrigin: '880px 60px', opacity: 1 });
 
       const tl = gsap.timeline({
         onComplete: () => {
@@ -533,31 +533,31 @@
       // 1. Draw Left Black Wing (starts immediately and completes)
       tl.to('#loader-left-wing', {
         strokeDashoffset: 0,
-        duration: 0.9,
-        ease: 'power2.out'
+        duration: 1.0,
+        ease: 'power3.out'
       });
       
       // 2. Draw Right Green Wing (starts exactly after left wing completes)
       tl.to('#loader-right-wing', {
         strokeDashoffset: 0,
-        duration: 0.9,
-        ease: 'power2.out'
+        duration: 1.0,
+        ease: 'power3.out'
       });
       
       // 3. Arrowhead Pop In, Scale Up & Bounce (starts exactly at the end of green wing)
       tl.to('#loader-arrow-head', {
         scale: 1,
-        duration: 0.5,
-        ease: 'back.out(2.5)'
-      }, "-=0.05");
+        duration: 0.55,
+        ease: 'back.out(1.7)'
+      }, "-=0.08");
 
       // 4. Sparkle Star Pop In, Spin/Scale and Shine
       tl.to('#loader-star', {
         scale: 1,
         rotation: 45,
-        duration: 0.5,
-        ease: 'back.out(2.2)'
-      }, "-=0.25");
+        duration: 0.55,
+        ease: 'back.out(1.5)'
+      }, "-=0.3");
     });
 
     function startExit() {

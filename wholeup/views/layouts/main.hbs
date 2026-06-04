@@ -491,14 +491,11 @@
     return html;
   }
 
-  // Premium Branded Preloader Script (W Growth Animation)
+  // Premium Branded Preloader Script (W Growth Animation - All Pages, Every Load)
   (function() {
-    const isLoaded = sessionStorage.getItem('wholeup_loaded');
     const preloader = document.getElementById('preloader');
-    if (isLoaded) {
-      if (preloader) preloader.style.display = 'none';
-      return;
-    }
+    if (!preloader) return;
+    
     // Prevent scrolling while preloader runs
     document.body.style.overflow = 'hidden';
     
@@ -555,7 +552,6 @@
             onComplete: () => {
               preloader.style.display = 'none';
               document.body.style.overflow = '';
-              sessionStorage.setItem('wholeup_loaded', 'true');
               if (typeof ScrollTrigger !== 'undefined') {
                 ScrollTrigger.refresh();
               }
@@ -588,7 +584,6 @@
         setTimeout(() => {
           preloader.style.display = 'none';
           document.body.style.overflow = '';
-          sessionStorage.setItem('wholeup_loaded', 'true');
         }, 700);
       }
     }

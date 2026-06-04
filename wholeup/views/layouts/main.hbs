@@ -40,7 +40,7 @@
 
   <style>
     *, *::before, *::after { box-sizing:border-box; }
-    html { -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale; text-rendering:optimizeLegibility; }
+    html { -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale; text-rendering:optimizeLegibility; scrollbar-gutter: stable; }
     body { background-color:#FAF8F2; color:#0D0D0D; font-family:'DM Sans',sans-serif; overflow-x:hidden; }
     h1,h2,h3,h4,h5,h6,.heading { font-family:'Inter',sans-serif; }
     @media(min-width:768px){ body{ cursor:none; } }
@@ -77,8 +77,7 @@
     .anim-float-3 { animation:float3 11s cubic-bezier(.37,0,.63,1) infinite; }
 
     /* Smooth page transitions */
-    main { animation: pageFadeIn 0.5s ease forwards; }
-    @keyframes pageFadeIn { from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:translateY(0)} }
+    main { opacity: 1; }
 
     /* Button hover enhancements */
     .magnetic-btn { transition: all 0.28s cubic-bezier(.25,.46,.45,.94); }
@@ -500,6 +499,19 @@
     // Prevent scrolling while preloader runs
     document.body.style.overflow = 'hidden';
     
+    // Check and stop Lenis scroll dynamically
+    if (typeof lenis !== 'undefined' && lenis) {
+      lenis.stop();
+    } else {
+      const checkLenis = setInterval(() => {
+        if (typeof lenis !== 'undefined' && lenis) {
+          lenis.stop();
+          clearInterval(checkLenis);
+        }
+      }, 50);
+      setTimeout(() => clearInterval(checkLenis), 3000);
+    }
+    
     // Start drawing animation on DOM Content Loaded
     window.addEventListener('DOMContentLoaded', () => {
       if (typeof gsap === 'undefined') {
@@ -553,24 +565,40 @@
             onComplete: () => {
               preloader.style.display = 'none';
               document.body.style.overflow = '';
+              if (typeof lenis !== 'undefined' && lenis) {
+                lenis.start();
+              }
               if (typeof ScrollTrigger !== 'undefined') {
                 ScrollTrigger.refresh();
               }
             }
           });
           
+          // Parallax logo exit (slides up slightly faster & fades out)
           exitTl.to('#loader-logo-wrap', {
-            scale: 0.92,
+            y: -100,
             opacity: 0,
-            duration: 0.35,
+            duration: 0.55,
             ease: 'power2.in'
           });
           
+          // Premium curtain slide-up
           exitTl.to(preloader, {
             yPercent: -100,
-            duration: 0.65,
-            ease: 'power3.inOut'
-          }, "-=0.15");
+            duration: 0.85,
+            ease: 'power4.inOut'
+          }, "-=0.4");
+
+          // Premium parallax page reveal (fades and rises up dynamically)
+          exitTl.fromTo('main', {
+            y: 40,
+            opacity: 0
+          }, {
+            y: 0,
+            opacity: 1,
+            duration: 0.8,
+            ease: 'power3.out'
+          }, "-=0.6");
         } else {
           finishLoading();
         }
@@ -584,6 +612,9 @@
         setTimeout(() => {
           preloader.style.display = 'none';
           document.body.style.overflow = '';
+          if (typeof lenis !== 'undefined' && lenis) {
+            lenis.start();
+          }
         }, 700);
       }
     }

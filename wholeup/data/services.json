@@ -102,5 +102,18 @@
     "features": ["Logo Design & Brand Mark", "Brand Guidelines Document", "Color & Typography System", "Social Media Kit", "Business Card & Stationery", "Pitch Deck Design"],
     "result": "Premium Brand Recognition",
     "timeline": "Brand kit in 2 weeks"
+  },
+  {
+    "id": 9,
+    "slug": "ai-automation",
+    "icon": "fas fa-robot",
+    "color": "#16A34A",
+    "bgColor": "rgba(22,163,74,0.08)",
+    "title": "AI Agent & Chatbot Automation",
+    "tagline": "Your Business On Autopilot.",
+    "description": "We build custom Gemini-powered chatbots, voice AI agents, and custom CRM dashboard systems that capture leads, qualify traffic, and automate customer support 24/7.",
+    "features": ["Gemini-Powered Chatbots", "Voice AI Agents (Vapi/Twilio)", "CRM & Dashboard Integration", "Lead Capture Automation", "Auto Strategy Generation", "SMS & Email Notifications"],
+    "result": "84% Support Automated",
+    "timeline": "Build time 2–3 weeks"
   }
 ]

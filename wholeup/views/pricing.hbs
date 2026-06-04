@@ -10,9 +10,21 @@
 <!-- PRICING CARDS -->
 <section class="py-24 bg-white px-6">
   <div class="max-w-6xl mx-auto">
+
+    <!-- Pricing Mode Switcher Tabs -->
+    <div class="flex justify-center mb-10 gs-reveal">
+      <div class="inline-flex p-1.5 bg-cream border border-black/5 rounded-2xl shadow-sm">
+        <button onclick="switchTab('marketing')" id="tab-marketing" class="px-6 py-3 rounded-xl text-xs font-bold uppercase tracking-widest bg-primary text-white shadow-md transition-all duration-300 cursor-pointer">
+          <i class="fas fa-chart-line mr-1"></i> Marketing Retainers
+        </button>
+        <button onclick="switchTab('web')" id="tab-web" class="px-6 py-3 rounded-xl text-xs font-bold uppercase tracking-widest text-dark/50 hover:text-dark transition-all duration-300 cursor-pointer">
+          <i class="fas fa-laptop-code mr-1"></i> Website & AI Systems
+        </button>
+      </div>
+    </div>
     
-    <!-- Billing Cycle Toggle Switch -->
-    <div class="flex justify-center items-center gap-4 mb-16 gs-reveal">
+    <!-- Billing Cycle Toggle Switch (Only for Marketing plans) -->
+    <div id="billing-toggle-section" class="flex justify-center items-center gap-4 mb-16 gs-reveal">
       <span class="text-sm font-bold uppercase tracking-widest text-dark/70" id="label-monthly">Monthly</span>
       <button onclick="toggleBilling()" id="billing-switch" class="w-14 h-8 bg-black/10 hover:bg-black/15 rounded-full p-1 transition-colors duration-300 focus:outline-none relative cursor-pointer" aria-label="Toggle Billing Plan">
         <div id="switch-dot" class="w-6 h-6 bg-primary rounded-full transition-transform duration-300 shadow-md transform translate-x-0"></div>
@@ -22,7 +34,8 @@
       </span>
     </div>
 
-    <div class="grid md:grid-cols-3 gap-8 items-stretch">
+    <!-- 1. MARKETING RETAINERS GRID -->
+    <div id="marketing-pricing-grid" class="grid md:grid-cols-3 gap-8 items-stretch">
       {{#each pricing}}
       <div class="relative rounded-[32px] border {{#if popular}}border-primary shadow-2xl shadow-primary/20{{else}}border-black/8 shadow-lg{{/if}} overflow-hidden gs-reveal flex flex-col" data-tilt data-tilt-max="3">
         {{#if popular}}
@@ -63,6 +76,87 @@
       {{/each}}
     </div>
 
+    <!-- 2. WEBSITE & AI SYSTEMS GRID (Hidden by default) -->
+    <div id="web-pricing-grid" class="hidden grid md:grid-cols-3 gap-8 items-stretch">
+      <!-- Card 1: Starter AI Landing Page -->
+      <div class="relative rounded-[32px] border border-black/8 shadow-lg overflow-hidden flex flex-col" data-tilt data-tilt-max="3">
+        <div class="p-10 flex flex-col flex-1 bg-cream">
+          <div class="mb-8">
+            <h3 class="text-2xl font-black uppercase tracking-widest mb-2 text-dark">AI Landing Page</h3>
+            <p class="text-sm font-medium text-dark/60 mb-6">Perfect for launching a single product, capturing leads, or running ad campaigns.</p>
+            <div class="flex items-end gap-2 mb-1">
+              <span class="text-5xl font-black text-dark font-mono">₹19,999</span>
+              <span class="text-sm font-bold text-dark/50 mb-2">/one-time</span>
+            </div>
+            <p class="text-xs font-bold uppercase tracking-widest text-dark/40 mt-3">Free domain & hosting for 1st year</p>
+          </div>
+          <div class="space-y-3 mb-8 flex-1">
+            <div class="flex items-start gap-3 text-sm font-medium text-dark/80"><i class="fas fa-check-circle text-primary mt-0.5 flex-shrink-0"></i>1 Custom Designed Page</div>
+            <div class="flex items-start gap-3 text-sm font-medium text-dark/80"><i class="fas fa-check-circle text-primary mt-0.5 flex-shrink-0"></i>Interactive AI Chatbot Setup</div>
+            <div class="flex items-start gap-3 text-sm font-medium text-dark/80"><i class="fas fa-check-circle text-primary mt-0.5 flex-shrink-0"></i>Lead Capture & CRM Sync</div>
+            <div class="flex items-start gap-3 text-sm font-medium text-dark/80"><i class="fas fa-check-circle text-primary mt-0.5 flex-shrink-0"></i>Mobile Responsive Design</div>
+            <div class="flex items-start gap-3 text-sm font-medium text-dark/80"><i class="fas fa-check-circle text-primary mt-0.5 flex-shrink-0"></i>Basic SEO Optimization</div>
+            <div class="flex items-start gap-3 text-sm font-medium text-dark/80"><i class="fas fa-check-circle text-primary mt-0.5 flex-shrink-0"></i>10-Day Delivery Time</div>
+            <div class="flex items-start gap-3 text-sm font-medium text-dark/30"><i class="fas fa-times-circle mt-0.5 flex-shrink-0"></i>E-Commerce payment gateways</div>
+            <div class="flex items-start gap-3 text-sm font-medium text-dark/30"><i class="fas fa-times-circle mt-0.5 flex-shrink-0"></i>Custom Admin Dashboard</div>
+          </div>
+          <a href="/contact?service=web-starter" class="block text-center py-5 rounded-xl font-black uppercase tracking-widest text-sm transition magnetic-btn bg-dark text-white hover:bg-primary">Get Started →</a>
+        </div>
+      </div>
+
+      <!-- Card 2: E-Commerce AI Store -->
+      <div class="relative rounded-[32px] border border-primary shadow-2xl shadow-primary/20 overflow-hidden flex flex-col" data-tilt data-tilt-max="3">
+        <div class="bg-primary text-white text-[10px] font-black uppercase tracking-[0.3em] text-center py-3">⭐ Most Popular — The Bear House Style</div>
+        <div class="p-10 flex flex-col flex-1 bg-dark text-white">
+          <div class="mb-8">
+            <h3 class="text-2xl font-black uppercase tracking-widest mb-2 text-white">E-Commerce AI Store</h3>
+            <p class="text-sm font-medium text-white/60 mb-6">Complete premium clothing or product store built for high checkout conversions.</p>
+            <div class="flex items-end gap-2 mb-1">
+              <span class="text-5xl font-black text-white font-mono">₹59,999</span>
+              <span class="text-sm font-bold text-white/50 mb-2">/one-time</span>
+            </div>
+            <p class="text-xs font-bold uppercase tracking-widest text-primary mt-3">Advanced Cart + Payments included</p>
+          </div>
+          <div class="space-y-3 mb-8 flex-1">
+            <div class="flex items-start gap-3 text-sm font-medium text-white/80"><i class="fas fa-check-circle text-primary mt-0.5 flex-shrink-0"></i>Premium Shopify / Custom Shop Layout</div>
+            <div class="flex items-start gap-3 text-sm font-medium text-white/80"><i class="fas fa-check-circle text-primary mt-0.5 flex-shrink-0"></i>Slide-In Cart Drawer System</div>
+            <div class="flex items-start gap-3 text-sm font-medium text-white/80"><i class="fas fa-check-circle text-primary mt-0.5 flex-shrink-0"></i>Razorpay & Stripe Payment Integration</div>
+            <div class="flex items-start gap-3 text-sm font-medium text-white/80"><i class="fas fa-check-circle text-primary mt-0.5 flex-shrink-0"></i>Custom Size Charts & Filters</div>
+            <div class="flex items-start gap-3 text-sm font-medium text-white/80"><i class="fas fa-check-circle text-primary mt-0.5 flex-shrink-0"></i>Interactive FAQ & Support Chatbot</div>
+            <div class="flex items-start gap-3 text-sm font-medium text-white/80"><i class="fas fa-check-circle text-primary mt-0.5 flex-shrink-0"></i>WhatsApp / SMS Order Notifications</div>
+            <div class="flex items-start gap-3 text-sm font-medium text-white/80"><i class="fas fa-check-circle text-primary mt-0.5 flex-shrink-0"></i>20-Day Delivery Time</div>
+            <div class="flex items-start gap-3 text-sm font-medium text-white/30"><i class="fas fa-times-circle mt-0.5 flex-shrink-0"></i>Private Admin Autopilot Dashboard</div>
+          </div>
+          <a href="/contact?service=web-ecommerce" class="block text-center py-5 rounded-xl font-black uppercase tracking-widest text-sm transition magnetic-btn bg-primary text-white hover:bg-green-500">Launch E-Com Store →</a>
+        </div>
+      </div>
+
+      <!-- Card 3: Custom AI Autopilot Suite -->
+      <div class="relative rounded-[32px] border border-black/8 shadow-lg overflow-hidden flex flex-col" data-tilt data-tilt-max="3">
+        <div class="p-10 flex flex-col flex-1 bg-cream">
+          <div class="mb-8">
+            <h3 class="text-2xl font-black uppercase tracking-widest mb-2 text-dark">AI Autopilot Suite</h3>
+            <p class="text-sm font-medium text-dark/60 mb-6">Fully custom web application with automated CRM, emailing, and outreach logic.</p>
+            <div class="flex items-end gap-2 mb-1">
+              <span class="text-5xl font-black text-dark font-mono">₹99,999</span>
+              <span class="text-sm font-bold text-dark/50 mb-2">/one-time</span>
+            </div>
+            <p class="text-xs font-bold uppercase tracking-widest text-dark/40 mt-3">Full control & zero platform monthly fees</p>
+          </div>
+          <div class="space-y-3 mb-8 flex-1">
+            <div class="flex items-start gap-3 text-sm font-medium text-dark/80"><i class="fas fa-check-circle text-primary mt-0.5 flex-shrink-0"></i>Custom Coded Node/React Web App</div>
+            <div class="flex items-start gap-3 text-sm font-medium text-dark/80"><i class="fas fa-check-circle text-primary mt-0.5 flex-shrink-0"></i>Secure Admin Dashboard (Autopilot Engine)</div>
+            <div class="flex items-start gap-3 text-sm font-medium text-dark/80"><i class="fas fa-check-circle text-primary mt-0.5 flex-shrink-0"></i>AI Outreach proposal builder</div>
+            <div class="flex items-start gap-3 text-sm font-medium text-dark/80"><i class="fas fa-check-circle text-primary mt-0.5 flex-shrink-0"></i>Content Copilot (Social media generator)</div>
+            <div class="flex items-start gap-3 text-sm font-medium text-dark/80"><i class="fas fa-check-circle text-primary mt-0.5 flex-shrink-0"></i>Vapi Voice AI Agent integration ready</div>
+            <div class="flex items-start gap-3 text-sm font-medium text-dark/80"><i class="fas fa-check-circle text-primary mt-0.5 flex-shrink-0"></i>Nodemailer SMTP & Database setup</div>
+            <div class="flex items-start gap-3 text-sm font-medium text-dark/80"><i class="fas fa-check-circle text-primary mt-0.5 flex-shrink-0"></i>30-Day Delivery Time</div>
+          </div>
+          <a href="/contact?service=web-autopilot" class="block text-center py-5 rounded-xl font-black uppercase tracking-widest text-sm transition magnetic-btn bg-dark text-white hover:bg-primary">Get Custom Suite →</a>
+        </div>
+      </div>
+    </div>
+
     <!-- Custom note -->
     <div class="mt-12 bg-cream border border-black/5 rounded-3xl p-10 text-center gs-reveal">
       <h3 class="text-2xl font-black uppercase tracking-widest text-dark mb-4">Need a Custom Plan?</h3>
@@ -87,6 +181,28 @@
 
 <script>
   let yearlyBilling = false;
+
+  function switchTab(tab) {
+    const tabMarketing = document.getElementById('tab-marketing');
+    const tabWeb = document.getElementById('tab-web');
+    const gridMarketing = document.getElementById('marketing-pricing-grid');
+    const gridWeb = document.getElementById('web-pricing-grid');
+    const billingToggle = document.getElementById('billing-toggle-section');
+
+    if (tab === 'marketing') {
+      tabMarketing.className = 'px-6 py-3 rounded-xl text-xs font-bold uppercase tracking-widest bg-primary text-white shadow-md transition-all duration-300 cursor-pointer';
+      tabWeb.className = 'px-6 py-3 rounded-xl text-xs font-bold uppercase tracking-widest text-dark/50 hover:text-dark transition-all duration-300 cursor-pointer';
+      gridMarketing.classList.remove('hidden');
+      gridWeb.classList.add('hidden');
+      billingToggle.classList.remove('hidden');
+    } else {
+      tabMarketing.className = 'px-6 py-3 rounded-xl text-xs font-bold uppercase tracking-widest text-dark/50 hover:text-dark transition-all duration-300 cursor-pointer';
+      tabWeb.className = 'px-6 py-3 rounded-xl text-xs font-bold uppercase tracking-widest bg-primary text-white shadow-md transition-all duration-300 cursor-pointer';
+      gridMarketing.classList.add('hidden');
+      gridWeb.classList.remove('hidden');
+      billingToggle.classList.add('hidden');
+    }
+  }
 
   function toggleBilling() {
     yearlyBilling = !yearlyBilling;

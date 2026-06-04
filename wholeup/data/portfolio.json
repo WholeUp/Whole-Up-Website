@@ -113,5 +113,24 @@
     "caseInfo": "The old website took 8.4 seconds to load on mobile, had no trust signals, and a 7-step checkout. We rebuilt on Shopify — mobile-first design, 1.8s load time, UPI + COD payment integration, exit-intent popups, and a Klaviyo email flow for abandoned carts. The new store's conversion rate was 4.1% vs. the old site's 0.9%.",
     "result": "Mobile load: 8.4s → 1.8s. CVR: 0.9% → 4.1%. Revenue +180% in launch month. Cart recovery 22%.",
     "services": ["Shopify Development", "UX Design", "Speed Optimization", "Conversion Tracking"]
+  },
+  {
+    "id": 7,
+    "title": "AI Agent & Lead Capture Automation",
+    "slug": "ai-lead-automation",
+    "category": "web",
+    "categoryLabel": "AI & Web",
+    "tagColor": "#16A34A",
+    "tagBg": "rgba(22,163,74,0.1)",
+    "icon": "fas fa-robot",
+    "iconColor": "#16A34A",
+    "gradientFrom": "#f0fdf4",
+    "gradientTo": "#dcfce7",
+    "metric1": "+210% Leads",
+    "metric2": "84% Support Auto",
+    "description": "Implemented custom Gemini-powered chatbots and automated sales proposal funnels for a D2C streetwear clothing brand.",
+    "caseInfo": "The brand wanted to automate customer inquiries and qualify site visitors. We built an interactive AI chatbot that answers questions in Hinglish, extracts lead info, and sends it directly to a custom CRM dashboard. The system automatically drafts and dispatches customized strategy proposals via email to prospective buyers.",
+    "result": "84% customer questions automated. Lead volume +210% in 30 days. Auto email proposals generated 18 new client calls.",
+    "services": ["AI Chatbots", "CRM Autopilot Panel", "Nodemailer Integration", "Gemini API Setup"]
   }
 ]

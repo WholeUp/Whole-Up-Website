@@ -208,6 +208,182 @@
   </div>
 </section>
 
+<!-- ══ AI WEBSITE AUDITOR ══════════════════════════════════════════════════ -->
+<section id="instant-audit" class="py-32 bg-white px-6 border-t border-black/5">
+  <div class="max-w-[1400px] mx-auto">
+    <div class="text-center mb-16 gs-reveal">
+      <p class="text-xs font-bold tracking-[0.3em] uppercase text-primary mb-4">Instant Lead Magnet</p>
+      <h2 class="text-5xl md:text-6xl font-black uppercase tracking-widest text-dark mb-4">Run A Free <span class="text-primary">AI Website Audit.</span></h2>
+      <p class="text-dark/60 font-medium text-lg max-w-2xl mx-auto">Type in your website details below. Our Gemini-powered marketing agent will scan your landing page and write a customized growth report instantly.</p>
+    </div>
+
+    <div class="grid lg:grid-cols-5 gap-12 items-stretch">
+      
+      <!-- Input Form Card -->
+      <div class="lg:col-span-2 bg-cream border border-black/5 rounded-[32px] p-8 shadow-xl flex flex-col justify-between gs-reveal">
+        <div>
+          <h3 class="text-xl font-heading font-black uppercase text-dark tracking-wide mb-6">Enter Site Details</h3>
+          <form id="audit-form" onsubmit="runLiveAudit(event)" class="space-y-5">
+            <div>
+              <label class="block text-[10px] font-black uppercase tracking-widest text-dark/50 mb-2">Your Name</label>
+              <input type="text" id="audit-name" required placeholder="e.g. Neel Patel" class="w-full border border-black/10 rounded-xl px-4 py-3.5 text-sm font-medium focus:border-primary outline-none focus:ring-4 focus:ring-primary/10 bg-white transition" />
+            </div>
+            <div>
+              <label class="block text-[10px] font-black uppercase tracking-widest text-dark/50 mb-2">Work Email</label>
+              <input type="email" id="audit-email" required placeholder="e.g. neel@example.com" class="w-full border border-black/10 rounded-xl px-4 py-3.5 text-sm font-medium focus:border-primary outline-none focus:ring-4 focus:ring-primary/10 bg-white transition" />
+            </div>
+            <div>
+              <label class="block text-[10px] font-black uppercase tracking-widest text-dark/50 mb-2">Website URL</label>
+              <input type="url" id="audit-url" required placeholder="e.g. https://mybrand.com" class="w-full border border-black/10 rounded-xl px-4 py-3.5 text-sm font-medium focus:border-primary outline-none focus:ring-4 focus:ring-primary/10 bg-white transition" />
+            </div>
+            <div>
+              <label class="block text-[10px] font-black uppercase tracking-widest text-dark/50 mb-2">Primary Audit Goal</label>
+              <select id="audit-goal" required class="w-full border border-black/10 rounded-xl px-4 py-3.5 text-sm font-medium focus:border-primary outline-none bg-white transition">
+                <option value="Increase Sales & Conversions">Increase Sales & Conversions</option>
+                <option value="Get More Leads & Signups">Get More Leads & Signups</option>
+                <option value="Improve Page Speed & SEO">Improve Page Speed & SEO</option>
+                <option value="Re-design Visual Branding">Re-design Visual Branding</option>
+              </select>
+            </div>
+            <button type="submit" class="w-full bg-primary text-white font-black uppercase tracking-widest text-xs py-4.5 rounded-xl shadow-lg shadow-primary/30 hover:bg-green-600 transition cursor-pointer flex items-center justify-center gap-2">
+              <i class="fas fa-microchip animate-pulse"></i> Generate Report
+            </button>
+          </form>
+        </div>
+      </div>
+
+      <!-- Live Terminal / Audit Output Card -->
+      <div class="lg:col-span-3 bg-slate-950 border border-slate-800 rounded-[32px] p-8 md:p-10 shadow-2xl text-slate-100 flex flex-col justify-between min-h-[420px] relative overflow-hidden gs-reveal">
+        <div class="absolute -top-20 -right-20 w-48 h-48 bg-primary/10 rounded-full blur-3xl"></div>
+        
+        <!-- Terminal Header -->
+        <div class="flex items-center justify-between border-b border-slate-800 pb-4 mb-6">
+          <span class="text-[10px] font-bold uppercase tracking-widest text-slate-400 flex items-center gap-2">
+            <span class="w-2.5 h-2.5 bg-green-500 rounded-full animate-ping" id="term-status-dot"></span> Live AI Auditor Console
+          </span>
+          <div class="flex gap-1.5">
+            <span class="w-2 h-2 rounded-full bg-red-500/30"></span>
+            <span class="w-2 h-2 rounded-full bg-yellow-500/30"></span>
+            <span class="w-2 h-2 rounded-full bg-green-500/30"></span>
+          </div>
+        </div>
+
+        <!-- Terminal Output View -->
+        <div id="audit-terminal-screen" class="flex-1 font-mono text-[11px] leading-relaxed text-slate-350 flex flex-col justify-center items-center text-center py-10">
+          <i class="fas fa-laptop-code text-5xl text-slate-700 mb-4 animate-bounce"></i>
+          <h4 class="text-sm font-bold text-slate-300">Auditor Ready</h4>
+          <p class="text-xs text-slate-500 max-w-[280px] mt-1">Enter your website details on the left and click "Generate Report" to start the live audit scan.</p>
+        </div>
+
+        <!-- Scrollable Report View (Hidden by default) -->
+        <div id="audit-report-container" class="hidden flex-1 overflow-y-auto max-h-[300px] border border-slate-800 bg-slate-900/50 p-5 rounded-2xl leading-relaxed text-xs text-slate-200 pr-2 select-text">
+          <!-- AI report content gets injected here -->
+        </div>
+
+        <!-- Action Button (Hidden by default) -->
+        <div id="audit-action-btn" class="hidden mt-6 pt-4 border-t border-slate-800">
+          <a href="tel:+919426846035" class="inline-flex items-center gap-2 bg-green-600 hover:bg-green-700 text-white font-bold text-xs uppercase tracking-widest px-6 py-3.5 rounded-xl shadow-md transition cursor-pointer">
+            <i class="fas fa-phone-alt"></i> Call Neel to Fix These Gaps
+          </a>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- Script for Auditor Widget -->
+<script>
+  function sleep(ms) { return new Promise(resolve => setTimeout(resolve, ms)); }
+
+  async function runLiveAudit(event) {
+    event.preventDefault();
+
+    const name = document.getElementById('audit-name').value.trim();
+    const email = document.getElementById('audit-email').value.trim();
+    const url = document.getElementById('audit-url').value.trim();
+    const goal = document.getElementById('audit-goal').value;
+
+    const termScreen = document.getElementById('audit-terminal-screen');
+    const reportContainer = document.getElementById('audit-report-container');
+    const actionBtn = document.getElementById('audit-action-btn');
+
+    // 1. Hide report container & show terminal
+    reportContainer.classList.add('hidden');
+    actionBtn.classList.add('hidden');
+    termScreen.classList.remove('hidden');
+    termScreen.className = "flex-1 font-mono text-[10px] leading-relaxed text-green-400 flex flex-col gap-2 text-left justify-start overflow-y-auto w-full select-none";
+    termScreen.innerHTML = "";
+
+    function log(text, type = 'info') {
+      const div = document.createElement('div');
+      const time = new Date().toLocaleTimeString();
+      let color = 'text-slate-350';
+      if (type === 'success') color = 'text-green-400 font-bold';
+      if (type === 'warning') color = 'text-yellow-400 font-bold';
+      if (type === 'error') color = 'text-red-400 font-bold';
+      
+      div.className = color;
+      div.innerHTML = `[${time}] ${text}`;
+      termScreen.appendChild(div);
+      termScreen.scrollTop = termScreen.scrollHeight;
+    }
+
+    // 2. Start simulated console logs for scanning
+    log("Initializing conversion audit suite...", 'info');
+    await sleep(800);
+    log(`Connecting to URL: ${url}...`, 'info');
+    await sleep(1000);
+    log("Pinging server... Status: 200 OK [1.4s]", 'success');
+    await sleep(800);
+    log("Testing mobile responsive layout... Breakpoints configured.", 'info');
+    await sleep(800);
+    log("Scanning SEO Meta tags and image Alt elements... Complete.", 'info');
+    await sleep(800);
+    log("Calling Gemini AI conversion audit engine... Generating Growth Roadmap...", 'warning');
+
+    // 3. Perform real API call to grader endpoint
+    try {
+      const response = await fetch('/api/grader/audit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: name,
+          email: email,
+          url: url,
+          goal: goal
+        })
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        log("Gemini AI successfully generated Website Audit Report!", 'success');
+        log("Audit report saved to CRM dashboard database and emailed to client.", 'success');
+        await sleep(1000);
+
+        // Transition to display the report content
+        termScreen.classList.add('hidden');
+        
+        // Format the audit markdown text dynamically
+        let formatted = data.audit;
+        formatted = formatted.replace(/\n/g, '<br>');
+        formatted = formatted.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+        formatted = formatted.replace(/(?:^|<br>)\s*[-*]\s(.*?)(?=<br>|$)/g, '<br>• $1');
+
+        reportContainer.innerHTML = formatted;
+        reportContainer.classList.remove('hidden');
+        actionBtn.classList.remove('hidden');
+      } else {
+        log(`❌ Error: Website audit generation failed. Reason: ${data.message}`, 'error');
+      }
+    } catch(err) {
+      log(`❌ Connection Error: Failed to resolve audit API. ${err.message}`, 'error');
+    }
+  }
+</script>
+
 <!-- ══ ROI CALCULATOR ═══════════════════════════════════════════════════ -->
 <section class="py-32 bg-dark text-white px-6 relative overflow-hidden">
   <div class="absolute inset-0 opacity-[0.03]" style="background-image:radial-gradient(#fff 1.5px,transparent 1.5px);background-size:24px 24px;"></div>

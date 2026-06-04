@@ -530,34 +530,34 @@
         }
       });
       
-      // 1. Draw Left Black Wing (starts immediately and completes)
+      // 1. Draw Left Black Wing (starts immediately)
       tl.to('#loader-left-wing', {
         strokeDashoffset: 0,
         duration: 1.0,
         ease: 'power3.out'
-      });
+      }, 0);
       
-      // 2. Draw Right Green Wing (starts exactly after left wing completes)
+      // 2. Draw Right Green Wing (starts simultaneously at 0.0)
       tl.to('#loader-right-wing', {
         strokeDashoffset: 0,
         duration: 1.0,
         ease: 'power3.out'
-      });
+      }, 0);
       
-      // 3. Arrowhead Pop In, Scale Up & Bounce (starts exactly at the end of green wing)
+      // 3. Arrowhead Pop In, Scale Up & Bounce (starts at 0.8s, near the end of wing drawing)
       tl.to('#loader-arrow-head', {
         scale: 1,
         duration: 0.55,
         ease: 'back.out(1.7)'
-      }, "-=0.08");
+      }, 0.8);
 
-      // 4. Sparkle Star Pop In, Spin/Scale and Shine
+      // 4. Sparkle Star Pop In, Spin/Scale and Shine (starts at 0.9s, staggered)
       tl.to('#loader-star', {
         scale: 1,
         rotation: 45,
         duration: 0.55,
         ease: 'back.out(1.5)'
-      }, "-=0.3");
+      }, 0.9);
     });
 
     function startExit() {

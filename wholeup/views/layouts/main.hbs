@@ -183,25 +183,20 @@
   <div class="z-10 flex flex-col items-center text-center px-6">
     <!-- Sleek Custom Animated W Growth Logo -->
     <div class="relative" id="loader-logo-wrap">
-      <svg class="w-64 h-64 md:w-80 md:h-80 animate-pulse" viewBox="0 0 1000 700" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <svg class="w-64 h-64 md:w-80 md:h-80" viewBox="0 0 1000 700" fill="none" xmlns="http://www.w3.org/2000/svg">
         <defs>
-          <!-- Dark Charcoal Gradient for left wing -->
-          <linearGradient id="charcoal-loader-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+          <!-- Dark Charcoal Gradient for left wing with userSpaceOnUse -->
+          <linearGradient id="charcoal-loader-grad" x1="180" y1="240" x2="465" y2="560" gradientUnits="userSpaceOnUse">
             <stop offset="0%" stop-color="#2D2D2D" />
             <stop offset="100%" stop-color="#121212" />
           </linearGradient>
           
-          <!-- Bright Green Gradient for right wing matching logo -->
-          <linearGradient id="green-loader-grad" x1="0%" y1="100%" x2="100%" y2="0%">
+          <!-- Bright Green Gradient for right wing and arrowhead with userSpaceOnUse -->
+          <linearGradient id="green-loader-grad" x1="465" y1="560" x2="800" y2="130" gradientUnits="userSpaceOnUse">
             <stop offset="0%" stop-color="#1E521F" />
             <stop offset="60%" stop-color="#4EAB30" />
             <stop offset="100%" stop-color="#55C235" />
           </linearGradient>
-
-          <!-- Glow Filter for Sparkle Star -->
-          <filter id="glow-loader" x="-30%" y="-30%" width="160%" height="160%">
-            <feDropShadow dx="0" dy="0" stdDeviation="10" flood-color="#55C235" flood-opacity="0.5"/>
-          </filter>
         </defs>
 
         <!-- Left Black Wing -->
@@ -213,8 +208,8 @@
               id="loader-left-wing" 
               style="stroke-dasharray: 600; stroke-dashoffset: 600;" />
 
-        <!-- Right Green Wing -->
-        <path d="M 465 350 C 455 390, 500 560, 570 560 C 640 560, 710 430, 765 320" 
+        <!-- Right Green Wing (Ends at 800, 130 for extra height / growth) -->
+        <path d="M 465 350 C 455 390, 500 560, 570 560 C 640 560, 710 330, 800 130" 
               stroke="url(#green-loader-grad)" 
               stroke-width="105" 
               stroke-linecap="round" 
@@ -222,17 +217,29 @@
               id="loader-right-wing" 
               style="stroke-dasharray: 600; stroke-dashoffset: 600;" />
 
-        <!-- Arrow Head Polygon (at the end of green wing) -->
-        <g id="loader-arrow-group" style="transform: scale(0); transform-origin: 765px 320px;">
-          <polygon points="705,290 825,200 805,340" fill="#55C235" />
-        </g>
+        <!-- Brand-Authentic Stroke Arrow Head (V-shape pointing top-right, matching navbar logo) -->
+        <path d="M 680 130 H 800 V 250" 
+              stroke="url(#green-loader-grad)" 
+              stroke-width="105" 
+              stroke-linecap="round" 
+              stroke-linejoin="round" 
+              fill="none"
+              id="loader-arrow-head" 
+              style="transform: scale(0); transform-origin: 800px 130px;" />
 
-        <!-- Sparkle Star (Top Right) -->
-        <path d="M 900 70 Q 900 110 940 110 Q 900 110 900 150 Q 900 110 860 110 Q 900 110 900 70" 
-              fill="#55C235" 
-              filter="url(#glow-loader)" 
-              id="loader-star" 
-              style="transform: scale(0); transform-origin: 900px 110px;" />
+        <!-- Sparkle Stars (Top Right) -->
+        <g id="loader-stars-group">
+          <!-- Large Sparkle Star -->
+          <path d="M 930 30 Q 930 70 970 70 Q 930 70 930 110 Q 930 70 890 70 Q 930 70 930 30" 
+                fill="#55C235" 
+                id="loader-star-large" 
+                style="transform: scale(0); transform-origin: 930px 70px;" />
+          <!-- Small Sparkle Star -->
+          <path d="M 880 15 Q 880 30 895 30 Q 880 30 880 45 Q 880 30 865 30 Q 880 30 880 15" 
+                fill="#4EAB30" 
+                id="loader-star-small" 
+                style="transform: scale(0); transform-origin: 880px 30px;" />
+        </g>
       </svg>
     </div>
   </div>
@@ -522,20 +529,27 @@
         ease: 'power2.out'
       }, "-=0.35");
       
-      // 3. Arrowhead Pop In & Scale Up
-      tl.to('#loader-arrow-group', {
+      // 3. Arrowhead Pop In, Scale Up & Bounce
+      tl.to('#loader-arrow-head', {
         scale: 1,
-        duration: 0.45,
+        duration: 0.5,
         ease: 'back.out(2.5)'
       }, "-=0.1");
 
-      // 4. Sparkle Star Pop In, Spin, and Glow
-      tl.to('#loader-star', {
+      // 4. Sparkle Stars Pop In, Spin/Scale and Shine
+      tl.to('#loader-star-large', {
         scale: 1,
         rotation: 45,
         duration: 0.5,
         ease: 'back.out(2.2)'
-      }, "-=0.2");
+      }, "-=0.25");
+
+      tl.to('#loader-star-small', {
+        scale: 1,
+        rotation: -45,
+        duration: 0.5,
+        ease: 'back.out(2.2)'
+      }, "-=0.4");
     });
 
     // Forced delay logic on Window Load
@@ -559,18 +573,17 @@
           });
           
           exitTl.to('#loader-logo-wrap', {
-            scale: 0.95,
+            scale: 0.92,
             opacity: 0,
-            duration: 0.4,
+            duration: 0.35,
             ease: 'power2.in'
           });
           
           exitTl.to(preloader, {
             yPercent: -100,
-            opacity: 0,
-            duration: 0.7,
+            duration: 0.65,
             ease: 'power3.inOut'
-          }, "-=0.2");
+          }, "-=0.15");
         } else {
           finishLoading();
         }
@@ -579,7 +592,7 @@
 
     function finishLoading() {
       if (preloader) {
-        preloader.style.opacity = '0';
+        preloader.style.transition = 'transform 0.65s cubic-bezier(0.77, 0, 0.175, 1)';
         preloader.style.transform = 'translateY(-100%)';
         setTimeout(() => {
           preloader.style.display = 'none';

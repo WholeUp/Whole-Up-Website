@@ -226,13 +226,13 @@
         <polygon points="712,165 850,106 868,255 790,210" 
                  fill="url(#green-loader-grad)"
                  id="loader-arrow-head" 
-                 style="transform: scale(0); transform-origin: 790px 210px;" />
+                 style="opacity: 0;" />
 
         <!-- Single Sparkle Star (Top Right) -->
         <path d="M 950 15 Q 950 50 985 50 Q 950 50 950 85 Q 950 50 915 50 Q 950 50 950 15" 
               fill="#55C235" 
               id="loader-star" 
-              style="transform: scale(0); transform-origin: 950px 50px;" />
+              style="opacity: 0;" />
       </svg>
     </div>
   </div>
@@ -519,6 +519,10 @@
         return;
       }
 
+      // Cross-browser safe initialization of scale and origin
+      gsap.set('#loader-arrow-head', { scale: 0, transformOrigin: '790px 210px', opacity: 1 });
+      gsap.set('#loader-star', { scale: 0, transformOrigin: '950px 50px', opacity: 1 });
+
       const tl = gsap.timeline({
         onComplete: () => {
           // Wait exactly 400ms after the W completes, then start the exit transition!
@@ -526,26 +530,26 @@
         }
       });
       
-      // 1. Draw Left Black Wing
+      // 1. Draw Left Black Wing (starts immediately and completes)
       tl.to('#loader-left-wing', {
         strokeDashoffset: 0,
-        duration: 0.8,
+        duration: 0.9,
         ease: 'power2.out'
       });
       
-      // 2. Draw Right Green Wing (starts slightly before left wing finishes)
+      // 2. Draw Right Green Wing (starts exactly after left wing completes)
       tl.to('#loader-right-wing', {
         strokeDashoffset: 0,
-        duration: 0.8,
+        duration: 0.9,
         ease: 'power2.out'
-      }, "-=0.35");
+      });
       
-      // 3. Arrowhead Pop In, Scale Up & Bounce
+      // 3. Arrowhead Pop In, Scale Up & Bounce (starts exactly at the end of green wing)
       tl.to('#loader-arrow-head', {
         scale: 1,
         duration: 0.5,
         ease: 'back.out(2.5)'
-      }, "-=0.1");
+      }, "-=0.05");
 
       // 4. Sparkle Star Pop In, Spin/Scale and Shine
       tl.to('#loader-star', {
@@ -553,7 +557,7 @@
         rotation: 45,
         duration: 0.5,
         ease: 'back.out(2.2)'
-      }, "-=0.2");
+      }, "-=0.25");
     });
 
     function startExit() {

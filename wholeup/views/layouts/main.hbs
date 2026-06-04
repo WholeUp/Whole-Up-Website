@@ -519,7 +519,12 @@
         return;
       }
 
-      const tl = gsap.timeline();
+      const tl = gsap.timeline({
+        onComplete: () => {
+          // Wait exactly 400ms after the W completes, then start the exit transition!
+          setTimeout(startExit, 400);
+        }
+      });
       
       // 1. Draw Left Black Wing
       tl.to('#loader-left-wing', {
@@ -551,59 +556,50 @@
       }, "-=0.2");
     });
 
-    // Forced delay logic on Window Load
-    const startTime = Date.now();
-    const totalAnimationTime = 2200; // Force exactly 2.2 seconds of animation
-
-    window.addEventListener('load', () => {
-      const elapsed = Date.now() - startTime;
-      const remaining = Math.max(0, totalAnimationTime - elapsed);
-      
-      setTimeout(() => {
-        if (typeof gsap !== 'undefined' && preloader) {
-          const exitTl = gsap.timeline({
-            onComplete: () => {
-              preloader.style.display = 'none';
-              document.body.style.overflow = '';
-              if (typeof lenis !== 'undefined' && lenis) {
-                lenis.start();
-              }
-              if (typeof ScrollTrigger !== 'undefined') {
-                ScrollTrigger.refresh();
-              }
+    function startExit() {
+      if (typeof gsap !== 'undefined' && preloader) {
+        const exitTl = gsap.timeline({
+          onComplete: () => {
+            preloader.style.display = 'none';
+            document.body.style.overflow = '';
+            if (typeof lenis !== 'undefined' && lenis) {
+              lenis.start();
             }
-          });
-          
-          // Parallax logo exit (slides up slightly faster & fades out)
-          exitTl.to('#loader-logo-wrap', {
-            y: -100,
-            opacity: 0,
-            duration: 0.55,
-            ease: 'power2.in'
-          });
-          
-          // Premium curtain slide-up
-          exitTl.to(preloader, {
-            yPercent: -100,
-            duration: 0.85,
-            ease: 'power4.inOut'
-          }, "-=0.4");
+            if (typeof ScrollTrigger !== 'undefined') {
+              ScrollTrigger.refresh();
+            }
+          }
+        });
+        
+        // Parallax logo exit (slides up slightly faster & fades out)
+        exitTl.to('#loader-logo-wrap', {
+          y: -100,
+          opacity: 0,
+          duration: 0.45,
+          ease: 'power2.in'
+        });
+        
+        // Premium curtain slide-up
+        exitTl.to(preloader, {
+          yPercent: -100,
+          duration: 0.75,
+          ease: 'power4.inOut'
+        }, "-=0.3");
 
-          // Premium parallax page reveal (fades and rises up dynamically)
-          exitTl.fromTo('main', {
-            y: 40,
-            opacity: 0
-          }, {
-            y: 0,
-            opacity: 1,
-            duration: 0.8,
-            ease: 'power3.out'
-          }, "-=0.6");
-        } else {
-          finishLoading();
-        }
-      }, remaining);
-    });
+        // Premium parallax page reveal (fades and rises up dynamically)
+        exitTl.fromTo('main', {
+          y: 40,
+          opacity: 0
+        }, {
+          y: 0,
+          opacity: 1,
+          duration: 0.75,
+          ease: 'power3.out'
+        }, "-=0.55");
+      } else {
+        finishLoading();
+      }
+    }
 
     function finishLoading() {
       if (preloader) {

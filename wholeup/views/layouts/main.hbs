@@ -353,9 +353,26 @@
           }
         );
       });
+
+      // Staggered cascade reveal for grids
+      gsap.utils.toArray('.gs-stagger-parent').forEach((parent) => {
+        const children = parent.querySelectorAll('.gs-stagger-item');
+        gsap.fromTo(children,
+          { y: 45, opacity: 0, scale: 0.96 },
+          { 
+            y: 0, 
+            opacity: 1, 
+            scale: 1, 
+            duration: 0.85, 
+            stagger: 0.08,
+            ease: 'power3.out',
+            scrollTrigger: { trigger: parent, start: 'top 85%', once: true }
+          }
+        );
+      });
     } else {
       // Fallback: make all reveals visible immediately
-      document.querySelectorAll('.gs-reveal').forEach(el => {
+      document.querySelectorAll('.gs-reveal, .gs-stagger-item').forEach(el => {
         el.style.opacity = '1';
         el.style.transform = 'none';
       });
@@ -363,7 +380,7 @@
   } catch (e) {
     console.warn('GSAP/ScrollTrigger initialization failed:', e);
     // Fallback: make all reveals visible immediately
-    document.querySelectorAll('.gs-reveal').forEach(el => {
+    document.querySelectorAll('.gs-reveal, .gs-stagger-item').forEach(el => {
       el.style.opacity = '1';
       el.style.transform = 'none';
     });

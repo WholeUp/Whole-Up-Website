@@ -1,32 +1,33 @@
 <!-- HERO -->
-<section class="page-hero bg-cream px-6 border-b border-black/5">
-  <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-16 items-center">
+<section class="page-hero bg-cream px-6 border-b border-black/5 relative overflow-hidden">
+  <div class="absolute inset-0 opacity-10 bg-grid pointer-events-none"></div>
+  <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-16 items-center relative z-10">
     <div class="gs-reveal">
       <p class="text-xs font-bold tracking-[0.3em] uppercase text-primary mb-4">Who We Are</p>
-      <h1 class="text-5xl md:text-6xl font-black uppercase tracking-widest text-dark mb-6">The Agency <br><span class="text-primary">Behind Your Growth.</span></h1>
+      <h1 class="text-5xl md:text-6xl font-black uppercase tracking-widest text-dark mb-6 leading-tight">The Agency <br><span class="text-primary text-gradient">Behind Your Growth.</span></h1>
       <p class="text-dark/70 text-lg font-medium leading-relaxed mb-8">Wholeup is a results-driven digital marketing agency built by marketers who were tired of agencies that promised the world and delivered excuses. We exist to deliver real, measurable growth.</p>
-      <a href="/contact" class="inline-flex items-center gap-2 bg-primary text-white px-8 py-4 rounded-xl font-bold uppercase tracking-widest text-sm shadow-lg shadow-primary/30 hover:bg-green-600 transition magnetic-btn">
-        Work With Us <i class="fas fa-arrow-right"></i>
+      <a href="/contact" class="inline-flex items-center gap-2 bg-primary text-white px-8 py-4 rounded-xl font-bold uppercase tracking-widest text-sm shadow-lg shadow-primary/30 hover:bg-green-600 hover:-translate-y-0.5 transition-all magnetic-btn">
+        Work With Us <i class="fas fa-arrow-right animate-pulse"></i>
       </a>
     </div>
     <div class="gs-reveal">
-      <div class="glass-card p-10 rounded-[40px] border-t-4 border-t-primary" data-tilt data-tilt-max="4">
+      <div class="glass-card p-10 rounded-[40px] border-t-4 border-t-primary" data-tilt data-tilt-max="3">
         <div class="grid grid-cols-2 gap-6">
-          <div class="text-center p-6 bg-cream rounded-2xl">
-            <div class="text-4xl font-black text-primary mb-2">150+</div>
-            <div class="text-xs font-bold uppercase tracking-widest text-dark/50">Clients</div>
+          <div class="text-center p-6 bg-cream rounded-2xl stat-card">
+            <div class="text-4xl font-black text-primary mb-2 count-stat" data-val="150">0</div>
+            <div class="text-xs font-bold uppercase tracking-widest text-dark/50">Clients Served</div>
           </div>
-          <div class="text-center p-6 bg-cream rounded-2xl">
-            <div class="text-4xl font-black text-primary mb-2">78%</div>
-            <div class="text-xs font-bold uppercase tracking-widest text-dark/50">Retention</div>
+          <div class="text-center p-6 bg-cream rounded-2xl stat-card">
+            <div class="text-4xl font-black text-primary mb-2 count-stat" data-val="78">0</div>
+            <div class="text-xs font-bold uppercase tracking-widest text-dark/50">Retention Rate %</div>
           </div>
-          <div class="text-center p-6 bg-cream rounded-2xl">
-            <div class="text-4xl font-black text-primary mb-2">4.8x</div>
+          <div class="text-center p-6 bg-cream rounded-2xl stat-card">
+            <div class="text-4xl font-black text-primary mb-2 count-stat" data-val="4.8">0</div>
             <div class="text-xs font-bold uppercase tracking-widest text-dark/50">Avg. ROAS</div>
           </div>
-          <div class="text-center p-6 bg-cream rounded-2xl">
-            <div class="text-4xl font-black text-primary mb-2">3yrs</div>
-            <div class="text-xs font-bold uppercase tracking-widest text-dark/50">Experience</div>
+          <div class="text-center p-6 bg-cream rounded-2xl stat-card">
+            <div class="text-4xl font-black text-primary mb-2 count-stat" data-val="3">0</div>
+            <div class="text-xs font-bold uppercase tracking-widest text-dark/50">Years Exp</div>
           </div>
         </div>
       </div>
@@ -34,13 +35,31 @@
   </div>
 </section>
 
-<!-- STORY -->
+<!-- STORY / VISION -->
 <section class="py-24 bg-white px-6">
-  <div class="max-w-4xl mx-auto text-center">
-    <p class="text-xs font-bold tracking-[0.3em] uppercase text-primary mb-4 gs-reveal">Our Story</p>
-    <h2 class="text-4xl md:text-5xl font-black uppercase tracking-widest text-dark mb-8 gs-reveal">Scale by Data, <br>Lead by Design.</h2>
-    <p class="text-dark/70 text-lg font-medium leading-relaxed mb-6 gs-reveal">We started Wholeup after seeing too many good businesses lose money to agencies that didn't understand performance marketing. Our founding principle: every strategy must be tied to a measurable outcome.</p>
-    <p class="text-dark/70 text-lg font-medium leading-relaxed gs-reveal">Today, we manage digital marketing for businesses across India, the US, UK, and Australia — from D2C startups to established enterprises generating crores in revenue.</p>
+  <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-16 items-center">
+    <div class="gs-reveal order-2 md:order-1">
+      <div class="relative">
+        <div class="absolute -top-6 -left-6 w-12 h-12 text-primary/15 text-7xl font-serif">“</div>
+        <div class="glass-card p-10 rounded-[32px] border border-black/5 bg-[#FBF9F3]">
+          <h4 class="text-xl font-bold uppercase tracking-wider text-dark mb-4">Our Philosophy</h4>
+          <p class="text-dark/70 font-medium leading-relaxed mb-6">"Most agencies measure success in clicks, impressions, and 'branding points.' We measure success in closed revenue, client retention, and ROI. If it doesn't move the bottom line, it doesn't matter."</p>
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-white font-extrabold text-xs">WU</div>
+            <div>
+              <p class="text-xs font-bold uppercase tracking-wider text-dark">Wholeup Founder Team</p>
+              <p class="text-[10px] text-gray-400 font-bold uppercase">Result-Driven Marketers</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="gs-reveal order-1 md:order-2">
+      <p class="text-xs font-bold tracking-[0.3em] uppercase text-primary mb-4">Our Story</p>
+      <h2 class="text-4xl md:text-5xl font-black uppercase tracking-widest text-dark mb-6">Scale by Data, <br>Lead by Design.</h2>
+      <p class="text-dark/70 text-lg font-medium leading-relaxed mb-6">We started Wholeup after seeing too many good businesses lose money to agencies that didn't understand performance marketing. Our founding principle: every strategy must be tied to a measurable outcome.</p>
+      <p class="text-dark/70 text-lg font-medium leading-relaxed">Today, we manage digital marketing for businesses across India, the US, UK, and Australia — from D2C startups to established enterprises generating crores in revenue.</p>
+    </div>
   </div>
 </section>
 
@@ -51,19 +70,19 @@
       <p class="text-xs font-bold tracking-[0.3em] uppercase text-primary mb-4">What Drives Us</p>
       <h2 class="text-4xl md:text-5xl font-black uppercase tracking-widest text-dark">Our Values.</h2>
     </div>
-    <div class="grid md:grid-cols-3 gap-8">
-      <div class="glass-card p-10 rounded-[32px] gs-reveal text-center" data-tilt data-tilt-max="4">
-        <div class="w-16 h-16 bg-primary/10 rounded-2xl flex items-center justify-center text-primary text-2xl mx-auto mb-6"><i class="fas fa-chart-bar"></i></div>
+    <div class="grid md:grid-cols-3 gap-8 gs-stagger-parent">
+      <div class="glass-card glass-card-glow p-10 rounded-[32px] gs-stagger-item text-center" data-tilt data-tilt-max="4" style="--hover-glow: #16A34A;">
+        <div class="w-16 h-16 bg-primary/10 rounded-2xl flex items-center justify-center text-primary text-2xl mx-auto mb-6 value-icon"><i class="fas fa-chart-bar"></i></div>
         <h3 class="text-xl font-black uppercase tracking-wider text-dark mb-4">Data First</h3>
         <p class="text-dark/60 font-medium leading-relaxed">Every decision is backed by data. No guessing. No gut feelings. Just numbers that tell us what works — and what doesn't.</p>
       </div>
-      <div class="glass-card p-10 rounded-[32px] gs-reveal text-center" data-tilt data-tilt-max="4">
-        <div class="w-16 h-16 bg-primary/10 rounded-2xl flex items-center justify-center text-primary text-2xl mx-auto mb-6"><i class="fas fa-handshake"></i></div>
+      <div class="glass-card glass-card-glow p-10 rounded-[32px] gs-stagger-item text-center" data-tilt data-tilt-max="4" style="--hover-glow: #2563EB;">
+        <div class="w-16 h-16 bg-blue-600/10 rounded-2xl flex items-center justify-center text-blue-600 text-2xl mx-auto mb-6 value-icon"><i class="fas fa-handshake"></i></div>
         <h3 class="text-xl font-black uppercase tracking-wider text-dark mb-4">Radical Transparency</h3>
         <p class="text-dark/60 font-medium leading-relaxed">You see exactly what we're doing, why we're doing it, and what results it's producing. No black boxes, no smoke and mirrors.</p>
       </div>
-      <div class="glass-card p-10 rounded-[32px] gs-reveal text-center" data-tilt data-tilt-max="4">
-        <div class="w-16 h-16 bg-primary/10 rounded-2xl flex items-center justify-center text-primary text-2xl mx-auto mb-6"><i class="fas fa-trophy"></i></div>
+      <div class="glass-card glass-card-glow p-10 rounded-[32px] gs-stagger-item text-center" data-tilt data-tilt-max="4" style="--hover-glow: #EC4899;">
+        <div class="w-16 h-16 bg-pink-600/10 rounded-2xl flex items-center justify-center text-pink-600 text-2xl mx-auto mb-6 value-icon"><i class="fas fa-trophy"></i></div>
         <h3 class="text-xl font-black uppercase tracking-wider text-dark mb-4">Results or Nothing</h3>
         <p class="text-dark/60 font-medium leading-relaxed">We don't celebrate activity. We celebrate outcomes. If a campaign isn't working, we fix it — not explain it away.</p>
       </div>
@@ -71,12 +90,100 @@
   </div>
 </section>
 
-<!-- WHY US -->
+<!-- METHODOLOGY / WORKFLOW -->
+<section class="py-24 bg-white px-6">
+  <div class="max-w-7xl mx-auto">
+    <div class="text-center mb-16 gs-reveal">
+      <p class="text-xs font-bold tracking-[0.3em] uppercase text-primary mb-4">How We Operate</p>
+      <h2 class="text-4xl md:text-5xl font-black uppercase tracking-widest text-dark">Our Methodology.</h2>
+    </div>
+    
+    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-8 gs-stagger-parent">
+      <div class="glass-card p-8 rounded-[28px] gs-stagger-item border-l-4 border-l-green-600 flex flex-col justify-between" style="--hover-glow: #16A34A;">
+        <div>
+          <div class="text-xs font-black text-primary uppercase tracking-widest mb-3">Phase 01</div>
+          <h4 class="text-lg font-black uppercase tracking-wider text-dark mb-3">Audit & Discovery</h4>
+          <p class="text-dark/60 text-xs font-medium leading-relaxed">We audit your entire sales funnel, website speed, current ad accounts, and competitor keywords to find instant gaps.</p>
+        </div>
+        <div class="mt-6 text-[10px] font-bold text-gray-400 uppercase">Duration: Days 1 - 5</div>
+      </div>
+      
+      <div class="glass-card p-8 rounded-[28px] gs-stagger-item border-l-4 border-l-blue-600 flex flex-col justify-between" style="--hover-glow: #2563EB;">
+        <div>
+          <div class="text-xs font-black text-blue-600 uppercase tracking-widest mb-3">Phase 02</div>
+          <h4 class="text-lg font-black uppercase tracking-wider text-dark mb-3">Strategy & Launch</h4>
+          <p class="text-dark/60 text-xs font-medium leading-relaxed">We set up conversion APIs, tracking pixels, design custom landing pages, and launch highly optimized target campaigns.</p>
+        </div>
+        <div class="mt-6 text-[10px] font-bold text-gray-400 uppercase">Duration: Days 5 - 12</div>
+      </div>
+      
+      <div class="glass-card p-8 rounded-[28px] gs-stagger-item border-l-4 border-l-yellow-600 flex flex-col justify-between" style="--hover-glow: #EAB308;">
+        <div>
+          <div class="text-xs font-black text-yellow-600 uppercase tracking-widest mb-3">Phase 03</div>
+          <h4 class="text-lg font-black uppercase tracking-wider text-dark mb-3">A/B Testing</h4>
+          <p class="text-dark/60 text-xs font-medium leading-relaxed">We monitor lead quality, test ad copy hooks, test visual variations, and adjust daily spends to lower CPL and maximize ROAS.</p>
+        </div>
+        <div class="mt-6 text-[10px] font-bold text-gray-400 uppercase">Duration: Ongoing</div>
+      </div>
+      
+      <div class="glass-card p-8 rounded-[28px] gs-stagger-item border-l-4 border-l-purple-600 flex flex-col justify-between" style="--hover-glow: #9333EA;">
+        <div>
+          <div class="text-xs font-black text-purple-600 uppercase tracking-widest mb-3">Phase 04</div>
+          <h4 class="text-lg font-black uppercase tracking-wider text-dark mb-3">Scale & Repeat</h4>
+          <p class="text-dark/60 text-xs font-medium leading-relaxed">Once a profitable acquisition funnel is validated, we double down on budgets to scale leads and e-commerce orders.</p>
+        </div>
+        <div class="mt-6 text-[10px] font-bold text-gray-400 uppercase">Duration: Long Term</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LEADERSHIP / SPECIALISTS -->
+<section class="py-24 bg-cream px-6 border-t border-b border-black/5">
+  <div class="max-w-7xl mx-auto">
+    <div class="text-center mb-16 gs-reveal">
+      <p class="text-xs font-bold tracking-[0.3em] uppercase text-primary mb-4">Experts in Action</p>
+      <h2 class="text-4xl md:text-5xl font-black uppercase tracking-widest text-dark">Specialist Roles.</h2>
+    </div>
+    
+    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-8 gs-stagger-parent">
+      <div class="glass-card glass-card-glow p-8 rounded-[28px] gs-stagger-item text-center" style="--hover-glow: #16A34A;">
+        <div class="w-16 h-16 rounded-full bg-cream border border-black/5 flex items-center justify-center text-primary text-xl mx-auto mb-6"><i class="fas fa-search"></i></div>
+        <h4 class="text-lg font-black uppercase text-dark mb-1">SEO Strategist</h4>
+        <p class="text-xs font-bold text-primary mb-4 uppercase tracking-widest">Rankings Expert</p>
+        <p class="text-dark/60 text-xs font-medium leading-relaxed">Focuses on technical structure audits, Google search ranking algorithms, backlinks, and organic brand visibility.</p>
+      </div>
+      
+      <div class="glass-card glass-card-glow p-8 rounded-[28px] gs-stagger-item text-center" style="--hover-glow: #2563EB;">
+        <div class="w-16 h-16 rounded-full bg-cream border border-black/5 flex items-center justify-center text-blue-600 text-xl mx-auto mb-6"><i class="fab fa-facebook"></i></div>
+        <h4 class="text-lg font-black uppercase text-dark mb-1">Campaign Director</h4>
+        <p class="text-xs font-bold text-blue-600 mb-4 uppercase tracking-widest">Paid Ads Specialist</p>
+        <p class="text-dark/60 text-xs font-medium leading-relaxed">Specializes in ROAS scaling, meta dynamic creatives, audience setups, conversion tracking API, and lower CPL.</p>
+      </div>
+      
+      <div class="glass-card glass-card-glow p-8 rounded-[28px] gs-stagger-item text-center" style="--hover-glow: #EC4899;">
+        <div class="w-16 h-16 rounded-full bg-cream border border-black/5 flex items-center justify-center text-pink-600 text-xl mx-auto mb-6"><i class="fas fa-video"></i></div>
+        <h4 class="text-lg font-black uppercase text-dark mb-1">Creative Director</h4>
+        <p class="text-xs font-bold text-pink-600 mb-4 uppercase tracking-widest">Reels & Design Lead</p>
+        <p class="text-dark/60 text-xs font-medium leading-relaxed">Designs high-CTR thumbnails, script viral reels hook frameworks, visual branding, and visual marketing creatives.</p>
+      </div>
+      
+      <div class="glass-card glass-card-glow p-8 rounded-[28px] gs-stagger-item text-center" style="--hover-glow: #EAB308;">
+        <div class="w-16 h-16 rounded-full bg-cream border border-black/5 flex items-center justify-center text-yellow-600 text-xl mx-auto mb-6"><i class="fas fa-laptop-code"></i></div>
+        <h4 class="text-lg font-black uppercase text-dark mb-1">Web Dev Lead</h4>
+        <p class="text-xs font-bold text-yellow-600 mb-4 uppercase tracking-widest">UI/UX & Speed Specialist</p>
+        <p class="text-dark/60 text-xs font-medium leading-relaxed">Builds high-performance landing pages, custom CRM integrations, automated operations, and smooth GSAP layouts.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY US / CTA -->
 <section class="py-24 bg-dark text-white px-6">
   <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-16 items-center">
     <div class="gs-reveal">
       <p class="text-xs font-bold tracking-[0.3em] uppercase text-primary mb-4">Why Wholeup?</p>
-      <h2 class="text-4xl font-black uppercase tracking-widest mb-8">What Makes Us <span class="text-primary">Different.</span></h2>
+      <h2 class="text-4xl font-black uppercase tracking-widest mb-8">What Makes Us <span class="text-primary text-gradient">Different.</span></h2>
       <div class="space-y-6">
         <div class="flex items-start gap-4">
           <div class="w-10 h-10 rounded-xl bg-primary/20 flex items-center justify-center text-primary flex-shrink-0 mt-1"><i class="fas fa-check"></i></div>
@@ -109,12 +216,75 @@
       </div>
     </div>
     <div class="gs-reveal">
-      <div class="bg-white/5 border border-white/10 rounded-[32px] p-10">
+      <div class="bg-white/5 border border-white/10 rounded-[32px] p-10 relative">
         <h3 class="text-2xl font-black uppercase tracking-widest mb-8">Ready to Start?</h3>
         <p class="text-white/60 font-medium mb-8 leading-relaxed">Book a free 30-minute strategy call. We'll review your current marketing, identify your biggest growth opportunities, and give you a roadmap — no strings attached.</p>
-        <a href="/contact" class="block bg-primary text-white text-center py-5 rounded-xl font-black uppercase tracking-widest text-sm hover:bg-green-500 transition mb-4 magnetic-btn">Book Free Strategy Call</a>
+        <a href="/contact" class="block bg-primary text-white text-center py-5 rounded-xl font-black uppercase tracking-widest text-sm hover:bg-green-500 transition mb-4 magnetic-btn shadow-[0_4px_20px_rgba(22,163,74,0.3)]">Book Free Strategy Call</a>
         <a href="/pricing" class="block border border-white/20 text-white text-center py-5 rounded-xl font-bold uppercase tracking-widest text-sm hover:bg-white/10 transition magnetic-btn">View Pricing Plans</a>
       </div>
     </div>
   </div>
 </section>
+
+<!-- CSS Glow Details & Animation Script -->
+<style>
+  .gs-stagger-item {
+    opacity: 0;
+  }
+  .glass-card-glow {
+    position: relative;
+    transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  }
+  .glass-card-glow:hover {
+    transform: translateY(-8px) scale(1.01) !important;
+    box-shadow: 0 30px 60px -15px rgba(0, 0, 0, 0.12), 0 0 40px -5px color-mix(in srgb, var(--hover-glow) 25%, transparent) !important;
+    border-color: var(--hover-glow) !important;
+    background: rgba(255, 255, 255, 0.98);
+  }
+  .glass-card-glow:hover .value-icon {
+    transform: scale(1.12) rotate(6deg);
+    box-shadow: 0 10px 24px -6px color-mix(in srgb, var(--hover-glow) 40%, transparent);
+  }
+  .value-icon {
+    transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+</style>
+
+<script>
+  // Dynamic Stats Counting Animation
+  window.addEventListener('DOMContentLoaded', () => {
+    // GSAP ScrollTrigger to count stats when in view
+    if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+      const stats = document.querySelectorAll('.count-stat');
+      stats.forEach(stat => {
+        const val = parseFloat(stat.getAttribute('data-val'));
+        const isDecimal = val % 1 !== 0;
+        const targetObj = { value: 0 };
+        
+        gsap.to(targetObj, {
+          value: val,
+          duration: 2.2,
+          ease: 'power2.out',
+          scrollTrigger: {
+            trigger: stat,
+            start: 'top 90%',
+            once: true
+          },
+          onUpdate: () => {
+            if (isDecimal) {
+              stat.textContent = targetObj.value.toFixed(1) + 'x';
+            } else {
+              stat.textContent = Math.floor(targetObj.value) + (val === 3 ? 'yrs' : (val === 78 ? '%' : '+'));
+            }
+          }
+        });
+      });
+    } else {
+      // Fallback
+      document.querySelectorAll('.count-stat').forEach(stat => {
+        const val = stat.getAttribute('data-val');
+        stat.textContent = val + (val.includes('.') ? 'x' : (val === '3' ? 'yrs' : (val === '78' ? '%' : '+')));
+      });
+    }
+  });
+</script>

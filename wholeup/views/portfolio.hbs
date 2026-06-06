@@ -1,23 +1,23 @@
-<!-- CUSTOM INLINE STYLES FOR THE PORTFOLIO PAGE -->
+<!-- CUSTOM INLINE STYLES FOR THE LIGHT THEME PORTFOLIO PAGE -->
 <style>
-  /* Dark Mode & Accent Variables */
+  /* Light Theme Variables */
   .portfolio-section {
-    background-color: #080c14;
-    color: #ffffff;
+    background-color: transparent;
+    color: #0d0d0d;
   }
   
   .portfolio-card {
     --card-accent: var(--theme-color, #16A34A);
-    background: rgba(13, 17, 26, 0.8);
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    background: rgba(255, 255, 255, 0.85);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.03);
     transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
   }
   
   .portfolio-card:hover {
     transform: translateY(-8px);
     border-color: color-mix(in srgb, var(--card-accent) 40%, transparent);
-    box-shadow: 0 20px 40px color-mix(in srgb, var(--card-accent) 15%, transparent);
+    box-shadow: 0 16px 32px color-mix(in srgb, var(--card-accent) 8%, transparent);
   }
 
   .portfolio-card::after {
@@ -26,22 +26,21 @@
     inset: 0;
     border-radius: 24px;
     padding: 1px;
-    background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.01) 50%, color-mix(in srgb, var(--card-accent) 50%, transparent) 100%);
+    background: linear-gradient(135deg, rgba(0,0,0,0.04) 0%, rgba(0,0,0,0.01) 50%, color-mix(in srgb, var(--card-accent) 40%, transparent) 100%);
     -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
     -webkit-mask-composite: xor;
     mask-composite: exclude;
     pointer-events: none;
   }
 
-  /* Ambient Blur Blobs */
+  /* Soft Light Theme Blur Blobs */
   .blur-blob {
     position: absolute;
     border-radius: 50%;
     filter: blur(140px);
-    opacity: 0.15;
+    opacity: 0.09;
     pointer-events: none;
     z-index: 0;
-    mix-blend-mode: screen;
   }
 
   .blob-1 {
@@ -72,11 +71,11 @@
     animation: float1 18s infinite alternate-reverse;
   }
 
-  /* Customized Tabs Selector */
+  /* Light Theme Tab Selector */
   #filter-tabs {
     position: relative;
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    background: rgba(13, 17, 26, 0.6);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    background: rgba(255, 255, 255, 0.7);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
     border-radius: 20px;
@@ -94,7 +93,7 @@
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.08em;
-    color: rgba(255, 255, 255, 0.6);
+    color: rgba(13, 13, 13, 0.5);
     background: transparent;
     border: none;
     cursor: pointer;
@@ -114,7 +113,7 @@
     background: linear-gradient(135deg, #16A34A 0%, #15803D 100%);
     border-radius: 14px;
     z-index: 1;
-    box-shadow: 0 4px 12px rgba(22, 163, 74, 0.3);
+    box-shadow: 0 4px 12px rgba(22, 163, 74, 0.2);
   }
 
   /* Mock Browser Custom Scroll */
@@ -122,40 +121,40 @@
     width: 4px;
   }
   .mock-browser-scroll::-webkit-scrollbar-track {
-    background: rgba(255, 255, 255, 0.02);
+    background: rgba(0, 0, 0, 0.02);
   }
   .mock-browser-scroll::-webkit-scrollbar-thumb {
-    background: rgba(255, 255, 255, 0.15);
+    background: rgba(0, 0, 0, 0.1);
     border-radius: 2px;
   }
 </style>
 
-<!-- IMMERSIVE HERO -->
-<section class="relative overflow-hidden pt-36 pb-20 portfolio-section px-6 border-b border-white/5">
-  <!-- Blur circles for dynamic ambient illumination -->
+<!-- IMMERSIVE LIGHT HERO -->
+<section class="relative overflow-hidden pt-36 pb-20 px-6 border-b border-black/5">
+  <!-- Soft blur blobs for ambient lighting -->
   <div class="blur-blob blob-1"></div>
   <div class="blur-blob blob-2"></div>
   <div class="blur-blob blob-3"></div>
 
-  <!-- Space Background Grid Overlay -->
-  <div class="absolute inset-0 bg-grid opacity-[0.03] pointer-events-none"></div>
+  <!-- Space Background Grid Overlay (Uses existing light grid) -->
+  <div class="absolute inset-0 bg-grid opacity-[0.4] pointer-events-none"></div>
 
   <div class="max-w-7xl mx-auto text-center relative z-10 gs-reveal">
     <p class="text-xs font-bold tracking-[0.3em] uppercase text-primary mb-4 animate-pulse">Our Innovations & Case Studies</p>
-    <h1 class="text-5xl md:text-8xl font-black uppercase tracking-wider text-white mb-6">
+    <h1 class="text-5xl md:text-8xl font-black uppercase tracking-wider text-dark mb-6">
       Our <span class="text-gradient">Impact.</span>
     </h1>
-    <p class="text-white/60 font-medium text-lg md:text-xl max-w-3xl mx-auto leading-relaxed">
+    <p class="text-dark/60 font-medium text-lg md:text-xl max-w-3xl mx-auto leading-relaxed">
       Browse our digital flagship products, interactive landing page architectures, and conversion-optimized performance reports.
     </p>
   </div>
 </section>
 
 <!-- MAIN PORTFOLIO CONTENT -->
-<section class="py-24 portfolio-section relative px-6">
+<section class="py-24 relative px-6">
   <div class="max-w-7xl mx-auto relative z-10">
     
-    <!-- Premium Slider Navigation Tabs -->
+    <!-- Slider Navigation Tabs -->
     <div class="flex justify-center mb-16 gs-reveal">
       <div id="filter-tabs" class="p-1.5 flex flex-wrap justify-center relative">
         <div id="filter-pill"></div>
@@ -176,7 +175,7 @@
            style="--theme-color: {{tagColor}};"
            onclick="openCaseModal({{id}})">
         
-        <!-- Premium Visual Header -->
+        <!-- Visual Header -->
         <div class="h-52 flex items-center justify-center relative overflow-hidden flex-shrink-0" style="background: linear-gradient(135deg, {{gradientFrom}} 0%, {{gradientTo}} 100%)">
           <!-- Ambient glowing mesh inside card header -->
           <div class="absolute inset-0 opacity-20 bg-cover bg-center" style="background-image: radial-gradient(circle at 30% 30%, {{tagColor}} 0%, transparent 60%);"></div>
@@ -185,31 +184,31 @@
             <div class="w-16 h-16 bg-white/10 border border-white/10 backdrop-blur-md rounded-2xl shadow-xl flex items-center justify-center mb-4 transition-transform duration-500 group-hover:scale-110 group-hover:rotate-3 anim-float-1">
               <i class="{{icon}} text-2xl text-white" style="text-shadow: 0 0 10px {{tagColor}};"></i>
             </div>
-            <p class="text-[9px] font-black tracking-[0.2em] uppercase text-white/50 bg-black/20 px-3 py-1 rounded-full border border-white/5">{{categoryLabel}}</p>
+            <p class="text-[9px] font-black tracking-[0.2em] uppercase text-white/60 bg-black/20 px-3 py-1 rounded-full border border-white/5">{{categoryLabel}}</p>
           </div>
           
           <!-- Category Indicator pill top right -->
-          <div class="absolute top-4 right-4 text-white text-[9px] font-extrabold uppercase tracking-widest px-3 py-1.5 rounded-full backdrop-blur-md border border-white/10 bg-white/5 shadow-md">
+          <div class="absolute top-4 right-4 text-white text-[9px] font-extrabold uppercase tracking-widest px-3 py-1.5 rounded-full backdrop-blur-md border border-white/10 bg-black/20 shadow-md">
             {{categoryLabel}}
           </div>
         </div>
 
         <!-- Card Body -->
         <div class="p-6 flex flex-col flex-1 relative z-10">
-          <h3 class="text-xl font-black uppercase tracking-wide text-white mb-3 group-hover:text-primary transition-colors duration-300">{{title}}</h3>
-          <p class="text-white/60 text-xs font-normal leading-relaxed mb-6 flex-1">{{description}}</p>
+          <h3 class="text-xl font-black uppercase tracking-wide text-dark mb-3 group-hover:text-primary transition-colors duration-300">{{title}}</h3>
+          <p class="text-dark/60 text-xs font-normal leading-relaxed mb-6 flex-1">{{description}}</p>
 
           <!-- Featured Metric Badges -->
           <div class="flex items-center gap-2 text-xs font-semibold mt-auto">
             <span class="px-4 py-2 rounded-xl text-white font-extrabold flex items-center gap-1.5 border border-white/5" style="background: {{tagBg}}; color: {{tagColor}}">
-              <span class="w-2 h-2 rounded-full animate-ping" style="background: {{tagColor}}"></span>
+              <span class="w-2.5 h-2.5 rounded-full animate-ping" style="background: {{tagColor}}"></span>
               {{metric1}}
             </span>
-            <span class="px-4 py-2 rounded-xl bg-white/5 border border-white/5 text-white/80 font-bold">{{metric2}}</span>
+            <span class="px-4 py-2 rounded-xl bg-dark/5 border border-black/5 text-dark/80 font-bold">{{metric2}}</span>
           </div>
         </div>
 
-        <!-- Slide-in Action Hover Overlay -->
+        <!-- Slide-in Action Hover Overlay (Stays high-contrast dark for details focus) -->
         <div class="absolute inset-0 bg-dark/95 flex flex-col justify-between p-6 opacity-0 translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 rounded-[24px] z-20 border border-white/10">
           <div class="text-center pt-8">
             <div class="w-12 h-12 rounded-full border border-white/15 bg-white/5 flex items-center justify-center mx-auto mb-4">
@@ -240,12 +239,12 @@
   </div>
 </section>
 
-<!-- IMMERSIVE MODAL DRAWER FOR DETAILS -->
-<div id="case-modal" class="fixed inset-0 z-[99999] bg-black/90 backdrop-blur-xl flex items-center justify-center p-4 md:p-8 opacity-0 pointer-events-none transition-all duration-500" onclick="closeCaseModal(event)">
-  <div class="relative bg-[#0d111a] border border-white/10 rounded-[32px] w-full max-w-5xl max-h-[92vh] overflow-y-auto p-6 md:p-12 text-white shadow-2xl flex flex-col gap-8 scrollbar-none" onclick="event.stopPropagation()">
+<!-- IMMERSIVE MODAL DRAWER FOR DETAILS (Light theme matching the body cream color) -->
+<div id="case-modal" class="fixed inset-0 z-[99999] bg-black/60 backdrop-blur-xl flex items-center justify-center p-4 md:p-8 opacity-0 pointer-events-none transition-all duration-500" onclick="closeCaseModal(event)">
+  <div class="relative bg-[#faf8f2] border border-black/10 rounded-[32px] w-full max-w-5xl max-h-[92vh] overflow-y-auto p-6 md:p-12 text-dark shadow-2xl flex flex-col gap-8 scrollbar-none" onclick="event.stopPropagation()">
     
     <!-- Close Button -->
-    <button onclick="closeCaseModal(null)" class="absolute top-6 right-6 w-10 h-10 rounded-full border border-white/10 bg-white/5 flex items-center justify-center text-white/60 hover:text-white hover:border-white/20 transition-all z-[100]" aria-label="Close details">
+    <button onclick="closeCaseModal(null)" class="absolute top-6 right-6 w-10 h-10 rounded-full border border-black/10 bg-black/5 flex items-center justify-center text-dark/60 hover:text-dark hover:border-black/20 transition-all z-[100]" aria-label="Close details">
       ✕
     </button>
 
@@ -253,9 +252,9 @@
     <div class="flex flex-col gap-8">
       
       <!-- Modal Header -->
-      <div class="border-b border-white/5 pb-6">
+      <div class="border-b border-black/5 pb-6">
         <span id="modal-category" class="text-[10px] font-black tracking-[0.25em] uppercase text-primary bg-primary/10 border border-primary/20 px-3 py-1 rounded-full inline-block mb-3">Category</span>
-        <h2 id="modal-title" class="text-3xl md:text-5xl font-black uppercase tracking-wide text-white leading-tight">Project Title</h2>
+        <h2 id="modal-title" class="text-3xl md:text-5xl font-black uppercase tracking-wide text-dark leading-tight">Project Title</h2>
       </div>
 
       <!-- Main Columns Grid -->
@@ -264,26 +263,26 @@
         <!-- Left Column: Strategy & Description (7 cols) -->
         <div class="lg:col-span-7 flex flex-col gap-6">
           <div>
-            <h4 class="text-xs font-black uppercase tracking-wider text-white/40 mb-2">The Challenge</h4>
-            <p id="modal-desc" class="text-white/70 text-sm leading-relaxed">Description of the project and its goals.</p>
+            <h4 class="text-xs font-black uppercase tracking-wider text-dark/40 mb-2">The Challenge</h4>
+            <p id="modal-desc" class="text-dark/70 text-sm leading-relaxed">Description of the project and its goals.</p>
           </div>
 
           <div>
-            <h4 class="text-xs font-black uppercase tracking-wider text-white/40 mb-2">Our Strategy</h4>
-            <div id="modal-strategy-card" class="bg-white/5 border border-white/5 p-5 rounded-2xl">
-              <p id="modal-strategy" class="text-white/80 text-sm leading-relaxed"></p>
+            <h4 class="text-xs font-black uppercase tracking-wider text-dark/40 mb-2">Our Strategy</h4>
+            <div id="modal-strategy-card" class="bg-black/5 border border-black/5 p-5 rounded-2xl">
+              <p id="modal-strategy" class="text-dark/80 text-sm leading-relaxed"></p>
             </div>
           </div>
 
           <div>
-            <h4 class="text-xs font-black uppercase tracking-wider text-white/40 mb-3">Expertises Delivered</h4>
+            <h4 class="text-xs font-black uppercase tracking-wider text-dark/40 mb-3">Expertises Delivered</h4>
             <div id="modal-services" class="flex flex-wrap gap-2">
               <!-- Services injected dynamically -->
             </div>
           </div>
 
           <!-- GrowBot Direct Integration CTA -->
-          <div class="mt-4 pt-4 border-t border-white/5">
+          <div class="mt-4 pt-4 border-t border-black/5">
             <button id="modal-chatbot-cta" onclick="consultFromCase()" class="inline-flex items-center justify-center gap-2.5 bg-primary hover:bg-green-700 text-white font-extrabold text-xs uppercase tracking-widest px-6 py-4 rounded-xl shadow-lg shadow-primary/25 hover:shadow-primary/45 transition-all duration-300">
               <i class="fas fa-comments"></i> Consult With GrowBot About This Service
             </button>
@@ -295,49 +294,49 @@
           
           <!-- Key Metrics Counter Display -->
           <div>
-            <h4 class="text-xs font-black uppercase tracking-wider text-white/40 mb-3">Verified Results</h4>
+            <h4 class="text-xs font-black uppercase tracking-wider text-dark/40 mb-3">Verified Results</h4>
             <div class="grid grid-cols-2 gap-4">
               <!-- Metric 1 Card -->
-              <div class="bg-white/5 border border-white/5 rounded-2xl p-4 text-center">
-                <p id="modal-metric1-label" class="text-[9px] font-black uppercase tracking-widest text-white/40 mb-2">Metric 1</p>
+              <div class="bg-white border border-black/5 rounded-2xl p-4 text-center shadow-sm">
+                <p id="modal-metric1-label" class="text-[9px] font-black uppercase tracking-widest text-dark/40 mb-2">Metric 1</p>
                 <div class="text-2xl font-black text-primary flex items-center justify-center gap-0.5">
                   <span id="modal-metric1-prefix"></span>
                   <span id="modal-metric1-num" class="counter-num">0</span>
-                  <span id="modal-metric1-suffix" class="text-sm font-bold text-white/80"></span>
+                  <span id="modal-metric1-suffix" class="text-sm font-bold text-dark/80"></span>
                 </div>
               </div>
               <!-- Metric 2 Card -->
-              <div class="bg-white/5 border border-white/5 rounded-2xl p-4 text-center">
-                <p id="modal-metric2-label" class="text-[9px] font-black uppercase tracking-widest text-white/40 mb-2">Metric 2</p>
-                <div class="text-2xl font-black text-white flex items-center justify-center gap-0.5">
+              <div class="bg-white border border-black/5 rounded-2xl p-4 text-center shadow-sm">
+                <p id="modal-metric2-label" class="text-[9px] font-black uppercase tracking-widest text-dark/40 mb-2">Metric 2</p>
+                <div class="text-2xl font-black text-dark flex items-center justify-center gap-0.5">
                   <span id="modal-metric2-prefix"></span>
                   <span id="modal-metric2-num" class="counter-num">0</span>
-                  <span id="modal-metric2-suffix" class="text-sm font-bold text-white/80"></span>
+                  <span id="modal-metric2-suffix" class="text-sm font-bold text-dark/80"></span>
                 </div>
               </div>
             </div>
           </div>
 
-          <!-- Premium Interactive Simulated Website Mockup Frame -->
+          <!-- Premium Interactive Simulated Website Mockup Frame (Light mode wireframe) -->
           <div id="modal-mockup-section" class="flex flex-col gap-2">
-            <h4 class="text-xs font-black uppercase tracking-wider text-white/40">Interactive Wireframe Preview</h4>
+            <h4 class="text-xs font-black uppercase tracking-wider text-dark/40">Interactive Wireframe Preview</h4>
             
-            <div class="mockup-browser border border-white/10 bg-[#121620] rounded-2xl overflow-hidden shadow-2xl">
+            <div class="mockup-browser border border-black/10 bg-[#f0ede6] rounded-2xl overflow-hidden shadow-xl">
               <!-- Browser Header -->
-              <div class="bg-[#181d2a] px-4 py-2.5 flex items-center gap-1.5 border-b border-white/5">
+              <div class="bg-[#e5dfd5] px-4 py-2.5 flex items-center gap-1.5 border-b border-black/5">
                 <span class="w-2.5 h-2.5 rounded-full bg-red-500/80"></span>
                 <span class="w-2.5 h-2.5 rounded-full bg-yellow-500/80"></span>
                 <span class="w-2.5 h-2.5 rounded-full bg-green-500/80"></span>
-                <div id="modal-mockup-url" class="bg-black/35 px-4 py-1 rounded-full text-[9px] text-white/40 ml-4 w-52 truncate tracking-wide border border-white/5">https://wholeup.in/showcase</div>
+                <div id="modal-mockup-url" class="bg-white/60 px-4 py-1 rounded-full text-[9px] text-dark/40 ml-4 w-52 truncate tracking-wide border border-black/5">https://wholeup.in/showcase</div>
               </div>
               
               <!-- Browser Viewport Container -->
-              <div id="modal-mockup-viewport" class="mock-browser-scroll h-64 overflow-y-auto bg-[#07090e] p-4 relative scroll-smooth flex flex-col gap-4">
+              <div id="modal-mockup-viewport" class="mock-browser-scroll h-64 overflow-y-auto bg-[#faf8f2] p-4 relative scroll-smooth flex flex-col gap-4">
                 <!-- Generated mockup contents will be injected here dynamically -->
               </div>
             </div>
             
-            <p class="text-[10px] text-white/30 text-center italic">↑ Scroll inside the browser to preview landing page architecture.</p>
+            <p class="text-[10px] text-dark/30 text-center italic">↑ Scroll inside the browser to preview landing page architecture.</p>
           </div>
 
         </div>
@@ -449,7 +448,7 @@
     tagsContainer.innerHTML = '';
     project.services.forEach(tag => {
       const chip = document.createElement('span');
-      chip.className = 'bg-white/5 border border-white/10 text-white/70 text-[10px] font-semibold uppercase tracking-wider px-3.5 py-1.5 rounded-lg';
+      chip.className = 'bg-white border border-black/5 text-dark/70 text-[10px] font-semibold uppercase tracking-wider px-3.5 py-1.5 rounded-lg shadow-sm';
       chip.innerText = tag;
       tagsContainer.appendChild(chip);
     });
@@ -607,110 +606,110 @@
     }, 400);
   }
 
-  // Programmatic builder of simulated responsive browser preview wireframe
+  // Programmatic builder of simulated responsive browser preview wireframe (Light theme style)
   function buildBrowserWireframe(project, container) {
     if (project.slug === 'fintech-saas-webgl') {
       container.innerHTML = `
         <!-- Landing Page Section 1: Hero -->
-        <div class="border border-white/5 bg-white/5 rounded-xl p-3.5 flex flex-col gap-2">
-          <div class="h-2 w-12 rounded bg-cyan-500/80"></div>
-          <div class="h-4 w-40 rounded bg-white/10"></div>
-          <div class="h-2.5 w-full rounded bg-white/5"></div>
-          <div class="h-2.5 w-4/5 rounded bg-white/5"></div>
+        <div class="border border-black/5 bg-black/5 rounded-xl p-3.5 flex flex-col gap-2">
+          <div class="h-2 w-12 rounded bg-cyan-600"></div>
+          <div class="h-4 w-40 rounded bg-dark/10"></div>
+          <div class="h-2.5 w-full rounded bg-dark/5"></div>
+          <div class="h-2.5 w-4/5 rounded bg-dark/5"></div>
           <div class="flex gap-2 mt-2">
             <div class="h-6 w-20 rounded bg-cyan-500"></div>
-            <div class="h-6 w-16 rounded border border-white/10 bg-white/5"></div>
+            <div class="h-6 w-16 rounded border border-black/10 bg-black/5"></div>
           </div>
         </div>
         <!-- Landing Page Section 2: Dashboard Visualization -->
-        <div class="border border-cyan-500/10 bg-cyan-950/20 rounded-xl p-4 flex flex-col gap-3">
+        <div class="border border-cyan-500/20 bg-cyan-50/50 rounded-xl p-4 flex flex-col gap-3">
           <div class="flex justify-between items-center">
-            <div class="h-2.5 w-24 rounded bg-white/20"></div>
-            <span class="text-[8px] text-cyan-400 font-bold uppercase tracking-widest border border-cyan-500/20 bg-cyan-500/5 px-2 py-0.5 rounded">WebGL Canvas</span>
+            <div class="h-2.5 w-24 rounded bg-dark/20"></div>
+            <span class="text-[8px] text-cyan-600 font-bold uppercase tracking-widest border border-cyan-500/20 bg-cyan-500/5 px-2 py-0.5 rounded">WebGL Canvas</span>
           </div>
           <!-- Simulated Chart -->
-          <div class="h-28 border border-white/5 bg-[#0a0d14] rounded-lg p-3 flex items-end gap-1.5 relative overflow-hidden">
+          <div class="h-28 border border-black/5 bg-white rounded-lg p-3 flex items-end gap-1.5 relative overflow-hidden shadow-sm">
             <div class="absolute inset-0 flex items-center justify-center">
-              <span class="text-[8px] text-white/15 uppercase font-bold tracking-widest animate-pulse">Dynamic Financial Ledger Canvas</span>
+              <span class="text-[8px] text-dark/15 uppercase font-bold tracking-widest animate-pulse">Dynamic Financial Ledger Canvas</span>
             </div>
-            <div class="w-full bg-cyan-500/40 rounded-t h-[30%] animate-pulse"></div>
-            <div class="w-full bg-cyan-500/60 rounded-t h-[55%]"></div>
-            <div class="w-full bg-cyan-500/80 rounded-t h-[40%] animate-pulse"></div>
-            <div class="w-full bg-cyan-500/90 rounded-t h-[85%]"></div>
-            <div class="w-full bg-cyan-400 rounded-t h-[95%]"></div>
+            <div class="w-full bg-cyan-500/20 rounded-t h-[30%] animate-pulse"></div>
+            <div class="w-full bg-cyan-500/40 rounded-t h-[55%]"></div>
+            <div class="w-full bg-cyan-500/30 rounded-t h-[40%] animate-pulse"></div>
+            <div class="w-full bg-cyan-500/60 rounded-t h-[85%]"></div>
+            <div class="w-full bg-cyan-500 rounded-t h-[95%]"></div>
           </div>
         </div>
         <!-- Landing Page Section 3: Features Grid -->
         <div class="grid grid-cols-2 gap-3">
-          <div class="border border-white/5 bg-white/5 rounded-xl p-3 flex flex-col gap-2">
-            <div class="w-6 h-6 rounded bg-cyan-500/20 flex items-center justify-center text-[10px] text-cyan-400"><i class="fas fa-bolt"></i></div>
-            <div class="h-2.5 w-16 rounded bg-white/10"></div>
-            <div class="h-1.5 w-full rounded bg-white/5"></div>
+          <div class="border border-black/5 bg-black/5 rounded-xl p-3 flex flex-col gap-2">
+            <div class="w-6 h-6 rounded bg-cyan-500/10 flex items-center justify-center text-[10px] text-cyan-600"><i class="fas fa-bolt"></i></div>
+            <div class="h-2.5 w-16 rounded bg-dark/10"></div>
+            <div class="h-1.5 w-full rounded bg-dark/5"></div>
           </div>
-          <div class="border border-white/5 bg-white/5 rounded-xl p-3 flex flex-col gap-2">
-            <div class="w-6 h-6 rounded bg-cyan-500/20 flex items-center justify-center text-[10px] text-cyan-400"><i class="fas fa-lock"></i></div>
-            <div class="h-2.5 w-16 rounded bg-white/10"></div>
-            <div class="h-1.5 w-full rounded bg-white/5"></div>
+          <div class="border border-black/5 bg-black/5 rounded-xl p-3 flex flex-col gap-2">
+            <div class="w-6 h-6 rounded bg-cyan-500/10 flex items-center justify-center text-[10px] text-cyan-600"><i class="fas fa-lock"></i></div>
+            <div class="h-2.5 w-16 rounded bg-dark/10"></div>
+            <div class="h-1.5 w-full rounded bg-dark/5"></div>
           </div>
         </div>
       `;
     } else if (project.slug === 'ecommerce-website-launch') {
       container.innerHTML = `
         <!-- E-commerce Navbar -->
-        <div class="border border-white/5 bg-white/5 rounded-xl px-3 py-2 flex justify-between items-center">
-          <div class="h-3 w-16 rounded bg-white/10"></div>
+        <div class="border border-black/5 bg-black/5 rounded-xl px-3 py-2 flex justify-between items-center">
+          <div class="h-3 w-16 rounded bg-dark/10"></div>
           <div class="flex gap-2">
-            <div class="h-2.5 w-6 rounded bg-white/5"></div>
-            <div class="h-2.5 w-6 rounded bg-white/5"></div>
+            <div class="h-2.5 w-6 rounded bg-dark/5"></div>
+            <div class="h-2.5 w-6 rounded bg-dark/5"></div>
             <div class="h-2.5 w-6 rounded bg-violet-500/80"></div>
           </div>
         </div>
         <!-- Hero Product Showcase -->
-        <div class="border border-white/5 bg-white/5 rounded-xl p-3.5 flex flex-col gap-3">
-          <div class="h-32 border border-white/5 bg-[#0f0d14] rounded-lg relative overflow-hidden flex items-center justify-center">
-            <div class="absolute inset-0 bg-gradient-to-tr from-violet-950/20 to-transparent"></div>
-            <i class="fas fa-shopping-bag text-2xl text-violet-400/50 anim-float-2"></i>
+        <div class="border border-black/5 bg-black/5 rounded-xl p-3.5 flex flex-col gap-3">
+          <div class="h-32 border border-black/5 bg-white rounded-lg relative overflow-hidden flex items-center justify-center shadow-sm">
+            <div class="absolute inset-0 bg-gradient-to-tr from-violet-500/5 to-transparent"></div>
+            <i class="fas fa-shopping-bag text-2xl text-violet-400 anim-float-2"></i>
           </div>
-          <div class="h-4 w-32 rounded bg-white/15"></div>
+          <div class="h-4 w-32 rounded bg-dark/15"></div>
           <div class="flex justify-between items-center">
-            <div class="h-3 w-12 rounded bg-violet-400"></div>
-            <div class="h-6 w-20 rounded bg-violet-600 flex items-center justify-center text-[8px] font-black uppercase tracking-wider">Buy Now</div>
+            <div class="h-3 w-12 rounded bg-violet-500"></div>
+            <div class="h-6 w-20 rounded bg-violet-600 flex items-center justify-center text-[8px] font-black text-white uppercase tracking-wider">Buy Now</div>
           </div>
         </div>
         <!-- Checkout Optimization section -->
-        <div class="border border-violet-500/10 bg-violet-950/10 rounded-xl p-3.5 flex flex-col gap-2">
-          <div class="h-2.5 w-24 rounded bg-white/20"></div>
+        <div class="border border-violet-500/10 bg-violet-50 rounded-xl p-3.5 flex flex-col gap-2">
+          <div class="h-2.5 w-24 rounded bg-dark/20"></div>
           <div class="flex gap-2 mt-1">
-            <div class="flex-1 h-7 border border-white/5 bg-white/5 rounded flex items-center justify-center text-[7px] text-white/50"><i class="fab fa-google-pay mr-1"></i> GPay</div>
-            <div class="flex-1 h-7 border border-white/5 bg-white/5 rounded flex items-center justify-center text-[7px] text-white/50"><i class="fas fa-credit-card mr-1"></i> UPI / COD</div>
+            <div class="flex-1 h-7 border border-black/5 bg-white rounded flex items-center justify-center text-[7px] text-dark/50 shadow-sm"><i class="fab fa-google-pay mr-1"></i> GPay</div>
+            <div class="flex-1 h-7 border border-black/5 bg-white rounded flex items-center justify-center text-[7px] text-dark/50 shadow-sm"><i class="fas fa-credit-card mr-1"></i> UPI / COD</div>
           </div>
         </div>
       `;
     } else if (project.slug === 'ai-lead-automation') {
       container.innerHTML = `
         <!-- AI Hero -->
-        <div class="border border-white/5 bg-white/5 rounded-xl p-3.5 flex flex-col gap-2">
-          <div class="h-3.5 w-36 rounded bg-emerald-400/80"></div>
-          <div class="h-2 w-full rounded bg-white/5"></div>
+        <div class="border border-black/5 bg-black/5 rounded-xl p-3.5 flex flex-col gap-2">
+          <div class="h-3.5 w-36 rounded bg-emerald-500"></div>
+          <div class="h-2 w-full rounded bg-dark/5"></div>
         </div>
         <!-- Automated Chat Interface Mock -->
-        <div class="border border-emerald-500/10 bg-emerald-950/15 rounded-xl p-4 flex flex-col gap-3">
-          <span class="text-[8px] text-emerald-400 font-extrabold uppercase tracking-widest bg-emerald-500/5 border border-emerald-500/20 px-2 py-0.5 rounded self-start">Live GrowBot Chat</span>
+        <div class="border border-emerald-500/20 bg-emerald-50/50 rounded-xl p-4 flex flex-col gap-3">
+          <span class="text-[8px] text-emerald-600 font-extrabold uppercase tracking-widest bg-emerald-500/5 border border-emerald-500/20 px-2 py-0.5 rounded self-start">Live GrowBot Chat</span>
           <div class="flex flex-col gap-2">
             <!-- Bot Bubble -->
-            <div class="bg-white/5 border border-white/5 rounded-lg p-2.5 self-start max-w-[80%] flex flex-col gap-1.5">
-              <div class="h-1.5 w-10 rounded bg-emerald-400"></div>
-              <div class="h-1 w-24 rounded bg-white/10"></div>
-              <div class="h-1 w-20 rounded bg-white/10"></div>
+            <div class="bg-white border border-black/5 rounded-lg p-2.5 self-start max-w-[80%] flex flex-col gap-1.5 shadow-sm">
+              <div class="h-1.5 w-10 rounded bg-emerald-500"></div>
+              <div class="h-1 w-24 rounded bg-dark/10"></div>
+              <div class="h-1 w-20 rounded bg-dark/10"></div>
             </div>
             <!-- User Bubble -->
-            <div class="bg-emerald-600 rounded-lg p-2.5 self-end max-w-[80%] flex flex-col gap-1.5">
+            <div class="bg-emerald-600 rounded-lg p-2.5 self-end max-w-[80%] flex flex-col gap-1.5 text-white">
               <div class="h-1 w-20 rounded bg-white/80"></div>
             </div>
             <!-- Bot Bubble with CTAs -->
-            <div class="bg-white/5 border border-white/5 rounded-lg p-2.5 self-start max-w-[80%] flex flex-col gap-2">
-              <div class="h-1 w-16 rounded bg-emerald-400"></div>
-              <div class="h-4 w-28 rounded bg-emerald-500/80 flex items-center justify-center text-[7px] font-bold">Call Team Directly</div>
+            <div class="bg-white border border-black/5 rounded-lg p-2.5 self-start max-w-[80%] flex flex-col gap-2 shadow-sm">
+              <div class="h-1 w-16 rounded bg-emerald-500"></div>
+              <div class="h-4 w-28 rounded bg-emerald-500 flex items-center justify-center text-[7px] font-bold text-white">Call Team Directly</div>
             </div>
           </div>
         </div>

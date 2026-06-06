@@ -128,9 +128,12 @@
     #dm-header .info .status { font-size:11px; opacity:.9; }
     #dm-close { margin-left:auto; background:none; border:none; color:white; cursor:pointer; font-size:18px; opacity:.8; }
     #dm-close:hover { opacity:1; }
-    #dm-quick { padding:10px 12px; display:flex; gap:6px; flex-wrap:wrap; border-bottom:1px solid rgba(22,163,74,.1); background:#fff; }
-    .dm-qbtn { background:#EFF8F2; border:1px solid #D1EBD6; border-radius:20px; padding:5px 10px; font-size:11px; cursor:pointer; color:#16A34A; font-weight:600; transition:all .2s; white-space:nowrap; }
-    .dm-qbtn:hover { background:#D1EBD6; }
+    #dm-chips-container { padding: 8px 12px; display: flex; gap: 8px; overflow-x: auto; background: #fff; border-bottom: 1px solid rgba(22,163,74,0.08); }
+    .dm-chip { background: rgba(22, 163, 74, 0.05); border: 1px solid rgba(22, 163, 74, 0.15); border-radius: 20px; padding: 5px 12px; font-size: 11px; cursor: pointer; color: #16A34A; font-weight: 600; transition: all 0.2s; white-space: nowrap; display: inline-block; }
+    .dm-chip:hover { background: #16A34A; color: white; border-color: #16A34A; transform: translateY(-1px); }
+    .dm-chip:active { transform: translateY(0); }
+    .scrollbar-none::-webkit-scrollbar { display: none; }
+    .scrollbar-none { -ms-overflow-style: none; scrollbar-width: none; }
     #dm-messages { flex:1; overflow-y:auto; padding:16px 12px; display:flex; flex-direction:column; gap:12px; }
     .dm-msg { display:flex; gap:8px; align-items:flex-end; }
     .dm-msg.user { flex-direction:row-reverse; }
@@ -411,24 +414,67 @@
   });
 
   // Chatbot - Dynamic Gemini API with History & Interactive CTAs
-  let dmOpen=false;
+  let dmOpen = false;
   let dmHistory = []; // Local array to persist conversation turns
+  let dmContext = 'default';
+  let wizardStep = 0;
+  let wizardData = { goal: '', website: '', budget: '' };
+
+  const chipData = {
+    'default': [
+      { text: "📈 Grow My Sales", action: () => dmAsk("Mujhe marketing campaigns scale karke sales badhani hai. Please guide kijiye.") },
+      { text: "🔍 Free SEO Check", action: () => openChatbotWithContext("seo") },
+      { text: "💻 Need a Website", action: () => openChatbotWithContext("webdev") },
+      { text: "💡 Find My Service", action: () => openChatbotWithContext("consultant") }
+    ],
+    'seo': [
+      { text: "🔍 Audit My Website", action: () => dmAsk("Kya aap meri website ka free technical SEO audit kar sakte hain?") },
+      { text: "📍 Local SEO / GMB", action: () => dmAsk("Google Maps aur Local SEO se local customers kaise layein?") },
+      { text: "📈 Rank on Page 1", action: () => dmAsk("Dominate Google search results on Page 1 by targeting buyer-intent keywords.") },
+      { text: "🔙 Main Menu", action: () => openChatbotWithContext("default") }
+    ],
+    'ppc': [
+      { text: "💰 Maximize ROAS", action: () => dmAsk("Paid ads me Return on Ad Spend (ROAS) kaise double karein?") },
+      { text: "📱 Meta/Instagram Ads", action: () => dmAsk("Instagram and Facebook Ads setup process aur pricing details batayein.") },
+      { text: "🎯 Lead Gen Campaigns", action: () => dmAsk("Google Ads aur landing page funnel setup lead generation ke liye.") },
+      { text: "🔙 Main Menu", action: () => openChatbotWithContext("default") }
+    ],
+    'social': [
+      { text: "🎬 Reels Viral Hooks", action: () => dmAsk("Short-form Reels ke liye high-retention hooks and video script ideas share karein.") },
+      { text: "📈 Instagram Growth", action: () => dmAsk("Followers badhane aur social engagement strategy implement kaise karein?") },
+      { text: "📅 Content Strategy", action: () => dmAsk("Brands ke liye content calendar aur monthly pricing details.") },
+      { text: "🔙 Main Menu", action: () => openChatbotWithContext("default") }
+    ],
+    'webdev': [
+      { text: "⚡ Speed Optimization", action: () => dmAsk("Mera website load-time slow hai. Performance and speed index kaise improve karein?") },
+      { text: "🎨 Premium UI/UX Design", action: () => dmAsk("Fast, responsive, modern glassmorphic theme conversion-focused landing page layout.") },
+      { text: "🛒 Shopify eCommerce", action: () => dmAsk("E-commerce website build and Shopify setups setup pricing details.") },
+      { text: "🔙 Main Menu", action: () => openChatbotWithContext("default") }
+    ]
+  };
 
   function dmToggle(){ dmOpen=!dmOpen; document.getElementById('dm-chat-box').style.display=dmOpen?'flex':'none'; document.getElementById('dm-badge').style.display='none'; if(dmOpen) document.getElementById('dm-input').focus(); }
   function dmAsk(t){ document.getElementById('dm-input').value=t; dmSend(); }
+
   async function dmSend(){
     const input=document.getElementById('dm-input');
     const text=input.value.trim(); if(!text) return; input.value='';
     const msgs=document.getElementById('dm-messages');
     
-    // 1. Add user message to UI
+    // Add user message to UI
     const uDiv=document.createElement('div');
     uDiv.className='dm-msg user';
     uDiv.innerHTML=`<div class="dm-av user">Ap</div><div class="dm-bubble user">${escapeHtml(text)}</div>`;
     msgs.appendChild(uDiv);
     msgs.scrollTop=msgs.scrollHeight;
     
-    // 2. Add typing indicator
+    await dmSendText(text);
+  }
+
+  async function dmSendText(text) {
+    const msgs=document.getElementById('dm-messages');
+    
+    // Add typing indicator
     const typDiv=document.createElement('div');
     typDiv.className='dm-msg';
     typDiv.id='dm-typ';
@@ -436,14 +482,13 @@
     msgs.appendChild(typDiv);
     msgs.scrollTop=msgs.scrollHeight;
     
-    // 3. Prepare client-side user message state for history
     const userMsg = { role: 'user', parts: [{ text: text }] };
     
     try {
       const response = await fetch('/api/chat', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ message: text, history: dmHistory })
+        body: JSON.stringify({ message: text, history: dmHistory, context: dmContext })
       });
       
       const data = await response.json();
@@ -454,23 +499,29 @@
       
       const reply = data.success ? data.reply : 'Maaf kijiye, humare servers temporary down hain. Kripya humse directly contact karein: +91 94268 46035!';
       
-      // 4. Update local conversational memory history state
+      // Update local conversational memory history state
       if (data.success) {
         dmHistory.push(userMsg);
         dmHistory.push({ role: 'model', parts: [{ text: reply }] });
         
-        // Cap history to keep payload size reasonable (last 10 turns = 20 entries)
+        // Cap history to keep payload size reasonable
         if (dmHistory.length > 20) {
           dmHistory = dmHistory.slice(dmHistory.length - 20);
         }
       }
       
-      // 5. Add bot response to UI
+      // Add bot response to UI
       const aDiv=document.createElement('div');
       aDiv.className='dm-msg';
       aDiv.innerHTML=`<div class="dm-av bot">AI</div><div class="dm-bubble bot">${formatReply(reply)}</div>`;
       msgs.appendChild(aDiv);
       msgs.scrollTop=msgs.scrollHeight;
+
+      // If we completed consultant wizard, go back to default context and load default chips
+      if (dmContext === 'consultant') {
+        dmContext = 'default';
+      }
+      loadSuggestionChips(dmContext);
     } catch(err) {
       console.error(err);
       const t = document.getElementById('dm-typ');
@@ -480,6 +531,201 @@
       aDiv.innerHTML=`<div class="dm-av bot">AI</div><div class="dm-bubble bot">Net connection me koi problem lag rahi hai. Kripya hume direct call karein: +91 94268 46035.</div>`;
       msgs.appendChild(aDiv);
       msgs.scrollTop=msgs.scrollHeight;
+    }
+  }
+
+  function loadSuggestionChips(contextVal) {
+    const container = document.getElementById('dm-chips-container');
+    if (!container) return;
+    container.innerHTML = '';
+    
+    let ctxKey = contextVal || 'default';
+    if (ctxKey === 'web') ctxKey = 'webdev';
+    if (ctxKey === 'ads') ctxKey = 'ppc';
+    if (ctxKey === 'smm') ctxKey = 'social';
+    
+    const chips = chipData[ctxKey] || chipData['default'];
+    
+    chips.forEach(chip => {
+      const btn = document.createElement('button');
+      btn.className = 'dm-chip';
+      btn.innerText = chip.text;
+      btn.onclick = chip.action;
+      container.appendChild(btn);
+    });
+  }
+
+  function openChatbotWithContext(slugOrContext) {
+    let contextVal = 'default';
+    if (slugOrContext === 'local-seo' || slugOrContext === 'seo' || slugOrContext === 'content-writing') {
+      contextVal = 'seo';
+    } else if (slugOrContext === 'meta-ads' || slugOrContext === 'ppc-google-ads' || slugOrContext === 'whatsapp-marketing' || slugOrContext === 'ecommerce-marketing' || slugOrContext === 'amazon-marketing') {
+      contextVal = 'ppc';
+    } else if (slugOrContext === 'reel-shoot-edit' || slugOrContext === 'linkedin-marketing' || slugOrContext === 'social-media-management') {
+      contextVal = 'social';
+    } else if (slugOrContext === 'website-designing' || slugOrContext === 'graphic-designing' || slugOrContext === 'generative-ai-video' || slugOrContext === 'automation') {
+      contextVal = 'webdev';
+    } else if (slugOrContext === 'consultant') {
+      contextVal = 'consultant';
+    } else {
+      contextVal = slugOrContext;
+    }
+
+    dmContext = contextVal;
+    
+    // Open chatbox
+    dmOpen = true;
+    document.getElementById('dm-chat-box').style.display = 'flex';
+    document.getElementById('dm-badge').style.display = 'none';
+    
+    const msgs = document.getElementById('dm-messages');
+    
+    // Clear chips container first
+    const container = document.getElementById('dm-chips-container');
+    if (container) container.innerHTML = '';
+
+    if (contextVal === 'consultant') {
+      wizardStep = 1;
+      wizardData = { goal: '', website: '', budget: '' };
+      dmHistory = [];
+      
+      const aDiv = document.createElement('div');
+      aDiv.className = 'dm-msg';
+      aDiv.innerHTML = `
+        <div class="dm-av bot">AI</div>
+        <div class="dm-bubble bot">
+          <strong>Wholeup Consultant Wizard 🚀</strong><br><br>
+          Namaste! Main aapko sahi digital marketing service package suggest karunga.<br><br>
+          Pehle ye batayein: <strong>Aapke business ka main goal kya hai?</strong>
+        </div>
+      `;
+      msgs.appendChild(aDiv);
+      msgs.scrollTop = msgs.scrollHeight;
+      
+      renderConsultantChips();
+    } else {
+      let greeting = '';
+      if (contextVal === 'seo') {
+        greeting = "Namaste! 👋 Main Wholeup ka <strong>SEO Specialist</strong> assistant hoon. Google search rankings aur organic business growth ke regarding aap kya janna chahte hain?";
+      } else if (contextVal === 'ppc') {
+        greeting = "Namaste! 👋 Main Wholeup ka <strong>Paid Ads Strategist</strong> assistant hoon. Meta, Google, aur WhatsApp marketing campaigns scaling ke regarding aap kya janna chahte hain?";
+      } else if (contextVal === 'social') {
+        greeting = "Namaste! 👋 Main Wholeup ka <strong>Social Media Growth Expert</strong> assistant hoon. Reels production details, content strategy aur outbound B2B LinkedIn plans ke related aapki kya query hai?";
+      } else if (contextVal === 'webdev') {
+        greeting = "Namaste! 👋 Main Wholeup ka <strong>Full-Stack Web Dev Expert</strong> assistant hoon. Website speed, automation flows, graphic designs aur modern conversion layouts ke baare me boliye.";
+      } else {
+        greeting = "Namaste! 👋 Main Wholeup ka <strong>GrowBot</strong> AI assistant hoon.<br><br>Main aapka digital marketing partner bankar aapke business ko target customers tak pahuchane aur scaling me madad karunga. Aap kya scale karna chahenge?";
+      }
+      
+      const aDiv = document.createElement('div');
+      aDiv.className = 'dm-msg';
+      aDiv.innerHTML = `
+        <div class="dm-av bot">AI</div>
+        <div class="dm-bubble bot">${greeting}</div>
+      `;
+      msgs.appendChild(aDiv);
+      msgs.scrollTop = msgs.scrollHeight;
+      
+      loadSuggestionChips(contextVal);
+    }
+    document.getElementById('dm-input').focus();
+  }
+
+  function renderConsultantChips() {
+    const container = document.getElementById('dm-chips-container');
+    if (!container) return;
+    container.innerHTML = '';
+    
+    if (wizardStep === 1) {
+      const options = [
+        { text: "📈 Leads & Clients", value: "Leads & Clients Badhana" },
+        { text: "🛒 Sales Online", value: "Online Sales (E-commerce)" },
+        { text: "📱 Brand Followers", value: "Brand Awareness & Followers" }
+      ];
+      options.forEach(opt => {
+        const btn = document.createElement('button');
+        btn.className = 'dm-chip';
+        btn.innerText = opt.text;
+        btn.onclick = () => selectWizardOption(opt.value);
+        container.appendChild(btn);
+      });
+    } else if (wizardStep === 2) {
+      const options = [
+        { text: "🌐 Active Website", value: "Active Website Hai" },
+        { text: "🆕 New Website", value: "New Website Chahiye" },
+        { text: "❌ Website Nahi", value: "Website Nahi Chahiye" }
+      ];
+      options.forEach(opt => {
+        const btn = document.createElement('button');
+        btn.className = 'dm-chip';
+        btn.innerText = opt.text;
+        btn.onclick = () => selectWizardOption(opt.value);
+        container.appendChild(btn);
+      });
+    } else if (wizardStep === 3) {
+      const options = [
+        { text: "💵 Under ₹15,000", value: "Under ₹15,000" },
+        { text: "💵 ₹15k - ₹40k", value: "₹15,000 - ₹40,000" },
+        { text: "💵 ₹40k+", value: "₹40,000+" }
+      ];
+      options.forEach(opt => {
+        const btn = document.createElement('button');
+        btn.className = 'dm-chip';
+        btn.innerText = opt.text;
+        btn.onclick = () => selectWizardOption(opt.value);
+        container.appendChild(btn);
+      });
+    }
+  }
+
+  function selectWizardOption(value) {
+    const msgs = document.getElementById('dm-messages');
+    
+    const uDiv = document.createElement('div');
+    uDiv.className = 'dm-msg user';
+    uDiv.innerHTML = `<div class="dm-av user">Ap</div><div class="dm-bubble user">${escapeHtml(value)}</div>`;
+    msgs.appendChild(uDiv);
+    msgs.scrollTop = msgs.scrollHeight;
+    
+    if (wizardStep === 1) {
+      wizardData.goal = value;
+      wizardStep = 2;
+      setTimeout(() => {
+        const aDiv = document.createElement('div');
+        aDiv.className = 'dm-msg';
+        aDiv.innerHTML = `
+          <div class="dm-av bot">AI</div>
+          <div class="dm-bubble bot">Great choice! 👍 Kya aapke paas currently active website hai ya aap new website plan kar rahe hain?</div>
+        `;
+        msgs.appendChild(aDiv);
+        msgs.scrollTop = msgs.scrollHeight;
+        renderConsultantChips();
+      }, 500);
+    } else if (wizardStep === 2) {
+      wizardData.website = value;
+      wizardStep = 3;
+      setTimeout(() => {
+        const aDiv = document.createElement('div');
+        aDiv.className = 'dm-msg';
+        aDiv.innerHTML = `
+          <div class="dm-av bot">AI</div>
+          <div class="dm-bubble bot">Perfect. Akhiri sawaal: Aapka monthly marketing budget range kya hai?</div>
+        `;
+        msgs.appendChild(aDiv);
+        msgs.scrollTop = msgs.scrollHeight;
+        renderConsultantChips();
+      }, 500);
+    } else if (wizardStep === 3) {
+      wizardData.budget = value;
+      wizardStep = 0;
+      
+      const query = `Mujhe marketing consultant ki zaroorat hai. My Goal: ${wizardData.goal}, My Website Status: ${wizardData.website}, My Budget: ${wizardData.budget}. Please recommend the best marketing services and strategy packages for me.`;
+      
+      setTimeout(() => {
+        const container = document.getElementById('dm-chips-container');
+        if (container) container.innerHTML = '';
+        dmSendText(query);
+      }, 500);
     }
   }
 
@@ -497,16 +743,16 @@
       return '<br>• ' + p1;
     });
     
-    // Parse CALL_CTA tag into a gorgeous Tailwind green glowing button
     html = html.replace(/\[CALL_CTA\]/g, `<a href="tel:+919426846035" class="inline-flex items-center gap-2 mt-3 px-4 py-2.5 bg-green-600 hover:bg-green-700 text-white font-semibold text-xs rounded-full shadow-lg shadow-green-600/25 hover:shadow-green-600/40 hover:-translate-y-0.5 active:translate-y-0 transition-all w-full justify-center cursor-pointer no-underline"><i class="fas fa-phone-alt animate-bounce"></i> +91 94268 46035 Par Call Karein</a>`);
-    
-    // Parse WHATSAPP_CTA tag into a gorgeous Tailwind emerald glowing button
     html = html.replace(/\[WHATSAPP_CTA\]/g, `<a href="https://wa.me/919426846035" target="_blank" class="inline-flex items-center gap-2 mt-2 px-4 py-2.5 bg-emerald-500 hover:bg-emerald-600 text-white font-semibold text-xs rounded-full shadow-lg shadow-emerald-500/25 hover:shadow-emerald-500/40 hover:-translate-y-0.5 active:translate-y-0 transition-all w-full justify-center cursor-pointer no-underline"><i class="fab fa-whatsapp text-sm"></i> WhatsApp Par Message Karein</a>`);
-    
-    // Remove consecutive double br if formatting leaves them
     html = html.replace(/(<br>){3,}/g, '<br><br>');
     return html;
   }
+
+  // Initialize chips on DOMContentLoaded
+  window.addEventListener('DOMContentLoaded', () => {
+    loadSuggestionChips('default');
+  });
 
   // Premium Branded Preloader Script (W Growth Animation - All Pages, Every Load)
   (function() {

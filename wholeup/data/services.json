@@ -91,19 +91,6 @@
     "timeline": "Active in 3 Days"
   },
   {
-    "id": 8,
-    "slug": "youtube-marketing",
-    "icon": "fab fa-youtube",
-    "color": "#EF4444",
-    "bgColor": "rgba(239,68,68,0.08)",
-    "title": "YouTube Marketing",
-    "tagline": "Build Authority with the World's Video Engine.",
-    "description": "Video optimization, strategy, channel setup, and high-CTR thumbnail assets to build subscribers and generate ads revenue.",
-    "features": ["Channel Optimization & Audit", "High-CTR Thumbnail Design", "Video Tags & Description SEO", "Scripting Guides & Hook Creation", "Ad campaigns (Pre-Rolls)", "Subscriber Growth Optimization"],
-    "result": "+120% View Duration",
-    "timeline": "Growth starts in 30 Days"
-  },
-  {
     "id": 9,
     "slug": "influencer-marketing",
     "icon": "fas fa-users",

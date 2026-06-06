@@ -30,6 +30,9 @@
           </div>
           {{/each}}
         </div>
+        <button onclick="openChatbotWithContext('{{slug}}')" class="w-full mb-6 py-2.5 rounded-xl border border-primary/20 text-xs font-bold uppercase tracking-wider transition duration-300 flex items-center justify-center gap-2" style="background: color-mix(in srgb, var(--hover-glow) 5%, transparent); border-color: color-mix(in srgb, var(--hover-glow) 20%, transparent); color: var(--hover-glow);">
+          <i class="fas fa-robot animate-pulse"></i> Ask {{title}} Expert
+        </button>
         <div class="flex items-center justify-between pt-6 border-t border-black/5">
           <div>
             <p class="text-[10px] font-bold uppercase tracking-widest text-gray-400 mb-1">Typical Result <i class="fas fa-chart-line text-[9px] ml-1 opacity-70"></i></p>

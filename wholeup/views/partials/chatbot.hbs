@@ -1,32 +1,51 @@
 <button id="dm-chat-btn" onclick="dmToggle()" aria-label="Chat with us">
-  <span id="dm-badge">1</span>
-  <svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/></svg>
+  <span id="dm-badge" class="animate-bounce">1</span>
+  <!-- Stylized growth W icon inside chatbot trigger -->
+  <svg viewBox="0 0 24 24" class="w-6 h-6 fill-white"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/></svg>
 </button>
-<div id="dm-chat-box">
-  <div id="dm-header">
-    <div class="avatar">WU</div>
-    <div class="info">
-      <div class="name">Wholeup AI Assistant</div>
-      <div class="status">● Online — Powered by Gemini AI</div>
+
+<div id="dm-chat-box" class="glass-card" data-lenis-prevent>
+  <!-- Branded Header with Online Pulse Indicator -->
+  <div id="dm-header" class="flex items-center gap-3 px-4 py-3 bg-gradient-to-r from-green-700 to-green-600 text-white shadow-md">
+    <div class="avatar flex items-center justify-center w-9 h-9 rounded-full bg-white/15 border border-white/20 text-white font-extrabold text-sm tracking-wider">
+      <svg class="w-5 h-5 fill-white" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+        <path d="M20 65 L35 35 L50 50 L70 20 L55 20 M70 20 V35" stroke="white" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" fill="none" />
+      </svg>
     </div>
-    <button id="dm-close" onclick="dmToggle()">✕</button>
+    <div class="info flex-1">
+      <div class="name font-bold text-sm tracking-wide">Wholeup GrowBot</div>
+      <div class="status flex items-center text-[10px] text-green-100 font-semibold tracking-wider uppercase">
+        <span class="relative flex h-2 w-2 mr-1.5">
+          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+          <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+        </span>
+        Online — Growth Expert
+      </div>
+    </div>
+    <button id="dm-close" onclick="dmToggle()" class="text-white/80 hover:text-white transition text-lg font-bold" aria-label="Close Chat">✕</button>
   </div>
-  <div id="dm-quick">
-    <button class="dm-qbtn" onclick="dmAsk('Social media strategy chahiye')">📱 Social Media</button>
-    <button class="dm-qbtn" onclick="dmAsk('SEO kaise improve karein')">🔍 SEO Tips</button>
-    <button class="dm-qbtn" onclick="dmAsk('Pricing kya hai')">💰 Pricing</button>
-    <button class="dm-qbtn" onclick="dmAsk('Free consultation chahiye')">📞 Consultation</button>
-  </div>
-  <div id="dm-messages">
-    <div class="dm-msg">
-      <div class="dm-av bot">AI</div>
-      <div class="dm-bubble bot">Namaste! 👋 Main Wholeup ka AI Assistant hoon.<br><br>Aapki digital marketing mein kaise madad kar sakta hoon?</div>
+
+  <!-- Chat Messages Box -->
+  <div id="dm-messages" class="flex-1 overflow-y-auto p-4 flex flex-col gap-3" data-lenis-prevent>
+    <!-- Initial welcome message from bot -->
+    <div class="dm-msg flex gap-2.5 items-end">
+      <div class="dm-av bot flex-shrink-0 w-7 h-7 rounded-full bg-green-600 text-white font-bold text-xs flex items-center justify-center">AI</div>
+      <div class="dm-bubble bot bg-white text-dark/80 border border-green-600/10 rounded-2xl rounded-bl-sm px-3.5 py-2.5 text-xs leading-relaxed shadow-sm">
+        Namaste! 👋 Main Wholeup ka **GrowBot** AI assistant hoon.<br><br>Main aapka digital marketing partner bankar aapke business ko target customers tak pahuchane aur scaling me madad karunga. Aap kya scale karna chahenge?
+      </div>
     </div>
   </div>
-  <div id="dm-input-row">
-    <input id="dm-input" type="text" placeholder="Apna sawaal likhein..." onkeydown="if(event.key==='Enter')dmSend()" />
-    <button id="dm-send" onclick="dmSend()">
-      <svg viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
+
+  <!-- Dynamic Suggestion Chips Container (Horizontal Scroll) -->
+  <div id="dm-chips-container" class="px-3 py-2 bg-white/50 border-t border-green-600/5 overflow-x-auto flex gap-2 scrollbar-none whitespace-nowrap" data-lenis-prevent>
+    <!-- Chips will be loaded dynamically via Javascript -->
+  </div>
+
+  <!-- Chat Input Row -->
+  <div id="dm-input-row" class="flex items-center gap-2 p-3 border-t border-green-600/10 bg-white">
+    <input id="dm-input" type="text" placeholder="Apna sawaal ya budget likhein..." onkeydown="if(event.key==='Enter')dmSend()" class="flex-1 px-4 py-2 text-xs border border-gray-200 rounded-full focus:outline-none focus:border-green-600 transition" />
+    <button id="dm-send" onclick="dmSend()" class="w-8 h-8 rounded-full bg-green-600 text-white flex items-center justify-center hover:bg-green-700 active:scale-95 transition shadow-md shadow-green-600/20" aria-label="Send Message">
+      <svg viewBox="0 0 24 24" class="w-4 h-4 fill-white"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
     </button>
   </div>
 </div>

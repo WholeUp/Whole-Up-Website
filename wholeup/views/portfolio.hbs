@@ -1,90 +1,720 @@
-<!-- HERO -->
-<section class="page-hero bg-cream px-6 border-b border-black/5">
-  <div class="max-w-7xl mx-auto text-center gs-reveal">
-    <p class="text-xs font-bold tracking-[0.3em] uppercase text-primary mb-4">Case Studies</p>
-    <h1 class="text-5xl md:text-7xl font-black uppercase tracking-widest text-dark mb-6">Our <span class="text-primary">Work.</span></h1>
-    <p class="text-dark/60 font-medium text-xl max-w-3xl mx-auto">Real campaigns. Real numbers. Real businesses we've transformed.</p>
+<!-- CUSTOM INLINE STYLES FOR THE PORTFOLIO PAGE -->
+<style>
+  /* Dark Mode & Accent Variables */
+  .portfolio-section {
+    background-color: #080c14;
+    color: #ffffff;
+  }
+  
+  .portfolio-card {
+    --card-accent: var(--theme-color, #16A34A);
+    background: rgba(13, 17, 26, 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+  }
+  
+  .portfolio-card:hover {
+    transform: translateY(-8px);
+    border-color: color-mix(in srgb, var(--card-accent) 40%, transparent);
+    box-shadow: 0 20px 40px color-mix(in srgb, var(--card-accent) 15%, transparent);
+  }
+
+  .portfolio-card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 24px;
+    padding: 1px;
+    background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.01) 50%, color-mix(in srgb, var(--card-accent) 50%, transparent) 100%);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+  }
+
+  /* Ambient Blur Blobs */
+  .blur-blob {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(140px);
+    opacity: 0.15;
+    pointer-events: none;
+    z-index: 0;
+    mix-blend-mode: screen;
+  }
+
+  .blob-1 {
+    width: 400px;
+    height: 400px;
+    background: #16A34A;
+    top: 10%;
+    left: 5%;
+    animation: float1 20s infinite alternate;
+  }
+
+  .blob-2 {
+    width: 500px;
+    height: 500px;
+    background: #06B6D4;
+    bottom: 15%;
+    right: 5%;
+    animation: float2 25s infinite alternate;
+  }
+
+  .blob-3 {
+    width: 350px;
+    height: 350px;
+    background: #7c3aed;
+    top: 45%;
+    left: 50%;
+    transform: translateX(-50%);
+    animation: float1 18s infinite alternate-reverse;
+  }
+
+  /* Customized Tabs Selector */
+  #filter-tabs {
+    position: relative;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: rgba(13, 17, 26, 0.6);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-radius: 20px;
+    padding: 6px;
+    display: inline-flex;
+    gap: 4px;
+    z-index: 10;
+  }
+
+  .filter-tab {
+    position: relative;
+    padding: 10px 24px;
+    border-radius: 14px;
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: rgba(255, 255, 255, 0.6);
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    z-index: 2;
+    transition: color 0.3s;
+  }
+
+  .filter-tab.active-tab {
+    color: #ffffff;
+  }
+
+  #filter-pill {
+    position: absolute;
+    top: 6px;
+    bottom: 6px;
+    left: 6px;
+    background: linear-gradient(135deg, #16A34A 0%, #15803D 100%);
+    border-radius: 14px;
+    z-index: 1;
+    box-shadow: 0 4px 12px rgba(22, 163, 74, 0.3);
+  }
+
+  /* Mock Browser Custom Scroll */
+  .mock-browser-scroll::-webkit-scrollbar {
+    width: 4px;
+  }
+  .mock-browser-scroll::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.02);
+  }
+  .mock-browser-scroll::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 2px;
+  }
+</style>
+
+<!-- IMMERSIVE HERO -->
+<section class="relative overflow-hidden pt-36 pb-20 portfolio-section px-6 border-b border-white/5">
+  <!-- Blur circles for dynamic ambient illumination -->
+  <div class="blur-blob blob-1"></div>
+  <div class="blur-blob blob-2"></div>
+  <div class="blur-blob blob-3"></div>
+
+  <!-- Space Background Grid Overlay -->
+  <div class="absolute inset-0 bg-grid opacity-[0.03] pointer-events-none"></div>
+
+  <div class="max-w-7xl mx-auto text-center relative z-10 gs-reveal">
+    <p class="text-xs font-bold tracking-[0.3em] uppercase text-primary mb-4 animate-pulse">Our Innovations & Case Studies</p>
+    <h1 class="text-5xl md:text-8xl font-black uppercase tracking-wider text-white mb-6">
+      Our <span class="text-gradient">Impact.</span>
+    </h1>
+    <p class="text-white/60 font-medium text-lg md:text-xl max-w-3xl mx-auto leading-relaxed">
+      Browse our digital flagship products, interactive landing page architectures, and conversion-optimized performance reports.
+    </p>
   </div>
 </section>
 
-<!-- PORTFOLIO GRID -->
-<section class="py-24 bg-white px-6">
-  <div class="max-w-7xl mx-auto">
-    <!-- Filter -->
-    <div class="flex justify-center gap-3 mb-16 flex-wrap gs-reveal" id="filter-tabs">
-      <button onclick="filterCards('all')" class="filter-tab active-tab bg-dark text-white border border-dark px-6 py-3 rounded-xl font-bold text-sm uppercase tracking-widest transition">All</button>
-      <button onclick="filterCards('ads')" class="filter-tab border border-dark/20 text-dark px-6 py-3 rounded-xl font-bold text-sm uppercase tracking-widest hover:border-dark transition">Paid Ads</button>
-      <button onclick="filterCards('seo')" class="filter-tab border border-dark/20 text-dark px-6 py-3 rounded-xl font-bold text-sm uppercase tracking-widest hover:border-dark transition">SEO</button>
-      <button onclick="filterCards('social')" class="filter-tab border border-dark/20 text-dark px-6 py-3 rounded-xl font-bold text-sm uppercase tracking-widest hover:border-dark transition">Social Media</button>
-      <button onclick="filterCards('web')" class="filter-tab border border-dark/20 text-dark px-6 py-3 rounded-xl font-bold text-sm uppercase tracking-widest hover:border-dark transition">Web Design</button>
+<!-- MAIN PORTFOLIO CONTENT -->
+<section class="py-24 portfolio-section relative px-6">
+  <div class="max-w-7xl mx-auto relative z-10">
+    
+    <!-- Premium Slider Navigation Tabs -->
+    <div class="flex justify-center mb-16 gs-reveal">
+      <div id="filter-tabs" class="p-1.5 flex flex-wrap justify-center relative">
+        <div id="filter-pill"></div>
+        <button onclick="filterPortfolio('all', this)" class="filter-tab active-tab">All Work</button>
+        <button onclick="filterPortfolio('web', this)" class="filter-tab">Web Design</button>
+        <button onclick="filterPortfolio('ads', this)" class="filter-tab">Paid Ads</button>
+        <button onclick="filterPortfolio('seo', this)" class="filter-tab">SEO</button>
+        <button onclick="filterPortfolio('social', this)" class="filter-tab">Social Media</button>
+      </div>
     </div>
 
+    <!-- Case Studies Cards Grid -->
     <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8" id="portfolio-grid">
       {{#each portfolio}}
-      <div class="portfolio-card group relative overflow-hidden rounded-[28px] {{#if dark}}bg-dark border border-white/5{{else}}bg-white border border-black/5{{/if}} shadow-md hover:shadow-2xl transition-all duration-500 gs-reveal flex flex-col" data-category="{{category}}" data-tilt data-tilt-max="3">
-        <div class="h-48 flex items-center justify-center relative overflow-hidden flex-shrink-0" style="background:linear-gradient(135deg,{{gradientFrom}},{{gradientTo}})">
-          <div class="text-center z-10 p-6">
-            <div class="w-16 h-16 {{#if dark}}bg-white/10 border border-white/10{{else}}bg-white{{/if}} rounded-2xl shadow-lg flex items-center justify-center mx-auto mb-3 anim-float-1">
-              <i class="{{icon}} text-2xl" style="color:{{iconColor}}"></i>
+      <div class="portfolio-card group relative overflow-hidden rounded-[24px] flex flex-col cursor-pointer gs-reveal" 
+           data-category="{{category}}" 
+           data-tilt data-tilt-max="4" 
+           style="--theme-color: {{tagColor}};"
+           onclick="openCaseModal({{id}})">
+        
+        <!-- Premium Visual Header -->
+        <div class="h-52 flex items-center justify-center relative overflow-hidden flex-shrink-0" style="background: linear-gradient(135deg, {{gradientFrom}} 0%, {{gradientTo}} 100%)">
+          <!-- Ambient glowing mesh inside card header -->
+          <div class="absolute inset-0 opacity-20 bg-cover bg-center" style="background-image: radial-gradient(circle at 30% 30%, {{tagColor}} 0%, transparent 60%);"></div>
+          
+          <div class="text-center z-10 p-6 flex flex-col items-center">
+            <div class="w-16 h-16 bg-white/10 border border-white/10 backdrop-blur-md rounded-2xl shadow-xl flex items-center justify-center mb-4 transition-transform duration-500 group-hover:scale-110 group-hover:rotate-3 anim-float-1">
+              <i class="{{icon}} text-2xl text-white" style="text-shadow: 0 0 10px {{tagColor}};"></i>
             </div>
-            <p class="text-[10px] font-bold tracking-widest uppercase" style="color:{{iconColor}}">{{categoryLabel}}</p>
+            <p class="text-[9px] font-black tracking-[0.2em] uppercase text-white/50 bg-black/20 px-3 py-1 rounded-full border border-white/5">{{categoryLabel}}</p>
           </div>
-          <div class="absolute top-3 right-3 text-white text-[9px] font-black uppercase tracking-wider px-2.5 py-1 rounded-full" style="background:{{iconColor}}">{{categoryLabel}}</div>
-        </div>
-        <div class="p-6 flex flex-col flex-1">
-          <h3 class="text-base font-black uppercase tracking-wide {{#if dark}}text-white{{else}}text-dark{{/if}} mb-2">{{title}}</h3>
-          <p class="{{#if dark}}text-white/50{{else}}text-dark/60{{/if}} text-xs font-normal leading-relaxed mb-4">{{description}}</p>
-
-          <!-- Case study info block -->
-          <div class="{{#if dark}}bg-white/5 border border-white/10{{else}}bg-gray-50 border border-gray-100{{/if}} rounded-xl p-4 mb-4 flex-1">
-            <p class="text-[9px] font-bold uppercase tracking-widest {{#if dark}}text-white/30{{else}}text-dark/35{{/if}} mb-2">What We Did</p>
-            <p class="{{#if dark}}text-white/55{{else}}text-dark/65{{/if}} text-[11px] leading-relaxed">{{caseInfo}}</p>
-          </div>
-
-          <div class="flex items-center gap-2 text-xs font-semibold flex-wrap">
-            <span class="px-3 py-1.5 rounded-full" style="color:{{iconColor}};background:{{tagBg}}">{{metric1}}</span>
-            <span class="px-3 py-1.5 rounded-full {{#if dark}}bg-white/10 text-white{{else}}bg-gray-100 text-dark{{/if}}">{{metric2}}</span>
+          
+          <!-- Category Indicator pill top right -->
+          <div class="absolute top-4 right-4 text-white text-[9px] font-extrabold uppercase tracking-widest px-3 py-1.5 rounded-full backdrop-blur-md border border-white/10 bg-white/5 shadow-md">
+            {{categoryLabel}}
           </div>
         </div>
-        <div class="absolute inset-0 bg-dark/93 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 rounded-[28px]">
-          <div class="text-center text-white p-8">
-            <i class="fas fa-chart-line text-3xl mb-3" style="color:{{iconColor}}"></i>
-            <h4 class="font-black text-sm mb-2 uppercase tracking-widest">The Result</h4>
-            <p class="text-white/65 text-xs font-normal mb-5 leading-relaxed max-w-xs mx-auto">{{result}}</p>
-            <div class="flex flex-wrap gap-2 justify-center">
-              {{#each services}}<span class="bg-white/10 text-white text-[9px] font-semibold uppercase tracking-widest px-2.5 py-1.5 rounded-full">{{this}}</span>{{/each}}
+
+        <!-- Card Body -->
+        <div class="p-6 flex flex-col flex-1 relative z-10">
+          <h3 class="text-xl font-black uppercase tracking-wide text-white mb-3 group-hover:text-primary transition-colors duration-300">{{title}}</h3>
+          <p class="text-white/60 text-xs font-normal leading-relaxed mb-6 flex-1">{{description}}</p>
+
+          <!-- Featured Metric Badges -->
+          <div class="flex items-center gap-2 text-xs font-semibold mt-auto">
+            <span class="px-4 py-2 rounded-xl text-white font-extrabold flex items-center gap-1.5 border border-white/5" style="background: {{tagBg}}; color: {{tagColor}}">
+              <span class="w-2 h-2 rounded-full animate-ping" style="background: {{tagColor}}"></span>
+              {{metric1}}
+            </span>
+            <span class="px-4 py-2 rounded-xl bg-white/5 border border-white/5 text-white/80 font-bold">{{metric2}}</span>
+          </div>
+        </div>
+
+        <!-- Slide-in Action Hover Overlay -->
+        <div class="absolute inset-0 bg-dark/95 flex flex-col justify-between p-6 opacity-0 translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 rounded-[24px] z-20 border border-white/10">
+          <div class="text-center pt-8">
+            <div class="w-12 h-12 rounded-full border border-white/15 bg-white/5 flex items-center justify-center mx-auto mb-4">
+              <i class="fas fa-chart-bar text-lg" style="color: {{tagColor}}"></i>
+            </div>
+            <h4 class="font-black text-white text-base uppercase tracking-widest mb-3">Key Highlight</h4>
+            <p class="text-white/70 text-xs leading-relaxed max-w-[240px] mx-auto mb-6">{{result}}</p>
+          </div>
+          
+          <div class="mt-auto">
+            <!-- Services deliver list -->
+            <div class="flex flex-wrap gap-1.5 justify-center mb-6">
+              {{#each services}}
+              <span class="bg-white/5 border border-white/5 text-white/60 text-[8px] font-bold uppercase tracking-wider px-2 py-1 rounded">{{this}}</span>
+              {{/each}}
+            </div>
+            <!-- Click Call To Action -->
+            <div class="w-full text-center py-3.5 rounded-xl text-white font-bold text-xs uppercase tracking-widest border border-white/15 bg-white/5 hover:bg-primary hover:border-primary transition-all duration-300">
+              Launch Case Study Details <i class="fas fa-external-link-alt ml-1"></i>
             </div>
           </div>
         </div>
+
       </div>
       {{/each}}
     </div>
+
   </div>
 </section>
 
-<!-- CTA -->
-<section class="py-24 px-6 bg-primary relative overflow-hidden">
-  <div class="absolute inset-0 opacity-10" style="background-image:radial-gradient(#fff 1px,transparent 1px);background-size:30px 30px;"></div>
-  <div class="max-w-3xl mx-auto text-center relative z-10 gs-reveal">
-    <h2 class="text-4xl md:text-5xl font-black text-white uppercase tracking-widest mb-6">Want Results Like These?</h2>
-    <p class="text-white/80 text-lg font-medium mb-10">Book a free audit. We'll identify exactly how to drive this kind of growth for your business.</p>
-    <a href="/contact" class="bg-white text-primary px-10 py-5 rounded-xl font-black uppercase tracking-widest text-sm shadow-xl hover:bg-cream transition magnetic-btn inline-flex items-center gap-2">
-      Book Free Strategy Call <i class="fas fa-arrow-right"></i>
-    </a>
+<!-- IMMERSIVE MODAL DRAWER FOR DETAILS -->
+<div id="case-modal" class="fixed inset-0 z-[99999] bg-black/90 backdrop-blur-xl flex items-center justify-center p-4 md:p-8 opacity-0 pointer-events-none transition-all duration-500" onclick="closeCaseModal(event)">
+  <div class="relative bg-[#0d111a] border border-white/10 rounded-[32px] w-full max-w-5xl max-h-[92vh] overflow-y-auto p-6 md:p-12 text-white shadow-2xl flex flex-col gap-8 scrollbar-none" onclick="event.stopPropagation()">
+    
+    <!-- Close Button -->
+    <button onclick="closeCaseModal(null)" class="absolute top-6 right-6 w-10 h-10 rounded-full border border-white/10 bg-white/5 flex items-center justify-center text-white/60 hover:text-white hover:border-white/20 transition-all z-[100]" aria-label="Close details">
+      ✕
+    </button>
+
+    <!-- Modal Layout -->
+    <div class="flex flex-col gap-8">
+      
+      <!-- Modal Header -->
+      <div class="border-b border-white/5 pb-6">
+        <span id="modal-category" class="text-[10px] font-black tracking-[0.25em] uppercase text-primary bg-primary/10 border border-primary/20 px-3 py-1 rounded-full inline-block mb-3">Category</span>
+        <h2 id="modal-title" class="text-3xl md:text-5xl font-black uppercase tracking-wide text-white leading-tight">Project Title</h2>
+      </div>
+
+      <!-- Main Columns Grid -->
+      <div class="grid lg:grid-cols-12 gap-8 items-start">
+        
+        <!-- Left Column: Strategy & Description (7 cols) -->
+        <div class="lg:col-span-7 flex flex-col gap-6">
+          <div>
+            <h4 class="text-xs font-black uppercase tracking-wider text-white/40 mb-2">The Challenge</h4>
+            <p id="modal-desc" class="text-white/70 text-sm leading-relaxed">Description of the project and its goals.</p>
+          </div>
+
+          <div>
+            <h4 class="text-xs font-black uppercase tracking-wider text-white/40 mb-2">Our Strategy</h4>
+            <div id="modal-strategy-card" class="bg-white/5 border border-white/5 p-5 rounded-2xl">
+              <p id="modal-strategy" class="text-white/80 text-sm leading-relaxed"></p>
+            </div>
+          </div>
+
+          <div>
+            <h4 class="text-xs font-black uppercase tracking-wider text-white/40 mb-3">Expertises Delivered</h4>
+            <div id="modal-services" class="flex flex-wrap gap-2">
+              <!-- Services injected dynamically -->
+            </div>
+          </div>
+
+          <!-- GrowBot Direct Integration CTA -->
+          <div class="mt-4 pt-4 border-t border-white/5">
+            <button id="modal-chatbot-cta" onclick="consultFromCase()" class="inline-flex items-center justify-center gap-2.5 bg-primary hover:bg-green-700 text-white font-extrabold text-xs uppercase tracking-widest px-6 py-4 rounded-xl shadow-lg shadow-primary/25 hover:shadow-primary/45 transition-all duration-300">
+              <i class="fas fa-comments"></i> Consult With GrowBot About This Service
+            </button>
+          </div>
+        </div>
+
+        <!-- Right Column: Interactive Metrics & Browser Mockups (5 cols) -->
+        <div class="lg:col-span-5 flex flex-col gap-6">
+          
+          <!-- Key Metrics Counter Display -->
+          <div>
+            <h4 class="text-xs font-black uppercase tracking-wider text-white/40 mb-3">Verified Results</h4>
+            <div class="grid grid-cols-2 gap-4">
+              <!-- Metric 1 Card -->
+              <div class="bg-white/5 border border-white/5 rounded-2xl p-4 text-center">
+                <p id="modal-metric1-label" class="text-[9px] font-black uppercase tracking-widest text-white/40 mb-2">Metric 1</p>
+                <div class="text-2xl font-black text-primary flex items-center justify-center gap-0.5">
+                  <span id="modal-metric1-prefix"></span>
+                  <span id="modal-metric1-num" class="counter-num">0</span>
+                  <span id="modal-metric1-suffix" class="text-sm font-bold text-white/80"></span>
+                </div>
+              </div>
+              <!-- Metric 2 Card -->
+              <div class="bg-white/5 border border-white/5 rounded-2xl p-4 text-center">
+                <p id="modal-metric2-label" class="text-[9px] font-black uppercase tracking-widest text-white/40 mb-2">Metric 2</p>
+                <div class="text-2xl font-black text-white flex items-center justify-center gap-0.5">
+                  <span id="modal-metric2-prefix"></span>
+                  <span id="modal-metric2-num" class="counter-num">0</span>
+                  <span id="modal-metric2-suffix" class="text-sm font-bold text-white/80"></span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Premium Interactive Simulated Website Mockup Frame -->
+          <div id="modal-mockup-section" class="flex flex-col gap-2">
+            <h4 class="text-xs font-black uppercase tracking-wider text-white/40">Interactive Wireframe Preview</h4>
+            
+            <div class="mockup-browser border border-white/10 bg-[#121620] rounded-2xl overflow-hidden shadow-2xl">
+              <!-- Browser Header -->
+              <div class="bg-[#181d2a] px-4 py-2.5 flex items-center gap-1.5 border-b border-white/5">
+                <span class="w-2.5 h-2.5 rounded-full bg-red-500/80"></span>
+                <span class="w-2.5 h-2.5 rounded-full bg-yellow-500/80"></span>
+                <span class="w-2.5 h-2.5 rounded-full bg-green-500/80"></span>
+                <div id="modal-mockup-url" class="bg-black/35 px-4 py-1 rounded-full text-[9px] text-white/40 ml-4 w-52 truncate tracking-wide border border-white/5">https://wholeup.in/showcase</div>
+              </div>
+              
+              <!-- Browser Viewport Container -->
+              <div id="modal-mockup-viewport" class="mock-browser-scroll h-64 overflow-y-auto bg-[#07090e] p-4 relative scroll-smooth flex flex-col gap-4">
+                <!-- Generated mockup contents will be injected here dynamically -->
+              </div>
+            </div>
+            
+            <p class="text-[10px] text-white/30 text-center italic">↑ Scroll inside the browser to preview landing page architecture.</p>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
   </div>
-</section>
+</div>
+
+<!-- CLIENT SIDE PORTFOLIO ANIMATIONS & MODAL LOGIC -->
+<script id="portfolio-data" type="application/json">
+  {{{json portfolio}}}
+</script>
 
 <script>
-function filterCards(cat) {
-  const cards = document.querySelectorAll('.portfolio-card');
-  const tabs = document.querySelectorAll('.filter-tab');
-  tabs.forEach(t => { t.classList.remove('active-tab','bg-dark','text-white','border-dark'); t.classList.add('border-dark/20','text-dark'); });
-  event.target.classList.add('active-tab','bg-dark','text-white','border-dark');
-  event.target.classList.remove('border-dark/20','text-dark');
-  cards.forEach(card => {
-    const show = cat === 'all' || card.dataset.category === cat;
-    card.style.display = show ? '' : 'none';
-    if(show) gsap.fromTo(card,{opacity:0,y:20},{opacity:1,y:0,duration:.4,ease:'power2.out'});
+  let portfolioData = [];
+  try {
+    portfolioData = JSON.parse(document.getElementById('portfolio-data').textContent);
+  } catch (err) {
+    console.error('Failed to parse portfolio JSON data:', err);
+  }
+
+  let activeModalSlug = '';
+
+  // Initial positioning of sliding pill indicator
+  window.addEventListener('DOMContentLoaded', () => {
+    const activeTab = document.querySelector('.filter-tab.active-tab');
+    if (activeTab && typeof gsap !== 'undefined') {
+      const pill = document.getElementById('filter-pill');
+      const container = document.getElementById('filter-tabs');
+      const cRect = container.getBoundingClientRect();
+      const bRect = activeTab.getBoundingClientRect();
+      gsap.set(pill, {
+        left: bRect.left - cRect.left,
+        width: bRect.width
+      });
+    }
   });
-}
+
+  // GSAP-powered tab filtration
+  function filterPortfolio(category, button) {
+    // 1. Move sliding pill indicator
+    const pill = document.getElementById('filter-pill');
+    const container = document.getElementById('filter-tabs');
+    if (pill && button && typeof gsap !== 'undefined') {
+      const cRect = container.getBoundingClientRect();
+      const bRect = button.getBoundingClientRect();
+      
+      // Update classes
+      document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active-tab'));
+      button.classList.add('active-tab');
+
+      gsap.to(pill, {
+        left: bRect.left - cRect.left,
+        width: bRect.width,
+        duration: 0.45,
+        ease: 'power3.out'
+      });
+    }
+
+    // 2. Animate and filter items
+    const cards = document.querySelectorAll('.portfolio-card');
+    cards.forEach(card => {
+      const matches = category === 'all' || card.dataset.category === category;
+      if (matches) {
+        card.style.display = 'flex';
+        if (typeof gsap !== 'undefined') {
+          gsap.fromTo(card, 
+            { opacity: 0, scale: 0.95, y: 15 },
+            { opacity: 1, scale: 1, y: 0, duration: 0.5, ease: 'power2.out', clearProps: 'transform' }
+          );
+        }
+      } else {
+        card.style.display = 'none';
+      }
+    });
+
+    // Refresh ScrollTrigger to update heights after filtering cards
+    if (typeof ScrollTrigger !== 'undefined') {
+      ScrollTrigger.refresh();
+    }
+  }
+
+  // Immersive Modal Operations
+  function openCaseModal(caseId) {
+    const project = portfolioData.find(p => p.id === caseId);
+    if (!project) return;
+    
+    activeModalSlug = project.slug;
+
+    // Populate Text Fields
+    document.getElementById('modal-category').innerText = project.categoryLabel;
+    document.getElementById('modal-title').innerText = project.title;
+    document.getElementById('modal-desc').innerText = project.description;
+    document.getElementById('modal-strategy').innerText = project.caseInfo;
+    document.getElementById('modal-mockup-url').innerText = `https://wholeup.in/portfolio/${project.slug}`;
+
+    // Style elements based on category accent colors
+    const categoryColor = project.tagColor;
+    document.getElementById('modal-category').style.color = categoryColor;
+    document.getElementById('modal-category').style.borderColor = colorMix(categoryColor, 20);
+    document.getElementById('modal-category').style.backgroundColor = colorMix(categoryColor, 8);
+    document.getElementById('modal-chatbot-cta').style.backgroundColor = categoryColor;
+
+    // Inject Tag Chips
+    const tagsContainer = document.getElementById('modal-services');
+    tagsContainer.innerHTML = '';
+    project.services.forEach(tag => {
+      const chip = document.createElement('span');
+      chip.className = 'bg-white/5 border border-white/10 text-white/70 text-[10px] font-semibold uppercase tracking-wider px-3.5 py-1.5 rounded-lg';
+      chip.innerText = tag;
+      tagsContainer.appendChild(chip);
+    });
+
+    // Reset and Populate Metrics Details
+    document.getElementById('modal-metric1-label').innerText = project.metric1.split(' ').slice(1).join(' ') || 'Metric 1';
+    document.getElementById('modal-metric2-label').innerText = project.metric2.split(' ').slice(1).join(' ') || 'Metric 2';
+
+    // Show/Hide Browser Mockups & Build Wireframe Viewport Contents
+    const mockupSection = document.getElementById('modal-mockup-section');
+    const viewport = document.getElementById('modal-mockup-viewport');
+    viewport.innerHTML = ''; // reset
+
+    if (project.category === 'web') {
+      mockupSection.classList.remove('hidden');
+      buildBrowserWireframe(project, viewport);
+    } else {
+      mockupSection.classList.add('hidden');
+    }
+
+    // Modal Opening Timeline Animations (GSAP)
+    const modal = document.getElementById('case-modal');
+    modal.classList.remove('pointer-events-none');
+    
+    if (typeof lenis !== 'undefined' && lenis) lenis.stop(); // stop background scrolling
+    
+    if (typeof gsap !== 'undefined') {
+      const modalBox = modal.querySelector('.relative');
+      
+      const tl = gsap.timeline();
+      
+      tl.to(modal, {
+        opacity: 1,
+        duration: 0.35,
+        ease: 'power2.out'
+      });
+      
+      tl.fromTo(modalBox, {
+        y: 40,
+        opacity: 0,
+        scale: 0.95
+      }, {
+        y: 0,
+        opacity: 1,
+        scale: 1,
+        duration: 0.5,
+        ease: 'power3.out'
+      }, "-=0.2");
+
+      // Animate Metrics Numbers Counting Up dynamically
+      animateCounter('modal-metric1-num', 0, project.metric1Val, project.metric1Prefix, project.metric1Suffix);
+      animateCounter('modal-metric2-num', 0, project.metric2Val, project.metric2Prefix, project.metric2Suffix);
+      
+      // Auto Scroll inside simulated browser frame
+      if (project.category === 'web') {
+        tl.to(viewport, {
+          scrollTop: viewport.scrollHeight - viewport.clientHeight,
+          duration: 4.5,
+          ease: 'power1.inOut',
+          delay: 0.5
+        });
+        tl.to(viewport, {
+          scrollTop: 0,
+          duration: 2.0,
+          ease: 'power2.out'
+        });
+      }
+    } else {
+      modal.style.opacity = '1';
+      document.getElementById('modal-metric1-num').innerText = project.metric1;
+      document.getElementById('modal-metric2-num').innerText = project.metric2;
+    }
+  }
+
+  function closeCaseModal(event) {
+    if (event && event.target !== document.getElementById('case-modal') && event.type === 'click') return;
+    
+    const modal = document.getElementById('case-modal');
+    modal.classList.add('pointer-events-none');
+    
+    if (typeof lenis !== 'undefined' && lenis) lenis.start(); // restore background scrolling
+    
+    if (typeof gsap !== 'undefined') {
+      const modalBox = modal.querySelector('.relative');
+      const tl = gsap.timeline({
+        onComplete: () => {
+          modal.style.opacity = '0';
+        }
+      });
+      
+      tl.to(modalBox, {
+        y: 30,
+        opacity: 0,
+        scale: 0.97,
+        duration: 0.3,
+        ease: 'power2.in'
+      });
+      
+      tl.to(modal, {
+        opacity: 0,
+        duration: 0.25,
+        ease: 'power2.in'
+      }, "-=0.15");
+    } else {
+      modal.style.opacity = '0';
+    }
+  }
+
+  // GSAP Counter Animation Handler
+  function animateCounter(elementId, start, end, prefix, suffix) {
+    const obj = { val: start };
+    const el = document.getElementById(elementId);
+    if (!el) return;
+
+    if (typeof gsap !== 'undefined') {
+      gsap.to(obj, {
+        val: end,
+        duration: 1.8,
+        ease: 'power3.out',
+        onUpdate: () => {
+          // Format integers or decimals nicely
+          let valueString = Number(obj.val % 1 === 0 ? obj.val.toFixed(0) : obj.val.toFixed(1)).toLocaleString('en-US');
+          
+          // Custom overrides for massive numbers
+          if (end >= 1000) {
+            valueString = (obj.val / 1000).toFixed(0) + 'K';
+          }
+          
+          el.innerText = `${prefix || ''}${valueString}`;
+          
+          // Append custom suffix
+          document.getElementById(elementId + '-prefix').innerText = prefix || '';
+          document.getElementById(elementId + '-suffix').innerText = suffix || '';
+        }
+      });
+    } else {
+      el.innerText = end;
+    }
+  }
+
+  // Helper utility to programmatically calculate color-mix
+  function colorMix(baseHex, percent) {
+    return `color-mix(in srgb, ${baseHex} ${percent}%, transparent)`;
+  }
+
+  // Interactive growbot linkage
+  function consultFromCase() {
+    closeCaseModal(null);
+    setTimeout(() => {
+      if (typeof openChatbotWithContext !== 'undefined') {
+        openChatbotWithContext(activeModalSlug);
+      } else if (typeof dmToggle !== 'undefined') {
+        dmToggle();
+      }
+    }, 400);
+  }
+
+  // Programmatic builder of simulated responsive browser preview wireframe
+  function buildBrowserWireframe(project, container) {
+    if (project.slug === 'fintech-saas-webgl') {
+      container.innerHTML = `
+        <!-- Landing Page Section 1: Hero -->
+        <div class="border border-white/5 bg-white/5 rounded-xl p-3.5 flex flex-col gap-2">
+          <div class="h-2 w-12 rounded bg-cyan-500/80"></div>
+          <div class="h-4 w-40 rounded bg-white/10"></div>
+          <div class="h-2.5 w-full rounded bg-white/5"></div>
+          <div class="h-2.5 w-4/5 rounded bg-white/5"></div>
+          <div class="flex gap-2 mt-2">
+            <div class="h-6 w-20 rounded bg-cyan-500"></div>
+            <div class="h-6 w-16 rounded border border-white/10 bg-white/5"></div>
+          </div>
+        </div>
+        <!-- Landing Page Section 2: Dashboard Visualization -->
+        <div class="border border-cyan-500/10 bg-cyan-950/20 rounded-xl p-4 flex flex-col gap-3">
+          <div class="flex justify-between items-center">
+            <div class="h-2.5 w-24 rounded bg-white/20"></div>
+            <span class="text-[8px] text-cyan-400 font-bold uppercase tracking-widest border border-cyan-500/20 bg-cyan-500/5 px-2 py-0.5 rounded">WebGL Canvas</span>
+          </div>
+          <!-- Simulated Chart -->
+          <div class="h-28 border border-white/5 bg-[#0a0d14] rounded-lg p-3 flex items-end gap-1.5 relative overflow-hidden">
+            <div class="absolute inset-0 flex items-center justify-center">
+              <span class="text-[8px] text-white/15 uppercase font-bold tracking-widest animate-pulse">Dynamic Financial Ledger Canvas</span>
+            </div>
+            <div class="w-full bg-cyan-500/40 rounded-t h-[30%] animate-pulse"></div>
+            <div class="w-full bg-cyan-500/60 rounded-t h-[55%]"></div>
+            <div class="w-full bg-cyan-500/80 rounded-t h-[40%] animate-pulse"></div>
+            <div class="w-full bg-cyan-500/90 rounded-t h-[85%]"></div>
+            <div class="w-full bg-cyan-400 rounded-t h-[95%]"></div>
+          </div>
+        </div>
+        <!-- Landing Page Section 3: Features Grid -->
+        <div class="grid grid-cols-2 gap-3">
+          <div class="border border-white/5 bg-white/5 rounded-xl p-3 flex flex-col gap-2">
+            <div class="w-6 h-6 rounded bg-cyan-500/20 flex items-center justify-center text-[10px] text-cyan-400"><i class="fas fa-bolt"></i></div>
+            <div class="h-2.5 w-16 rounded bg-white/10"></div>
+            <div class="h-1.5 w-full rounded bg-white/5"></div>
+          </div>
+          <div class="border border-white/5 bg-white/5 rounded-xl p-3 flex flex-col gap-2">
+            <div class="w-6 h-6 rounded bg-cyan-500/20 flex items-center justify-center text-[10px] text-cyan-400"><i class="fas fa-lock"></i></div>
+            <div class="h-2.5 w-16 rounded bg-white/10"></div>
+            <div class="h-1.5 w-full rounded bg-white/5"></div>
+          </div>
+        </div>
+      `;
+    } else if (project.slug === 'ecommerce-website-launch') {
+      container.innerHTML = `
+        <!-- E-commerce Navbar -->
+        <div class="border border-white/5 bg-white/5 rounded-xl px-3 py-2 flex justify-between items-center">
+          <div class="h-3 w-16 rounded bg-white/10"></div>
+          <div class="flex gap-2">
+            <div class="h-2.5 w-6 rounded bg-white/5"></div>
+            <div class="h-2.5 w-6 rounded bg-white/5"></div>
+            <div class="h-2.5 w-6 rounded bg-violet-500/80"></div>
+          </div>
+        </div>
+        <!-- Hero Product Showcase -->
+        <div class="border border-white/5 bg-white/5 rounded-xl p-3.5 flex flex-col gap-3">
+          <div class="h-32 border border-white/5 bg-[#0f0d14] rounded-lg relative overflow-hidden flex items-center justify-center">
+            <div class="absolute inset-0 bg-gradient-to-tr from-violet-950/20 to-transparent"></div>
+            <i class="fas fa-shopping-bag text-2xl text-violet-400/50 anim-float-2"></i>
+          </div>
+          <div class="h-4 w-32 rounded bg-white/15"></div>
+          <div class="flex justify-between items-center">
+            <div class="h-3 w-12 rounded bg-violet-400"></div>
+            <div class="h-6 w-20 rounded bg-violet-600 flex items-center justify-center text-[8px] font-black uppercase tracking-wider">Buy Now</div>
+          </div>
+        </div>
+        <!-- Checkout Optimization section -->
+        <div class="border border-violet-500/10 bg-violet-950/10 rounded-xl p-3.5 flex flex-col gap-2">
+          <div class="h-2.5 w-24 rounded bg-white/20"></div>
+          <div class="flex gap-2 mt-1">
+            <div class="flex-1 h-7 border border-white/5 bg-white/5 rounded flex items-center justify-center text-[7px] text-white/50"><i class="fab fa-google-pay mr-1"></i> GPay</div>
+            <div class="flex-1 h-7 border border-white/5 bg-white/5 rounded flex items-center justify-center text-[7px] text-white/50"><i class="fas fa-credit-card mr-1"></i> UPI / COD</div>
+          </div>
+        </div>
+      `;
+    } else if (project.slug === 'ai-lead-automation') {
+      container.innerHTML = `
+        <!-- AI Hero -->
+        <div class="border border-white/5 bg-white/5 rounded-xl p-3.5 flex flex-col gap-2">
+          <div class="h-3.5 w-36 rounded bg-emerald-400/80"></div>
+          <div class="h-2 w-full rounded bg-white/5"></div>
+        </div>
+        <!-- Automated Chat Interface Mock -->
+        <div class="border border-emerald-500/10 bg-emerald-950/15 rounded-xl p-4 flex flex-col gap-3">
+          <span class="text-[8px] text-emerald-400 font-extrabold uppercase tracking-widest bg-emerald-500/5 border border-emerald-500/20 px-2 py-0.5 rounded self-start">Live GrowBot Chat</span>
+          <div class="flex flex-col gap-2">
+            <!-- Bot Bubble -->
+            <div class="bg-white/5 border border-white/5 rounded-lg p-2.5 self-start max-w-[80%] flex flex-col gap-1.5">
+              <div class="h-1.5 w-10 rounded bg-emerald-400"></div>
+              <div class="h-1 w-24 rounded bg-white/10"></div>
+              <div class="h-1 w-20 rounded bg-white/10"></div>
+            </div>
+            <!-- User Bubble -->
+            <div class="bg-emerald-600 rounded-lg p-2.5 self-end max-w-[80%] flex flex-col gap-1.5">
+              <div class="h-1 w-20 rounded bg-white/80"></div>
+            </div>
+            <!-- Bot Bubble with CTAs -->
+            <div class="bg-white/5 border border-white/5 rounded-lg p-2.5 self-start max-w-[80%] flex flex-col gap-2">
+              <div class="h-1 w-16 rounded bg-emerald-400"></div>
+              <div class="h-4 w-28 rounded bg-emerald-500/80 flex items-center justify-center text-[7px] font-bold">Call Team Directly</div>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+  }
 </script>

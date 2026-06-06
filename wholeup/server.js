@@ -238,14 +238,14 @@ app.post('/api/chat', async (req, res) => {
   const { message, history, context } = req.body;
 
   if (!message) {
-    return res.status(400).json({ success: false, reply: 'Sawaal khali nahi ho sakta.' });
+    return res.status(400).json({ success: false, reply: 'Your inquiry cannot be empty.' });
   }
 
   const apiKey = process.env.GEMINI_API_KEY;
   if (!apiKey || apiKey.trim() === '') {
     return res.json({
       success: true,
-      reply: 'Namaste! 😊 Mera AI engine connect nahi ho paa raha hai kyunki API key configured nahi hai. Lekin main aapki digital marketing (SEO, Ads, Social Media) me zaroor madad karunga. Kripya humein call karein: +91 94268 46035!'
+      reply: 'Hello! 😊 My AI engine is currently offline. However, I can certainly assist you with your digital marketing, SEO, paid ads, or web development needs. Please feel free to contact our growth team directly: +91 94268 46035!'
     });
   }
 
@@ -257,15 +257,16 @@ app.post('/api/chat', async (req, res) => {
 Your goal is to answer all digital marketing, SEO, paid advertising, social media, web development, and business growth queries. You must act as an extremely knowledgeable, creative, and experienced digital marketing expert.
 - Answer general questions, technical setup questions (like Meta pixels, tracking, keyword tools, backlink metrics, Instagram hooks, or SEO audits) with highly accurate, detailed, and professional marketing knowledge to prove your expertise.
 - Always explain concepts simply, and IMMEDIATELY follow up your explanation with a direct invitation to contact Wholeup's experts to implement it.
-- CRITICAL: At the end of every marketing query explanation, you MUST append the text "[CALL_CTA] [WHATSAPP_CTA]" so the user has immediate access to our contact buttons. For example: "Aap apne business ke liye custom strategy design karne ke liye niche direct connect kar sakte hain: [CALL_CTA] [WHATSAPP_CTA]".
+- CRITICAL: At the end of every marketing query explanation, you MUST append the text "[CALL_CTA] [WHATSAPP_CTA]" so the user has immediate access to our contact buttons. For example: "To design a custom growth strategy for your business, feel free to connect with our experts: [CALL_CTA] [WHATSAPP_CTA]".
 
 Tone & Language:
-- Speak in a friendly, highly enthusiastic, and professional tone using a mix of Hindi and English (Hinglish).
-- Keep answers informative yet concise (3 to 5 sentences max).
+- Speak strictly in professional, formal, and authoritative English. Do NOT use Hindi, Hinglish, or informal/slang expressions.
+- CRITICAL: Never use conversational fluff, slang, or generic opening/closing expressions like "What a fantastic question!", "That is a brilliant query!", or any Hindi/Hinglish greetings/slang (e.g., "zabardast", "namaste", "sawaal", "kijiye"). Address the user's query directly and professionally.
+- Keep answers highly informative, business-oriented, and concise (3 to 5 sentences max).
 
 Strict Constraints:
 - You must ONLY answer questions related to digital marketing, websites, copywriting, and business growth.
-- If a user asks general knowledge, academic, coding (other than explaining web design or simple analytics snippets), recipes, sports, or completely unrelated questions, you must politely and creatively redirect them back to digital marketing. Say something like: "Main Wholeup ka digital marketing assistant (GrowBot) hoon. Isliye main sirf aapke business ko grow karne, SEO, Ads ya websites ke baare me baat kar sakta hoon! 😊"
+- If a user asks general knowledge, academic, coding (other than explaining web design or simple analytics snippets), recipes, sports, or completely unrelated questions, you must politely and creatively redirect them back to digital marketing. Say something like: "I am GrowBot, your virtual digital marketing consultant at Wholeup. I can only assist you with business growth, SEO, paid advertising, or web development queries. 😊"
 - Always encourage the user to book a Free Strategy Consultation or contact Wholeup directly:
   - Phone/WhatsApp: +91 94268 46035
   - Email: wholeup.agency@gmail.com
@@ -275,7 +276,7 @@ Interactive Call-To-Actions (CTAs):
 - If the user asks how to contact you, how to call you, wants a consultation, or asks about plans/pricing, you must append these specific code tags at the end of your response to render interactive call-to-action buttons:
   - Append \`[CALL_CTA]\` to show a click-to-call button.
   - Append \`[WHATSAPP_CTA]\` to show a click-to-WhatsApp button.
-  - Example response: "...Aap humein call kar sakte hain. [CALL_CTA] [WHATSAPP_CTA]"
+  - Example response: "...You can connect with us directly. [CALL_CTA] [WHATSAPP_CTA]"
 
 Lead Capture Automation:
 - If the user shares their contact information (like Name, Phone number, Email, or Service interest), you must extract them. At the very end of your response, append a special structured tag in this exact format:
@@ -417,7 +418,7 @@ You are acting as Wholeup's Lead Business Consultant. Your task is to walk the u
     console.error('Gemini API Error:', error);
     res.status(500).json({
       success: false,
-      reply: 'Maaf kijiyega, server me thodi dikkat aa gayi hai. Kripya kuch samay baad prayaas karein ya humse seedhe sampark karein: +91 94268 46035.'
+      reply: 'Apologies, we are experiencing a temporary server connectivity issue. Please try again shortly or contact our growth experts directly at +91 94268 46035.'
     });
   }
 });
@@ -434,7 +435,7 @@ app.post('/api/grader/audit', async (req, res) => {
   let auditText = '';
 
   if (!apiKey || apiKey.trim() === '') {
-    auditText = `Namaste ${name}! 😊
+    auditText = `Hello ${name}! 😊
 
 Thank you for requesting an audit for ${url}. Currently, our live AI grading engine is offline due to missing configuration, but we've logged your request!
 

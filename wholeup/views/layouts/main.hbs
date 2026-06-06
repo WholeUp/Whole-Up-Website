@@ -422,31 +422,31 @@
 
   const chipData = {
     'default': [
-      { text: "📈 Grow My Sales", action: () => dmAsk("Mujhe marketing campaigns scale karke sales badhani hai. Please guide kijiye.") },
+      { text: "📈 Grow My Sales", action: () => dmAsk("I want to scale my marketing campaigns to increase sales. Please guide me.") },
       { text: "🔍 Free SEO Check", action: () => openChatbotWithContext("seo") },
       { text: "💻 Need a Website", action: () => openChatbotWithContext("webdev") },
       { text: "💡 Find My Service", action: () => openChatbotWithContext("consultant") }
     ],
     'seo': [
-      { text: "🔍 Audit My Website", action: () => dmAsk("Kya aap meri website ka free technical SEO audit kar sakte hain?") },
-      { text: "📍 Local SEO / GMB", action: () => dmAsk("Google Maps aur Local SEO se local customers kaise layein?") },
+      { text: "🔍 Audit My Website", action: () => dmAsk("Can you perform a free technical SEO audit of my website?") },
+      { text: "📍 Local SEO / GMB", action: () => dmAsk("How can we attract local customers using Google Maps and Local SEO?") },
       { text: "📈 Rank on Page 1", action: () => dmAsk("Dominate Google search results on Page 1 by targeting buyer-intent keywords.") },
       { text: "🔙 Main Menu", action: () => openChatbotWithContext("default") }
     ],
     'ppc': [
-      { text: "💰 Maximize ROAS", action: () => dmAsk("Paid ads me Return on Ad Spend (ROAS) kaise double karein?") },
-      { text: "📱 Meta/Instagram Ads", action: () => dmAsk("Instagram and Facebook Ads setup process aur pricing details batayein.") },
-      { text: "🎯 Lead Gen Campaigns", action: () => dmAsk("Google Ads aur landing page funnel setup lead generation ke liye.") },
+      { text: "💰 Maximize ROAS", action: () => dmAsk("How can we double our Return on Ad Spend (ROAS) with paid ads?") },
+      { text: "📱 Meta/Instagram Ads", action: () => dmAsk("What is the setup process and pricing details for Instagram and Facebook Ads?") },
+      { text: "🎯 Lead Gen Campaigns", action: () => dmAsk("How do we set up Google Ads and a landing page funnel for lead generation?") },
       { text: "🔙 Main Menu", action: () => openChatbotWithContext("default") }
     ],
     'social': [
-      { text: "🎬 Reels Viral Hooks", action: () => dmAsk("Short-form Reels ke liye high-retention hooks and video script ideas share karein.") },
-      { text: "📈 Instagram Growth", action: () => dmAsk("Followers badhane aur social engagement strategy implement kaise karein?") },
-      { text: "📅 Content Strategy", action: () => dmAsk("Brands ke liye content calendar aur monthly pricing details.") },
+      { text: "🎬 Reels Viral Hooks", action: () => dmAsk("Can you share high-retention hooks and script ideas for short-form Reels?") },
+      { text: "📈 Instagram Growth", action: () => dmAsk("How can we implement a strategy to grow followers and boost social engagement?") },
+      { text: "📅 Content Strategy", action: () => dmAsk("What are the details and monthly pricing for brand content calendars?") },
       { text: "🔙 Main Menu", action: () => openChatbotWithContext("default") }
     ],
     'webdev': [
-      { text: "⚡ Speed Optimization", action: () => dmAsk("Mera website load-time slow hai. Performance and speed index kaise improve karein?") },
+      { text: "⚡ Speed Optimization", action: () => dmAsk("My website load time is slow. How can we improve performance and speed index?") },
       { text: "🎨 Premium UI/UX Design", action: () => dmAsk("Fast, responsive, modern glassmorphic theme conversion-focused landing page layout.") },
       { text: "🛒 Shopify eCommerce", action: () => dmAsk("E-commerce website build and Shopify setups setup pricing details.") },
       { text: "🔙 Main Menu", action: () => openChatbotWithContext("default") }
@@ -497,7 +497,7 @@
       const t = document.getElementById('dm-typ');
       if (t) t.remove();
       
-      const reply = data.success ? data.reply : 'Maaf kijiye, humare servers temporary down hain. Kripya humse directly contact karein: +91 94268 46035!';
+      const reply = data.success ? data.reply : 'We apologize, but our servers are temporarily offline. Please contact us directly at +91 94268 46035.';
       
       // Update local conversational memory history state
       if (data.success) {
@@ -528,7 +528,7 @@
       if (t) t.remove();
       const aDiv=document.createElement('div');
       aDiv.className='dm-msg';
-      aDiv.innerHTML=`<div class="dm-av bot">AI</div><div class="dm-bubble bot">Net connection me koi problem lag rahi hai. Kripya hume direct call karein: +91 94268 46035.</div>`;
+      aDiv.innerHTML=`<div class="dm-av bot">AI</div><div class="dm-bubble bot">It seems there is a network connectivity issue. Please call us directly at +91 94268 46035.</div>`;
       msgs.appendChild(aDiv);
       msgs.scrollTop=msgs.scrollHeight;
     }
@@ -595,8 +595,8 @@
         <div class="dm-av bot">AI</div>
         <div class="dm-bubble bot">
           <strong>Wholeup Consultant Wizard 🚀</strong><br><br>
-          Namaste! Main aapko sahi digital marketing service package suggest karunga.<br><br>
-          Pehle ye batayein: <strong>Aapke business ka main goal kya hai?</strong>
+          Hello! I will help suggest the right digital marketing service package for your business.<br><br>
+          First, please tell us: <strong>What is your main business goal?</strong>
         </div>
       `;
       msgs.appendChild(aDiv);
@@ -606,15 +606,15 @@
     } else {
       let greeting = '';
       if (contextVal === 'seo') {
-        greeting = "Namaste! 👋 Main Wholeup ka <strong>SEO Specialist</strong> assistant hoon. Google search rankings aur organic business growth ke regarding aap kya janna chahte hain?";
+        greeting = "Hello! 👋 I am Wholeup's <strong>SEO Specialist</strong> assistant. How can I help you with Google search rankings and organic business growth?";
       } else if (contextVal === 'ppc') {
-        greeting = "Namaste! 👋 Main Wholeup ka <strong>Paid Ads Strategist</strong> assistant hoon. Meta, Google, aur WhatsApp marketing campaigns scaling ke regarding aap kya janna chahte hain?";
+        greeting = "Hello! 👋 I am Wholeup's <strong>Paid Ads Strategist</strong> assistant. What would you like to know about scaling Meta, Google, and WhatsApp marketing campaigns?";
       } else if (contextVal === 'social') {
-        greeting = "Namaste! 👋 Main Wholeup ka <strong>Social Media Growth Expert</strong> assistant hoon. Reels production details, content strategy aur outbound B2B LinkedIn plans ke related aapki kya query hai?";
+        greeting = "Hello! 👋 I am Wholeup's <strong>Social Media Growth Expert</strong> assistant. Do you have questions about Reels production, content strategy, or outbound B2B LinkedIn plans?";
       } else if (contextVal === 'webdev') {
-        greeting = "Namaste! 👋 Main Wholeup ka <strong>Full-Stack Web Dev Expert</strong> assistant hoon. Website speed, automation flows, graphic designs aur modern conversion layouts ke baare me boliye.";
+        greeting = "Hello! 👋 I am Wholeup's <strong>Full-Stack Web Dev Expert</strong> assistant. Ask me about website speed, automation flows, graphic design, or modern conversion layouts.";
       } else {
-        greeting = "Namaste! 👋 Main Wholeup ka <strong>GrowBot</strong> AI assistant hoon.<br><br>Main aapka digital marketing partner bankar aapke business ko target customers tak pahuchane aur scaling me madad karunga. Aap kya scale karna chahenge?";
+        greeting = "Hello! 👋 I am Wholeup's <strong>GrowBot</strong> AI assistant.<br><br>I will partner with you to scale your business and reach your target customers. What would you like to scale today?";
       }
       
       const aDiv = document.createElement('div');
@@ -638,7 +638,7 @@
     
     if (wizardStep === 1) {
       const options = [
-        { text: "📈 Leads & Clients", value: "Leads & Clients Badhana" },
+        { text: "📈 Leads & Clients", value: "Grow Leads & Clients" },
         { text: "🛒 Sales Online", value: "Online Sales (E-commerce)" },
         { text: "📱 Brand Followers", value: "Brand Awareness & Followers" }
       ];
@@ -651,9 +651,9 @@
       });
     } else if (wizardStep === 2) {
       const options = [
-        { text: "🌐 Active Website", value: "Active Website Hai" },
-        { text: "🆕 New Website", value: "New Website Chahiye" },
-        { text: "❌ Website Nahi", value: "Website Nahi Chahiye" }
+        { text: "🌐 Active Website", value: "I have an active website" },
+        { text: "🆕 New Website", value: "I need a new website" },
+        { text: "❌ Website Nahi", value: "I do not need a website" }
       ];
       options.forEach(opt => {
         const btn = document.createElement('button');
@@ -695,7 +695,7 @@
         aDiv.className = 'dm-msg';
         aDiv.innerHTML = `
           <div class="dm-av bot">AI</div>
-          <div class="dm-bubble bot">Great choice! 👍 Kya aapke paas currently active website hai ya aap new website plan kar rahe hain?</div>
+          <div class="dm-bubble bot">Great choice! 👍 Do you currently have an active website, or are you planning a new one?</div>
         `;
         msgs.appendChild(aDiv);
         msgs.scrollTop = msgs.scrollHeight;
@@ -709,7 +709,7 @@
         aDiv.className = 'dm-msg';
         aDiv.innerHTML = `
           <div class="dm-av bot">AI</div>
-          <div class="dm-bubble bot">Perfect. Akhiri sawaal: Aapka monthly marketing budget range kya hai?</div>
+          <div class="dm-bubble bot">Perfect. One last question: What is your monthly marketing budget range?</div>
         `;
         msgs.appendChild(aDiv);
         msgs.scrollTop = msgs.scrollHeight;
@@ -719,7 +719,7 @@
       wizardData.budget = value;
       wizardStep = 0;
       
-      const query = `Mujhe marketing consultant ki zaroorat hai. My Goal: ${wizardData.goal}, My Website Status: ${wizardData.website}, My Budget: ${wizardData.budget}. Please recommend the best marketing services and strategy packages for me.`;
+      const query = `I need a marketing consultation. My Goal: ${wizardData.goal}, My Website Status: ${wizardData.website}, My Budget: ${wizardData.budget}. Please recommend the best marketing services and strategy packages for me.`;
       
       setTimeout(() => {
         const container = document.getElementById('dm-chips-container');
@@ -743,8 +743,8 @@
       return '<br>• ' + p1;
     });
     
-    html = html.replace(/\[CALL_CTA\]/g, `<a href="tel:+919426846035" class="inline-flex items-center gap-2 mt-3 px-4 py-2.5 bg-green-600 hover:bg-green-700 text-white font-semibold text-xs rounded-full shadow-lg shadow-green-600/25 hover:shadow-green-600/40 hover:-translate-y-0.5 active:translate-y-0 transition-all w-full justify-center cursor-pointer no-underline"><i class="fas fa-phone-alt animate-bounce"></i> +91 94268 46035 Par Call Karein</a>`);
-    html = html.replace(/\[WHATSAPP_CTA\]/g, `<a href="https://wa.me/919426846035" target="_blank" class="inline-flex items-center gap-2 mt-2 px-4 py-2.5 bg-emerald-500 hover:bg-emerald-600 text-white font-semibold text-xs rounded-full shadow-lg shadow-emerald-500/25 hover:shadow-emerald-500/40 hover:-translate-y-0.5 active:translate-y-0 transition-all w-full justify-center cursor-pointer no-underline"><i class="fab fa-whatsapp text-sm"></i> WhatsApp Par Message Karein</a>`);
+    html = html.replace(/\[CALL_CTA\]/g, `<a href="tel:+919426846035" class="inline-flex items-center gap-2 mt-3 px-4 py-2.5 bg-green-600 hover:bg-green-700 text-white font-semibold text-xs rounded-full shadow-lg shadow-green-600/25 hover:shadow-green-600/40 hover:-translate-y-0.5 active:translate-y-0 transition-all w-full justify-center cursor-pointer no-underline"><i class="fas fa-phone-alt animate-bounce"></i> Call +91 94268 46035 Now</a>`);
+    html = html.replace(/\[WHATSAPP_CTA\]/g, `<a href="https://wa.me/919426846035" target="_blank" class="inline-flex items-center gap-2 mt-2 px-4 py-2.5 bg-emerald-500 hover:bg-emerald-600 text-white font-semibold text-xs rounded-full shadow-lg shadow-emerald-500/25 hover:shadow-emerald-500/40 hover:-translate-y-0.5 active:translate-y-0 transition-all w-full justify-center cursor-pointer no-underline"><i class="fab fa-whatsapp text-sm"></i> Message on WhatsApp</a>`);
     html = html.replace(/(<br>){3,}/g, '<br><br>');
     return html;
   }

@@ -48,10 +48,11 @@
     .lenis.lenis-smooth { scroll-behavior:auto!important; }
     .lenis.lenis-stopped { overflow:hidden; }
 
-    /* Premium Inversion Custom Cursor */
-    .cursor-dot { display:none; }
-    .cursor-shadow { width:24px; height:24px; background:#ffffff; border-radius:50%; position:fixed; pointer-events:none; z-index:99999; transform:translate(-50%,-50%); mix-blend-mode:difference; transition:width 0.25s ease,height 0.25s ease; will-change:transform; }
-    .cursor-hover .cursor-shadow { width:52px; height:52px; background:#ffffff; }
+    /* Cursor */
+    .cursor-dot { width:8px; height:8px; background:#16A34A; position:fixed; border-radius:50%; pointer-events:none; z-index:99999; transform:translate(-50%,-50%); transition:width .2s,height .2s; }
+    .cursor-shadow { width:40px; height:40px; border:1.5px solid rgba(22,163,74,.4); border-radius:50%; position:fixed; pointer-events:none; z-index:99998; transform:translate(-50%,-50%); transition:.1s ease-out,width .3s,height .3s; }
+    .cursor-hover .cursor-dot { width:0; height:0; }
+    .cursor-hover .cursor-shadow { width:60px; height:60px; border-color:#16A34A; background:rgba(22,163,74,.1); }
 
     /* Global font rules — Inter for headings, DM Sans for body */
     h1,h2,h3,h4,h5,h6 { font-family:'Inter',sans-serif; }
@@ -313,7 +314,7 @@
     let mx=0,my=0,sx=0,sy=0;
     document.addEventListener('mousemove',e=>{ mx=e.clientX; my=e.clientY; });
     function animateCursor(){
-      sx+=(mx-sx)*.25; sy+=(my-sy)*.25;
+      sx+=(mx-sx)*.12; sy+=(my-sy)*.12;
       dot.style.left=mx+'px'; dot.style.top=my+'px';
       shadow.style.left=sx+'px'; shadow.style.top=sy+'px';
       requestAnimationFrame(animateCursor);

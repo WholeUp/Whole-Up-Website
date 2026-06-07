@@ -422,7 +422,8 @@
 
   const chipData = {
     'default': [
-      { text: "📈 Grow My Sales", action: () => dmAsk("I want to scale my marketing campaigns to increase sales. Please guide me.") },
+      { text: "📱 Social Media / SMM", action: () => openChatbotWithContext("social") },
+      { text: "💰 Paid Ads (PPC)", action: () => openChatbotWithContext("ppc") },
       { text: "🔍 Free SEO Check", action: () => openChatbotWithContext("seo") },
       { text: "💻 Need a Website", action: () => openChatbotWithContext("webdev") },
       { text: "💡 Find My Service", action: () => openChatbotWithContext("consultant") }

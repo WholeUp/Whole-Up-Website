@@ -1,3 +1,14 @@
+<style>
+  @keyframes whatsapp-pulse {
+    0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7), 0 4px 20px rgba(0,0,0,.2); }
+    70% { box-shadow: 0 0 0 15px rgba(37, 211, 102, 0), 0 4px 20px rgba(0,0,0,.2); }
+    100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0), 0 4px 20px rgba(0,0,0,.2); }
+  }
+  .float-btn.whatsapp {
+    animation: whatsapp-pulse 2s infinite !important;
+  }
+</style>
+
 <div class="float-btn-group">
   <a href="tel:+919426846035" class="float-btn phone" title="Call Us">
     <i class="fas fa-phone-alt"></i>

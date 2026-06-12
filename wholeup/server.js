@@ -18,6 +18,12 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, 'public')));
 
+// Middleware to inject canonical URL to all rendered pages
+app.use((req, res, next) => {
+  res.locals.canonicalUrl = `https://wholeup.in${req.path === '/' ? '' : req.path}`;
+  next();
+});
+
 // Rate limiting for contact form
 const contactLimiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes

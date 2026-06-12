@@ -10,6 +10,7 @@
   <meta property="og:description" content="{{metaDesc}}">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://wholeup.in/favicon.png">
+  <link rel="canonical" href="{{canonicalUrl}}">
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>W</text></svg>">
 
   <script src="https://cdn.tailwindcss.com"></script>
@@ -179,6 +180,47 @@
     .range-slider::-moz-range-thumb { width: 18px; height: 18px; border-radius: 50%; background: #16A34A; cursor: pointer; border: none; box-shadow: 0 0 10px rgba(22, 163, 74, 0.4); transition: transform 0.1s ease; }
     .range-slider::-moz-range-thumb:hover { transform: scale(1.25); }
   </style>
+
+  <!-- Structured Data / Schema Markup -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": "https://wholeup.in/#organization",
+        "name": "Wholeup",
+        "url": "https://wholeup.in",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://wholeup.in/favicon.png",
+          "caption": "Wholeup Logo"
+        },
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "telephone": "+919426846035",
+          "contactType": "sales",
+          "email": "wholeup.agency@gmail.com",
+          "areaServed": "IN",
+          "availableLanguage": ["en", "hi"]
+        },
+        "sameAs": [
+          "https://instagram.com/wholeup.india"
+        ]
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://wholeup.in/#website",
+        "url": "https://wholeup.in",
+        "name": "Wholeup",
+        "description": "Results-driven digital marketing agency helping businesses scale with SEO, paid ads, social media, and conversion-first websites.",
+        "publisher": {
+          "@id": "https://wholeup.in/#organization"
+        }
+      }
+    ]
+  }
+  </script>
 </head>
 <body class="antialiased selection:bg-primary selection:text-white bg-grid">
 

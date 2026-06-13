@@ -1043,6 +1043,11 @@ app.post('/api/telegram/webhook', async (req, res) => {
   }
 });
 
+// CRON Endpoint: Keep-Awake Ping Route (Public)
+app.get('/api/cron/ping', (req, res) => {
+  res.status(200).send('pong');
+});
+
 // CRON Endpoint: Morning Check-in (7:00 AM)
 app.get('/api/cron/morning-checkin', async (req, res) => {
   const token = req.query.token;

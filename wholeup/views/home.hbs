@@ -8,6 +8,7 @@
     opacity: 0.12;
     pointer-events: none;
     z-index: 0;
+    will-change: transform;
   }
   .hero-blob-1 {
     width: 450px;
@@ -15,7 +16,7 @@
     background: #16A34A;
     top: 5%;
     left: -10%;
-    animation: float1 18s infinite alternate;
+    animation: blobFloat1 22s infinite alternate ease-in-out;
   }
   .hero-blob-2 {
     width: 500px;
@@ -23,7 +24,19 @@
     background: #06B6D4;
     bottom: 5%;
     right: -10%;
-    animation: float2 22s infinite alternate;
+    animation: blobFloat2 28s infinite alternate ease-in-out;
+  }
+
+  @keyframes blobFloat1 {
+    0% { transform: translate(0px, 0px) scale(1) rotate(0deg); }
+    33% { transform: translate(40px, -60px) scale(1.08) rotate(6deg); }
+    66% { transform: translate(-30px, 30px) scale(0.95) rotate(-4deg); }
+    100% { transform: translate(0px, 0px) scale(1) rotate(0deg); }
+  }
+  @keyframes blobFloat2 {
+    0% { transform: translate(0px, 0px) scale(1) rotate(0deg); }
+    50% { transform: translate(-50px, 50px) scale(1.06) rotate(-7deg); }
+    100% { transform: translate(0px, 0px) scale(1) rotate(0deg); }
   }
   
   /* Services Glow Styles */
@@ -89,6 +102,13 @@
   <div class="hero-blur-blob hero-blob-1"></div>
   <div class="hero-blur-blob hero-blob-2"></div>
 
+  <!-- Floating Interactive Decorative Particles -->
+  <div class="absolute top-[15%] left-[20%] w-3 h-3 rounded-full bg-primary/20 anim-particle-1 pointer-events-none select-none z-0"></div>
+  <div class="absolute top-[40%] right-[30%] w-4 h-4 rounded-full bg-blue-500/20 anim-particle-2 pointer-events-none select-none z-0"></div>
+  <div class="absolute bottom-[25%] left-[10%] w-2 h-2 rounded-full bg-emerald-500/30 anim-particle-3 pointer-events-none select-none z-0"></div>
+  <div class="absolute top-[70%] left-[45%] text-primary/25 text-xl font-black anim-particle-4 pointer-events-none select-none z-0">+</div>
+  <div class="absolute top-[25%] right-[15%] text-blue-500/25 text-lg font-black anim-particle-5 pointer-events-none select-none z-0">x</div>
+
   <div class="max-w-[1450px] mx-auto w-full grid lg:grid-cols-12 gap-12 items-center relative z-10">
     
     <!-- Hero Text Content (Left: 7 cols) -->
@@ -116,8 +136,8 @@
         <a href="/contact" class="w-full sm:w-auto bg-primary text-white px-8 py-4 rounded-xl font-bold text-base shadow-lg shadow-primary/30 hover:bg-green-600 hover:shadow-primary/45 hover:-translate-y-0.5 active:translate-y-0 transition-all duration-300 flex items-center justify-center gap-2 magnetic-btn">
           Get Free Growth Audit <i class="fas fa-arrow-right"></i>
         </a>
-        <a href="/services" class="w-full sm:w-auto bg-white border border-black/10 text-dark px-8 py-4 rounded-xl font-bold text-base hover:border-primary hover:text-primary transition-colors duration-300 text-center magnetic-btn">
-          View Our Services
+        <a href="/services" class="w-full sm:w-auto bg-white border border-black/10 text-dark px-8 py-4 rounded-xl font-bold text-base hover:border-primary hover:text-primary transition-all duration-300 text-center magnetic-btn flex items-center justify-center gap-2 group">
+          View Our Services <i class="fas fa-arrow-right text-xs opacity-50 group-hover:opacity-100 group-hover:translate-x-1.5 transition-all duration-300"></i>
         </a>
       </div>
       
@@ -248,8 +268,12 @@
     </div>
     
     <div class="text-center mt-16 gs-reveal">
-      <a href="/services" class="inline-flex items-center gap-3 border-2 border-dark text-dark px-10 py-4.5 rounded-xl font-bold uppercase tracking-widest text-sm hover:bg-dark hover:text-white transition-all duration-300 magnetic-btn">
-        View All Services <i class="fas fa-arrow-right"></i>
+      <a href="/services" class="inline-flex items-center gap-3 bg-dark text-white px-10 py-5 rounded-2xl font-black uppercase tracking-widest text-sm shadow-xl shadow-black/10 hover:shadow-primary/35 hover:-translate-y-1 duration-300 transition-all magnetic-btn relative overflow-hidden group">
+        <span class="relative z-10 flex items-center gap-3">
+          View All Services 
+          <i class="fas fa-arrow-right transition-transform duration-300 group-hover:translate-x-1.5"></i>
+        </span>
+        <div class="absolute inset-0 bg-gradient-to-r from-green-600 to-emerald-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-0"></div>
       </a>
     </div>
     
@@ -733,7 +757,7 @@
         ease: 'back.out(1.2)'
       }, "-=0.7");
 
-      // 2. HERO MOUSE PARALLAX EFFECT
+      // 2. HERO MOUSE PARALLAX EFFECT (Dashboard + Floating Particles)
       const heroSection = document.getElementById('home');
       if (heroSection) {
         heroSection.addEventListener('mousemove', e => {
@@ -759,10 +783,16 @@
             duration: 0.7,
             ease: 'power2.out'
           });
+          // Parallax for decorative background particles
+          gsap.to('.anim-particle-1', { x: moveX * 45, y: moveY * 45, duration: 0.9, ease: 'power1.out' });
+          gsap.to('.anim-particle-2', { x: moveX * -55, y: moveY * 55, duration: 0.9, ease: 'power1.out' });
+          gsap.to('.anim-particle-3', { x: moveX * 65, y: moveY * -65, duration: 0.9, ease: 'power1.out' });
+          gsap.to('.anim-particle-4', { x: moveX * -25, y: moveY * -25, duration: 0.9, ease: 'power1.out' });
+          gsap.to('.anim-particle-5', { x: moveX * 75, y: moveY * 35, duration: 0.9, ease: 'power1.out' });
         });
         
         heroSection.addEventListener('mouseleave', () => {
-          gsap.to('.hero-parallax-1, .hero-parallax-2, .hero-parallax-3', {
+          gsap.to('.hero-parallax-1, .hero-parallax-2, .hero-parallax-3, .anim-particle-1, .anim-particle-2, .anim-particle-3, .anim-particle-4, .anim-particle-5', {
             x: 0,
             y: 0,
             duration: 1.0,
@@ -843,6 +873,39 @@
   .title-line-text {
     display: inline-block;
     will-change: transform, opacity;
+  }
+
+  /* Decorative Floating Particles */
+  .anim-particle-1 { animation: floatParticle1 12s infinite alternate ease-in-out; }
+  .anim-particle-2 { animation: floatParticle2 16s infinite alternate ease-in-out; }
+  .anim-particle-3 { animation: floatParticle3 10s infinite alternate ease-in-out; }
+  .anim-particle-4 { animation: floatParticle4 14s infinite alternate ease-in-out; }
+  .anim-particle-5 { animation: floatParticle5 18s infinite alternate ease-in-out; }
+
+  @keyframes floatParticle1 {
+    0% { transform: translate(0, 0) rotate(0deg); }
+    50% { transform: translate(45px, -45px) rotate(180deg); }
+    100% { transform: translate(0, 0) rotate(360deg); }
+  }
+  @keyframes floatParticle2 {
+    0% { transform: translate(0, 0) scale(1); }
+    50% { transform: translate(-35px, 45px) scale(1.25); }
+    100% { transform: translate(0, 0) scale(1); }
+  }
+  @keyframes floatParticle3 {
+    0% { transform: translate(0, 0); opacity: 0.35; }
+    50% { transform: translate(25px, 30px); opacity: 0.9; }
+    100% { transform: translate(0, 0); opacity: 0.35; }
+  }
+  @keyframes floatParticle4 {
+    0% { transform: translate(0, 0) rotate(0deg); }
+    50% { transform: translate(-40px, -25px) rotate(180deg); }
+    100% { transform: translate(0, 0) rotate(360deg); }
+  }
+  @keyframes floatParticle5 {
+    0% { transform: translate(0, 0) rotate(0deg); }
+    50% { transform: translate(35px, 35px) rotate(-180deg); }
+    100% { transform: translate(0, 0) rotate(-360deg); }
   }
 
   /* Services Cards Interactive Glow & Scale */
@@ -943,5 +1006,13 @@
     color: #16A34A !important;
     text-shadow: 0 0 20px rgba(22, 163, 74, 0.5);
     transform: scale(1.08);
+  }
+
+  /* Stats Section Hover Lifts */
+  #stats-section .text-center {
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  }
+  #stats-section .text-center:hover {
+    transform: translateY(-5px) !important;
   }
 </style>

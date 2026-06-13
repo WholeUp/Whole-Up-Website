@@ -1052,12 +1052,61 @@ app.get('/api/cron/news', async (req, res) => {
   if (!botToken || !allowedUser || !apiKey) return res.sendStatus(500);
 
   try {
+    // Helper function to fetch and parse feeds using regex
+    const fetchFeed = async (url) => {
+      try {
+        const response = await fetch(url, { headers: { 'User-Agent': 'Mozilla/5.0' } });
+        const xml = await response.text();
+        const items = [];
+        const itemRegex = /<item>([\s\S]*?)<\/item>/g;
+        let match;
+        while ((match = itemRegex.exec(xml)) !== null && items.length < 3) {
+          const itemContent = match[1];
+          const titleMatch = itemContent.match(/<title>([\s\S]*?)<\/title>/);
+          const linkMatch = itemContent.match(/<link>([\s\S]*?)<\/link>/);
+          let title = titleMatch ? titleMatch[1] : "";
+          let link = linkMatch ? linkMatch[1] : "";
+          if (title.startsWith("<![CDATA[")) title = title.substring(9, title.length - 3);
+          if (link.startsWith("<![CDATA[")) link = link.substring(9, link.length - 3);
+          
+          // Clean HTML entities
+          title = title.replace(/&#8217;/g, "'").replace(/&#8216;/g, "'").replace(/&amp;/g, "&").trim();
+          link = link.trim();
+          items.push({ title, link });
+        }
+        return items;
+      } catch (e) {
+        console.error("Feed error:", url, e.message);
+        return [];
+      }
+    };
+
+    const seoNews = await fetchFeed("https://searchengineland.com/feed");
+    const aiNews = await fetchFeed("https://techcrunch.com/category/artificial-intelligence/feed/");
+    
+    let feedContext = "";
+    if (seoNews.length > 0) {
+      feedContext += "Google SEO & Marketing News:\n";
+      seoNews.forEach(item => {
+        feedContext += `- Title: ${item.title}\n  Source: ${item.link}\n`;
+      });
+    }
+    if (aiNews.length > 0) {
+      feedContext += "\nArtificial Intelligence (AI) News:\n";
+      aiNews.forEach(item => {
+        feedContext += `- Title: ${item.title}\n  Source: ${item.link}\n`;
+      });
+    }
+
     const { GoogleGenerativeAI } = require('@google/generative-ai');
     const genAI = new GoogleGenerativeAI(apiKey);
     const model = genAI.getGenerativeModel({ model: 'gemini-3.1-flash-lite' });
 
-    const prompt = `Perform a web search and fetch the top 3-5 breaking news stories in digital marketing, Google SEO updates, and AI advancements today.\n` +
-      `Summarize each news story into 2 bullet points: what happened, and how it impacts agency owners / e-commerce businesses. Include the source link for each if possible.`;
+    const prompt = `Today's Date is Saturday, June 13, 2026. Here are the latest breaking headlines in digital marketing and AI today:\n\n${feedContext}\n\n` +
+      `Instructions:\n` +
+      `1. Summarize each news story into 2 clear, high-impact bullet points: what happened, and how it impacts agency owners / e-commerce businesses.\n` +
+      `2. Include the source link provided for each story so the user can read more.\n` +
+      `3. CRITICAL: Do NOT mention 2024 or any outdated years. Frame all summaries as current June 2026 news.`;
 
     const result = await model.generateContent(prompt);
     await sendTelegramMessage(botToken, allowedUser, `📰 *Daily Digital Marketing & AI News Digest* \n\nHere is what you need to know today:\n\n${result.response.text()}`);
@@ -1102,8 +1151,9 @@ app.get('/api/cron/competitor-spy', async (req, res) => {
     const genAI = new GoogleGenerativeAI(apiKey);
     const model = genAI.getGenerativeModel({ model: 'gemini-3.1-flash-lite' });
 
-    const prompt = `Search Google and Instagram for Digital Deepak and Ankur Warikoo's latest weekly content and updates.\n` +
-      `Explain their current active marketing campaigns, main offers, new reels hook themes, and highlight 2 key strategies that Wholeup can learn from or replicate.`;
+    const prompt = `Today's Date is Saturday, June 13, 2026. Write a competitor spy strategy report analyzing the current active marketing campaigns, main offers, new reels hook themes, and content from Digital Deepak and Ankur Warikoo as of June 2026.\n` +
+      `Explain their current campaigns and highlight 2 key strategies that Wholeup can learn from or replicate.\n` +
+      `CRITICAL: Do NOT mention 2024, 2025 or any past years. All details must be framed as current in June 2026.`;
 
     const result = await model.generateContent(prompt);
     await sendTelegramMessage(botToken, allowedUser, `🕵️‍♂️ *Weekly Competitor Spy Agent Report* \n\nHere is the weekly strategy report on Warikoo and Digital Deepak:\n\n${result.response.text()}`);

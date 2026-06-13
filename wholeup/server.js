@@ -722,6 +722,419 @@ Please structure your response beautifully with:
   }
 });
 
+// ─── 24/7 Cloud Telegram Bot & Cron Routes ──────────────────────────────────────
+
+// In-memory state tracker for accountability checks
+let awaitingAccountabilityReply = false;
+
+// Helper function to send Telegram Text messages
+async function sendTelegramMessage(botToken, chatId, text) {
+  try {
+    const response = await fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        chat_id: chatId,
+        text: text,
+        parse_mode: 'Markdown'
+      })
+    });
+    return await response.json();
+  } catch (err) {
+    console.error('Error sending Telegram message:', err.message);
+  }
+}
+
+// Helper function to send Telegram Document (CSV files)
+async function sendTelegramDocument(botToken, chatId, csvContent, filename, caption) {
+  try {
+    const blob = new Blob([csvContent], { type: 'text/csv' });
+    const formData = new FormData();
+    formData.append('chat_id', chatId);
+    formData.append('document', blob, filename);
+    if (caption) formData.append('caption', caption);
+
+    const response = await fetch(`https://api.telegram.org/bot${botToken}/sendDocument`, {
+      method: 'POST',
+      body: formData
+    });
+    return await response.json();
+  } catch (err) {
+    console.error('Error sending Telegram document:', err.message);
+  }
+}
+
+// Webhook endpoint for Telegram bot
+app.post('/api/telegram/webhook', async (req, res) => {
+  res.sendStatus(200); // Always respond 200 OK immediately to Telegram
+
+  const botToken = process.env.TELEGRAM_BOT_TOKEN;
+  const allowedUser = process.env.TELEGRAM_ALLOWED_USERS;
+  const apiKey = process.env.GEMINI_API_KEY;
+
+  if (!botToken || !req.body || !req.body.message) return;
+
+  const { chat, text } = req.body.message;
+  const chatId = chat.id.toString();
+
+  // Access Control: Only allow the authorized user
+  if (chatId !== allowedUser) {
+    await sendTelegramMessage(botToken, chatId, "Access Denied: You are not authorized to use this bot.");
+    return;
+  }
+
+  const rawText = (text || '').trim();
+
+  // 1. Welcome / Help Command
+  if (rawText.toLowerCase() === '/start' || rawText.toLowerCase() === 'hi' || rawText.toLowerCase() === 'hello') {
+    await sendTelegramMessage(botToken, chatId, 
+      `*Welcome to Wholeup Agency Automator Bot!* 🚀\n\n` +
+      `Here is what I can do for you 24/7:\n\n` +
+      `1️⃣ *Audit Website (Redesign)*: Type \`Audit website: [url]\` to find layout/speed flaws and generate a web design pitch.\n` +
+      `2️⃣ *Audit Business (New Site)*: Type \`Audit business: [name/social link]\` to pitch a new website for a business without one.\n` +
+      `3️⃣ *Lead Tracker*: I will automatically log audits to a CSV file and send it to you as an attachment.\n` +
+      `4️⃣ *Daily Reels & News*: I will automatically send you Instagram Reels templates and AI/Marketing news digests daily.\n` +
+      `5️⃣ *Accountability Logs*: Just reply to my daily check-in messages and I will log your progress into an Excel file.`
+    );
+    return;
+  }
+
+  // 2. Expecting Accountability Reply state
+  if (awaitingAccountabilityReply) {
+    awaitingAccountabilityReply = false;
+    
+    // Save accountability log
+    const fs = require('fs');
+    const logPath = path.join(__dirname, 'data/accountability.json');
+    let logs = [];
+    try { logs = JSON.parse(fs.readFileSync(logPath, 'utf8')); } catch(e) { logs = []; }
+    
+    const newLog = {
+      date: new Date().toISOString().split('T')[0],
+      time: new Date().toLocaleTimeString('en-IN'),
+      goals: rawText,
+      notes: "Logged via Telegram 24/7 Cloud Bot"
+    };
+    logs.push(newLog);
+    try { fs.mkdirSync(path.dirname(logPath), { recursive: true }); } catch(e){}
+    fs.writeFileSync(logPath, JSON.stringify(logs, null, 2));
+
+    // Generate CSV
+    let csv = 'Date,Time,Goals/Tasks Met,Notes\n';
+    logs.forEach(l => {
+      const escape = (val) => `"${(val || '').replace(/"/g, '""')}"`;
+      csv += `${l.date},${escape(l.time)},${escape(l.goals)},${escape(l.notes)}\n`;
+    });
+
+    await sendTelegramMessage(botToken, chatId, `✅ *Accountability Progress Logged!* \n\nI have saved your progress into the daily log file.`);
+    await sendTelegramDocument(botToken, chatId, csv, 'Daily_Accountability_Log.csv', 'Updated Daily Accountability Tracker');
+    return;
+  }
+
+  // 3. Audit website command
+  if (rawText.toLowerCase().startsWith('audit website:')) {
+    const url = rawText.substring(14).trim();
+    if (!url) {
+      await sendTelegramMessage(botToken, chatId, "Please provide a valid website URL. Example: `Audit website: myclient.com`");
+      return;
+    }
+
+    await sendTelegramMessage(botToken, chatId, `🔍 *Analyzing website: ${url}...* Please wait 15-30 seconds.`);
+
+    try {
+      const { GoogleGenerativeAI } = require('@google/generative-ai');
+      const genAI = new GoogleGenerativeAI(apiKey);
+      const model = genAI.getGenerativeModel({ model: 'gemini-3.1-flash-lite' });
+
+      // Fetch homepage html snippet (first 6000 chars to avoid model context bloat)
+      let htmlSample = 'Could not fetch site HTML';
+      try {
+        const response = await fetch(url.startsWith('http') ? url : `https://${url}`, { headers: { 'User-Agent': 'Mozilla/5.0' } });
+        const html = await response.text();
+        htmlSample = html.substring(0, 6000);
+      } catch(e) {
+        htmlSample = `Error fetching site: ${e.message}`;
+      }
+
+      const prompt = `Perform a web design and performance audit on this website (${url}) using this HTML sample:\n${htmlSample}\n\n` +
+        `Instructions:\n` +
+        `1. Identify 2 visual layout or loading speed weaknesses (e.g. outdated style, mobile scaling, missing call to action).\n` +
+        `2. Draft a highly personalized, short DM outreach pitch (under 120 words) proposing a website redesign. Highlight a specific visual gap and offer a free modern homepage mockup screenshot.\n` +
+        `3. Keep the tone professional, friendly, and value-first. Do NOT use marketing jargon.\n\n` +
+        `Format your response exactly as:\n` +
+        `*Audit Gaps:* [1-2 sentences summarizing weaknesses]\n` +
+        `*Outreach Pitch:* [Your custom pitch text here]`;
+
+      const result = await model.generateContent(prompt);
+      const auditResponse = result.response.text();
+
+      // Parse audit results
+      let weaknesses = "Outdated design, mobile responsiveness gaps";
+      let pitch = auditResponse;
+      const gapsMatch = auditResponse.match(/\*Audit Gaps:\*([\s\S]*?)(?=\*Outreach Pitch:\*|$)/i);
+      const pitchMatch = auditResponse.match(/\*Outreach Pitch:\*([\s\S]*)/i);
+      if (gapsMatch) weaknesses = gapsMatch[1].trim();
+      if (pitchMatch) pitch = pitchMatch[1].trim();
+
+      // Log Lead to leads_audit.json
+      const fs = require('fs');
+      const leadPath = path.join(__dirname, 'data/leads_audit.json');
+      let leads = [];
+      try { leads = JSON.parse(fs.readFileSync(leadPath, 'utf8')); } catch(e) { leads = []; }
+      leads.push({
+        date: new Date().toISOString().split('T')[0],
+        url: url,
+        type: 'Redesign Pitch',
+        weaknesses: weaknesses,
+        pitch: pitch
+      });
+      try { fs.mkdirSync(path.dirname(leadPath), { recursive: true }); } catch(e){}
+      fs.writeFileSync(leadPath, JSON.stringify(leads, null, 2));
+
+      // Generate CSV
+      let csv = 'Date,Target URL/Name,Type,Weaknesses/Gaps,Outreach Pitch\n';
+      leads.forEach(l => {
+        const escape = (val) => `"${(val || '').replace(/"/g, '""')}"`;
+        csv += `${l.date},${escape(l.url)},${escape(l.type)},${escape(l.weaknesses)},${escape(l.pitch)}\n`;
+      });
+
+      await sendTelegramMessage(botToken, chatId, `✅ *Audit Complete for ${url}!*\n\n*Audit Gaps Found:*\n${weaknesses}\n\n*Your Outreach Pitch:*\n\`\`\`\n${pitch}\n\`\`\``);
+      await sendTelegramDocument(botToken, chatId, csv, 'Wholeup_Leads_Audit.csv', 'Updated Leads & Audits Tracker');
+
+    } catch (err) {
+      await sendTelegramMessage(botToken, chatId, `❌ Error performing audit: ${err.message}`);
+    }
+    return;
+  }
+
+  // 4. Audit business command (no website)
+  if (rawText.toLowerCase().startsWith('audit business:')) {
+    const bizName = rawText.substring(15).trim();
+    if (!bizName) {
+      await sendTelegramMessage(botToken, chatId, "Please provide a valid business name or Instagram link. Example: `Audit business: Neel Bakery Delhi`");
+      return;
+    }
+
+    await sendTelegramMessage(botToken, chatId, `🔍 *Researching business: ${bizName}...* Please wait 15-30 seconds.`);
+
+    try {
+      const { GoogleGenerativeAI } = require('@google/generative-ai');
+      const genAI = new GoogleGenerativeAI(apiKey);
+      const model = genAI.getGenerativeModel({ model: 'gemini-3.1-flash-lite' });
+
+      const prompt = `Research this business: "${bizName}". They currently do not have a website.\n` +
+        `1. Identify why they need a professional website (e.g. automate customer bookings, showcase portfolio, build Google search authority, reduce DM checkout friction).\n` +
+        `2. Draft a highly personalized, short DM outreach pitch (under 120 words) proposing a new website build from scratch. Include a hook praising their business/brand, a value drop explaining how a landing page will capture more customer leads, and a CTA offering a free customized homepage layout mockup.\n\n` +
+        `Format your response exactly as:\n` +
+        `*Audit Gaps:* [1-2 sentences on why they need a website]\n` +
+        `*Outreach Pitch:* [Your custom pitch text here]`;
+
+      const result = await model.generateContent(prompt);
+      const auditResponse = result.response.text();
+
+      // Parse audit results
+      let weaknesses = "No official website, manual checkout friction";
+      let pitch = auditResponse;
+      const gapsMatch = auditResponse.match(/\*Audit Gaps:\*([\s\S]*?)(?=\*Outreach Pitch:\*|$)/i);
+      const pitchMatch = auditResponse.match(/\*Outreach Pitch:\*([\s\S]*)/i);
+      if (gapsMatch) weaknesses = gapsMatch[1].trim();
+      if (pitchMatch) pitch = pitchMatch[1].trim();
+
+      // Log Lead
+      const fs = require('fs');
+      const leadPath = path.join(__dirname, 'data/leads_audit.json');
+      let leads = [];
+      try { leads = JSON.parse(fs.readFileSync(leadPath, 'utf8')); } catch(e) { leads = []; }
+      leads.push({
+        date: new Date().toISOString().split('T')[0],
+        url: bizName,
+        type: 'New Website Pitch',
+        weaknesses: weaknesses,
+        pitch: pitch
+      });
+      try { fs.mkdirSync(path.dirname(leadPath), { recursive: true }); } catch(e){}
+      fs.writeFileSync(leadPath, JSON.stringify(leads, null, 2));
+
+      // Generate CSV
+      let csv = 'Date,Target URL/Name,Type,Weaknesses/Gaps,Outreach Pitch\n';
+      leads.forEach(l => {
+        const escape = (val) => `"${(val || '').replace(/"/g, '""')}"`;
+        csv += `${l.date},${escape(l.url)},${escape(l.type)},${escape(l.weaknesses)},${escape(l.pitch)}\n`;
+      });
+
+      await sendTelegramMessage(botToken, chatId, `✅ *Audit Complete for "${bizName}"!*\n\n*Value Proposition:*\n${weaknesses}\n\n*Your Outreach Pitch:*\n\`\`\`\n${pitch}\n\`\`\``);
+      await sendTelegramDocument(botToken, chatId, csv, 'Wholeup_Leads_Audit.csv', 'Updated Leads & Audits Tracker');
+
+    } catch (err) {
+      await sendTelegramMessage(botToken, chatId, `❌ Error performing audit: ${err.message}`);
+    }
+    return;
+  }
+
+  // 5. Default General Conversation (GrowBot)
+  try {
+    const { GoogleGenerativeAI } = require('@google/generative-ai');
+    const genAI = new GoogleGenerativeAI(apiKey);
+    const model = genAI.getGenerativeModel({ model: 'gemini-3.1-flash-lite' });
+
+    const prompt = `You are Wholeup Agency Assistant, an automated co-pilot for Neel, the founder of Wholeup Digital Marketing Agency.\n` +
+      `Neels asks: "${rawText}"\n\n` +
+      `Provide a helpful, direct, and short response (under 100 words). If they ask for content ideas, scripts, or sales strategies, draft them directly.`;
+
+    const result = await model.generateContent(prompt);
+    await sendTelegramMessage(botToken, chatId, result.response.text());
+  } catch (err) {
+    await sendTelegramMessage(botToken, chatId, `Error processing message: ${err.message}`);
+  }
+});
+
+// CRON Endpoint: Morning Check-in (7:00 AM)
+app.get('/api/cron/morning-checkin', async (req, res) => {
+  const token = req.query.token;
+  const secret = process.env.CRON_SECRET_TOKEN || 'wholeup_cron_secret_123';
+  if (token !== secret) return res.status(401).send('Unauthorized');
+
+  const botToken = process.env.TELEGRAM_BOT_TOKEN;
+  const allowedUser = process.env.TELEGRAM_ALLOWED_USERS;
+
+  if (!botToken || !allowedUser) return res.sendStatus(500);
+
+  const msg = `☀️ *Good Morning, Neel!* \n\nTime to dominate the day. What are your main priority goals for Wholeup Solutions today?\n\nReply to this message with your goals, and I will log them into your accountability tracker!`;
+  await sendTelegramMessage(botToken, allowedUser, msg);
+  
+  awaitingAccountabilityReply = true; // Set state to expect user response next
+  res.send('Morning check-in triggered successfully.');
+});
+
+// CRON Endpoint: Daily Instagram Reels Machine (8:00 AM)
+app.get('/api/cron/reels', async (req, res) => {
+  const token = req.query.token;
+  const secret = process.env.CRON_SECRET_TOKEN || 'wholeup_cron_secret_123';
+  if (token !== secret) return res.status(401).send('Unauthorized');
+
+  const botToken = process.env.TELEGRAM_BOT_TOKEN;
+  const allowedUser = process.env.TELEGRAM_ALLOWED_USERS;
+  const apiKey = process.env.GEMINI_API_KEY;
+
+  if (!botToken || !allowedUser || !apiKey) return res.sendStatus(500);
+
+  try {
+    const { GoogleGenerativeAI } = require('@google/generative-ai');
+    const genAI = new GoogleGenerativeAI(apiKey);
+    const model = genAI.getGenerativeModel({ model: 'gemini-3.1-flash-lite' });
+
+    const prompt = `Generate 3 high-converting Instagram Reel concepts for a general website development and redesign agency. Only select targets that have 2,000+ followers or active traction.\n` +
+      `For each concept, provide:\n` +
+      `- An attention-grabbing hook (first 3 seconds exact script)\n` +
+      `- Video visual/action description (what to show on screen)\n` +
+      `- Voiceover script/points to speak\n` +
+      `- A strong call to action and 5 hashtags.\n\n` +
+      `Make the script modern, engaging, and tailored for Indian e-commerce / direct-to-consumer business owners. Keep it concise.`;
+
+    const result = await model.generateContent(prompt);
+    await sendTelegramMessage(botToken, allowedUser, `🎬 *Daily Instagram Reels Idea Machine* \n\nHere are 3 fresh Reel concepts for today:\n\n${result.response.text()}`);
+    res.send('Reels cron executed successfully.');
+  } catch (err) {
+    res.status(500).send(`Error: ${err.message}`);
+  }
+});
+
+// CRON Endpoint: Daily Marketing & AI News Digest (10:00 AM)
+app.get('/api/cron/news', async (req, res) => {
+  const token = req.query.token;
+  const secret = process.env.CRON_SECRET_TOKEN || 'wholeup_cron_secret_123';
+  if (token !== secret) return res.status(401).send('Unauthorized');
+
+  const botToken = process.env.TELEGRAM_BOT_TOKEN;
+  const allowedUser = process.env.TELEGRAM_ALLOWED_USERS;
+  const apiKey = process.env.GEMINI_API_KEY;
+
+  if (!botToken || !allowedUser || !apiKey) return res.sendStatus(500);
+
+  try {
+    const { GoogleGenerativeAI } = require('@google/generative-ai');
+    const genAI = new GoogleGenerativeAI(apiKey);
+    const model = genAI.getGenerativeModel({ model: 'gemini-3.1-flash-lite' });
+
+    const prompt = `Perform a web search and fetch the top 3-5 breaking news stories in digital marketing, Google SEO updates, and AI advancements today.\n` +
+      `Summarize each news story into 2 bullet points: what happened, and how it impacts agency owners / e-commerce businesses. Include the source link for each if possible.`;
+
+    const result = await model.generateContent(prompt);
+    await sendTelegramMessage(botToken, allowedUser, `📰 *Daily Digital Marketing & AI News Digest* \n\nHere is what you need to know today:\n\n${result.response.text()}`);
+    res.send('News cron executed successfully.');
+  } catch (err) {
+    res.status(500).send(`Error: ${err.message}`);
+  }
+});
+
+// CRON Endpoint: Evening Check-in (10:00 PM)
+app.get('/api/cron/evening-checkin', async (req, res) => {
+  const token = req.query.token;
+  const secret = process.env.CRON_SECRET_TOKEN || 'wholeup_cron_secret_123';
+  if (token !== secret) return res.status(401).send('Unauthorized');
+
+  const botToken = process.env.TELEGRAM_BOT_TOKEN;
+  const allowedUser = process.env.TELEGRAM_ALLOWED_USERS;
+
+  if (!botToken || !allowedUser) return res.sendStatus(500);
+
+  const msg = `🌙 *Evening Accountability Check-in!* \n\nDid you accomplish the goals you set out this morning, Neel? What are the key wins of the day?\n\nReply directly to this message to log your evening check-in into your excel database!`;
+  await sendTelegramMessage(botToken, allowedUser, msg);
+  
+  awaitingAccountabilityReply = true; // Set state to expect user response next
+  res.send('Evening check-in triggered successfully.');
+});
+
+// CRON Endpoint: Competitor Spy Agent (Monday 9:00 AM)
+app.get('/api/cron/competitor-spy', async (req, res) => {
+  const token = req.query.token;
+  const secret = process.env.CRON_SECRET_TOKEN || 'wholeup_cron_secret_123';
+  if (token !== secret) return res.status(401).send('Unauthorized');
+
+  const botToken = process.env.TELEGRAM_BOT_TOKEN;
+  const allowedUser = process.env.TELEGRAM_ALLOWED_USERS;
+  const apiKey = process.env.GEMINI_API_KEY;
+
+  if (!botToken || !allowedUser || !apiKey) return res.sendStatus(500);
+
+  try {
+    const { GoogleGenerativeAI } = require('@google/generative-ai');
+    const genAI = new GoogleGenerativeAI(apiKey);
+    const model = genAI.getGenerativeModel({ model: 'gemini-3.1-flash-lite' });
+
+    const prompt = `Search Google and Instagram for Digital Deepak and Ankur Warikoo's latest weekly content and updates.\n` +
+      `Explain their current active marketing campaigns, main offers, new reels hook themes, and highlight 2 key strategies that Wholeup can learn from or replicate.`;
+
+    const result = await model.generateContent(prompt);
+    await sendTelegramMessage(botToken, allowedUser, `🕵️‍♂️ *Weekly Competitor Spy Agent Report* \n\nHere is the weekly strategy report on Warikoo and Digital Deepak:\n\n${result.response.text()}`);
+    res.send('Competitor spy executed successfully.');
+  } catch (err) {
+    res.status(500).send(`Error: ${err.message}`);
+  }
+});
+
+// Helper function to auto-register webhook with Telegram on start
+async function initTelegramWebhook() {
+  const botToken = process.env.TELEGRAM_BOT_TOKEN;
+  const webhookUrl = `https://wholeup.in/api/telegram/webhook`;
+  if (!botToken) return;
+
+  try {
+    const response = await fetch(`https://api.telegram.org/bot${botToken}/setWebhook?url=${webhookUrl}`);
+    const data = await response.json();
+    if (data.ok) {
+      console.log(`🤖 Telegram Webhook registered successfully to: ${webhookUrl}`);
+    } else {
+      console.warn(`⚠️ Telegram Webhook registration failed: ${data.description}`);
+    }
+  } catch (err) {
+    console.error('Failed to automatically register Telegram Webhook:', err.message);
+  }
+}
+
+// Register webhook immediately on startup (non-blocking)
+initTelegramWebhook();
+
 // ─── 404 ──────────────────────────────────────────────────────────────────────
 app.use((req, res) => {
   res.status(404).render('404', { title: 'Page Not Found | Wholeup', page: '404' });

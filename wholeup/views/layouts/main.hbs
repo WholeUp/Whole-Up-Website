@@ -56,6 +56,7 @@
     .cursor-shadow { width:40px; height:40px; border:1.5px solid rgba(22,163,74,.4); border-radius:50%; position:fixed; pointer-events:none; z-index:99998; transform:translate(-50%,-50%); transition:.1s ease-out,width .3s,height .3s; }
     .cursor-hover .cursor-dot { width:0; height:0; }
     .cursor-hover .cursor-shadow { width:60px; height:60px; border-color:#16A34A; background:rgba(22,163,74,.1); }
+    .cursor-shadow.cursor-click { transform: translate(-50%,-50%) scale(1.8) !important; border-color: #06B6D4 !important; background: rgba(6, 182, 212, 0.2) !important; transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1) !important; }
 
     /* Global font rules — Inter for headings, DM Sans for body */
     h1,h2,h3,h4,h5,h6 { font-family:'Inter',sans-serif; }
@@ -93,7 +94,19 @@
     ::selection { background:#16A34A; color:white; }
 
     /* Text gradient */
-    .text-gradient { background:linear-gradient(to right,#16A34A,#4ade80); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
+    /* Text gradient shine */
+    .text-gradient {
+      background: linear-gradient(135deg, #16A34A, #4ade80, #06B6D4, #16A34A) !important;
+      background-size: 300% auto !important;
+      -webkit-background-clip: text !important;
+      -webkit-text-fill-color: transparent !important;
+      animation: textShine 6s linear infinite !important;
+      will-change: background-position;
+    }
+    @keyframes textShine {
+      0% { background-position: 0% 50%; }
+      100% { background-position: 300% 50%; }
+    }
 
     /* Mobile nav */
     .mobile-menu { display:none; flex-direction:column; gap:0; background:#FBF9F1; position:absolute; top:100%; left:0; right:0; border-top:1px solid rgba(0,0,0,.08); box-shadow:0 10px 30px rgba(0,0,0,.08); z-index:9999; }
@@ -171,7 +184,7 @@
     }
 
     /* Scroll progress bar */
-    #progress-bar { position:fixed; top:0; left:0; height:3px; background:#16A34A; z-index:100000; width:0%; transition:width .1s; }
+    #progress-bar { position: fixed; top: 0; left: 0; height: 4px; background: linear-gradient(to right, #16A34A, #4ade80, #06B6D4); box-shadow: 0 0 10px rgba(22, 163, 74, 0.5), 0 0 5px rgba(6, 182, 212, 0.5); z-index: 100000; width: 0%; transition: width 0.1s ease; will-change: width; }
 
     /* Custom range slider styling */
     .range-slider { -webkit-appearance: none; width: 100%; height: 6px; border-radius: 9999px; background: rgba(0, 0, 0, 0.08); outline: none; }
@@ -371,6 +384,14 @@
       requestAnimationFrame(animateCursor);
     }
     animateCursor();
+    
+    // Add Click ripple effect
+    document.addEventListener('mousedown', () => {
+      shadow.classList.add('cursor-click');
+    });
+    document.addEventListener('mouseup', () => {
+      setTimeout(() => shadow.classList.remove('cursor-click'), 150);
+    });
     document.querySelectorAll('a,button,.magnetic-btn').forEach(el=>{
       el.addEventListener('mouseenter',()=>document.body.classList.add('cursor-hover'));
       el.addEventListener('mouseleave',()=>{

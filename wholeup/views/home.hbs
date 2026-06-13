@@ -108,6 +108,10 @@
   <div class="absolute bottom-[25%] left-[10%] w-2 h-2 rounded-full bg-emerald-500/30 anim-particle-3 pointer-events-none select-none z-0"></div>
   <div class="absolute top-[70%] left-[45%] text-primary/25 text-xl font-black anim-particle-4 pointer-events-none select-none z-0">+</div>
   <div class="absolute top-[25%] right-[15%] text-blue-500/25 text-lg font-black anim-particle-5 pointer-events-none select-none z-0">x</div>
+  <div class="absolute top-[20%] left-[8%] w-12 h-12 rounded-full border-2 border-primary/25 anim-shape-ring pointer-events-none select-none z-0"></div>
+  <div class="absolute top-[65%] right-[25%] w-8 h-8 border-2 border-cyan-500/25 rotate-45 anim-shape-square pointer-events-none select-none z-0"></div>
+  <div class="absolute bottom-[15%] right-[10%] text-purple-500/25 text-2xl anim-shape-star pointer-events-none select-none z-0"><i class="fas fa-star"></i></div>
+  <div class="absolute top-[12%] right-[40%] text-orange-500/25 text-2xl anim-shape-bolt pointer-events-none select-none z-0"><i class="fas fa-bolt"></i></div>
 
   <div class="max-w-[1450px] mx-auto w-full grid lg:grid-cols-12 gap-12 items-center relative z-10">
     
@@ -789,10 +793,14 @@
           gsap.to('.anim-particle-3', { x: moveX * 65, y: moveY * -65, duration: 0.9, ease: 'power1.out' });
           gsap.to('.anim-particle-4', { x: moveX * -25, y: moveY * -25, duration: 0.9, ease: 'power1.out' });
           gsap.to('.anim-particle-5', { x: moveX * 75, y: moveY * 35, duration: 0.9, ease: 'power1.out' });
+          gsap.to('.anim-shape-ring', { x: moveX * -40, y: moveY * 40, duration: 0.85, ease: 'power2.out' });
+          gsap.to('.anim-shape-square', { x: moveX * 50, y: moveY * -30, duration: 0.85, ease: 'power2.out' });
+          gsap.to('.anim-shape-star', { x: moveX * -60, y: moveY * -50, duration: 0.85, ease: 'power2.out' });
+          gsap.to('.anim-shape-bolt', { x: moveX * 30, y: moveY * 60, duration: 0.85, ease: 'power2.out' });
         });
         
         heroSection.addEventListener('mouseleave', () => {
-          gsap.to('.hero-parallax-1, .hero-parallax-2, .hero-parallax-3, .anim-particle-1, .anim-particle-2, .anim-particle-3, .anim-particle-4, .anim-particle-5', {
+          gsap.to('.hero-parallax-1, .hero-parallax-2, .hero-parallax-3, .anim-particle-1, .anim-particle-2, .anim-particle-3, .anim-particle-4, .anim-particle-5, .anim-shape-ring, .anim-shape-square, .anim-shape-star, .anim-shape-bolt', {
             x: 0,
             y: 0,
             duration: 1.0,
@@ -908,6 +916,33 @@
     100% { transform: translate(0, 0) rotate(-360deg); }
   }
 
+  /* Neon Parallax Shape CSS Animations */
+  .anim-shape-ring { animation: floatShapeRing 16s infinite alternate ease-in-out; }
+  .anim-shape-square { animation: floatShapeSquare 20s infinite alternate ease-in-out; }
+  .anim-shape-star { animation: floatShapeStar 14s infinite alternate ease-in-out; }
+  .anim-shape-bolt { animation: floatShapeBolt 12s infinite alternate ease-in-out; }
+
+  @keyframes floatShapeRing {
+    0% { transform: translate(0, 0) rotate(0deg) scale(1); }
+    50% { transform: translate(-30px, 30px) rotate(180deg) scale(1.1); }
+    100% { transform: translate(0, 0) rotate(360deg) scale(1); }
+  }
+  @keyframes floatShapeSquare {
+    0% { transform: translate(0, 0) rotate(45deg) scale(1); }
+    50% { transform: translate(40px, -40px) rotate(225deg) scale(0.9); }
+    100% { transform: translate(0, 0) rotate(405deg) scale(1); }
+  }
+  @keyframes floatShapeStar {
+    0% { transform: translate(0, 0) rotate(0deg) scale(1); opacity: 0.3; }
+    50% { transform: translate(-20px, -35px) rotate(-180deg) scale(1.25); opacity: 0.8; }
+    100% { transform: translate(0, 0) rotate(-360deg) scale(1); opacity: 0.3; }
+  }
+  @keyframes floatShapeBolt {
+    0% { transform: translate(0, 0) scale(1); opacity: 0.4; }
+    50% { transform: translate(30px, 20px) scale(1.2); opacity: 0.85; }
+    100% { transform: translate(0, 0) scale(1); opacity: 0.4; }
+  }
+
   /* Services Cards Interactive Glow & Scale */
   .services-card, .marquee-card {
     position: relative;
@@ -924,8 +959,8 @@
     inset: 0;
     border-radius: inherit;
     background: radial-gradient(
-      350px circle at var(--mouse-x, 0px) var(--mouse-y, 0px),
-      color-mix(in srgb, var(--service-color, #16A34A) 12%, transparent),
+      450px circle at var(--mouse-x, 0px) var(--mouse-y, 0px),
+      color-mix(in srgb, var(--service-color, #16A34A) 25%, transparent),
       transparent 80%
     );
     opacity: 0;

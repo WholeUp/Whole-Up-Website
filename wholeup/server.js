@@ -1104,9 +1104,10 @@ app.get('/api/cron/news', async (req, res) => {
 
     const prompt = `Today's Date is Saturday, June 13, 2026. Here are the latest breaking headlines in digital marketing and AI today:\n\n${feedContext}\n\n` +
       `Instructions:\n` +
-      `1. Summarize each news story into 2 clear, high-impact bullet points: what happened, and how it impacts agency owners / e-commerce businesses.\n` +
-      `2. Include the source link provided for each story so the user can read more.\n` +
-      `3. CRITICAL: Do NOT mention 2024 or any outdated years. Frame all summaries as current June 2026 news.`;
+      `1. Write the entire response in friendly and professional Hinglish (Hindi + English mixed, using Latin script, e.g., 'Google ne Search ad policy ko change kiya hai...').\n` +
+      `2. Summarize each news story into 2 clear, high-impact bullet points explaining what happened and how it impacts agency owners / e-commerce businesses.\n` +
+      `3. Include the source link provided for each story so the user can read more.\n` +
+      `4. CRITICAL: Do NOT mention 2024 or any outdated years. Frame all summaries as current June 2026 news.`;
 
     const result = await model.generateContent(prompt);
     await sendTelegramMessage(botToken, allowedUser, `📰 *Daily Digital Marketing & AI News Digest* \n\nHere is what you need to know today:\n\n${result.response.text()}`);
@@ -1152,6 +1153,7 @@ app.get('/api/cron/competitor-spy', async (req, res) => {
     const model = genAI.getGenerativeModel({ model: 'gemini-3.1-flash-lite' });
 
     const prompt = `Today's Date is Saturday, June 13, 2026. Write a competitor spy strategy report analyzing the current active marketing campaigns, main offers, new reels hook themes, and content from Digital Deepak and Ankur Warikoo as of June 2026.\n` +
+      `Write the entire report in friendly, professional Hinglish (Hindi + English mixed, using Latin script).\n` +
       `Explain their current campaigns and highlight 2 key strategies that Wholeup can learn from or replicate.\n` +
       `CRITICAL: Do NOT mention 2024, 2025 or any past years. All details must be framed as current in June 2026.`;
 

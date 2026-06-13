@@ -1,0 +1,903 @@
+<div class="d2c-dark-theme min-h-screen text-slate-100 bg-[#070a13] select-none relative overflow-hidden font-sans pt-28 pb-16">
+  
+  <!-- Sleek Glowing Accents -->
+  <div class="glow-blob glow-blob-cyan"></div>
+  <div class="glow-blob glow-blob-emerald"></div>
+
+  <!-- MAIN SECTION CONTAINER -->
+  <div class="max-w-7xl mx-auto px-4 md:px-6 relative z-10 space-y-24">
+    
+    <!-- 1. HERO PITCH -->
+    <section class="text-center space-y-6 pt-10">
+      <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 text-xs font-black uppercase tracking-widest animate-pulse">
+        <span class="w-2 h-2 rounded-full bg-cyan-400"></span> The AI Automation Era is Here
+      </div>
+      <h1 class="text-4xl md:text-7xl font-black uppercase tracking-tight text-white leading-tight max-w-5xl mx-auto font-heading">
+        Stop Running Ads <span class="bg-gradient-to-r from-emerald-400 via-cyan-400 to-emerald-400 bg-clip-text text-transparent bg-[length:200%_auto] animate-text-shine">Manually</span>
+      </h1>
+      <p class="text-slate-400 font-medium text-lg md:text-xl max-w-3xl mx-auto leading-relaxed">
+        E-Commerce & D2C brands are leaking up to 45% of potential revenue to slow lead follow-ups. Transition to autonomous AI agents that call, text, and close customers 24/7.
+      </p>
+      
+      <!-- Call to Action Buttons -->
+      <div class="flex flex-col sm:flex-row justify-center items-center gap-4 pt-6">
+        <a href="#simulator" class="w-full sm:w-auto px-8 py-4 bg-emerald-500 hover:bg-emerald-600 text-dark font-black uppercase tracking-widest text-xs rounded-xl transition duration-300 shadow-lg shadow-emerald-500/25 flex items-center justify-center gap-2">
+          Test AI Voice Agent <i class="fas fa-phone-volume animate-bounce"></i>
+        </a>
+        <a href="#audit-form" class="w-full sm:w-auto px-8 py-4 border border-white/10 hover:bg-white/5 text-white font-black uppercase tracking-widest text-xs rounded-xl transition duration-300 flex items-center justify-center gap-2">
+          Book AI Setup Audit <i class="fas fa-arrow-right"></i>
+        </a>
+      </div>
+    </section>
+
+    <!-- 2. AI SIMULATORS GRID -->
+    <section id="simulator" class="grid lg:grid-cols-12 gap-8 items-start scroll-mt-28">
+      
+      <!-- Phone Mockup Container (Vapi Simulator) - 7 Columns -->
+      <div class="lg:col-span-7 bg-[#0b0f19]/80 border border-white/5 rounded-[40px] p-6 md:p-10 shadow-[0_20px_50px_rgba(0,0,0,0.5)] backdrop-blur-xl relative">
+        <div class="absolute top-0 right-0 w-48 h-48 bg-emerald-500/5 blur-[80px] rounded-full pointer-events-none"></div>
+        
+        <div class="space-y-6">
+          <div>
+            <span class="text-[10px] font-black uppercase tracking-widest text-emerald-400">Live Agent Emulator</span>
+            <h2 class="text-2xl md:text-3xl font-black uppercase tracking-wide text-white">Vapi Voice Agent Simulator</h2>
+            <p class="text-slate-400 text-xs mt-1">Simulate an instant AI phone call reclaiming an abandoned cart customer.</p>
+          </div>
+
+          <!-- Configuration Form / Status View -->
+          <div class="grid md:grid-cols-12 gap-6 bg-[#080b13] border border-white/5 rounded-3xl p-6 relative">
+            
+            <!-- Left inputs (Config) -->
+            <div class="md:col-span-5 space-y-4" id="vapi-config-panel">
+              <div>
+                <label class="block text-[9px] font-black uppercase tracking-widest text-slate-500 mb-2">Customer Name</label>
+                <input type="text" id="cust-name" value="Amit" placeholder="E.g., Amit" 
+                  class="w-full px-4 py-3 bg-[#0c101b] border border-white/10 rounded-xl text-white text-xs font-semibold focus:outline-none focus:border-emerald-500 transition-colors">
+              </div>
+
+              <div>
+                <label class="block text-[9px] font-black uppercase tracking-widest text-slate-500 mb-2">Select Campaign Script</label>
+                <select id="vapi-script" 
+                  class="w-full px-4 py-3 bg-[#0c101b] border border-white/10 rounded-xl text-white text-xs font-semibold focus:outline-none focus:border-emerald-500 transition-colors">
+                  <option value="abandoned_cart">🛒 Abandoned Cart Recovery</option>
+                  <option value="upsell">🔥 Post-Purchase Up-Sell</option>
+                  <option value="support">📞 24/7 Inbound Customer Care</option>
+                </select>
+              </div>
+
+              <button onclick="startVoiceCall()" class="w-full py-3.5 bg-emerald-500 hover:bg-emerald-600 text-dark font-black uppercase tracking-widest text-xs rounded-xl transition-all duration-300 flex items-center justify-center gap-2 shadow-lg shadow-emerald-500/20">
+                <i class="fas fa-play"></i> Initiate Call
+              </button>
+            </div>
+
+            <!-- Right Visual Phone Device -->
+            <div class="md:col-span-7 flex flex-col justify-between min-h-[300px] border border-white/5 bg-[#0d1222] rounded-2xl p-6 relative overflow-hidden">
+              <div class="absolute inset-0 bg-gradient-to-b from-transparent to-black/30 pointer-events-none"></div>
+
+              <!-- Phone Status Header -->
+              <div class="flex justify-between items-center relative z-10">
+                <div class="flex items-center gap-2">
+                  <div id="vapi-signal-dot" class="w-2.5 h-2.5 rounded-full bg-slate-500"></div>
+                  <span id="vapi-status-text" class="text-[10px] font-black uppercase tracking-widest text-slate-400">Offline</span>
+                </div>
+                <span class="text-[10px] font-mono text-slate-500">Latency: <span id="vapi-latency">0ms</span></span>
+              </div>
+
+              <!-- Avatar Animation Area -->
+              <div class="flex flex-col items-center justify-center py-6 relative z-10 space-y-4">
+                <div class="phone-avatar-outer" id="phone-avatar-ring">
+                  <div class="w-20 h-20 rounded-full bg-[#111729] border border-white/10 flex items-center justify-center text-3xl text-emerald-400 shadow-lg relative z-20">
+                    <i class="fas fa-robot" id="phone-avatar-icon"></i>
+                  </div>
+                  <!-- Soundwave Pulses -->
+                  <div class="sound-wave-ring r-1"></div>
+                  <div class="sound-wave-ring r-2"></div>
+                </div>
+
+                <!-- Active Conversation Display -->
+                <div class="w-full text-center min-h-[48px] px-2">
+                  <p id="vapi-transcript" class="text-xs font-semibold text-slate-400 italic">"Configure setup and press Initiate Call."</p>
+                </div>
+              </div>
+
+              <!-- Control Pad -->
+              <div class="flex justify-center items-center gap-4 relative z-10 pt-4 border-t border-white/5">
+                <button onclick="endVoiceCall()" id="btn-decline" disabled class="w-12 h-12 rounded-full bg-red-500/10 hover:bg-red-500/20 text-red-400 flex items-center justify-center transition-colors disabled:opacity-40">
+                  <i class="fas fa-phone-slash"></i>
+                </button>
+                <button onclick="toggleSpeech()" id="btn-speech" disabled class="w-12 h-12 rounded-full bg-cyan-500/10 hover:bg-cyan-500/20 text-cyan-400 flex items-center justify-center transition-colors disabled:opacity-40">
+                  <i class="fas fa-volume-up"></i>
+                </button>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+
+      <!-- 24/7 Web Agent Widget Demonstration (5 Columns) -->
+      <div class="lg:col-span-5 bg-[#0b0f19]/80 border border-white/5 rounded-[40px] p-6 md:p-8 shadow-[0_20px_50px_rgba(0,0,0,0.5)] backdrop-blur-xl space-y-6">
+        <div>
+          <span class="text-[10px] font-black uppercase tracking-widest text-cyan-400">On-Site Conversion Bot</span>
+          <h2 class="text-2xl font-black uppercase tracking-wide text-white">24/7 Web Agent</h2>
+          <p class="text-slate-400 text-xs mt-1">Try our live agent right here. It handles brand queries and qualifies leads automatically.</p>
+        </div>
+
+        <!-- Chat Container -->
+        <div class="border border-white/5 bg-[#080b13] rounded-3xl overflow-hidden flex flex-col h-[380px]">
+          <!-- Chat header -->
+          <div class="bg-[#0c101b] px-5 py-4 border-b border-white/5 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+              <div class="relative">
+                <div class="w-9 h-9 rounded-full bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center text-cyan-400 text-sm">
+                  <i class="fas fa-bolt"></i>
+                </div>
+                <div class="absolute bottom-0 right-0 w-2.5 h-2.5 rounded-full bg-emerald-500 border-2 border-[#0c101b]"></div>
+              </div>
+              <div>
+                <p class="text-xs font-black uppercase tracking-wider text-white">GrowBot D2C</p>
+                <p class="text-[8px] font-bold uppercase tracking-widest text-emerald-400">Autonomous Assistant</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Message Log -->
+          <div id="web-agent-chat-log" class="flex-1 overflow-y-auto p-5 space-y-4 text-xs">
+            <!-- Bot message -->
+            <div class="flex items-start gap-2.5 max-w-[85%]">
+              <div class="w-7 h-7 rounded-full bg-cyan-500/15 text-cyan-400 flex items-center justify-center text-[10px] flex-shrink-0 mt-0.5">
+                <i class="fas fa-bolt"></i>
+              </div>
+              <div class="bg-[#0f1526] text-slate-300 p-3 rounded-2xl rounded-tl-none border border-white/5 font-medium leading-relaxed">
+                Hello! I am GrowBot, your 24/7 AI Sales Agent. Are you looking to scale your E-commerce or D2C store conversions today?
+              </div>
+            </div>
+          </div>
+
+          <!-- Form Input -->
+          <form onsubmit="sendChatMessage(event)" class="bg-[#0c101b] p-3 border-t border-white/5 flex gap-2">
+            <input type="text" id="chat-input" placeholder="Type a message..." required autocomplete="off"
+              class="flex-1 bg-[#080b13] border border-white/5 rounded-xl px-4 py-3 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-cyan-500 transition-colors font-semibold">
+            <button type="submit" class="w-11 h-11 bg-cyan-500 text-dark rounded-xl flex items-center justify-center hover:bg-cyan-600 transition-colors">
+              <i class="fas fa-paper-plane text-sm"></i>
+            </button>
+          </form>
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- 3. MANUAL VS AI COMPARISON TABLE -->
+    <section class="space-y-12">
+      <div class="text-center max-w-2xl mx-auto space-y-4">
+        <span class="text-[10px] font-black uppercase tracking-widest text-emerald-400">Performance Metrics</span>
+        <h2 class="text-3xl md:text-5xl font-black uppercase tracking-wider text-white font-heading">Manual Ads vs AI Agents</h2>
+        <p class="text-slate-400 text-sm">Why the world's fastest-growing E-com brands are migrating to the autonomous stack.</p>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-8">
+        <!-- Card 1 -->
+        <div class="bg-[#0b0f19]/60 border border-white/5 rounded-3xl p-8 space-y-4 hover:border-emerald-500/20 transition-all duration-300 hover:-translate-y-1">
+          <div class="w-12 h-12 rounded-2xl bg-red-500/10 text-red-400 flex items-center justify-center text-xl">
+            <i class="fas fa-user-clock"></i>
+          </div>
+          <h3 class="text-lg font-black uppercase tracking-wide text-white">Call Latency & Speed</h3>
+          <p class="text-xs text-slate-400 leading-relaxed">
+            <strong>Manual Setup</strong>: Support reps take 15 to 45 minutes to follow up on a fresh abandoned cart form. Leads grow cold.
+          </p>
+          <div class="pt-3 border-t border-white/5 flex justify-between items-center text-xs">
+            <span class="text-red-400 font-bold">Manual: ~30 Min</span>
+            <span class="text-emerald-400 font-bold uppercase tracking-wider">AI Voice: <span class="font-mono">2s</span></span>
+          </div>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="bg-[#0b0f19]/60 border border-white/5 rounded-3xl p-8 space-y-4 hover:border-cyan-500/20 transition-all duration-300 hover:-translate-y-1">
+          <div class="w-12 h-12 rounded-2xl bg-cyan-500/10 text-cyan-400 flex items-center justify-center text-xl">
+            <i class="fas fa-wallet"></i>
+          </div>
+          <h3 class="text-lg font-black uppercase tracking-wide text-white">Operational Cost</h3>
+          <p class="text-xs text-slate-400 leading-relaxed">
+            <strong>Manual Setup</strong>: High salaries, night-shift premiums, system subscriptions, and recruitment expenses.
+          </p>
+          <div class="pt-3 border-t border-white/5 flex justify-between items-center text-xs">
+            <span class="text-red-400 font-bold">Manual: High Salary</span>
+            <span class="text-cyan-400 font-bold uppercase tracking-wider">AI Agent: 85% Savings</span>
+          </div>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="bg-[#0b0f19]/60 border border-white/5 rounded-3xl p-8 space-y-4 hover:border-emerald-500/20 transition-all duration-300 hover:-translate-y-1">
+          <div class="w-12 h-12 rounded-2xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center text-xl">
+            <i class="fas fa-headset"></i>
+          </div>
+          <h3 class="text-lg font-black uppercase tracking-wide text-white">Availability</h3>
+          <p class="text-xs text-slate-400 leading-relaxed">
+            <strong>Manual Setup</strong>: Restricted to operational shifts. Leads filled during late nights are neglected until morning.
+          </p>
+          <div class="pt-3 border-t border-white/5 flex justify-between items-center text-xs">
+            <span class="text-red-400 font-bold">Manual: 8-Hour Shifts</span>
+            <span class="text-emerald-400 font-bold uppercase tracking-wider">AI Stack: 24/7/365</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. WHATSAPP FUNNEL VISUALIZER -->
+    <section class="bg-[#0b0f19]/80 border border-white/5 rounded-[40px] p-8 md:p-12 shadow-lg relative overflow-hidden">
+      <div class="absolute top-0 left-0 w-64 h-64 bg-cyan-500/5 blur-[90px] rounded-full pointer-events-none"></div>
+
+      <div class="grid lg:grid-cols-12 gap-8 items-center">
+        <!-- Info text -->
+        <div class="lg:col-span-5 space-y-6">
+          <div>
+            <span class="text-[10px] font-black uppercase tracking-widest text-emerald-400">Checkout Conversion</span>
+            <h2 class="text-3xl font-black uppercase tracking-wide text-white">WhatsApp & Email Automation Funnel</h2>
+            <p class="text-slate-400 text-xs leading-relaxed mt-2">
+              Every step is structured, tracked, and triggered automatically depending on customer behavior. Click steps to see how the funnel operates.
+            </p>
+          </div>
+
+          <!-- Step options list -->
+          <div class="space-y-3" id="visualizer-steps-container">
+            <button onclick="activateFunnelStep(1)" class="w-full flex items-start gap-4 p-4 border border-emerald-500/30 rounded-2xl bg-[#080b13] text-left transition-all duration-300 funnel-step-btn" id="funnel-step-btn-1">
+              <span class="w-6 h-6 rounded-full bg-emerald-500 text-dark flex items-center justify-center text-[10px] font-black flex-shrink-0 mt-0.5 font-mono">1</span>
+              <div>
+                <h4 class="text-xs font-black uppercase tracking-wide text-white">Cart Abandonment Trigger</h4>
+                <p class="text-[10px] text-slate-400 mt-1">Meta/Google ad visitor leaves checkout page before paying.</p>
+              </div>
+            </button>
+
+            <button onclick="activateFunnelStep(2)" class="w-full flex items-start gap-4 p-4 border border-white/5 rounded-2xl bg-[#080b13]/40 text-left transition-all duration-300 funnel-step-btn" id="funnel-step-btn-2">
+              <span class="w-6 h-6 rounded-full bg-slate-800 text-slate-400 flex items-center justify-center text-[10px] font-black flex-shrink-0 mt-0.5 font-mono">2</span>
+              <div>
+                <h4 class="text-xs font-black uppercase tracking-wide text-slate-400">WhatsApp Alert Sequence</h4>
+                <p class="text-[10px] text-slate-500 mt-1">Autonomous WhatsApp chatbot pushes personalized discount catalog.</p>
+              </div>
+            </button>
+
+            <button onclick="activateFunnelStep(3)" class="w-full flex items-start gap-4 p-4 border border-white/5 rounded-2xl bg-[#080b13]/40 text-left transition-all duration-300 funnel-step-btn" id="funnel-step-btn-3">
+              <span class="w-6 h-6 rounded-full bg-slate-800 text-slate-400 flex items-center justify-center text-[10px] font-black flex-shrink-0 mt-0.5 font-mono">3</span>
+              <div>
+                <h4 class="text-xs font-black uppercase tracking-wide text-slate-400">Dynamic Voice AI Escalation</h4>
+                <p class="text-[10px] text-slate-500 mt-1">If unpurchased within 1 hour, Voice AI dials user to answer queries.</p>
+              </div>
+            </button>
+
+            <button onclick="activateFunnelStep(4)" class="w-full flex items-start gap-4 p-4 border border-white/5 rounded-2xl bg-[#080b13]/40 text-left transition-all duration-300 funnel-step-btn" id="funnel-step-btn-4">
+              <span class="w-6 h-6 rounded-full bg-slate-800 text-slate-400 flex items-center justify-center text-[10px] font-black flex-shrink-0 mt-0.5 font-mono">4</span>
+              <div>
+                <h4 class="text-xs font-black uppercase tracking-wide text-slate-400">Conversion Synced</h4>
+                <p class="text-[10px] text-slate-500 mt-1">Order completed. Database logs details to proprietary CRM dashboard.</p>
+              </div>
+            </button>
+          </div>
+        </div>
+
+        <!-- Phone screen preview -->
+        <div class="lg:col-span-7 flex justify-center">
+          <div class="w-full max-w-[340px] border border-white/10 bg-[#0d1222] rounded-[48px] p-5 shadow-2xl relative">
+            <div class="w-28 h-5 bg-black rounded-full absolute top-7 left-1/2 -translate-x-1/2 z-20"></div> <!-- Notch -->
+            
+            <div class="border border-white/5 bg-[#080b13] rounded-[32px] overflow-hidden h-[460px] flex flex-col justify-between p-4 relative" id="funnel-device-body">
+              
+              <!-- Screen Header (Mock Whatsapp) -->
+              <div class="border-b border-white/5 pb-2.5 mb-2.5 flex items-center gap-2">
+                <div class="w-8 h-8 rounded-full bg-emerald-500/10 flex items-center justify-center text-emerald-400 text-xs">
+                  <i class="fab fa-whatsapp"></i>
+                </div>
+                <div>
+                  <p class="text-[10px] font-black uppercase text-white tracking-wider">Wholeup Automations</p>
+                  <p class="text-[7px] text-emerald-400 uppercase tracking-widest font-black">Online chatbot active</p>
+                </div>
+              </div>
+
+              <!-- Screen Content Area -->
+              <div class="flex-1 overflow-y-auto space-y-3 pr-1 text-[10px]" id="funnel-screen-log">
+                <!-- Step 1 Content initially -->
+                <div class="space-y-2" id="funnel-step-content-box">
+                  <div class="bg-[#0f1526]/50 border border-yellow-500/20 text-yellow-400 p-2.5 rounded-xl">
+                    <i class="fas fa-exclamation-triangle mr-1"></i> [Trigger Event] Cart Abandoned by visitor (Phone: +91 XXXXX XXXXX)
+                  </div>
+                </div>
+              </div>
+
+              <!-- Screen bottom input mockup -->
+              <div class="pt-2.5 border-t border-white/5 mt-2.5">
+                <div class="bg-[#0c101b] rounded-xl py-2 px-3 border border-white/5 text-[9px] text-slate-500 font-bold flex justify-between items-center">
+                  <span>Chatbot is responding...</span>
+                  <i class="fas fa-paper-plane text-slate-600"></i>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 5. AUDIT LEAD CAPTURE FORM -->
+    <section id="audit-form" class="max-w-xl mx-auto bg-[#0b0f19]/90 border border-white/5 rounded-[40px] p-8 md:p-10 shadow-2xl relative scroll-mt-28">
+      <div class="absolute top-0 right-0 w-36 h-36 bg-cyan-500/5 blur-[70px] rounded-full pointer-events-none"></div>
+
+      <div class="text-center mb-8">
+        <div class="w-14 h-14 rounded-2xl bg-cyan-500/15 text-cyan-400 border border-cyan-500/30 flex items-center justify-center text-2xl mx-auto mb-4">
+          <i class="fas fa-network-wired"></i>
+        </div>
+        <h2 class="text-2xl font-black uppercase tracking-wider text-white">Book Free AI Audit</h2>
+        <p class="text-xs text-slate-400 mt-1.5">Get a custom Vapi mockup calling sequence and custom D2C workflow map built for your brand.</p>
+      </div>
+
+      <!-- Audit form -->
+      <form onsubmit="submitAuditForm(event)" class="space-y-5" id="d2c-audit-form">
+        <div>
+          <label class="block text-[9px] font-black uppercase tracking-widest text-slate-500 mb-2">E-com Brand Name</label>
+          <input type="text" name="brandName" id="brandName" placeholder="E.g., Mumbai Threads" required 
+            class="w-full px-5 py-4 bg-[#080b13] border border-white/5 rounded-xl text-white text-xs font-semibold focus:outline-none focus:border-cyan-500 transition-colors">
+        </div>
+
+        <div>
+          <label class="block text-[9px] font-black uppercase tracking-widest text-slate-500 mb-2">Contact Email</label>
+          <input type="email" name="email" id="email" placeholder="you@brand.com" required 
+            class="w-full px-5 py-4 bg-[#080b13] border border-white/5 rounded-xl text-white text-xs font-semibold focus:outline-none focus:border-cyan-500 transition-colors">
+        </div>
+
+        <div class="grid grid-cols-2 gap-4">
+          <div>
+            <label class="block text-[9px] font-black uppercase tracking-widest text-slate-500 mb-2">Monthly Revenue (INR)</label>
+            <select name="monthlyRevenue" id="monthlyRevenue" required 
+              class="w-full px-4 py-4 bg-[#080b13] border border-white/5 rounded-xl text-white text-xs font-semibold focus:outline-none focus:border-cyan-500 transition-colors">
+              <option value="under_5l">Under 5 Lakhs</option>
+              <option value="5l_15l">5L - 15 Lakhs</option>
+              <option value="15l_50l">15L - 50 Lakhs</option>
+              <option value="over_50l">Over 50 Lakhs</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-[9px] font-black uppercase tracking-widest text-slate-500 mb-2">Phone / WhatsApp</label>
+            <input type="text" name="phone" id="phone" placeholder="+91 XXXXX XXXXX" required 
+              class="w-full px-4 py-4 bg-[#080b13] border border-white/5 rounded-xl text-white text-xs font-semibold focus:outline-none focus:border-cyan-500 transition-colors">
+          </div>
+        </div>
+
+        <button type="submit" class="w-full py-4.5 bg-cyan-500 hover:bg-cyan-600 text-dark font-black uppercase tracking-widest text-xs rounded-xl transition duration-300 flex items-center justify-center gap-2 shadow-lg shadow-cyan-500/25">
+          Submit & Generate Audit <i class="fas fa-check"></i>
+        </button>
+      </form>
+
+      <!-- Successful message block -->
+      <div id="d2c-form-success" class="hidden p-6 text-center space-y-4 bg-emerald-500/10 border border-emerald-500/20 rounded-3xl">
+        <div class="w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-xl mx-auto">
+          <i class="fas fa-check-double animate-bounce"></i>
+        </div>
+        <h3 class="text-base font-black uppercase tracking-wider text-white">Audit Scheduled!</h3>
+        <p class="text-xs text-slate-400">Our outbound AI voice agent will trigger a welcome phone call to confirm your details shortly. Thank you!</p>
+      </div>
+
+    </section>
+
+  </div>
+
+</div>
+
+<!-- CSS SPECIFIC TO THE D2C LANDING PAGE -->
+<style>
+  .glow-blob {
+    position: absolute;
+    width: 600px;
+    height: 600px;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 1;
+    filter: blur(140px);
+    opacity: 0.08;
+  }
+  .glow-blob-cyan {
+    background: #06b6d4;
+    top: 5%;
+    left: -10%;
+    animation: float1 15s infinite;
+  }
+  .glow-blob-emerald {
+    background: #16a34a;
+    bottom: 10%;
+    right: -10%;
+    animation: float2 18s infinite;
+  }
+
+  /* Text gradient animation */
+  @keyframes text-shine {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+  .animate-text-shine {
+    background: linear-gradient(135deg, #10b981, #06b6d4, #10b981);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    animation: text-shine 5s linear infinite;
+  }
+
+  /* Sound Wave rings */
+  .phone-avatar-outer {
+    position: relative;
+    display: inline-block;
+  }
+  .sound-wave-ring {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80px;
+    height: 80px;
+    border: 1px solid rgba(16, 185, 129, 0.4);
+    border-radius: 50%;
+    opacity: 0;
+    pointer-events: none;
+    z-index: 10;
+  }
+  .sound-wave-ring.calling {
+    animation: pulse-ring 2s cubic-bezier(0.215, 0.610, 0.355, 1) infinite;
+  }
+  .sound-wave-ring.speaking {
+    animation: speaking-ring 1s ease-out infinite;
+  }
+  .sound-wave-ring.r-2 {
+    animation-delay: 0.5s;
+  }
+
+  @keyframes pulse-ring {
+    0% {
+      width: 80px;
+      height: 80px;
+      opacity: 0.8;
+      border-color: rgba(6, 182, 212, 0.5);
+    }
+    100% {
+      width: 220px;
+      height: 220px;
+      opacity: 0;
+      border-color: rgba(6, 182, 212, 0);
+    }
+  }
+
+  @keyframes speaking-ring {
+    0% {
+      width: 80px;
+      height: 80px;
+      opacity: 0.9;
+      border-color: rgba(16, 185, 129, 0.6);
+    }
+    100% {
+      width: 160px;
+      height: 160px;
+      opacity: 0;
+      border-color: rgba(16, 185, 129, 0);
+    }
+  }
+</style>
+
+<!-- SIMULATOR CLIENT-SIDE LOGIC -->
+<script>
+  let isCallActive = false;
+  let audioContext = null;
+  let voiceTimer = null;
+  let callTimeout = null;
+  let mockSteps = [];
+  let speechSynth = null;
+  let activeSpeechUtterance = null;
+  let voiceEnabled = true;
+
+  // Initializing Web Speech API
+  if (typeof window !== 'undefined' && 'speechSynthesis' in window) {
+    speechSynth = window.speechSynthesis;
+  }
+
+  // Audio oscillators helper (synthesizer beep alerts & dial tone)
+  function playSynthTone(frequency, duration, type = 'sine', gainVal = 0.05) {
+    try {
+      if (!audioContext) {
+        audioContext = new (window.AudioContext || window.webkitAudioContext)();
+      }
+      if (audioContext.state === 'suspended') {
+        audioContext.resume();
+      }
+      const osc = audioContext.createOscillator();
+      const gain = audioContext.createGain();
+      
+      osc.type = type;
+      osc.frequency.setValueAtTime(frequency, audioContext.currentTime);
+      
+      gain.gain.setValueAtTime(gainVal, audioContext.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.001, audioContext.currentTime + duration);
+      
+      osc.connect(gain);
+      gain.connect(audioContext.destination);
+      
+      osc.start();
+      osc.stop(audioContext.currentTime + duration);
+    } catch(e) {}
+  }
+
+  // Ringing effect tones
+  let ringInterval = null;
+  function startRingingTones() {
+    // Standard double phone ring back tone
+    const ring = () => {
+      playSynthTone(440, 0.4, 'sine', 0.08);
+      setTimeout(() => {
+        playSynthTone(480, 0.4, 'sine', 0.08);
+      }, 80);
+      setTimeout(() => {
+        playSynthTone(440, 0.4, 'sine', 0.08);
+        setTimeout(() => {
+          playSynthTone(480, 0.4, 'sine', 0.08);
+        }, 80);
+      }, 800);
+    };
+    ring();
+    ringInterval = setInterval(ring, 3000);
+  }
+
+  function stopRingingTones() {
+    if (ringInterval) {
+      clearInterval(ringInterval);
+      ringInterval = null;
+    }
+  }
+
+  // 1. VOICE CALL CONTROLLER
+  function startVoiceCall() {
+    if (isCallActive) return;
+    
+    // Resume audio context
+    if (!audioContext) {
+      audioContext = new (window.AudioContext || window.webkitAudioContext)();
+    }
+    
+    const customer = document.getElementById('cust-name').value.trim() || 'Amit';
+    const campaign = document.getElementById('vapi-script').value;
+    
+    isCallActive = true;
+    
+    // UI Updates
+    document.getElementById('vapi-signal-dot').className = "w-2.5 h-2.5 rounded-full bg-yellow-500 animate-ping";
+    document.getElementById('vapi-status-text').innerText = "DIALING...";
+    document.getElementById('vapi-status-text').className = "text-[10px] font-black uppercase tracking-widest text-yellow-500";
+    document.getElementById('vapi-transcript').innerText = `Dialing brand customer ${customer}...`;
+    document.getElementById('btn-decline').disabled = false;
+    document.getElementById('btn-speech').disabled = false;
+    
+    // Soundwave animations activation
+    const rings = document.querySelectorAll('.sound-wave-ring');
+    rings.forEach(r => r.classList.add('calling'));
+    
+    // Start phone dial ring back audio
+    startRingingTones();
+    
+    // Set latency log simulation
+    document.getElementById('vapi-latency').innerText = "120ms";
+
+    // Set script script array depending on selection
+    if (campaign === 'abandoned_cart') {
+      mockSteps = [
+        { speak: `Hi! Am I speaking with ${customer}?`, delay: 1000 },
+        { speak: `Hey ${customer}, I'm Sarah, the AI shop manager for Wholeup D2C Store. I saw you added some premium items to your checkout cart a few minutes ago but didn't complete the order. Was there any technical issue at checkout?`, delay: 5000 },
+        { speak: "Oh, no problem! We understand. Since you left those premium items, I can unlock a one-time 20% discount code just for you if you complete the order within the next 10 minutes. Would you like me to SMS you the checkout coupon link?", delay: 8000 },
+        { speak: "Awesome! I've sent the secure checkout link to your number. Have a wonderful day!", delay: 12000 }
+      ];
+    } else if (campaign === 'upsell') {
+      mockSteps = [
+        { speak: `Hi ${customer}! Sarah here from Wholeup customer care. Thank you for your recent checkout order.`, delay: 1000 },
+        { speak: `I noticed your order qualified for our exclusive VIP VIP Club member discount. Would you like to add our D2C Growth Automation toolkit at 50% discount to your package today? It requires just one click to add.`, delay: 5000 },
+        { speak: "Fantastic choice! I've automatically added that to your active shipment catalog and applied the 50% discount to your invoice. You'll receive a confirmation receipt on WhatsApp.", delay: 8000 },
+        { speak: "Thank you for choosing us, talk to you soon!", delay: 12000 }
+      ];
+    } else {
+      mockSteps = [
+        { speak: `Welcome to Wholeup inbound support helpline. How can I help you today?`, delay: 1000 },
+        { speak: "Our agency specializes in scaling D2C stores and building proprietary AI voice calling, WhatsApp bots, and lead systems.", delay: 5000 },
+        { speak: "If you'd like to book a free prototype audit, just enter your email on our form right below, and our agent will schedule the setup slot.", delay: 9000 },
+        { speak: "Thank you for calling. Goodbye!", delay: 13000 }
+      ];
+    }
+
+    // Connect call after 2 rings (approx 4 seconds)
+    callTimeout = setTimeout(() => {
+      stopRingingTones();
+      
+      // Connect Call sound alert
+      playSynthTone(880, 0.15, 'sine', 0.06);
+      setTimeout(() => playSynthTone(1200, 0.2, 'sine', 0.05), 100);
+
+      document.getElementById('vapi-signal-dot').className = "w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse";
+      document.getElementById('vapi-status-text').innerText = "CONNECTED";
+      document.getElementById('vapi-status-text').className = "text-[10px] font-black uppercase tracking-widest text-emerald-400";
+      document.getElementById('vapi-latency').innerText = "15ms (Zero Latency)";
+      
+      rings.forEach(r => {
+        r.classList.remove('calling');
+        r.classList.add('speaking');
+      });
+
+      // Start dialogue trigger
+      triggerDialogue(0);
+
+    }, 3800);
+  }
+
+  function triggerDialogue(stepIndex) {
+    if (!isCallActive || stepIndex >= mockSteps.length) {
+      if (stepIndex >= mockSteps.length) {
+        setTimeout(endVoiceCall, 2000);
+      }
+      return;
+    }
+
+    const currentStep = mockSteps[stepIndex];
+    document.getElementById('vapi-transcript').innerText = `"${currentStep.speak}"`;
+    
+    // TTS Audio speech synthesis
+    if (voiceEnabled && speechSynth) {
+      speechSynth.cancel(); // Stop active speaking
+      activeSpeechUtterance = new SpeechSynthesisUtterance(currentStep.speak);
+      
+      // Find a premium-sounding voice if available
+      const voices = speechSynth.getVoices();
+      const enVoice = voices.find(v => v.lang.startsWith('en') && v.name.includes('Google'));
+      if (enVoice) activeSpeechUtterance.voice = enVoice;
+      
+      activeSpeechUtterance.rate = 1.05; // speak naturally
+      activeSpeechUtterance.pitch = 1.0;
+      speechSynth.speak(activeSpeechUtterance);
+    } else {
+      // Simulate click soundwave oscillation if voice disabled
+      playSynthTone(600, 0.1, 'triangle', 0.02);
+    }
+
+    // Trigger next step
+    voiceTimer = setTimeout(() => {
+      triggerDialogue(stepIndex + 1);
+    }, currentStep.delay);
+  }
+
+  function endVoiceCall() {
+    isCallActive = false;
+    stopRingingTones();
+    clearTimeout(callTimeout);
+    clearTimeout(voiceTimer);
+    if (speechSynth) speechSynth.cancel();
+
+    // End call tones
+    playSynthTone(380, 0.35, 'sawtooth', 0.05);
+
+    // UI Reset
+    document.getElementById('vapi-signal-dot').className = "w-2.5 h-2.5 rounded-full bg-slate-500";
+    document.getElementById('vapi-status-text').innerText = "OFFLINE";
+    document.getElementById('vapi-status-text').className = "text-[10px] font-black uppercase tracking-widest text-slate-400";
+    document.getElementById('vapi-latency').innerText = "0ms";
+    document.getElementById('vapi-transcript').innerText = "Call ended by agent.";
+    document.getElementById('btn-decline').disabled = true;
+    document.getElementById('btn-speech').disabled = true;
+
+    const rings = document.querySelectorAll('.sound-wave-ring');
+    rings.forEach(r => {
+      r.classList.remove('calling');
+      r.classList.remove('speaking');
+    });
+  }
+
+  function toggleSpeech() {
+    voiceEnabled = !voiceEnabled;
+    const btn = document.getElementById('btn-speech');
+    if (voiceEnabled) {
+      btn.className = "w-12 h-12 rounded-full bg-cyan-500/10 hover:bg-cyan-500/20 text-cyan-400 flex items-center justify-center transition-colors";
+      btn.innerHTML = '<i class="fas fa-volume-up"></i>';
+    } else {
+      btn.className = "w-12 h-12 rounded-full bg-slate-500/10 hover:bg-slate-500/20 text-slate-400 flex items-center justify-center transition-colors";
+      btn.innerHTML = '<i class="fas fa-volume-mute"></i>';
+      if (speechSynth) speechSynth.cancel();
+    }
+  }
+
+
+  // 2. 24/7 WEB CHAT AGENT LOGIC
+  const chatScripts = {
+    greetings: ["hello", "hi", "hey", "hola"],
+    budget: ["ads", "budget", "spend", "revenue", "scale", "traffic", "ecom", "d2c"],
+    pricing: ["price", "cost", "charge", "pricing", "fees"]
+  };
+
+  function sendChatMessage(event) {
+    event.preventDefault();
+    const input = document.getElementById('chat-input');
+    const msg = input.value.trim();
+    if (!msg) return;
+
+    // Display user message in chat
+    appendChatMessage("user", msg);
+    input.value = "";
+
+    // Synthesize key sound
+    playSynthTone(980, 0.05, 'sine', 0.02);
+
+    // Bot Response trigger
+    setTimeout(() => {
+      const lower = msg.toLowerCase();
+      let botResponse = "That sounds interesting! We help E-commerce and D2C brands scale by setting up Vapi agents, WhatsApp recovery flows, and CRM dashboards. To unlock a free prototype audit, could you submit your email in our D2C Audit form below?";
+
+      if (chatScripts.greetings.some(word => lower.includes(word))) {
+        botResponse = "Hey there! GrowBot here. What is your brand name and what E-commerce platform are you currently running on? (Shopify, WooCommerce, Custom)";
+      } else if (chatScripts.budget.some(word => lower.includes(word))) {
+        botResponse = "If you're currently running meta ads or Google PPC, our custom WhatsApp lead routing can boost qualified conversions by over 2.5x. Are you scaling outbound voice calls for cart recovery?";
+      } else if (chatScripts.pricing.some(word => lower.includes(word))) {
+        botResponse = "Our entry-level AI setups start on a performance basis. We integrate custom CRM layouts and set up official WhatsApp APIs. Fill out the audit request form below for an exact cost proposal!";
+      }
+
+      appendChatMessage("bot", botResponse);
+      playSynthTone(750, 0.1, 'triangle', 0.03);
+    }, 800);
+  }
+
+  function appendChatMessage(sender, text) {
+    const chatLog = document.getElementById('web-agent-chat-log');
+    const row = document.createElement('div');
+    
+    if (sender === 'user') {
+      row.className = "flex items-start gap-2.5 justify-end ml-auto max-w-[85%]";
+      row.innerHTML = `
+        <div class="bg-cyan-500 text-dark p-3 rounded-2xl rounded-tr-none font-bold leading-relaxed shadow shadow-cyan-500/10">
+          ${text}
+        </div>
+      `;
+    } else {
+      row.className = "flex items-start gap-2.5 max-w-[85%]";
+      row.innerHTML = `
+        <div class="w-7 h-7 rounded-full bg-cyan-500/15 text-cyan-400 flex items-center justify-center text-[10px] flex-shrink-0 mt-0.5">
+          <i class="fas fa-bolt"></i>
+        </div>
+        <div class="bg-[#0f1526] text-slate-300 p-3 rounded-2xl rounded-tl-none border border-white/5 font-medium leading-relaxed">
+          ${text}
+        </div>
+      `;
+    }
+    
+    chatLog.appendChild(row);
+    chatLog.scrollTop = chatLog.scrollHeight;
+  }
+
+
+  // 3. WHATSAPP FUNNEL STEPS PREVIEW
+  const funnelStepsData = {
+    1: `
+      <div class="space-y-2">
+        <div class="bg-[#0f1526]/50 border border-yellow-500/20 text-yellow-400 p-3 rounded-xl">
+          <i class="fas fa-exclamation-triangle mr-1"></i> [Trigger Event] Cart Abandoned by visitor (Phone: +91 XXXXX XXXXX)
+        </div>
+        <div class="p-2.5 text-slate-500 font-mono text-[9px]">Event logs: 1. Checkout initiated -> 2. Name & Phone stored -> 3. Tab Closed without payment confirmation.</div>
+      </div>
+    `,
+    2: `
+      <div class="space-y-2">
+        <div class="bg-[#0f1526]/50 border border-emerald-500/20 text-emerald-400 p-3 rounded-xl">
+          <i class="fab fa-whatsapp mr-1 text-xs"></i> [Outbound Push] WhatsApp notification sent:
+        </div>
+        <div class="bg-[#070b13] border border-white/5 p-3 rounded-xl text-slate-300 leading-relaxed font-semibold">
+          "Hey Amit! Sarah here from Wholeup store. 🛒 We noticed you left some items in your cart. Grab a one-time 20% discount coupon valid for 10 minutes: <strong>WHOLEUP20</strong>. Complete order here: <span class="text-cyan-400 underline">checkout-url</span>"
+        </div>
+      </div>
+    `,
+    3: `
+      <div class="space-y-2">
+        <div class="bg-[#0f1526]/50 border border-cyan-500/20 text-cyan-400 p-3 rounded-xl">
+          <i class="fas fa-phone-alt mr-1"></i> [Escalation Trigger] Outbound Vapi voice call dispatched.
+        </div>
+        <div class="bg-[#070b13] border border-white/5 p-3 rounded-xl text-slate-300 leading-relaxed font-mono">
+          [System Dialing] Client phone active... <br>
+          [Agent Speech] "Hi Amit, I saw you were looking at D2C automation toolkits. Would you like me to SMS you the VIP check out coupon?"
+        </div>
+      </div>
+    `,
+    4: `
+      <div class="space-y-2">
+        <div class="bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 p-3 rounded-xl flex items-center gap-2">
+          <i class="fas fa-check-circle text-lg"></i>
+          <div>
+            <h5 class="font-black">ORDER RECOVERED SUCCESSFULLY</h5>
+            <p class="text-[8px] text-slate-400">Total recovery time: 14 mins. CRM logged transaction.</p>
+          </div>
+        </div>
+        <div class="p-2 bg-[#070b13] rounded-xl text-[9px] text-slate-500 text-center font-mono">
+          ₹14,500 checkout value recovered. ROAS tracked at 8.4x.
+        </div>
+      </div>
+    `
+  };
+
+  function activateFunnelStep(step) {
+    // Reset buttons class
+    const buttons = document.querySelectorAll('.funnel-step-btn');
+    buttons.forEach((btn, idx) => {
+      btn.className = "w-full flex items-start gap-4 p-4 border border-white/5 rounded-2xl bg-[#080b13]/40 text-left transition-all duration-300 funnel-step-btn";
+      const badge = btn.querySelector('span');
+      badge.className = "w-6 h-6 rounded-full bg-slate-800 text-slate-400 flex items-center justify-center text-[10px] font-black flex-shrink-0 mt-0.5 font-mono";
+      
+      const headers = btn.querySelector('h4');
+      headers.className = "text-xs font-black uppercase tracking-wide text-slate-400";
+      const desc = btn.querySelector('p');
+      desc.className = "text-[10px] text-slate-500 mt-1";
+    });
+
+    // Update active button
+    const activeBtn = document.getElementById(`funnel-step-btn-${step}`);
+    activeBtn.className = "w-full flex items-start gap-4 p-4 border border-emerald-500/30 rounded-2xl bg-[#080b13] text-left transition-all duration-300 funnel-step-btn shadow-lg shadow-emerald-500/5";
+    const activeBadge = activeBtn.querySelector('span');
+    activeBadge.className = "w-6 h-6 rounded-full bg-emerald-500 text-dark flex items-center justify-center text-[10px] font-black flex-shrink-0 mt-0.5 font-mono";
+    
+    const activeHeader = activeBtn.querySelector('h4');
+    activeHeader.className = "text-xs font-black uppercase tracking-wide text-white";
+    const activeDesc = activeBtn.querySelector('p');
+    activeDesc.className = "text-[10px] text-slate-400 mt-1";
+
+    // Play visual update synth beep
+    playSynthTone(900, 0.08, 'sine', 0.03);
+
+    // Update screen display HTML
+    const screen = document.getElementById('funnel-screen-log');
+    screen.innerHTML = funnelStepsData[step];
+
+    // GSAP animation transition
+    if (typeof gsap !== 'undefined') {
+      gsap.from(screen.firstChild, { opacity: 0, scale: 0.95, y: 10, duration: 0.4, ease: 'power2.out' });
+    }
+  }
+
+
+  // 4. AUDIT FORM SUBMISSION
+  async function submitAuditForm(event) {
+    event.preventDefault();
+    const form = document.getElementById('d2c-audit-form');
+    const brandName = document.getElementById('brandName').value;
+    const email = document.getElementById('email').value;
+    const monthlyRevenue = document.getElementById('monthlyRevenue').value;
+    const phone = document.getElementById('phone').value;
+
+    const submitBtn = form.querySelector('button');
+    submitBtn.disabled = true;
+    submitBtn.innerText = "Generating Audit Slot...";
+
+    try {
+      // POST lead data to Express API contact endpoint
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: `${brandName} Team`,
+          email: email,
+          phone: phone,
+          city: `Monthly Revenue: ${monthlyRevenue}`,
+          service: 'marketing-automation-crm-setup',
+          message: `D2C Brand AI Audit request from landing page. Revenue tier: ${monthlyRevenue}. Current Ad spend qualifications requested.`
+        })
+      });
+
+      const result = await response.json();
+      
+      // Play double success beep sound
+      playSynthTone(987.77, 0.15, 'sine', 0.08); // B5 note
+      setTimeout(() => playSynthTone(1318.51, 0.25, 'sine', 0.08), 120); // E6 note
+
+      form.classList.add('hidden');
+      document.getElementById('d2c-form-success').classList.remove('hidden');
+
+    } catch (e) {
+      alert("Submission error. Please check your connectivity and try again!");
+      submitBtn.disabled = false;
+      submitBtn.innerText = "Submit & Generate Audit";
+    }
+  }
+</script>

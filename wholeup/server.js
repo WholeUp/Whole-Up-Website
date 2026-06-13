@@ -230,6 +230,16 @@ app.get('/dashboard', (req, res) => {
   });
 });
 
+// D2C SCALE LANDING PAGE (GET)
+app.get('/d2c-scale', (req, res) => {
+  res.render('d2c-scale', {
+    title: 'Scale Your D2C Brand with Autonomous AI Agents | Wholeup',
+    metaDesc: 'Stop running ads manually. The era of Autonomous AI Agents is here. Implement high-converting Vapi voice agents, WhatsApp automation, and 24/7 web agents to scale your E-commerce or D2C store.',
+    page: 'd2c-scale'
+  });
+});
+
+
 
 // ─── API: Contact Form Submission ─────────────────────────────────────────────
 app.post('/api/contact', contactLimiter, async (req, res) => {

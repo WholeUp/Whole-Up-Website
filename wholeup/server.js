@@ -186,6 +186,51 @@ app.get('/terms', (req, res) => {
   });
 });
 
+// Helper function to get cookie by name
+const getCookie = (req, name) => {
+  const cookies = req.headers.cookie;
+  if (!cookies) return null;
+  const match = cookies.match(new RegExp('(^| )' + name + '=([^;]+)'));
+  if (match) return match[2];
+  return null;
+};
+
+// CLIENT PORTAL LOGIN (GET)
+app.get('/login', (req, res) => {
+  res.setHeader('Set-Cookie', 'client_session=; Path=/; HttpOnly; Max-Age=0');
+  res.render('login', {
+    title: 'Client Portal Login | Wholeup',
+    page: 'login'
+  });
+});
+
+// CLIENT PORTAL LOGIN (POST)
+app.post('/login', (req, res) => {
+  const { clientId, password } = req.body;
+  if (clientId === 'demo' && password === 'demo') {
+    res.setHeader('Set-Cookie', 'client_session=demo_active; Path=/; HttpOnly; Max-Age=86400');
+    return res.redirect('/dashboard');
+  }
+  res.render('login', {
+    title: 'Client Portal Login | Wholeup',
+    page: 'login',
+    error: 'Invalid Client ID or Password'
+  });
+});
+
+// CLIENT DASHBOARD (GET)
+app.get('/dashboard', (req, res) => {
+  const session = getCookie(req, 'client_session');
+  if (session !== 'demo_active') {
+    return res.redirect('/login');
+  }
+  res.render('dashboard', {
+    title: 'Client Dashboard | Wholeup',
+    page: 'dashboard'
+  });
+});
+
+
 // ─── API: Contact Form Submission ─────────────────────────────────────────────
 app.post('/api/contact', contactLimiter, async (req, res) => {
   const { name, phone, city, email, service, message } = req.body;

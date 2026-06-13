@@ -1,0 +1,304 @@
+<!-- DASHBOARD CONTAINER -->
+<section class="min-h-screen pt-32 pb-24 bg-cream px-4 md:px-6 relative overflow-hidden select-none">
+  <!-- Glowing Background Ambience -->
+  <div class="hero-blur-blob hero-blob-1 opacity-5"></div>
+  <div class="hero-blur-blob hero-blob-2 opacity-5"></div>
+
+  <div class="max-w-[1400px] mx-auto relative z-10 space-y-8">
+    
+    <!-- Header banner -->
+    <div class="flex flex-col md:flex-row justify-between items-start md:items-center bg-white border border-black/5 rounded-[32px] p-8 md:p-10 shadow-sm gs-reveal gap-6">
+      <div class="flex items-center gap-4">
+        <div class="w-14 h-14 rounded-2xl bg-primary text-white flex items-center justify-center text-2xl shadow-lg shadow-primary/25">
+          <i class="fas fa-chart-line"></i>
+        </div>
+        <div>
+          <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-[9px] font-black text-primary uppercase tracking-widest mb-1.5">
+            <span class="w-1.5 h-1.5 rounded-full bg-primary animate-pulse"></span> System Active
+          </span>
+          <h1 class="text-xl md:text-2xl font-black uppercase tracking-wider text-dark leading-none">Mumbai D2C Brand</h1>
+          <p class="text-xs text-dark/40 font-medium mt-1">Client ID: <code>demo</code> &bull; Plan: <strong>Growth Engine V2</strong></p>
+        </div>
+      </div>
+      <div class="flex gap-3 w-full md:w-auto">
+        <a href="/login" class="w-full md:w-auto text-center border border-black/10 text-dark px-6 py-3.5 rounded-xl font-bold text-xs hover:border-red-500 hover:text-red-500 transition-colors uppercase tracking-widest magnetic-btn">
+          <i class="fas fa-sign-out-alt mr-1"></i> Sign Out
+        </a>
+      </div>
+    </div>
+
+    <!-- Quick Stats Grid -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 gs-reveal">
+      
+      <!-- Stat 1 -->
+      <div class="bg-white rounded-3xl p-6 border border-black/5 shadow-sm hover:shadow-md transition-shadow duration-300">
+        <p class="text-[9px] font-black uppercase tracking-widest text-dark/40 mb-2">Monthly Ad Budget</p>
+        <p class="text-3xl font-black text-dark font-mono">₹45,000</p>
+        <div class="flex items-center gap-1.5 text-[10px] text-green-500 font-bold mt-2">
+          <i class="fas fa-caret-up"></i> 100% active allocation
+        </div>
+      </div>
+
+      <!-- Stat 2 -->
+      <div class="bg-white rounded-3xl p-6 border border-black/5 shadow-sm hover:shadow-md transition-shadow duration-300">
+        <p class="text-[9px] font-black uppercase tracking-widest text-dark/40 mb-2">Active campaigns ROAS</p>
+        <p class="text-3xl font-black text-primary font-mono">4.8x</p>
+        <div class="flex items-center gap-1.5 text-[10px] text-green-500 font-bold mt-2">
+          <i class="fas fa-caret-up"></i> +0.4x lift this week
+        </div>
+      </div>
+
+      <!-- Stat 3 -->
+      <div class="bg-white rounded-3xl p-6 border border-black/5 shadow-sm hover:shadow-md transition-shadow duration-300">
+        <p class="text-[9px] font-black uppercase tracking-widest text-dark/40 mb-2">Qualified Leads logged</p>
+        <p class="text-3xl font-black text-dark font-mono">1,250</p>
+        <div class="flex items-center gap-1.5 text-[10px] text-green-500 font-bold mt-2">
+          <i class="fas fa-caret-up"></i> +32 today (verified)
+        </div>
+      </div>
+
+      <!-- Stat 4 -->
+      <div class="bg-white rounded-3xl p-6 border border-black/5 shadow-sm hover:shadow-md transition-shadow duration-300">
+        <p class="text-[9px] font-black uppercase tracking-widest text-dark/40 mb-2">WhatsApp Auto-replies</p>
+        <p class="text-3xl font-black text-dark font-mono">482</p>
+        <div class="flex items-center gap-1.5 text-[10px] text-cyan-500 font-bold mt-2">
+          <i class="fas fa-check"></i> 99.2% delivery success
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Main Content Panels -->
+    <div class="grid lg:grid-cols-12 gap-8 items-start">
+      
+      <!-- Left: WhatsApp Automation Status (5 cols) -->
+      <div class="lg:col-span-5 bg-white border border-black/5 rounded-[32px] p-8 shadow-sm gs-reveal space-y-6">
+        
+        <div>
+          <span class="inline-block text-[9px] font-black text-cyan-600 bg-cyan-50 border border-cyan-100 px-3 py-1 rounded-full uppercase tracking-wider mb-2">
+            Engine Config
+          </span>
+          <h2 class="text-lg font-black uppercase tracking-wide text-dark">WhatsApp Automation Flow</h2>
+          <p class="text-xs text-dark/50 mt-1">Real-time trigger automation logs and active funnel sequences.</p>
+        </div>
+
+        <div class="grid grid-cols-3 gap-3 bg-cream rounded-2xl p-4 border border-black/5 text-center">
+          <div>
+            <p class="text-base font-black text-dark font-mono">99.2%</p>
+            <p class="text-[8px] font-black uppercase tracking-wider text-dark/45 mt-0.5">Delivered</p>
+          </div>
+          <div>
+            <p class="text-base font-black text-dark font-mono">~8s</p>
+            <p class="text-[8px] font-black uppercase tracking-wider text-dark/45 mt-0.5">Response Time</p>
+          </div>
+          <div>
+            <p class="text-base font-black text-primary font-mono">16%</p>
+            <p class="text-[8px] font-black uppercase tracking-wider text-dark/45 mt-0.5">Conversions</p>
+          </div>
+        </div>
+
+        <div class="space-y-4">
+          <h3 class="text-xs font-black uppercase tracking-widest text-dark/40">Active Funnel Sequences</h3>
+          
+          <!-- Flow 1 -->
+          <div class="flex items-start gap-4 p-4 border border-black/5 rounded-2xl bg-cream hover:border-primary transition-colors duration-200">
+            <div class="w-8 h-8 rounded-lg bg-green-500/10 text-primary flex items-center justify-center text-sm flex-shrink-0 mt-0.5">
+              <i class="fab fa-whatsapp"></i>
+            </div>
+            <div>
+              <div class="flex justify-between items-center w-full">
+                <h4 class="text-xs font-black uppercase tracking-wider text-dark">1. Immediate Contact</h4>
+                <span class="text-[8px] font-black text-primary uppercase tracking-widest">Active</span>
+              </div>
+              <p class="text-[10px] text-dark/60 font-medium leading-relaxed mt-1">Sends welcome catalog PDF and Calendly slot link within 1 minute of ad form filling.</p>
+              <p class="text-[9px] text-dark/40 font-mono mt-1.5"><i class="fas fa-play text-[8px] mr-1"></i> Triggered: 1,250 times</p>
+            </div>
+          </div>
+
+          <!-- Flow 2 -->
+          <div class="flex items-start gap-4 p-4 border border-black/5 rounded-2xl bg-cream hover:border-primary transition-colors duration-200">
+            <div class="w-8 h-8 rounded-lg bg-green-500/10 text-primary flex items-center justify-center text-sm flex-shrink-0 mt-0.5">
+              <i class="fab fa-whatsapp"></i>
+            </div>
+            <div>
+              <div class="flex justify-between items-center w-full">
+                <h4 class="text-xs font-black uppercase tracking-wider text-dark">2. 24-Hr Case Study Follow</h4>
+                <span class="text-[8px] font-black text-primary uppercase tracking-widest">Active</span>
+              </div>
+              <p class="text-[10px] text-dark/60 font-medium leading-relaxed mt-1">Delivers a success video testimonial if no slot is booked after 24 hours.</p>
+              <p class="text-[9px] text-dark/40 font-mono mt-1.5"><i class="fas fa-play text-[8px] mr-1"></i> Triggered: 740 times</p>
+            </div>
+          </div>
+
+          <!-- Flow 3 -->
+          <div class="flex items-start gap-4 p-4 border border-black/5 rounded-2xl bg-cream hover:border-primary transition-colors duration-200">
+            <div class="w-8 h-8 rounded-lg bg-green-500/10 text-primary flex items-center justify-center text-sm flex-shrink-0 mt-0.5">
+              <i class="fab fa-whatsapp"></i>
+            </div>
+            <div>
+              <div class="flex justify-between items-center w-full">
+                <h4 class="text-xs font-black uppercase tracking-wider text-dark">3. 48-Hr Direct Chat Connect</h4>
+                <span class="text-[8px] font-black text-primary uppercase tracking-widest">Active</span>
+              </div>
+              <p class="text-[10px] text-dark/60 font-medium leading-relaxed mt-1">Offers direct support team WhatsApp connect for high-touch custom sales query.</p>
+              <p class="text-[9px] text-dark/40 font-mono mt-1.5"><i class="fas fa-play text-[8px] mr-1"></i> Triggered: 310 times</p>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- Right: Real-time leads log (7 cols) -->
+      <div class="lg:col-span-7 bg-white border border-black/5 rounded-[32px] p-8 shadow-sm gs-reveal space-y-6">
+        
+        <div class="flex justify-between items-center flex-wrap gap-4">
+          <div>
+            <span class="inline-block text-[9px] font-black text-green-600 bg-green-50 border border-green-100 px-3 py-1 rounded-full uppercase tracking-wider mb-2">
+              Pipeline Log
+            </span>
+            <h2 class="text-lg font-black uppercase tracking-wide text-dark">Real-Time Qualified Leads</h2>
+          </div>
+          <button onclick="simulateNewLead()" class="bg-dark text-white hover:bg-primary px-4 py-2.5 rounded-xl font-bold text-[10px] uppercase tracking-widest transition-colors duration-300 flex items-center gap-1.5 shadow">
+            <i class="fas fa-plus"></i> Simulate Lead
+          </button>
+        </div>
+
+        <!-- Leads Table Log -->
+        <div class="overflow-x-auto">
+          <table class="w-full text-left border-collapse">
+            <thead>
+              <tr class="border-b border-black/5 text-[9px] font-black uppercase tracking-widest text-dark/40">
+                <th class="pb-3 pr-4">Lead Name</th>
+                <th class="pb-3 pr-4">Contact Info</th>
+                <th class="pb-3 pr-4">Channel Source</th>
+                <th class="pb-3 pr-4">Pipeline Status</th>
+                <th class="pb-3 text-right">Time Log</th>
+              </tr>
+            </thead>
+            <tbody id="leads-log-table" class="text-xs font-medium text-dark/85 divide-y divide-black/5">
+              
+              <!-- Lead 1 -->
+              <tr class="hover:bg-cream/40 transition-colors">
+                <td class="py-4 font-black">Rahul Verma</td>
+                <td class="py-4 font-mono">+91 98256 XXXXX</td>
+                <td class="py-4"><span class="px-2.5 py-1 rounded-full bg-blue-50 text-[10px] font-bold text-blue-600 uppercase">Meta Ads</span></td>
+                <td class="py-4"><span class="px-2.5 py-1 rounded-full bg-green-50 text-[10px] font-bold text-green-600 uppercase">Contacted</span></td>
+                <td class="py-4 text-right text-dark/40 text-[10px] font-mono">2 mins ago</td>
+              </tr>
+
+              <!-- Lead 2 -->
+              <tr class="hover:bg-cream/40 transition-colors">
+                <td class="py-4 font-black">Simran Kaur</td>
+                <td class="py-4 font-mono">+91 94038 XXXXX</td>
+                <td class="py-4"><span class="px-2.5 py-1 rounded-full bg-green-50 text-[10px] font-bold text-primary uppercase">SEO Organic</span></td>
+                <td class="py-4"><span class="px-2.5 py-1 rounded-full bg-emerald-100 text-[10px] font-bold text-emerald-700 uppercase">Booking Confirmed</span></td>
+                <td class="py-4 text-right text-dark/40 text-[10px] font-mono">45 mins ago</td>
+              </tr>
+
+              <!-- Lead 3 -->
+              <tr class="hover:bg-cream/40 transition-colors">
+                <td class="py-4 font-black">Amit Patel</td>
+                <td class="py-4 font-mono">+91 99281 XXXXX</td>
+                <td class="py-4"><span class="px-2.5 py-1 rounded-full bg-orange-50 text-[10px] font-bold text-orange-600 uppercase">Google Ads</span></td>
+                <td class="py-4"><span class="px-2.5 py-1 rounded-full bg-orange-100 text-[10px] font-bold text-orange-700 uppercase">Awaiting Reply</span></td>
+                <td class="py-4 text-right text-dark/40 text-[10px] font-mono">2 hours ago</td>
+              </tr>
+
+              <!-- Lead 4 -->
+              <tr class="hover:bg-cream/40 transition-colors">
+                <td class="py-4 font-black">Priya Shah</td>
+                <td class="py-4 font-mono">+91 90812 XXXXX</td>
+                <td class="py-4"><span class="px-2.5 py-1 rounded-full bg-blue-50 text-[10px] font-bold text-blue-600 uppercase">Meta Ads</span></td>
+                <td class="py-4"><span class="px-2.5 py-1 rounded-full bg-purple-50 text-[10px] font-bold text-purple-600 uppercase">Nurturing</span></td>
+                <td class="py-4 text-right text-dark/40 text-[10px] font-mono">5 hours ago</td>
+              </tr>
+
+              <!-- Lead 5 -->
+              <tr class="hover:bg-cream/40 transition-colors">
+                <td class="py-4 font-black">Suresh Joshi</td>
+                <td class="py-4 font-mono">+91 97263 XXXXX</td>
+                <td class="py-4"><span class="px-2.5 py-1 rounded-full bg-emerald-50 text-[10px] font-bold text-emerald-600 uppercase">WhatsApp Bot</span></td>
+                <td class="py-4"><span class="px-2.5 py-1 rounded-full bg-green-50 text-[10px] font-bold text-green-600 uppercase">Contacted</span></td>
+                <td class="py-4 text-right text-dark/40 text-[10px] font-mono">1 day ago</td>
+              </tr>
+
+            </tbody>
+          </table>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+<!-- Audio Alert & Simulations scripts -->
+<script>
+  function simulateNewLead() {
+    const table = document.getElementById('leads-log-table');
+    const firstNames = ["Rajesh", "Neha", "Kunal", "Tanya", "Vikram", "Meera", "Deepak", "Anjali"];
+    const lastNames = ["Mehta", "Sharma", "Kothari", "Goel", "Jain", "Bose", "Ahuja", "Kapoor"];
+    const channels = [
+      { name: "Meta Ads", bg: "bg-blue-50 text-blue-600" },
+      { name: "Google Ads", bg: "bg-orange-50 text-orange-600" },
+      { name: "SEO Organic", bg: "bg-green-50 text-primary" },
+      { name: "WhatsApp Bot", bg: "bg-emerald-50 text-emerald-600" }
+    ];
+    const statuses = [
+      { name: "Contacted", bg: "bg-green-50 text-green-600" },
+      { name: "Nurturing", bg: "bg-purple-50 text-purple-600" },
+      { name: "Awaiting Reply", bg: "bg-orange-100 text-orange-700" }
+    ];
+
+    const randomName = firstNames[Math.floor(Math.random() * firstNames.length)] + " " + lastNames[Math.floor(Math.random() * lastNames.length)];
+    const randomPhone = "+91 " + (Math.floor(Math.random() * 90000) + 10000) + " XXXXX";
+    const randomChannel = channels[Math.floor(Math.random() * channels.length)];
+    const randomStatus = statuses[Math.floor(Math.random() * statuses.length)];
+
+    // Create new lead row HTML
+    const tr = document.createElement('tr');
+    tr.className = "hover:bg-cream/40 transition-colors bg-green-50/20";
+    tr.innerHTML = `
+      <td class="py-4 font-black">${randomName}</td>
+      <td class="py-4 font-mono">${randomPhone}</td>
+      <td class="py-4"><span class="px-2.5 py-1 rounded-full ${randomChannel.bg} text-[10px] font-bold uppercase">${randomChannel.name}</span></td>
+      <td class="py-4"><span class="px-2.5 py-1 rounded-full ${randomStatus.bg} text-[10px] font-bold uppercase">${randomStatus.name}</span></td>
+      <td class="py-4 text-right text-dark/40 text-[10px] font-mono">Just Now</td>
+    `;
+
+    // Prepend row and fade in
+    table.insertBefore(tr, table.firstChild);
+    
+    // Play alert bell sound using standard web synth audio
+    playSystemBeep();
+
+    // Stagger transition entry
+    if (typeof gsap !== 'undefined') {
+      gsap.from(tr, { opacity: 0, y: -20, duration: 0.5, ease: 'power2.out' });
+      gsap.to(tr, { backgroundColor: 'transparent', delay: 1.5, duration: 1.0 });
+    }
+  }
+
+  function playSystemBeep() {
+    try {
+      const context = new (window.AudioContext || window.webkitAudioContext)();
+      const osc = context.createOscillator();
+      const gain = context.createGain();
+      
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(587.33, context.currentTime); // D5 note
+      osc.frequency.setValueAtTime(880, context.currentTime + 0.08); // A5 note
+      
+      gain.gain.setValueAtTime(0.08, context.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.001, context.currentTime + 0.35);
+      
+      osc.connect(gain);
+      gain.connect(context.destination);
+      
+      osc.start();
+      osc.stop(context.currentTime + 0.35);
+    } catch(e) {}
+  }
+</script>

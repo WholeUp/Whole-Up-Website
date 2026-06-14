@@ -2,9 +2,47 @@
   <div class="max-w-[1400px] mx-auto">
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12 border-b border-white/10 pb-16">
       <div class="lg:col-span-2">
-        <div class="flex items-center gap-3 mb-6">
-          <span class="text-white bg-white/10 w-10 h-10 rounded-md flex items-center justify-center font-script text-xl font-black italic">W.</span>
-          <h2 class="text-xl font-bold tracking-tight text-white uppercase">Wholeup Solutions</h2>
+        <div class="flex items-center gap-2 mb-6 group/logo">
+          <svg role="img" aria-label="Whole Up Logo" class="w-10 h-10 transform group-hover:scale-110 group-hover:rotate-3 transition-all duration-300" viewBox="0 0 1000 700" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <filter id="foot-overlap-shadow" x="-30%" y="-30%" width="160%" height="160%">
+                <feDropShadow dx="-12" dy="12" stdDeviation="16" flood-color="#000000" flood-opacity="0.5"/>
+              </filter>
+              <linearGradient id="foot-charcoal-loader-grad" x1="180" y1="270" x2="465" y2="590" gradientUnits="userSpaceOnUse">
+                <stop offset="0%" stop-color="#4B5563" />
+                <stop offset="100%" stop-color="#1F2937" />
+              </linearGradient>
+              <linearGradient id="foot-green-loader-grad" x1="465" y1="590" x2="900" y2="100" gradientUnits="userSpaceOnUse">
+                <stop offset="0%" stop-color="#16A34A" />
+                <stop offset="60%" stop-color="#22C55E" />
+                <stop offset="100%" stop-color="#4ADE80" />
+              </linearGradient>
+            </defs>
+            <!-- Right Green Wing -->
+            <path d="M 465 380 C 455 420, 500 590, 570 590 C 640 590, 710 350, 790 210" 
+                  stroke="url(#foot-green-loader-grad)" 
+                  stroke-width="105" 
+                  stroke-linecap="butt" 
+                  stroke-linejoin="round" />
+            <!-- Left Black/Gray Wing -->
+            <path d="M 180 270 C 180 270, 260 590, 330 590 C 400 590, 440 480, 465 380" 
+                  stroke="url(#foot-charcoal-loader-grad)" 
+                  stroke-width="105" 
+                  stroke-linecap="round" 
+                  stroke-linejoin="round" 
+                  filter="url(#foot-overlap-shadow)" />
+            <!-- Solid Arrow Head -->
+            <polygon points="712,165 850,106 868,255 790,210" 
+                     fill="url(#foot-green-loader-grad)" />
+            <!-- Single Sparkle Star -->
+            <path d="M 880 25 Q 880 60 915 60 Q 880 60 880 95 Q 880 60 845 60 Q 880 60 880 25" 
+                  fill="#22C55E" />
+          </svg>
+          <h2 class="text-2xl font-josefin tracking-[0.05em] select-none flex items-center gap-0.5">
+            <span class="font-light text-white transition-colors duration-300 group-hover/logo:text-primary">Whole</span>
+            <span class="font-bold text-primary transition-colors duration-300 group-hover/logo:text-white">Up</span>
+            <span class="text-xs font-semibold text-gray-500 tracking-[0.2em] ml-2 self-end mb-1">Solutions</span>
+          </h2>
         </div>
         <p class="text-gray-400 text-sm leading-relaxed mb-6">Performance-driven digital agency helping global businesses grow smarter, faster, and stronger. We engineer results — not just campaigns.</p>
         <div class="flex flex-wrap gap-2 mb-6">
@@ -57,7 +95,7 @@
       </div>
     </div>
     <div class="flex flex-col md:flex-row justify-between items-center mt-8 text-xs text-gray-500">
-      <p>&copy; 2025 Wholeup Solutions. All rights reserved.</p>
+      <p>&copy; 2025 Whole Up Solutions. All rights reserved.</p>
       <div class="flex gap-6 mt-4 md:mt-0">
         <a href="/privacy" class="hover:text-white transition">Privacy Policy</a>
         <a href="/terms" class="hover:text-white transition">Terms of Service</a>

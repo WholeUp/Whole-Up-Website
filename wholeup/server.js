@@ -101,7 +101,7 @@ function scoreLead(leadData) {
 // HOME
 app.get('/', (req, res) => {
   res.render('home', {
-    title: 'Wholeup | Full-Funnel Digital Marketing Agency',
+    title: 'Whole Up | Full-Funnel Digital Marketing Agency',
     metaDesc: 'Wholeup is a results-driven digital marketing agency helping businesses scale with SEO, paid ads, social media, and conversion-first websites.',
     page: 'home',
     services: services.slice(0, 6),
@@ -114,7 +114,7 @@ app.get('/', (req, res) => {
 // ABOUT
 app.get('/about', (req, res) => {
   res.render('about', {
-    title: 'About Wholeup | Who We Are',
+    title: 'About Whole Up | Who We Are',
     metaDesc: 'Learn about Wholeup Digital Marketing Agency — our story, team, values, and what makes us different.',
     page: 'about'
   });
@@ -123,7 +123,7 @@ app.get('/about', (req, res) => {
 // SERVICES
 app.get('/services', (req, res) => {
   res.render('services', {
-    title: 'Our Services | Wholeup Digital Marketing',
+    title: 'Our Services | Whole Up Digital Marketing',
     metaDesc: 'Full-service digital marketing: SEO, Google Ads, Meta Ads, Social Media, Web Design, Email Marketing and more.',
     page: 'services',
     services
@@ -133,7 +133,7 @@ app.get('/services', (req, res) => {
 // AI SERVICES
 app.get('/ai-services', (req, res) => {
   res.render('ai-services', {
-    title: 'AI Services | Wholeup — Voice AI, WhatsApp Automation & More',
+    title: 'AI Services | Whole Up — Voice AI, WhatsApp Automation & More',
     metaDesc: 'Explore Wholeup AI Services: Voice AI Agents, WhatsApp Automation, AI Email Flows, Smart CRM, and 10 more intelligent systems to grow your business 24/7.',
     page: 'ai-services',
     aiServices
@@ -145,7 +145,7 @@ app.get('/services/:slug', (req, res) => {
   const service = services.find(s => s.slug === req.params.slug);
   if (!service) return res.redirect('/services');
   res.render('service-single', {
-    title: `${service.title} | Wholeup`,
+    title: `${service.title} | Whole Up`,
     metaDesc: service.description,
     page: 'services',
     service,
@@ -156,7 +156,7 @@ app.get('/services/:slug', (req, res) => {
 // PORTFOLIO
 app.get('/portfolio', (req, res) => {
   res.render('portfolio', {
-    title: 'Portfolio & Case Studies | Wholeup',
+    title: 'Portfolio & Case Studies | Whole Up',
     metaDesc: 'See our proven results — case studies showing how we grew businesses with digital marketing.',
     page: 'portfolio',
     portfolio
@@ -166,7 +166,7 @@ app.get('/portfolio', (req, res) => {
 // PRICING
 app.get('/pricing', (req, res) => {
   res.render('pricing', {
-    title: 'Pricing Plans | Wholeup Digital Marketing',
+    title: 'Pricing Plans | Whole Up Digital Marketing',
     metaDesc: 'Transparent pricing for SEO, social media, paid ads, and full-stack digital marketing. No hidden fees.',
     page: 'pricing',
     pricing
@@ -176,7 +176,7 @@ app.get('/pricing', (req, res) => {
 // BLOG
 app.get('/blog', (req, res) => {
   res.render('blog', {
-    title: 'Digital Marketing Blog | Wholeup Insights',
+    title: 'Digital Marketing Blog | Whole Up Insights',
     metaDesc: 'Expert tips, strategies, and insights on SEO, paid ads, social media, and digital growth.',
     page: 'blog',
     posts: blogPosts
@@ -188,7 +188,7 @@ app.get('/blog/:slug', (req, res) => {
   const post = blogPosts.find(p => p.slug === req.params.slug);
   if (!post) return res.redirect('/blog');
   res.render('blog-single', {
-    title: `${post.title} | Wholeup Blog`,
+    title: `${post.title} | Whole Up Blog`,
     metaDesc: post.excerpt,
     page: 'blog',
     post,
@@ -199,7 +199,7 @@ app.get('/blog/:slug', (req, res) => {
 // FAQ
 app.get('/faq', (req, res) => {
   res.render('faq', {
-    title: 'Frequently Asked Questions | Wholeup',
+    title: 'Frequently Asked Questions | Whole Up',
     metaDesc: 'Got questions? We have answers. Learn everything about our digital marketing services, pricing, and process.',
     page: 'faq',
     faqs
@@ -209,7 +209,7 @@ app.get('/faq', (req, res) => {
 // CONTACT PAGE
 app.get('/contact', (req, res) => {
   res.render('contact', {
-    title: 'Contact Wholeup | Book a Free Strategy Call',
+    title: 'Contact Whole Up | Book a Free Strategy Call',
     metaDesc: 'Get in touch with Wholeup. Book a free consultation and let us build your digital growth strategy.',
     page: 'contact'
   });
@@ -218,7 +218,7 @@ app.get('/contact', (req, res) => {
 // PRIVACY POLICY
 app.get('/privacy', (req, res) => {
   res.render('privacy', {
-    title: 'Privacy Policy | Wholeup',
+    title: 'Privacy Policy | Whole Up',
     page: 'privacy'
   });
 });
@@ -226,7 +226,7 @@ app.get('/privacy', (req, res) => {
 // TERMS
 app.get('/terms', (req, res) => {
   res.render('terms', {
-    title: 'Terms of Service | Wholeup',
+    title: 'Terms of Service | Whole Up',
     page: 'terms'
   });
 });
@@ -244,7 +244,7 @@ const getCookie = (req, name) => {
 app.get('/login', (req, res) => {
   res.setHeader('Set-Cookie', 'client_session=; Path=/; HttpOnly; Max-Age=0');
   res.render('login', {
-    title: 'Client Portal Login | Wholeup',
+    title: 'Client Portal Login | Whole Up',
     page: 'login'
   });
 });
@@ -257,7 +257,7 @@ app.post('/login', (req, res) => {
     return res.redirect('/dashboard');
   }
   res.render('login', {
-    title: 'Client Portal Login | Wholeup',
+    title: 'Client Portal Login | Whole Up',
     page: 'login',
     error: 'Invalid Client ID or Password'
   });
@@ -270,7 +270,7 @@ app.get('/dashboard', (req, res) => {
     return res.redirect('/login');
   }
   res.render('dashboard', {
-    title: 'Client Dashboard | Wholeup',
+    title: 'Client Dashboard | Whole Up',
     page: 'dashboard'
   });
 });
@@ -278,7 +278,7 @@ app.get('/dashboard', (req, res) => {
 // D2C SCALE LANDING PAGE (GET)
 app.get('/d2c-scale', (req, res) => {
   res.render('d2c-scale', {
-    title: 'Scale Your D2C Brand with Autonomous AI Agents | Wholeup',
+    title: 'Scale Your D2C Brand with Autonomous AI Agents | Whole Up',
     metaDesc: 'Stop running ads manually. The era of Autonomous AI Agents is here. Implement high-converting Vapi voice agents, WhatsApp automation, and 24/7 web agents to scale your E-commerce or D2C store.',
     page: 'd2c-scale'
   });
@@ -671,7 +671,7 @@ Maintain a confident, highly professional tone. Do not write generic placeholder
 // ─── AI Agent Admin Dashboard ──────────────────────────────────────────────────
 app.get('/admin/agent', (req, res) => {
   if (req.query.pass !== 'wholeup2026') {
-    return res.status(404).render('404', { title: 'Page Not Found | Wholeup', page: '404' });
+    return res.status(404).render('404', { title: 'Page Not Found | Whole Up', page: '404' });
   }
 
   const fs = require('fs');
@@ -685,7 +685,7 @@ app.get('/admin/agent', (req, res) => {
   }
 
   res.render('agent', {
-    title: 'Wholeup AI Agent Command Center',
+    title: 'Whole Up AI Agent Command Center',
     page: 'agent',
     leads: leads
   });
@@ -1472,7 +1472,7 @@ initTelegramWebhook();
 
 // ─── 404 ──────────────────────────────────────────────────────────────────────
 app.use((req, res) => {
-  res.status(404).render('404', { title: 'Page Not Found | Wholeup', page: '404' });
+  res.status(404).render('404', { title: 'Page Not Found | Whole Up', page: '404' });
 });
 
 // ─── Start ────────────────────────────────────────────────────────────────────

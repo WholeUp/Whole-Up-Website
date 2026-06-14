@@ -8,6 +8,48 @@ const rateLimit = require('express-rate-limit');
 const path = require('path');
 const nodemailer = require('nodemailer');
 
+// ─── Gemini API Key Rotation (auto-switch when quota exceeded) ─────────────────
+async function getGeminiResponse(prompt, systemInstruction = null, contentsArray = null) {
+  const { GoogleGenAI } = require('@google/genai');
+  // All available API keys — add more here when needed
+  const apiKeys = [
+    process.env.GEMINI_API_KEY,
+    process.env.GEMINI_API_KEY_2,
+    process.env.GEMINI_API_KEY_3,
+  ].filter(k => k && k.trim() !== '');
+
+  const models = ['gemini-2.5-flash', 'gemini-2.0-flash-lite', 'gemini-2.0-flash'];
+  let lastError = null;
+
+  for (const apiKey of apiKeys) {
+    for (const model of models) {
+      try {
+        const ai = new GoogleGenAI({ apiKey });
+        const contents = contentsArray || [{ role: 'user', parts: [{ text: prompt }] }];
+        const config = systemInstruction ? { systemInstruction } : {};
+        const result = await ai.models.generateContent({ model, contents, config });
+        console.log(`✅ Gemini success — key: ...${apiKey.slice(-6)}, model: ${model}`);
+        return result.text;
+      } catch (err) {
+        const is429 = err.message && (err.message.includes('429') || err.message.includes('RESOURCE_EXHAUSTED') || err.message.includes('quota'));
+        const is404 = err.message && err.message.includes('404');
+        if (is429) {
+          console.warn(`⚠️ Key ...${apiKey.slice(-6)} quota exceeded on ${model}, trying next...`);
+          break; // Try next key (this key is exhausted)
+        } else if (is404) {
+          console.warn(`⚠️ Model ${model} not found for key ...${apiKey.slice(-6)}, trying next model...`);
+          lastError = err;
+          continue; // Try next model
+        } else {
+          lastError = err;
+          continue;
+        }
+      }
+    }
+  }
+  throw lastError || new Error('All Gemini API keys and models are exhausted.');
+}
+
 const app = express();
 const PORT = process.env.PORT || 3000;
 
@@ -412,49 +454,19 @@ You are acting as Wholeup's Lead Business Consultant. Your task is to walk the u
 - Always end with a recommendation and clear next steps to call or WhatsApp you directly to implement the roadmap.`;
     }
 
-    const modelsToTry = ['gemini-2.5-flash', 'gemini-2.0-flash-lite', 'gemini-2.0-flash'];
-    let reply = '';
-    let success = false;
-    let lastError = null;
-
-    // Convert history format if present, making sure it fits the SDK expectations
-    const formattedHistory = [];
+    // Build chat contents with history
+    const chatContents = [];
     if (history && Array.isArray(history)) {
       history.forEach(h => {
-        formattedHistory.push({
+        chatContents.push({
           role: h.role === 'user' ? 'user' : 'model',
           parts: [{ text: h.parts[0].text }]
         });
       });
     }
+    chatContents.push({ role: 'user', parts: [{ text: message }] });
 
-    for (const modelName of modelsToTry) {
-      try {
-        console.log(`Trying Gemini model: ${modelName}`);
-        const model = genAI.getGenerativeModel({
-          model: modelName,
-          systemInstruction: systemPrompt
-        });
-        
-        // Start native chat session with conversation history
-        const chatSession = model.startChat({
-          history: formattedHistory
-        });
-        
-        const result = await chatSession.sendMessage(message);
-        reply = result.response.text();
-        success = true;
-        console.log(`Success with model: ${modelName}`);
-        break; // Successfully got response, stop loop!
-      } catch (err) {
-        console.warn(`Model ${modelName} failed/busy, trying next... Error:`, err.message);
-        lastError = err;
-      }
-    }
-
-    if (!success) {
-      throw lastError || new Error('All Gemini models failed to respond.');
-    }
+    const reply = await getGeminiResponse(null, systemPrompt, chatContents);
 
     // Extract lead if present in the response
     const leadRegex = /\[LEAD:\s*([^|]*)\|([^|]*)\|([^|]*)\|([^\]]*)\]/;
@@ -558,10 +570,6 @@ Here is our initial review of your objective (${goal}):
 Our human strategist will contact you within 24 hours at ${email} to deliver a custom growth roadmap!`;
   } else {
     try {
-      const { GoogleGenAI } = require('@google/genai');
-      const ai = new GoogleGenAI({ apiKey });
-      const modelsToTry = ['gemini-2.5-flash', 'gemini-2.0-flash-lite', 'gemini-2.0-flash'];
-
       const prompt = `You are a World-Class Digital Marketing Strategist and Conversion Rate Auditor for Wholeup Solutions.
 Generate an actionable, highly customized Digital Audit Report for the domain: ${url}
 Audit Objective: ${goal}
@@ -574,24 +582,7 @@ Please write exactly 3 distinct, professional sections. Keep it clear, concise, 
 
 Maintain a confident, highly professional tone. Do not write generic placeholders. Talk directly as Wholeup Solutions. Do not mention that you cannot browse. Speak with expert authority.`;
 
-      let success = false;
-      let lastError = null;
-
-      for (const modelName of modelsToTry) {
-        try {
-          const result = await ai.models.generateContent({ model: modelName, contents: prompt });
-          auditText = result.text;
-          success = true;
-          break;
-        } catch (err) {
-          console.warn(`Model ${modelName} failed for Grader. Trying next...`);
-          lastError = err;
-        }
-      }
-
-      if (!success) {
-        throw lastError || new Error('AI Grader failed to resolve.');
-      }
+      auditText = await getGeminiResponse(prompt);
     } catch(err) {
       console.error('Grader Gemini Error:', err.message);
       return res.status(500).json({ success: false, message: 'AI Agent failed to analyze website. Please try again later.' });
@@ -731,20 +722,10 @@ Instructions:
 5. End with a professional email signature for "Wholeup Digital Growth Team" and phone: +91 94268 46035 / email: wholeup.agency@gmail.com.
 6. Keep the email highly readable, clean, and concise (under 250 words total). Do NOT include generic placeholder brackets. Write the final email copy directly.`;
 
-    for (const modelName of modelsToTry) {
-      try {
-        const result = await ai.models.generateContent({ model: modelName, contents: agentPrompt });
-        proposalText = result.text;
-        success = true;
-        break;
-      } catch (err) {
-        console.warn(`Outreach Agent model ${modelName} failed/busy. Error:`, err.message);
-        lastError = err;
-      }
-    }
+    const proposalText = await getGeminiResponse(agentPrompt);
 
-    if (!success) {
-      throw lastError || new Error('All Gemini models failed to generate proposal.');
+    if (!proposalText) {
+      throw new Error('Outreach Agent AI failed to generate proposal.');
     }
 
     let emailSent = false;
@@ -788,14 +769,6 @@ app.post('/api/agent/content', async (req, res) => {
   }
 
   try {
-    const { GoogleGenAI } = require('@google/genai');
-    const ai = new GoogleGenAI({ apiKey });
-    
-    const modelsToTry = ['gemini-2.5-flash', 'gemini-2.0-flash-lite', 'gemini-2.0-flash'];
-    let contentCopy = '';
-    let success = false;
-    let lastError = null;
-
     const copilotPrompt = `You are Wholeup Content Studio Copilot, the social media strategist for Wholeup Digital Marketing Agency.
 Your task is to write a highly engaging, high-converting social media post outline regarding the following topic:
 Topic: ${topic}
@@ -806,20 +779,10 @@ Please structure your response beautifully with:
 3. 🏷️ **Curated Hashtags**: 8-10 highly relevant, high-traffic digital marketing hashtags (e.g. #Wholeup, #DigitalMarketing, #SEO, #SocialMediaStrategy).
 4. 📞 **Strong Call-To-Action (CTA)**: Prompt the reader to DM Wholeup for a Free Growth Audit or call +91 94268 46035.`;
 
-    for (const modelName of modelsToTry) {
-      try {
-        const result = await ai.models.generateContent({ model: modelName, contents: copilotPrompt });
-        contentCopy = result.text;
-        success = true;
-        break;
-      } catch (err) {
-        console.warn(`Content Agent model ${modelName} failed/busy. Error:`, err.message);
-        lastError = err;
-      }
-    }
+    const contentCopy = await getGeminiResponse(copilotPrompt);
 
-    if (!success) {
-      throw lastError || new Error('All Gemini models failed to generate content.');
+    if (!contentCopy) {
+      throw new Error('Content Copilot failed to generate content.');
     }
 
     res.json({ success: true, content: contentCopy });
@@ -951,9 +914,6 @@ app.post('/api/telegram/webhook', async (req, res) => {
     await sendTelegramMessage(botToken, chatId, `🔍 *Analyzing website: ${url}...* Please wait 15-30 seconds.`);
 
     try {
-      const { GoogleGenAI } = require('@google/genai');
-      const ai = new GoogleGenAI({ apiKey });
-
       // Fetch homepage html snippet (first 6000 chars to avoid model context bloat)
       let htmlSample = 'Could not fetch site HTML';
       try {
@@ -973,8 +933,7 @@ app.post('/api/telegram/webhook', async (req, res) => {
         `*Audit Gaps:* [1-2 sentences summarizing weaknesses]\n` +
         `*Outreach Pitch:* [Your custom pitch text here]`;
 
-      const result = await ai.models.generateContent({ model: 'gemini-2.5-flash', contents: prompt });
-      const auditResponse = result.text;
+      const auditResponse = await getGeminiResponse(prompt);
 
       // Parse audit results
       let weaknesses = "Outdated design, mobile responsiveness gaps";
@@ -1026,9 +985,6 @@ app.post('/api/telegram/webhook', async (req, res) => {
     await sendTelegramMessage(botToken, chatId, `🔍 *Researching business: ${bizName}...* Please wait 15-30 seconds.`);
 
     try {
-      const { GoogleGenAI } = require('@google/genai');
-      const ai = new GoogleGenAI({ apiKey });
-
       const prompt = `Research this business: "${bizName}". They currently do not have a website.\n` +
         `1. Identify why they need a professional website (e.g. automate customer bookings, showcase portfolio, build Google search authority, reduce DM checkout friction).\n` +
         `2. Draft a highly personalized, short DM outreach pitch (under 120 words) proposing a new website build from scratch. Include a hook praising their business/brand, a value drop explaining how a landing page will capture more customer leads, and a CTA offering a free customized homepage layout mockup.\n\n` +
@@ -1036,8 +992,7 @@ app.post('/api/telegram/webhook', async (req, res) => {
         `*Audit Gaps:* [1-2 sentences on why they need a website]\n` +
         `*Outreach Pitch:* [Your custom pitch text here]`;
 
-      const result = await ai.models.generateContent({ model: 'gemini-2.5-flash', contents: prompt });
-      const auditResponse = result.text;
+      const auditResponse = await getGeminiResponse(prompt);
 
       // Parse audit results
       let weaknesses = "No official website, manual checkout friction";
@@ -1209,11 +1164,8 @@ app.post('/api/whatsapp/webhook', async (req, res) => {
 
     if (apiKey && apiKey.trim() !== '') {
       try {
-        const { GoogleGenAI } = require('@google/genai');
-        const ai = new GoogleGenAI({ apiKey });
         const waPrompt = `You are Wholeup Digital Marketing Agency's WhatsApp AI assistant. A customer named "${contactName}" sent this message:\n\n"${msgBody}"\n\nReply in a friendly, professional, short manner (under 80 words). \n- If they ask about services, mention: SEO, Meta Ads, Google Ads, WhatsApp Automation, AI Services, Website Design.\n- If they want to book a call, give number: +91 94268 46035\n- If they ask pricing, say packages start from ₹8,000/month and invite them to book a free call.\n- Always end with a clear CTA. Speak naturally. Do NOT mention AI or that you are a bot.`;
-        const result = await ai.models.generateContent({ model: 'gemini-2.5-flash', contents: waPrompt });
-        replyText = result.text;
+        replyText = await getGeminiResponse(waPrompt);
       } catch(e) { console.warn('WhatsApp AI reply failed, using fallback:', e.message); }
     }
 

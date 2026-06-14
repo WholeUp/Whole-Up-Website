@@ -356,9 +356,10 @@ app.post('/api/chat', async (req, res) => {
   }
 
   try {
-    const { GoogleGenerativeAI } = require('@google/generative-ai');
-    const genAI = new GoogleGenerativeAI(apiKey);
-    
+    // Use new @google/genai SDK (supports AQ. key format)
+    const { GoogleGenAI } = require('@google/genai');
+    const ai = new GoogleGenAI({ apiKey });
+
     let systemPrompt = `You are Wholeup AI (GrowBot), the premier digital marketing consultant for "Wholeup" - a results-driven digital marketing agency.
 Your goal is to answer all digital marketing, SEO, paid advertising, social media, web development, and business growth queries. You must act as an extremely knowledgeable, creative, and experienced digital marketing expert.
 - Answer general questions, technical setup questions (like Meta pixels, tracking, keyword tools, backlink metrics, Instagram hooks, or SEO audits) with highly accurate, detailed, and professional marketing knowledge to prove your expertise.
@@ -411,8 +412,7 @@ You are acting as Wholeup's Lead Business Consultant. Your task is to walk the u
 - Always end with a recommendation and clear next steps to call or WhatsApp you directly to implement the roadmap.`;
     }
 
-    // Loop through available models to handle high-demand 503 errors gracefully
-    const modelsToTry = ['gemini-1.5-flash', 'gemini-2.0-flash', 'gemini-2.5-flash', 'gemini-1.5-pro'];
+    const modelsToTry = ['gemini-2.5-flash', 'gemini-2.0-flash-lite', 'gemini-2.0-flash'];
     let reply = '';
     let success = false;
     let lastError = null;
@@ -558,9 +558,9 @@ Here is our initial review of your objective (${goal}):
 Our human strategist will contact you within 24 hours at ${email} to deliver a custom growth roadmap!`;
   } else {
     try {
-      const { GoogleGenerativeAI } = require('@google/generative-ai');
-      const genAI = new GoogleGenerativeAI(apiKey);
-      const modelsToTry = ['gemini-2.5-flash', 'gemini-2.0-flash', 'gemini-2.5-flash-lite'];
+      const { GoogleGenAI } = require('@google/genai');
+      const ai = new GoogleGenAI({ apiKey });
+      const modelsToTry = ['gemini-2.5-flash', 'gemini-2.0-flash-lite', 'gemini-2.0-flash'];
 
       const prompt = `You are a World-Class Digital Marketing Strategist and Conversion Rate Auditor for Wholeup Solutions.
 Generate an actionable, highly customized Digital Audit Report for the domain: ${url}
@@ -579,9 +579,8 @@ Maintain a confident, highly professional tone. Do not write generic placeholder
 
       for (const modelName of modelsToTry) {
         try {
-          const model = genAI.getGenerativeModel({ model: modelName });
-          const result = await model.generateContent(prompt);
-          auditText = result.response.text();
+          const result = await ai.models.generateContent({ model: modelName, contents: prompt });
+          auditText = result.text;
           success = true;
           break;
         } catch (err) {
@@ -710,10 +709,10 @@ app.post('/api/agent/outreach', async (req, res) => {
   }
 
   try {
-    const { GoogleGenerativeAI } = require('@google/generative-ai');
-    const genAI = new GoogleGenerativeAI(apiKey);
+    const { GoogleGenAI } = require('@google/genai');
+    const ai = new GoogleGenAI({ apiKey });
     
-    const modelsToTry = ['gemini-2.5-flash', 'gemini-2.0-flash', 'gemini-2.5-flash-lite'];
+    const modelsToTry = ['gemini-2.5-flash', 'gemini-2.0-flash-lite', 'gemini-2.0-flash'];
     let proposalText = '';
     let success = false;
     let lastError = null;
@@ -734,9 +733,8 @@ Instructions:
 
     for (const modelName of modelsToTry) {
       try {
-        const model = genAI.getGenerativeModel({ model: modelName });
-        const result = await model.generateContent(agentPrompt);
-        proposalText = result.response.text();
+        const result = await ai.models.generateContent({ model: modelName, contents: agentPrompt });
+        proposalText = result.text;
         success = true;
         break;
       } catch (err) {
@@ -790,10 +788,10 @@ app.post('/api/agent/content', async (req, res) => {
   }
 
   try {
-    const { GoogleGenerativeAI } = require('@google/generative-ai');
-    const genAI = new GoogleGenerativeAI(apiKey);
+    const { GoogleGenAI } = require('@google/genai');
+    const ai = new GoogleGenAI({ apiKey });
     
-    const modelsToTry = ['gemini-2.5-flash', 'gemini-2.0-flash', 'gemini-2.5-flash-lite'];
+    const modelsToTry = ['gemini-2.5-flash', 'gemini-2.0-flash-lite', 'gemini-2.0-flash'];
     let contentCopy = '';
     let success = false;
     let lastError = null;
@@ -810,9 +808,8 @@ Please structure your response beautifully with:
 
     for (const modelName of modelsToTry) {
       try {
-        const model = genAI.getGenerativeModel({ model: modelName });
-        const result = await model.generateContent(copilotPrompt);
-        contentCopy = result.response.text();
+        const result = await ai.models.generateContent({ model: modelName, contents: copilotPrompt });
+        contentCopy = result.text;
         success = true;
         break;
       } catch (err) {
@@ -954,9 +951,8 @@ app.post('/api/telegram/webhook', async (req, res) => {
     await sendTelegramMessage(botToken, chatId, `🔍 *Analyzing website: ${url}...* Please wait 15-30 seconds.`);
 
     try {
-      const { GoogleGenerativeAI } = require('@google/generative-ai');
-      const genAI = new GoogleGenerativeAI(apiKey);
-      const model = genAI.getGenerativeModel({ model: 'gemini-3.1-flash-lite' });
+      const { GoogleGenAI } = require('@google/genai');
+      const ai = new GoogleGenAI({ apiKey });
 
       // Fetch homepage html snippet (first 6000 chars to avoid model context bloat)
       let htmlSample = 'Could not fetch site HTML';
@@ -977,8 +973,8 @@ app.post('/api/telegram/webhook', async (req, res) => {
         `*Audit Gaps:* [1-2 sentences summarizing weaknesses]\n` +
         `*Outreach Pitch:* [Your custom pitch text here]`;
 
-      const result = await model.generateContent(prompt);
-      const auditResponse = result.response.text();
+      const result = await ai.models.generateContent({ model: 'gemini-2.5-flash', contents: prompt });
+      const auditResponse = result.text;
 
       // Parse audit results
       let weaknesses = "Outdated design, mobile responsiveness gaps";
@@ -1030,9 +1026,8 @@ app.post('/api/telegram/webhook', async (req, res) => {
     await sendTelegramMessage(botToken, chatId, `🔍 *Researching business: ${bizName}...* Please wait 15-30 seconds.`);
 
     try {
-      const { GoogleGenerativeAI } = require('@google/generative-ai');
-      const genAI = new GoogleGenerativeAI(apiKey);
-      const model = genAI.getGenerativeModel({ model: 'gemini-3.1-flash-lite' });
+      const { GoogleGenAI } = require('@google/genai');
+      const ai = new GoogleGenAI({ apiKey });
 
       const prompt = `Research this business: "${bizName}". They currently do not have a website.\n` +
         `1. Identify why they need a professional website (e.g. automate customer bookings, showcase portfolio, build Google search authority, reduce DM checkout friction).\n` +
@@ -1041,8 +1036,8 @@ app.post('/api/telegram/webhook', async (req, res) => {
         `*Audit Gaps:* [1-2 sentences on why they need a website]\n` +
         `*Outreach Pitch:* [Your custom pitch text here]`;
 
-      const result = await model.generateContent(prompt);
-      const auditResponse = result.response.text();
+      const result = await ai.models.generateContent({ model: 'gemini-2.5-flash', contents: prompt });
+      const auditResponse = result.text;
 
       // Parse audit results
       let weaknesses = "No official website, manual checkout friction";
@@ -1214,12 +1209,11 @@ app.post('/api/whatsapp/webhook', async (req, res) => {
 
     if (apiKey && apiKey.trim() !== '') {
       try {
-        const { GoogleGenerativeAI } = require('@google/generative-ai');
-        const genAI = new GoogleGenerativeAI(apiKey);
-        const model = genAI.getGenerativeModel({ model: 'gemini-2.0-flash' });
+        const { GoogleGenAI } = require('@google/genai');
+        const ai = new GoogleGenAI({ apiKey });
         const waPrompt = `You are Wholeup Digital Marketing Agency's WhatsApp AI assistant. A customer named "${contactName}" sent this message:\n\n"${msgBody}"\n\nReply in a friendly, professional, short manner (under 80 words). \n- If they ask about services, mention: SEO, Meta Ads, Google Ads, WhatsApp Automation, AI Services, Website Design.\n- If they want to book a call, give number: +91 94268 46035\n- If they ask pricing, say packages start from ₹8,000/month and invite them to book a free call.\n- Always end with a clear CTA. Speak naturally. Do NOT mention AI or that you are a bot.`;
-        const result = await model.generateContent(waPrompt);
-        replyText = result.response.text();
+        const result = await ai.models.generateContent({ model: 'gemini-2.5-flash', contents: waPrompt });
+        replyText = result.text;
       } catch(e) { console.warn('WhatsApp AI reply failed, using fallback:', e.message); }
     }
 

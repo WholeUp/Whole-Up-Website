@@ -22,8 +22,43 @@
       </svg>
       <span class="text-xl font-black tracking-tight text-dark uppercase">Wholeup</span>
     </a>
-    <div class="hidden md:flex space-x-7 text-[11px] font-semibold text-dark/65 uppercase tracking-widest">
-      <a href="/services" class="hover:text-primary transition magnetic-btn {{#if (eq page 'services')}}nav-active{{/if}}">Services</a>
+    <div class="hidden md:flex space-x-7 text-[11px] font-semibold text-dark/65 uppercase tracking-widest items-center">
+      <!-- Services Dropdown -->
+      <div class="relative group" id="services-dropdown-wrapper">
+        <a href="/services" class="hover:text-primary transition magnetic-btn flex items-center gap-1 {{#if (eq page 'services')}}nav-active{{/if}} {{#if (eq page 'ai-services')}}nav-active{{/if}}">
+          Services <i class="fas fa-chevron-down text-[8px] mt-0.5 transition-transform duration-300 group-hover:rotate-180"></i>
+        </a>
+        <!-- Dropdown Panel -->
+        <div class="absolute top-full left-1/2 -translate-x-1/2 mt-3 w-[320px] bg-white rounded-2xl border border-black/8 shadow-2xl shadow-black/10 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 translate-y-2 group-hover:translate-y-0 z-50 overflow-hidden">
+          <div class="p-2">
+            <!-- Marketing Services -->
+            <a href="/services" class="flex items-start gap-4 p-4 rounded-xl hover:bg-primary/5 transition-all duration-200 group/item">
+              <div class="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center text-primary text-base flex-shrink-0 mt-0.5">
+                <i class="fas fa-bullhorn"></i>
+              </div>
+              <div>
+                <p class="text-[11px] font-black uppercase tracking-widest text-dark group-hover/item:text-primary transition-colors">Marketing Services</p>
+                <p class="text-[10px] text-dark/50 font-medium mt-0.5 leading-relaxed">SEO, Meta Ads, Google Ads, Social Media & More</p>
+              </div>
+            </a>
+            <!-- Divider -->
+            <div class="mx-4 my-1 border-t border-black/5"></div>
+            <!-- AI Services -->
+            <a href="/ai-services" class="flex items-start gap-4 p-4 rounded-xl hover:bg-primary/5 transition-all duration-200 group/item">
+              <div class="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center text-primary text-base flex-shrink-0 mt-0.5">
+                <i class="fas fa-robot"></i>
+              </div>
+              <div>
+                <div class="flex items-center gap-2">
+                  <p class="text-[11px] font-black uppercase tracking-widest text-dark group-hover/item:text-primary transition-colors">AI Services</p>
+                  <span class="text-[8px] font-black uppercase tracking-wider bg-primary text-white px-1.5 py-0.5 rounded-full">New</span>
+                </div>
+                <p class="text-[10px] text-dark/50 font-medium mt-0.5 leading-relaxed">Voice AI, WhatsApp Bot, Smart CRM & 10 More</p>
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
       <a href="/about" class="hover:text-primary transition magnetic-btn {{#if (eq page 'about')}}nav-active{{/if}}">About</a>
       <a href="/portfolio" class="hover:text-primary transition magnetic-btn {{#if (eq page 'portfolio')}}nav-active{{/if}}">Portfolio</a>
       <a href="/pricing" class="hover:text-primary transition magnetic-btn {{#if (eq page 'pricing')}}nav-active{{/if}}">Pricing</a>
@@ -32,6 +67,7 @@
       <a href="/contact" class="hover:text-primary transition magnetic-btn {{#if (eq page 'contact')}}nav-active{{/if}}">Contact</a>
       <a href="/login" class="hover:text-primary transition magnetic-btn {{#if (eq page 'login')}}nav-active{{/if}}"><i class="fas fa-lock mr-1"></i>Portal</a>
     </div>
+
     <div class="flex items-center gap-3">
       <a href="/contact" class="hidden sm:inline-flex bg-primary text-white px-5 py-2.5 rounded-full font-bold text-xs shadow-[0_4px_14px_rgba(22,163,74,0.35)] hover:shadow-[0_6px_20px_rgba(22,163,74,0.5)] transition hover:-translate-y-0.5 magnetic-btn uppercase tracking-widest">Book Free Call</a>
       <button class="hamburger md:hidden" id="hamburger-btn" onclick="toggleMobileMenu()" aria-label="Menu">
@@ -40,7 +76,8 @@
     </div>
   </div>
   <div class="mobile-menu" id="mobile-menu">
-    <a href="/services" onclick="toggleMobileMenu()">Services</a>
+    <a href="/services" onclick="toggleMobileMenu()">Marketing Services</a>
+    <a href="/ai-services" onclick="toggleMobileMenu()"><i class="fas fa-robot mr-1"></i>AI Services <span style="background:#16A34A;color:white;font-size:8px;padding:1px 6px;border-radius:20px;margin-left:4px;font-weight:900;">NEW</span></a>
     <a href="/about" onclick="toggleMobileMenu()">About</a>
     <a href="/portfolio" onclick="toggleMobileMenu()">Portfolio</a>
     <a href="/pricing" onclick="toggleMobileMenu()">Pricing</a>

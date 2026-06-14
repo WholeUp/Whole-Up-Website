@@ -60,6 +60,7 @@ const portfolio = require('./data/portfolio.json');
 const blogPosts = require('./data/blog.json');
 const faqs = require('./data/faqs.json');
 const pricing = require('./data/pricing.json');
+const aiServices = require('./data/ai-services.json');
 
 // ─── Routes ──────────────────────────────────────────────────────────────────
 
@@ -92,6 +93,16 @@ app.get('/services', (req, res) => {
     metaDesc: 'Full-service digital marketing: SEO, Google Ads, Meta Ads, Social Media, Web Design, Email Marketing and more.',
     page: 'services',
     services
+  });
+});
+
+// AI SERVICES
+app.get('/ai-services', (req, res) => {
+  res.render('ai-services', {
+    title: 'AI Services | Wholeup — Voice AI, WhatsApp Automation & More',
+    metaDesc: 'Explore Wholeup AI Services: Voice AI Agents, WhatsApp Automation, AI Email Flows, Smart CRM, and 10 more intelligent systems to grow your business 24/7.',
+    page: 'ai-services',
+    aiServices
   });
 });
 

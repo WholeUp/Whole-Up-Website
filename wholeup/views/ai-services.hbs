@@ -1,0 +1,112 @@
+<!-- PAGE HERO -->
+<section class="page-hero bg-cream px-6 border-b border-black/5 relative overflow-hidden">
+  <div class="absolute inset-0 pointer-events-none" style="background-image:radial-gradient(circle at 70% 50%, rgba(22,163,74,0.06) 0%, transparent 60%);"></div>
+  <div class="max-w-7xl mx-auto text-center gs-reveal relative z-10">
+    <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-black uppercase tracking-widest mb-6 animate-pulse">
+      <span class="w-2 h-2 rounded-full bg-primary"></span> The Future of Business Automation
+    </div>
+    <h1 class="text-5xl md:text-7xl font-black uppercase tracking-widest text-dark mb-6">AI <span class="text-primary">Services.</span></h1>
+    <p class="text-dark/60 font-medium text-xl max-w-3xl mx-auto">Beyond ads and content — we build intelligent AI systems that work 24/7 to qualify leads, close sales, and grow your business while you sleep.</p>
+    <div class="flex flex-wrap justify-center gap-3 mt-8">
+      <span class="px-4 py-2 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-bold">🤖 Voice AI Agents</span>
+      <span class="px-4 py-2 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-bold">💬 WhatsApp Automation</span>
+      <span class="px-4 py-2 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-bold">📧 AI Email Flows</span>
+      <span class="px-4 py-2 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-bold">🎯 AI Ads Optimization</span>
+      <span class="px-4 py-2 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-bold">📊 Smart CRM Systems</span>
+    </div>
+  </div>
+</section>
+
+<!-- AI SERVICES GRID -->
+<section class="py-24 bg-white px-6">
+  <div class="max-w-7xl mx-auto">
+    <div class="grid md:grid-cols-2 gap-8 gs-stagger-parent">
+      {{#each aiServices}}
+      <div class="glass-card glass-card-glow rounded-[32px] p-10 gs-stagger-item transition-all duration-300" data-tilt data-tilt-max="3" style="--hover-glow: {{color}}; --hover-glow-rgba: {{bgColor}}">
+        <div class="flex items-start gap-6 mb-8">
+          <div class="w-16 h-16 rounded-2xl flex items-center justify-center text-3xl flex-shrink-0 service-icon" style="background:{{bgColor}};color:{{color}}">
+            <i class="{{icon}}"></i>
+          </div>
+          <div>
+            <div class="inline-flex items-center gap-1.5 px-2 py-1 rounded-full text-[9px] font-black uppercase tracking-wider mb-2" style="background:{{bgColor}};color:{{color}}">
+              <i class="fas fa-robot text-[8px]"></i> AI Powered
+            </div>
+            <h2 class="text-2xl font-black uppercase tracking-wider text-dark mb-1">{{title}}</h2>
+            <p class="text-sm font-bold text-primary">{{tagline}}</p>
+          </div>
+        </div>
+        <p class="text-dark/70 font-medium leading-relaxed mb-8">{{description}}</p>
+        <div class="grid grid-cols-2 gap-3 mb-8">
+          {{#each features}}
+          <div class="flex items-center gap-2 text-sm font-medium text-dark feature-item">
+            <i class="fas fa-check-circle text-primary text-xs flex-shrink-0"></i>{{this}}
+          </div>
+          {{/each}}
+        </div>
+        <button onclick="openChatbotWithContext('{{slug}}')" class="w-full mb-6 py-2.5 rounded-xl border border-primary/20 text-xs font-bold uppercase tracking-wider transition duration-300 flex items-center justify-center gap-2" style="background: color-mix(in srgb, var(--hover-glow) 5%, transparent); border-color: color-mix(in srgb, var(--hover-glow) 20%, transparent); color: var(--hover-glow);">
+          <i class="fas fa-robot animate-pulse"></i> Ask {{title}} Expert
+        </button>
+        <div class="flex items-center justify-between pt-6 border-t border-black/5">
+          <div>
+            <p class="text-[10px] font-bold uppercase tracking-widest text-gray-400 mb-1">Typical Result <i class="fas fa-chart-line text-[9px] ml-1 opacity-70"></i></p>
+            <p class="text-lg font-black text-primary">{{result}}</p>
+          </div>
+          <a href="/contact" class="bg-dark text-white px-6 py-3 rounded-xl font-bold text-sm uppercase tracking-widest hover:bg-primary transition magnetic-btn">
+            Get Started →
+          </a>
+        </div>
+      </div>
+      {{/each}}
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="py-24 px-6 bg-[#EAF6ED] border-t border-black/5 relative overflow-hidden">
+  <div class="absolute inset-0 opacity-[0.05]" style="background-image:radial-gradient(#000 1px,transparent 1px);background-size:30px 30px;"></div>
+  <div class="max-w-3xl mx-auto text-center relative z-10 gs-reveal">
+    <div class="w-16 h-16 rounded-2xl bg-primary/10 border border-primary/20 flex items-center justify-center text-2xl text-primary mx-auto mb-6">
+      <i class="fas fa-rocket"></i>
+    </div>
+    <h2 class="text-4xl md:text-5xl font-black text-dark uppercase tracking-widest mb-6">Ready to Automate Your Business?</h2>
+    <p class="text-dark/70 text-lg font-medium mb-10">Book a free AI strategy call. We'll map out which automation system will deliver the fastest ROI for your business.</p>
+    <div class="flex flex-col sm:flex-row justify-center items-center gap-4">
+      <a href="/d2c-scale#audit-form" class="bg-primary text-white px-10 py-5 rounded-xl font-black uppercase tracking-widest text-sm shadow-xl shadow-primary/25 hover:bg-green-600 transition magnetic-btn inline-flex items-center gap-2">
+        Get Free AI Audit <i class="fas fa-arrow-right"></i>
+      </a>
+      <button onclick="openChatbotWithContext('ai-services')" class="border-2 border-dark/20 text-dark hover:bg-dark/5 px-10 py-5 rounded-xl font-black uppercase tracking-widest text-sm transition magnetic-btn inline-flex items-center gap-2">
+        <i class="fas fa-robot"></i> Ask GrowBot Wizard
+      </button>
+    </div>
+  </div>
+</section>
+
+<style>
+  .gs-stagger-item {
+    opacity: 0;
+  }
+  .glass-card-glow {
+    position: relative;
+    transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  }
+  .glass-card-glow:hover {
+    transform: translateY(-8px) scale(1.01) !important;
+    box-shadow: 0 30px 60px -15px rgba(0, 0, 0, 0.12), 0 0 40px -5px color-mix(in srgb, var(--hover-glow) 25%, transparent) !important;
+    border-color: var(--hover-glow) !important;
+    background: rgba(255, 255, 255, 0.98);
+  }
+  .glass-card-glow:hover .service-icon {
+    transform: scale(1.12) rotate(6deg);
+    box-shadow: 0 10px 24px -6px color-mix(in srgb, var(--hover-glow) 40%, transparent);
+  }
+  .service-icon {
+    transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .feature-item {
+    transition: transform 0.25s ease, color 0.25s ease;
+  }
+  .glass-card-glow:hover .feature-item:hover {
+    transform: translateX(4px);
+    color: var(--hover-glow);
+  }
+</style>

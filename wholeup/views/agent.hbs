@@ -80,6 +80,7 @@
               <thead>
                 <tr class="border-b border-black/5 text-dark/45 font-bold uppercase text-[10px] tracking-wider">
                   <th class="py-3 px-2">Contact</th>
+                  <th class="py-3 px-2">Score</th>
                   <th class="py-3 px-2">Service Goal</th>
                   <th class="py-3 px-2">Date Logged</th>
                   <th class="py-3 px-2 text-right">Autopilot Trigger</th>
@@ -96,6 +97,21 @@
                           <span><i class="fas fa-envelope text-[10px] text-green-600/60 mr-1"></i> {{this.email}}</span>
                         {{/if}}
                       </div>
+                    </td>
+                    <td class="py-4 px-2">
+                      {{#if this.scoreLabel}}
+                        {{#if (eq this.scoreLabel 'Hot')}}
+                          <span class="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-red-50 text-red-600 border border-red-200">🔥 Hot <span class="text-[9px] opacity-60">({{this.score}})</span></span>
+                        {{/if}}
+                        {{#if (eq this.scoreLabel 'Warm')}}
+                          <span class="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-amber-50 text-amber-600 border border-amber-200">⚡ Warm <span class="text-[9px] opacity-60">({{this.score}})</span></span>
+                        {{/if}}
+                        {{#if (eq this.scoreLabel 'Cold')}}
+                          <span class="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-blue-50 text-blue-500 border border-blue-200">❄️ Cold <span class="text-[9px] opacity-60">({{this.score}})</span></span>
+                        {{/if}}
+                      {{else}}
+                        <span class="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-gray-50 text-gray-400 border border-gray-200">— Unscored</span>
+                      {{/if}}
                     </td>
                     <td class="py-4 px-2">
                       <span class="inline-block bg-green-500/10 text-green-600 border border-green-500/20 text-xs px-2.5 py-1 rounded-full font-bold uppercase tracking-wide">

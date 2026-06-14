@@ -62,6 +62,40 @@ const faqs = require('./data/faqs.json');
 const pricing = require('./data/pricing.json');
 const aiServices = require('./data/ai-services.json');
 
+// ─── Lead Scoring Engine ────────────────────────────────────────────────────
+function scoreLead(leadData) {
+  let score = 0;
+  const { name, phone, email, service, message, city } = leadData;
+
+  // Phone provided = high intent
+  if (phone && phone !== 'Not provided' && phone.length >= 10) score += 30;
+
+  // Email provided and not gmail/yahoo (business email = more serious)
+  if (email && email !== 'Not provided') {
+    score += 10;
+    if (!email.includes('gmail') && !email.includes('yahoo') && !email.includes('hotmail')) score += 15;
+  }
+
+  // High-value services
+  const highValueServices = ['ppc-google-ads', 'meta-ads', 'ecommerce-marketing', 'seo', 'marketing-automation', 'ai-', 'voice-ai', 'Grader'];
+  if (service && highValueServices.some(s => service.toLowerCase().includes(s.toLowerCase()))) score += 25;
+
+  // Message length = more effort = more serious
+  if (message && message.length > 100) score += 10;
+  if (message && message.length > 250) score += 10;
+
+  // Name quality (not just one word)
+  if (name && name.trim().includes(' ')) score += 5;
+
+  // Determine label
+  let label, emoji;
+  if (score >= 65) { label = 'Hot'; emoji = '🔥'; }
+  else if (score >= 35) { label = 'Warm'; emoji = '⚡'; }
+  else { label = 'Cold'; emoji = '❄️'; }
+
+  return { score, label, emoji };
+}
+
 // ─── Routes ──────────────────────────────────────────────────────────────────
 
 // HOME
@@ -436,6 +470,8 @@ You are acting as Wholeup's Lead Business Consultant. Your task is to walk the u
       const logPath = path.join(__dirname, 'data/leads.json');
       let leads = [];
       try { leads = JSON.parse(fs.readFileSync(logPath, 'utf8')); } catch(e) { leads = []; }
+      const chatLeadData = { name, phone, email, service, message: 'Lead captured dynamically during AI chatbot conversation.' };
+      const chatScore = scoreLead(chatLeadData);
       leads.push({
         name: name || 'Chatbot Lead',
         phone: phone || 'Not provided',
@@ -443,7 +479,10 @@ You are acting as Wholeup's Lead Business Consultant. Your task is to walk the u
         email: email || 'Not provided',
         service: service || 'General Inquiry',
         message: 'Lead captured dynamically during AI chatbot conversation.',
-        date: new Date().toISOString()
+        date: new Date().toISOString(),
+        score: chatScore.score,
+        scoreLabel: chatScore.label,
+        scoreEmoji: chatScore.emoji
       });
       fs.writeFileSync(logPath, JSON.stringify(leads, null, 2));
       console.log('✅ Lead captured and saved to leads.json:', { name, phone, email, service });
@@ -566,6 +605,8 @@ Maintain a confident, highly professional tone. Do not write generic placeholder
   let leads = [];
   try { leads = JSON.parse(fs.readFileSync(logPath, 'utf8')); } catch(e) { leads = []; }
   
+  const graderLeadData = { name, phone, email, service: `Grader: ${goal}`, message: `Analyzed website: ${url}\n\nGenerated Audit Report:\n${auditText}` };
+  const graderScore = scoreLead(graderLeadData);
   leads.push({
     name,
     phone: phone || 'Not provided',
@@ -573,7 +614,10 @@ Maintain a confident, highly professional tone. Do not write generic placeholder
     email,
     service: `Grader: ${goal}`,
     message: `Analyzed website: ${url}\n\nGenerated Audit Report:\n${auditText}`,
-    date: new Date().toISOString()
+    date: new Date().toISOString(),
+    score: graderScore.score,
+    scoreLabel: graderScore.label,
+    scoreEmoji: graderScore.emoji
   });
   
   fs.writeFileSync(logPath, JSON.stringify(leads, null, 2));
@@ -854,13 +898,15 @@ app.post('/api/telegram/webhook', async (req, res) => {
   // 1. Welcome / Help Command
   if (rawText.toLowerCase() === '/start' || rawText.toLowerCase() === 'hi' || rawText.toLowerCase() === 'hello') {
     await sendTelegramMessage(botToken, chatId, 
-      `*Welcome to Wholeup Agency Automator Bot!* 🚀\n\n` +
+      `*Welcome to Wholeup Agency AI Bot!* 🚀\n\n` +
       `Here is what I can do for you 24/7:\n\n` +
-      `1️⃣ *Audit Website (Redesign)*: Type \`Audit website: [url]\` to find layout/speed flaws and generate a web design pitch.\n` +
-      `2️⃣ *Audit Business (New Site)*: Type \`Audit business: [name/social link]\` to pitch a new website for a business without one.\n` +
-      `3️⃣ *Lead Tracker*: I will automatically log audits to a CSV file and send it to you as an attachment.\n` +
-      `4️⃣ *Daily Reels & News*: I will automatically send you Instagram Reels templates and AI/Marketing news digests daily.\n` +
-      `5️⃣ *Accountability Logs*: Just reply to my daily check-in messages and I will log your progress into an Excel file.`
+      `1️⃣ *Audit Website (Redesign)*: \`Audit website: [url]\`\n` +
+      `2️⃣ *Audit Business (No Website)*: \`Audit business: [name]\`\n` +
+      `3️⃣ *Competitor Spy* 🕵️: \`/spy competitor.com\` — Full intelligence report\n` +
+      `4️⃣ *Lead Tracker*: Auto-logs all audits to CSV file\n` +
+      `5️⃣ *Daily Reels & News*: Auto-sends Reel scripts & AI news daily\n` +
+      `6️⃣ *Accountability Logs*: Reply to morning check-in to log goals\n\n` +
+      `🧠 *Ask me anything* — I can help with strategy, captions, pitches, and more!`
     );
     return;
   }
@@ -1037,7 +1083,71 @@ app.post('/api/telegram/webhook', async (req, res) => {
     return;
   }
 
-  // 5. Default General Conversation (GrowBot)
+  // 5. Competitor Spy Command: /spy [url]
+  if (rawText.toLowerCase().startsWith('/spy')) {
+    const target = rawText.substring(4).trim();
+    if (!target) {
+      await sendTelegramMessage(botToken, chatId, '🕵️ *Competitor Spy* — Usage:\n\n`/spy competitor.com`\n\nI will analyze their website, ads strategy, SEO gaps, and write you a battle plan to beat them.');
+      return;
+    }
+
+    await sendTelegramMessage(botToken, chatId, `🔍 *Spying on: ${target}...*\n\nFetching their site, running AI analysis... give me 20–30 seconds.`);
+
+    try {
+      const { GoogleGenerativeAI } = require('@google/generative-ai');
+      const genAI = new GoogleGenerativeAI(apiKey);
+
+      // Try to fetch competitor homepage HTML
+      let htmlSample = 'Could not fetch site HTML — analyzing based on domain name only.';
+      try {
+        const r = await fetch(target.startsWith('http') ? target : `https://${target}`, {
+          headers: { 'User-Agent': 'Mozilla/5.0 (compatible; Googlebot/2.1)' },
+          signal: AbortSignal.timeout(8000)
+        });
+        const html = await r.text();
+        htmlSample = html.substring(0, 8000);
+      } catch(e) { htmlSample = `Fetch error: ${e.message}. Analyze based on domain only.`; }
+
+      const spyPrompt = `You are Wholeup Digital Marketing Agency's Competitive Intelligence AI. Your job is to analyze a competitor and give Neel (founder of Wholeup) a precise battle plan.\n\nCompetitor: ${target}\nWebsite HTML Sample:\n${htmlSample}\n\nGenerate a sharp, executive-level Competitor Intelligence Report with exactly these sections:\n\n🏢 *COMPETITOR OVERVIEW*\nWhat they do, who they target, their positioning in 2-3 lines.\n\n🎯 *THEIR STRENGTHS*\nWhat they are doing well (2-3 specific points from the HTML/domain).\n\n⚠️ *THEIR WEAKNESSES & GAPS*\nCritical gaps in their UX, messaging, SEO or services that Wholeup can exploit (3 specific points).\n\n🔥 *WHOLEUP BATTLE PLAN*\nExact 3-step strategy for Neel to position Wholeup as the superior choice over this competitor. Be specific — mention what copy, what offer, what page to build.\n\n💬 *KILLER PITCH LINE*\nOne powerful one-liner Neel can use in DMs or ads to steal this competitor's clients.\n\nKeep the tone sharp, strategic, and actionable. No fluff.`;
+
+      const modelsToTry = ['gemini-2.5-flash', 'gemini-2.0-flash', 'gemini-2.5-flash-lite'];
+      let spyReport = '';
+      for (const m of modelsToTry) {
+        try {
+          const model = genAI.getGenerativeModel({ model: m });
+          const result = await model.generateContent(spyPrompt);
+          spyReport = result.response.text();
+          break;
+        } catch(e) { console.warn(`Spy model ${m} failed:`, e.message); }
+      }
+
+      if (!spyReport) throw new Error('All models failed for spy report.');
+
+      // Save to spy log
+      const fs = require('fs');
+      const spyPath = path.join(__dirname, 'data/spy_log.json');
+      let spyLog = [];
+      try { spyLog = JSON.parse(fs.readFileSync(spyPath, 'utf8')); } catch(e) { spyLog = []; }
+      spyLog.push({ date: new Date().toISOString(), target, report: spyReport });
+      try { fs.mkdirSync(path.dirname(spyPath), { recursive: true }); } catch(e){}
+      fs.writeFileSync(spyPath, JSON.stringify(spyLog, null, 2));
+
+      // Telegram has 4096 char limit — split if needed
+      const fullMsg = `🕵️ *Competitor Intelligence Report*\n📌 Target: ${target}\n\n${spyReport}`;
+      if (fullMsg.length <= 4000) {
+        await sendTelegramMessage(botToken, chatId, fullMsg);
+      } else {
+        await sendTelegramMessage(botToken, chatId, fullMsg.substring(0, 4000));
+        await sendTelegramMessage(botToken, chatId, fullMsg.substring(4000));
+      }
+
+    } catch(err) {
+      await sendTelegramMessage(botToken, chatId, `❌ Spy failed: ${err.message}`);
+    }
+    return;
+  }
+
+  // 6. Default General Conversation (GrowBot)
   try {
     const { GoogleGenerativeAI } = require('@google/generative-ai');
     const genAI = new GoogleGenerativeAI(apiKey);
@@ -1057,6 +1167,102 @@ app.post('/api/telegram/webhook', async (req, res) => {
 // CRON Endpoint: Keep-Awake Ping Route (Public)
 app.get('/api/cron/ping', (req, res) => {
   res.status(200).send('pong');
+});
+
+// ─── WhatsApp Automation Webhook (Ready when API approved) ───────────────────
+// This endpoint receives incoming WhatsApp messages via Meta/360dialog webhook.
+// When your WhatsApp Business API is approved, just set WHATSAPP_TOKEN & WHATSAPP_PHONE_ID in .env
+// and point your webhook URL to: https://wholeup.in/api/whatsapp/webhook
+
+// Webhook verification (GET) — required by Meta
+app.get('/api/whatsapp/webhook', (req, res) => {
+  const VERIFY_TOKEN = process.env.WHATSAPP_VERIFY_TOKEN || 'wholeup_wa_verify_2026';
+  const mode = req.query['hub.mode'];
+  const token = req.query['hub.verify_token'];
+  const challenge = req.query['hub.challenge'];
+  if (mode === 'subscribe' && token === VERIFY_TOKEN) {
+    console.log('✅ WhatsApp webhook verified by Meta!');
+    return res.status(200).send(challenge);
+  }
+  res.sendStatus(403);
+});
+
+// Incoming WhatsApp message handler (POST)
+app.post('/api/whatsapp/webhook', async (req, res) => {
+  res.sendStatus(200); // Always respond immediately
+
+  const waToken = process.env.WHATSAPP_TOKEN;
+  const phoneNumberId = process.env.WHATSAPP_PHONE_ID;
+  const apiKey = process.env.GEMINI_API_KEY;
+
+  try {
+    const entry = req.body?.entry?.[0];
+    const changes = entry?.changes?.[0];
+    const value = changes?.value;
+    const message = value?.messages?.[0];
+
+    if (!message || message.type !== 'text') return; // Only handle text messages
+
+    const from = message.from; // Customer's phone number
+    const msgBody = message.text.body.trim();
+    const contactName = value?.contacts?.[0]?.profile?.name || 'Customer';
+
+    console.log(`💬 WhatsApp message from ${contactName} (${from}): ${msgBody}`);
+
+    // Auto-reply using Gemini AI
+    let replyText = 'Thank you for reaching out to Wholeup! 😊 Our team will get back to you shortly. For instant help, call us at +91 94268 46035.';
+
+    if (apiKey && apiKey.trim() !== '') {
+      try {
+        const { GoogleGenerativeAI } = require('@google/generative-ai');
+        const genAI = new GoogleGenerativeAI(apiKey);
+        const model = genAI.getGenerativeModel({ model: 'gemini-2.0-flash' });
+        const waPrompt = `You are Wholeup Digital Marketing Agency's WhatsApp AI assistant. A customer named "${contactName}" sent this message:\n\n"${msgBody}"\n\nReply in a friendly, professional, short manner (under 80 words). \n- If they ask about services, mention: SEO, Meta Ads, Google Ads, WhatsApp Automation, AI Services, Website Design.\n- If they want to book a call, give number: +91 94268 46035\n- If they ask pricing, say packages start from ₹8,000/month and invite them to book a free call.\n- Always end with a clear CTA. Speak naturally. Do NOT mention AI or that you are a bot.`;
+        const result = await model.generateContent(waPrompt);
+        replyText = result.response.text();
+      } catch(e) { console.warn('WhatsApp AI reply failed, using fallback:', e.message); }
+    }
+
+    // Send reply via WhatsApp API
+    if (waToken && phoneNumberId) {
+      await fetch(`https://graph.facebook.com/v19.0/${phoneNumberId}/messages`, {
+        method: 'POST',
+        headers: { 'Authorization': `Bearer ${waToken}`, 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          messaging_product: 'whatsapp',
+          to: from,
+          type: 'text',
+          text: { body: replyText }
+        })
+      });
+      console.log(`✅ WhatsApp AI reply sent to ${from}`);
+    } else {
+      console.log('⚠️ WhatsApp API credentials not set. Reply not sent. Set WHATSAPP_TOKEN & WHATSAPP_PHONE_ID in .env');
+    }
+
+    // Log this as a lead
+    const fs = require('fs');
+    const waLeadPath = path.join(__dirname, 'data/whatsapp_leads.json');
+    let waLeads = [];
+    try { waLeads = JSON.parse(fs.readFileSync(waLeadPath, 'utf8')); } catch(e) { waLeads = []; }
+    const waLeadData = { name: contactName, phone: from, email: 'Not provided', service: 'WhatsApp Inquiry', message: msgBody };
+    const waScore = scoreLead(waLeadData);
+    waLeads.push({ ...waLeadData, reply: replyText, date: new Date().toISOString(), score: waScore.score, scoreLabel: waScore.label, scoreEmoji: waScore.emoji });
+    try { fs.mkdirSync(path.dirname(waLeadPath), { recursive: true }); } catch(e){}
+    fs.writeFileSync(waLeadPath, JSON.stringify(waLeads, null, 2));
+
+    // Notify Neel on Telegram
+    const tgToken = process.env.TELEGRAM_BOT_TOKEN;
+    const tgUser = process.env.TELEGRAM_ALLOWED_USERS;
+    if (tgToken && tgUser) {
+      await sendTelegramMessage(tgToken, tgUser,
+        `💬 *New WhatsApp Lead!*\n\n*Name:* ${contactName}\n*Phone:* ${from}\n*Score:* ${waScore.emoji} ${waScore.label} (${waScore.score}/100)\n*Message:* ${msgBody}\n\n*AI Reply Sent:* ✅\n${replyText}`
+      );
+    }
+
+  } catch(err) {
+    console.error('❌ WhatsApp webhook error:', err.message);
+  }
 });
 
 // CRON Endpoint: Morning Check-in (7:00 AM)

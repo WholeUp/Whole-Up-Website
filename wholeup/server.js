@@ -749,7 +749,7 @@ Instructions:
 5. End with a professional email signature for "Wholeup Digital Growth Team" and phone: +91 94268 46035 / email: wholeup.agency@gmail.com.
 6. Keep the email highly readable, clean, and concise (under 250 words total). Do NOT include generic placeholder brackets. Write the final email copy directly.`;
 
-    const proposalText = await getGeminiResponse(agentPrompt);
+    proposalText = await getGeminiResponse(agentPrompt);
 
     if (!proposalText) {
       throw new Error('Outreach Agent AI failed to generate proposal.');

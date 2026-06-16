@@ -5,12 +5,65 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{{title}}</title>
   <meta name="description" content="{{metaDesc}}">
-  <meta name="keywords" content="{{#if metaKeywords}}{{metaKeywords}}{{else}}digital marketing agency, SEO services, paid ads, social media marketing, web design, conversion optimization, Wholeup{{/if}}">
+  <meta name="keywords" content="{{#if metaKeywords}}{{metaKeywords}}{{else}}digital marketing agency Surat, SEO services India, Google Ads agency, Meta Ads, WhatsApp automation, web design Surat, Wholeup{{/if}}">
+  <meta name="author" content="Wholeup Digital Marketing Agency">
+  <meta name="robots" content="index, follow">
+  <meta name="geo.region" content="IN-GJ">
+  <meta name="geo.placename" content="Surat, Gujarat, India">
+
+  <!-- Open Graph -->
   <meta property="og:title" content="{{title}}">
   <meta property="og:description" content="{{metaDesc}}">
   <meta property="og:type" content="website">
-  <meta property="og:image" content="https://wholeup.in/favicon.png">
-  <link rel="canonical" href="{{canonicalUrl}}">
+  <meta property="og:image" content="{{#if ogImage}}{{ogImage}}{{else}}https://wholeup.in/favicon.png{{/if}}">
+  <meta property="og:url" content="{{#if canonicalUrl}}{{canonicalUrl}}{{else}}https://wholeup.in{{/if}}">
+  <meta property="og:site_name" content="Wholeup Digital Marketing">
+  <meta property="og:locale" content="en_IN">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="{{title}}">
+  <meta name="twitter:description" content="{{metaDesc}}">
+  <meta name="twitter:image" content="{{#if ogImage}}{{ogImage}}{{else}}https://wholeup.in/favicon.png{{/if}}">
+
+  <!-- Canonical -->
+  <link rel="canonical" href="{{#if canonicalUrl}}{{canonicalUrl}}{{else}}https://wholeup.in{{/if}}">
+
+  <!-- LocalBusiness Schema Markup -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": "Wholeup Digital Marketing Agency",
+    "url": "https://wholeup.in",
+    "logo": "https://wholeup.in/favicon.png",
+    "image": "https://wholeup.in/favicon.png",
+    "description": "Wholeup is a results-driven digital marketing agency in Surat, India offering SEO, Google Ads, Meta Ads, WhatsApp Automation, AI Services and Web Design.",
+    "telephone": "+919426846035",
+    "email": "wholeup.agency@gmail.com",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Surat",
+      "addressRegion": "Gujarat",
+      "addressCountry": "IN"
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": "21.1702",
+      "longitude": "72.8311"
+    },
+    "openingHours": "Mo-Sa 09:00-20:00",
+    "priceRange": "₹₹",
+    "sameAs": [
+      "https://www.instagram.com/wholeup.in"
+    ],
+    "serviceArea": {
+      "@type": "Place",
+      "name": "India"
+    }
+  }
+  </script>
+
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1000 700' fill='none'><defs><linearGradient id='fav-charcoal' x1='180' y1='270' x2='465' y2='590' gradientUnits='userSpaceOnUse'><stop offset='0%' stop-color='%232D2D2D' /><stop offset='100%' stop-color='%23121212' /></linearGradient><linearGradient id='fav-green' x1='465' y1='590' x2='900' y2='100' gradientUnits='userSpaceOnUse'><stop offset='0%' stop-color='%2316A34A' /><stop offset='60%' stop-color='%2322C55E' /><stop offset='100%' stop-color='%234ADE80' /></linearGradient></defs><path d='M 465 380 C 455 420, 500 590, 570 590 C 640 590, 710 350, 790 210' stroke='url(%23fav-green)' stroke-width='105' stroke-linecap='round' stroke-linejoin='round' /><path d='M 180 270 C 180 270, 260 590, 330 590 C 400 590, 440 480, 465 380' stroke='url(%23fav-charcoal)' stroke-width='105' stroke-linecap='round' stroke-linejoin='round' /><polygon points='712,165 850,106 868,255 790,210' fill='url(%23fav-green)' /><path d='M 880 25 Q 880 60 915 60 Q 880 60 880 95 Q 880 60 845 60 Q 880 60 880 25' fill='%2322C55E' /></svg>">
 
   <script src="https://cdn.tailwindcss.com"></script>

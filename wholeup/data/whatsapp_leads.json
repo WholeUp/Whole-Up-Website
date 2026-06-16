@@ -1,0 +1,14 @@
+[
+  {
+    "name": "Test Customer",
+    "phone": "919876543210",
+    "email": "Not provided",
+    "service": "WhatsApp Inquiry",
+    "message": "Hello, I want to know about your SEO services and pricing!",
+    "reply": "Thank you for reaching out to Wholeup! 😊 Our team will get back to you shortly. For instant help, call us at +91 94268 46035.",
+    "date": "2026-06-14T16:02:30.722Z",
+    "score": 35,
+    "scoreLabel": "Warm",
+    "scoreEmoji": "⚡"
+  }
+]

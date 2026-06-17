@@ -256,13 +256,14 @@
   </div>
 </section>
 
-<div id="case-modal" class="fixed inset-0 z-[99999] bg-black/60 backdrop-blur-xl flex items-center justify-center p-4 md:p-8 opacity-0 pointer-events-none" onclick="closeCaseModal(event)">
-  <div class="relative bg-[#faf8f2] border border-black/10 rounded-[32px] w-full max-w-5xl max-h-[85vh] overflow-y-auto p-6 md:p-12 text-dark shadow-2xl block space-y-8 modal-scroll" onclick="event.stopPropagation()">
-    
-    <!-- Close Button -->
-    <button onclick="closeCaseModal(null)" class="absolute top-6 right-6 w-11 h-11 rounded-full border border-black/10 bg-white/85 backdrop-blur-md flex items-center justify-center text-dark/70 hover:text-dark hover:border-black/35 hover:scale-105 transition-all z-[100] shadow-sm" aria-label="Close details">
-      <i class="fas fa-times text-sm"></i>
-    </button>
+<div id="case-modal" class="fixed inset-0 z-[99999] bg-black/60 backdrop-blur-xl overflow-y-auto opacity-0 pointer-events-none modal-scroll" onclick="closeCaseModal(event)">
+  <div class="flex min-h-full items-center justify-center p-4 md:p-8">
+    <div id="case-modal-box" class="relative bg-[#faf8f2] border border-black/10 rounded-[32px] w-full max-w-5xl p-6 md:p-12 text-dark shadow-2xl block space-y-8" onclick="event.stopPropagation()">
+      
+      <!-- Close Button -->
+      <button onclick="closeCaseModal(null)" class="absolute top-6 right-6 w-11 h-11 rounded-full border border-black/10 bg-white/85 backdrop-blur-md flex items-center justify-center text-dark/70 hover:text-dark hover:border-black/35 hover:scale-105 transition-all z-[100] shadow-sm" aria-label="Close details">
+        <i class="fas fa-times text-sm"></i>
+      </button>
 
     <!-- Modal Layout -->
     <div class="flex flex-col gap-8">
@@ -360,7 +361,6 @@
       </div>
 
     </div>
-
   </div>
 </div>
 
@@ -502,7 +502,7 @@
     if (typeof lenis !== 'undefined' && lenis) lenis.stop(); // stop background scrolling
     
     if (typeof gsap !== 'undefined') {
-      const modalBox = modal.querySelector('.relative');
+      const modalBox = document.getElementById('case-modal-box');
       
       const tl = gsap.timeline();
       
@@ -550,7 +550,13 @@
   }
 
   function closeCaseModal(event) {
-    if (event && event.target !== document.getElementById('case-modal') && event.type === 'click') return;
+    // If the click is inside the modal box, do not close
+    if (event && event.type === 'click') {
+      const modalBox = document.getElementById('case-modal-box');
+      if (modalBox && modalBox.contains(event.target)) {
+        return;
+      }
+    }
     
     const modal = document.getElementById('case-modal');
     modal.classList.add('pointer-events-none');
@@ -561,7 +567,7 @@
     if (typeof lenis !== 'undefined' && lenis) lenis.start(); // restore background scrolling
     
     if (typeof gsap !== 'undefined') {
-      const modalBox = modal.querySelector('.relative');
+      const modalBox = document.getElementById('case-modal-box');
       const tl = gsap.timeline({
         onComplete: () => {
           gsap.set(modal, { opacity: 0 });

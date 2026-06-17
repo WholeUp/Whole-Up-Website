@@ -127,6 +127,22 @@
     background: rgba(0, 0, 0, 0.1);
     border-radius: 2px;
   }
+
+  /* Custom Scrollbar for Modal Content */
+  .modal-scroll::-webkit-scrollbar {
+    width: 8px;
+  }
+  .modal-scroll::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  .modal-scroll::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.15);
+    border-radius: 99px;
+    border: 2.5px solid #faf8f2;
+  }
+  .modal-scroll::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 0, 0, 0.3);
+  }
 </style>
 
 <!-- IMMERSIVE LIGHT HERO -->
@@ -240,13 +256,12 @@
   </div>
 </section>
 
-<!-- IMMERSIVE MODAL DRAWER FOR DETAILS (Light theme matching the body cream color) -->
 <div id="case-modal" class="fixed inset-0 z-[99999] bg-black/60 backdrop-blur-xl flex items-center justify-center p-4 md:p-8 opacity-0 pointer-events-none" onclick="closeCaseModal(event)">
-  <div class="relative bg-[#faf8f2] border border-black/10 rounded-[32px] w-full max-w-5xl max-h-[92vh] overflow-y-auto p-6 md:p-12 text-dark shadow-2xl flex flex-col gap-8 scrollbar-none" onclick="event.stopPropagation()">
+  <div class="relative bg-[#faf8f2] border border-black/10 rounded-[32px] w-full max-w-5xl max-h-[85vh] overflow-y-auto p-6 md:p-12 text-dark shadow-2xl block space-y-8 modal-scroll" onclick="event.stopPropagation()">
     
     <!-- Close Button -->
-    <button onclick="closeCaseModal(null)" class="absolute top-6 right-6 w-10 h-10 rounded-full border border-black/10 bg-black/5 flex items-center justify-center text-dark/60 hover:text-dark hover:border-black/20 transition-all z-[100]" aria-label="Close details">
-      ✕
+    <button onclick="closeCaseModal(null)" class="absolute top-6 right-6 w-11 h-11 rounded-full border border-black/10 bg-white/85 backdrop-blur-md flex items-center justify-center text-dark/70 hover:text-dark hover:border-black/35 hover:scale-105 transition-all z-[100] shadow-sm" aria-label="Close details">
+      <i class="fas fa-times text-sm"></i>
     </button>
 
     <!-- Modal Layout -->
@@ -298,7 +313,7 @@
             <h4 class="text-xs font-black uppercase tracking-wider text-dark/40 mb-3">Verified Results</h4>
             <div class="grid grid-cols-2 gap-4">
               <!-- Metric 1 Card -->
-              <div class="bg-white border border-black/5 rounded-2xl p-4 text-center shadow-sm">
+              <div class="metric-card bg-white border border-black/5 rounded-2xl p-4 text-center shadow-sm">
                 <p id="modal-metric1-label" class="text-[9px] font-black uppercase tracking-widest text-dark/40 mb-2">Metric 1</p>
                 <div class="text-2xl font-black text-primary flex items-center justify-center gap-0.5">
                   <span id="modal-metric1-num-prefix"></span>
@@ -307,7 +322,7 @@
                 </div>
               </div>
               <!-- Metric 2 Card -->
-              <div class="bg-white border border-black/5 rounded-2xl p-4 text-center shadow-sm">
+              <div class="metric-card bg-white border border-black/5 rounded-2xl p-4 text-center shadow-sm">
                 <p id="modal-metric2-label" class="text-[9px] font-black uppercase tracking-widest text-dark/40 mb-2">Metric 2</p>
                 <div class="text-2xl font-black text-dark flex items-center justify-center gap-0.5">
                   <span id="modal-metric2-num-prefix"></span>
@@ -430,6 +445,9 @@
     
     activeModalSlug = project.slug;
 
+    // Lock Body Scroll natively
+    document.body.style.overflow = 'hidden';
+
     // Populate Text Fields
     document.getElementById('modal-category').innerText = project.categoryLabel;
     document.getElementById('modal-title').innerText = project.title;
@@ -443,6 +461,13 @@
     document.getElementById('modal-category').style.borderColor = colorMix(categoryColor, 20);
     document.getElementById('modal-category').style.backgroundColor = colorMix(categoryColor, 8);
     document.getElementById('modal-chatbot-cta').style.backgroundColor = categoryColor;
+
+    // Theme the metrics cards
+    const metricCards = document.querySelectorAll('.metric-card');
+    metricCards.forEach(card => {
+      card.style.borderColor = colorMix(categoryColor, 15);
+      card.style.backgroundColor = colorMix(categoryColor, 4);
+    });
 
     // Inject Tag Chips
     const tagsContainer = document.getElementById('modal-services');
@@ -529,6 +554,9 @@
     
     const modal = document.getElementById('case-modal');
     modal.classList.add('pointer-events-none');
+    
+    // Unlock body scroll natively
+    document.body.style.overflow = '';
     
     if (typeof lenis !== 'undefined' && lenis) lenis.start(); // restore background scrolling
     

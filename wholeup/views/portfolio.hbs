@@ -499,8 +499,6 @@
     const modal = document.getElementById('case-modal');
     modal.classList.remove('pointer-events-none');
     
-    if (typeof lenis !== 'undefined' && lenis) lenis.stop(); // stop background scrolling
-    
     if (typeof gsap !== 'undefined') {
       const modalBox = document.getElementById('case-modal-box');
       
@@ -563,8 +561,6 @@
     
     // Unlock body scroll natively
     document.body.style.overflow = '';
-    
-    if (typeof lenis !== 'undefined' && lenis) lenis.start(); // restore background scrolling
     
     if (typeof gsap !== 'undefined') {
       const modalBox = document.getElementById('case-modal-box');

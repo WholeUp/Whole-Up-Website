@@ -217,6 +217,21 @@ app.get('/portfolio', (req, res) => {
   });
 });
 
+app.get('/portfolio/:slug', (req, res) => {
+  const project = portfolio.find(p => p.slug === req.params.slug);
+  if (!project) {
+    return res.status(404).render('404', { title: '404 - Case Study Not Found' });
+  }
+  res.render('portfolio-single', {
+    title: `${project.title} Case Study | Wholeup`,
+    metaDesc: `${project.description} Read how Wholeup achieved outstanding results: ${project.result}`,
+    canonicalUrl: `https://wholeup.in/portfolio/${project.slug}`,
+    page: 'portfolio',
+    project,
+    related: portfolio.filter(p => p.slug !== project.slug).slice(0, 3)
+  });
+});
+
 // PRICING
 app.get('/pricing', (req, res) => {
   res.render('pricing', {

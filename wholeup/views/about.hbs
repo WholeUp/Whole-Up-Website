@@ -401,11 +401,16 @@
       });
 
       // ════ VALUES CARDS 3D REVEAL ════
-      gsap.from('.gs-stagger-parent .gs-stagger-item', {
+      gsap.fromTo('.gs-stagger-parent .gs-stagger-item', {
         y: 60,
         rotationX: 10,
         opacity: 0,
-        scale: 0.95,
+        scale: 0.95
+      }, {
+        y: 0,
+        rotationX: 0,
+        opacity: 1,
+        scale: 1,
         duration: 1.0,
         stagger: 0.15,
         ease: 'power3.out',
@@ -416,12 +421,15 @@
       });
 
       // ════ METHODOLOGY FOLD-IN ANIMATION ════
-      // Select methodology section children and animate them to reveal like a folding card
-      gsap.from('#methodology-section .gs-stagger-item', {
+      gsap.fromTo('#methodology-section .gs-stagger-item', {
         opacity: 0,
         rotationY: -45,
         transformOrigin: 'left center',
-        x: -40,
+        x: -40
+      }, {
+        opacity: 1,
+        rotationY: 0,
+        x: 0,
         duration: 1.2,
         stagger: 0.18,
         ease: 'power4.out',
@@ -432,10 +440,14 @@
       });
 
       // ════ ROLE CARDS FLY-IN ════
-      gsap.from('.py-24.bg-cream .gs-stagger-item', {
+      gsap.fromTo('.py-24.bg-cream .gs-stagger-item', {
         y: 40,
         opacity: 0,
-        scale: 0.96,
+        scale: 0.96
+      }, {
+        y: 0,
+        opacity: 1,
+        scale: 1,
         duration: 0.85,
         stagger: 0.1,
         ease: 'back.out(1.4)',

@@ -809,19 +809,20 @@
       // ════ STATS SECTION COUNT-UP & REVEAL ════
       if (typeof ScrollTrigger !== 'undefined') {
         // Staggered fade and 3D tilt reveal for stat column cards
-        gsap.from('#stats-section .home-stats-card', {
-          y: 45,
-          scale: 0.9,
-          rotationX: 15,
-          opacity: 0,
-          duration: 1.0,
-          stagger: 0.12,
-          ease: 'power3.out',
-          scrollTrigger: {
-            trigger: '#stats-section',
-            start: 'top 85%'
+        gsap.fromTo('#stats-section .home-stats-card',
+          { y: 45, scale: 0.9, rotationX: 15, opacity: 0 },
+          {
+            y: 0, scale: 1, rotationX: 0, opacity: 1,
+            duration: 1.0,
+            stagger: 0.12,
+            ease: 'power3.out',
+            scrollTrigger: {
+              trigger: '#stats-section',
+              start: 'top 90%',
+              once: true
+            }
           }
-        });
+        );
 
         gsap.utils.toArray('.stat-count').forEach(stat => {
           const target = parseFloat(stat.dataset.target);
@@ -889,18 +890,20 @@
         });
 
         // ════ PORTFOLIO STAGGERED GRID REVEAL ════
-        gsap.from('#portfolio-section .home-portfolio-item', {
-          y: 80,
-          skewY: 2.5,
-          opacity: 0,
-          duration: 1.1,
-          stagger: 0.12,
-          ease: 'power4.out',
-          scrollTrigger: {
-            trigger: '#portfolio-section',
-            start: 'top 80%'
+        gsap.fromTo('#portfolio-section .home-portfolio-item',
+          { y: 80, skewY: 2.5, opacity: 0 },
+          {
+            y: 0, skewY: 0, opacity: 1,
+            duration: 1.1,
+            stagger: 0.12,
+            ease: 'power4.out',
+            scrollTrigger: {
+              trigger: '#portfolio-section',
+              start: 'top 85%',
+              once: true
+            }
           }
-        });
+        );
 
         // ════ TESTIMONIALS VELOCITY SKEW EFFECT ════
         let velocity = 0;
@@ -933,19 +936,37 @@
         });
 
         // ════ BLOG GRID REVEALS ════
-        gsap.from('#blog-section .home-blog-item', {
-          scale: 0.94,
-          y: 40,
-          opacity: 0,
-          duration: 0.9,
-          stagger: 0.1,
-          ease: 'power2.out',
-          scrollTrigger: {
-            trigger: '#blog-section',
-            start: 'top 85%'
+        gsap.fromTo('#blog-section .home-blog-item',
+          { scale: 0.94, y: 40, opacity: 0 },
+          {
+            scale: 1, y: 0, opacity: 1,
+            duration: 0.9,
+            stagger: 0.1,
+            ease: 'power2.out',
+            scrollTrigger: {
+              trigger: '#blog-section',
+              start: 'top 90%',
+              once: true
+            }
           }
-        });
+        );
       }
+
+      // ════ SAFETY FALLBACK: ensure cards always visible after 2s ════
+      setTimeout(() => {
+        [
+          '#stats-section .home-stats-card',
+          '#portfolio-section .home-portfolio-item',
+          '#blog-section .home-blog-item'
+        ].forEach(sel => {
+          document.querySelectorAll(sel).forEach(el => {
+            if (parseFloat(getComputedStyle(el).opacity) < 0.5) {
+              el.style.opacity = '1';
+              el.style.transform = 'none';
+            }
+          });
+        });
+      }, 2000);
 
       // ════ ROI CALCULATOR HOLOGRAPHIC REFLECTION ════
       const roiPanel = document.getElementById('roi-result-card');

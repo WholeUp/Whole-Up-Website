@@ -158,36 +158,108 @@ app.get('/', (req, res) => {
 
 // ABOUT
 app.get('/about', (req, res) => {
+  const schema = {
+    "@context": "https://schema.org",
+    "@type": "AboutPage",
+    "name": "About Wholeup",
+    "description": "Learn about Wholeup — a results-driven digital marketing agency in Surat, Gujarat. Our expert team helps businesses grow.",
+    "url": "https://wholeup.in/about",
+    "publisher": {
+      "@type": "Organization",
+      "name": "Wholeup",
+      "url": "https://wholeup.in",
+      "logo": "https://wholeup.in/favicon.png"
+    }
+  };
   res.render('about', {
     title: 'About Wholeup | Best Digital Marketing Agency in Surat, Gujarat',
     metaDesc: 'Learn about Wholeup — a results-driven digital marketing agency in Surat, Gujarat. Our expert team helps businesses grow with SEO, paid ads, AI automation & creative strategies.',
     canonicalUrl: 'https://wholeup.in/about',
     metaKeywords: 'about Wholeup, digital marketing agency Surat, marketing team Gujarat, best marketing agency India',
-    page: 'about'
+    page: 'about',
+    schemaMarkup: `<script type="application/ld+json">${JSON.stringify(schema)}</script>`
   });
 });
 
 // SERVICES
 app.get('/services', (req, res) => {
+  const schema = {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "provider": {
+      "@type": "LocalBusiness",
+      "name": "Wholeup",
+      "url": "https://wholeup.in",
+      "logo": "https://wholeup.in/favicon.png",
+      "telephone": "+919426846035",
+      "email": "wholeup.agency@gmail.com",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Surat",
+        "addressRegion": "Gujarat",
+        "addressCountry": "IN"
+      }
+    },
+    "serviceType": "Digital Marketing Services",
+    "areaServed": "India",
+    "hasOfferCatalog": {
+      "@type": "OfferCatalog",
+      "name": "Digital Marketing Services Catalog",
+      "itemListElement": services.map(s => ({
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": s.title,
+          "description": s.description
+        }
+      }))
+    }
+  };
   res.render('services', {
     title: 'Digital Marketing Services in Surat | SEO, Ads, Web Design | Wholeup',
     metaDesc: 'Wholeup offers full-stack digital marketing services in Surat — SEO, Google Ads, Meta Ads, Social Media Marketing, WhatsApp Automation, AI Voice Agents & Conversion-Optimized Websites. Start growing today!',
     canonicalUrl: 'https://wholeup.in/services',
     metaKeywords: 'SEO services Surat, Google Ads agency India, Meta Ads Surat, social media marketing, web design Surat, WhatsApp automation, digital marketing services',
     page: 'services',
-    services
+    services,
+    schemaMarkup: `<script type="application/ld+json">${JSON.stringify(schema)}</script>`
   });
 });
 
 // AI SERVICES
 app.get('/ai-services', (req, res) => {
+  const schema = {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "provider": {
+      "@type": "LocalBusiness",
+      "name": "Wholeup",
+      "url": "https://wholeup.in",
+      "logo": "https://wholeup.in/favicon.png"
+    },
+    "serviceType": "AI Business Automation",
+    "areaServed": "India",
+    "hasOfferCatalog": {
+      "@type": "OfferCatalog",
+      "name": "AI Solutions Catalog",
+      "itemListElement": aiServices.map(s => ({
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": s.title,
+          "description": s.description
+        }
+      }))
+    }
+  };
   res.render('ai-services', {
     title: 'AI Services for Business | 24/7 Voice AI, WhatsApp Automation, AI Chatbot | Wholeup',
     metaDesc: 'Automate your business with Wholeup AI Services — 24/7 AI Voice Call Agents, WhatsApp AI Chatbots, AI Lead Generation, Smart CRM & more. Never miss a lead again. Get FREE demo!',
     canonicalUrl: 'https://wholeup.in/ai-services',
     metaKeywords: 'AI voice agent India, WhatsApp automation business, AI chatbot India, AI lead generation, business automation Surat, 24/7 AI system',
     page: 'ai-services',
-    aiServices
+    aiServices,
+    schemaMarkup: `<script type="application/ld+json">${JSON.stringify(schema)}</script>`
   });
 });
 
@@ -195,13 +267,26 @@ app.get('/ai-services', (req, res) => {
 app.get('/services/:slug', (req, res) => {
   const service = services.find(s => s.slug === req.params.slug);
   if (!service) return res.redirect('/services');
+  const schema = {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "name": service.title,
+    "description": service.description,
+    "provider": {
+      "@type": "LocalBusiness",
+      "name": "Wholeup",
+      "url": "https://wholeup.in",
+      "logo": "https://wholeup.in/favicon.png"
+    }
+  };
   res.render('service-single', {
     title: `${service.title} in Surat, India | Wholeup Digital Marketing`,
     metaDesc: `${service.description} Wholeup provides expert ${service.title} services in Surat and across India. Get a FREE consultation today!`,
     canonicalUrl: `https://wholeup.in/services/${service.slug}`,
     page: 'services',
     service,
-    related: services.filter(s => s.slug !== service.slug).slice(0, 3)
+    related: services.filter(s => s.slug !== service.slug).slice(0, 3),
+    schemaMarkup: `<script type="application/ld+json">${JSON.stringify(schema)}</script>`
   });
 });
 
@@ -222,25 +307,49 @@ app.get('/portfolio/:slug', (req, res) => {
   if (!project) {
     return res.status(404).render('404', { title: '404 - Case Study Not Found' });
   }
+  const schema = {
+    "@context": "https://schema.org",
+    "@type": "CreativeWork",
+    "name": project.title,
+    "description": project.description,
+    "author": {
+      "@type": "Organization",
+      "name": "Wholeup"
+    }
+  };
   res.render('portfolio-single', {
     title: `${project.title} Case Study | Wholeup`,
     metaDesc: `${project.description} Read how Wholeup achieved outstanding results: ${project.result}`,
     canonicalUrl: `https://wholeup.in/portfolio/${project.slug}`,
     page: 'portfolio',
     project,
-    related: portfolio.filter(p => p.slug !== project.slug).slice(0, 3)
+    related: portfolio.filter(p => p.slug !== project.slug).slice(0, 3),
+    schemaMarkup: `<script type="application/ld+json">${JSON.stringify(schema)}</script>`
   });
 });
 
 // PRICING
 app.get('/pricing', (req, res) => {
+  const schema = {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": "Digital Marketing Pricing Packages",
+    "description": "Transparent, affordable digital marketing pricing plans by Wholeup starting from ₹8,000/month.",
+    "offers": {
+      "@type": "AggregateOffer",
+      "lowPrice": "8000",
+      "highPrice": "40000",
+      "priceCurrency": "INR"
+    }
+  };
   res.render('pricing', {
     title: 'Digital Marketing Pricing Plans | Affordable SEO & Ads Packages | Wholeup',
     metaDesc: 'Transparent, affordable digital marketing pricing — SEO, Google Ads, Meta Ads, Social Media & full-stack packages. No hidden fees. Plans starting from ₹8,000/month.',
     canonicalUrl: 'https://wholeup.in/pricing',
     metaKeywords: 'digital marketing pricing India, SEO packages Surat, affordable marketing plans, Google Ads pricing, social media marketing cost India',
     page: 'pricing',
-    pricing
+    pricing,
+    schemaMarkup: `<script type="application/ld+json">${JSON.stringify(schema)}</script>`
   });
 });
 
@@ -260,36 +369,81 @@ app.get('/blog', (req, res) => {
 app.get('/blog/:slug', (req, res) => {
   const post = blogPosts.find(p => p.slug === req.params.slug);
   if (!post) return res.redirect('/blog');
+  const schema = {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": post.title,
+    "description": post.excerpt,
+    "datePublished": post.date ? new Date(post.date).toISOString().split('T')[0] : new Date().toISOString().split('T')[0],
+    "author": {
+      "@type": "Organization",
+      "name": "Wholeup Team"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Wholeup",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://wholeup.in/favicon.png"
+      }
+    },
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": `https://wholeup.in/blog/${post.slug}`
+    }
+  };
   res.render('blog-single', {
     title: `${post.title} | Wholeup Digital Marketing Blog`,
     metaDesc: post.excerpt,
     canonicalUrl: `https://wholeup.in/blog/${post.slug}`,
     page: 'blog',
     post,
-    related: blogPosts.filter(p => p.slug !== post.slug).slice(0, 3)
+    related: blogPosts.filter(p => p.slug !== post.slug).slice(0, 3),
+    schemaMarkup: `<script type="application/ld+json">${JSON.stringify(schema)}</script>`
   });
 });
 
 // FAQ
 app.get('/faq', (req, res) => {
+  const schema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": faqs.map(f => ({
+      "@type": "Question",
+      "name": f.question,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": f.answer
+      }
+    }))
+  };
   res.render('faq', {
     title: 'FAQs | Digital Marketing Agency Questions Answered | Wholeup',
     metaDesc: 'Got questions about digital marketing? Wholeup answers everything — SEO timelines, ad budgets, pricing, process, and how we help your business grow. Read our FAQs.',
     canonicalUrl: 'https://wholeup.in/faq',
     metaKeywords: 'digital marketing FAQ, SEO questions, Google Ads FAQ, marketing agency questions India',
     page: 'faq',
-    faqs
+    faqs,
+    schemaMarkup: `<script type="application/ld+json">${JSON.stringify(schema)}</script>`
   });
 });
 
 // CONTACT PAGE
 app.get('/contact', (req, res) => {
+  const schema = {
+    "@context": "https://schema.org",
+    "@type": "ContactPage",
+    "name": "Contact Wholeup",
+    "description": "Contact Wholeup Digital Marketing Agency in Surat. Book a FREE 30-minute growth strategy call. We help businesses with SEO, Ads, AI Automation & Web Design.",
+    "url": "https://wholeup.in/contact"
+  };
   res.render('contact', {
     title: 'Contact Wholeup | Book a FREE Digital Marketing Strategy Call in Surat',
     metaDesc: 'Contact Wholeup Digital Marketing Agency in Surat. Book a FREE 30-minute growth strategy call. We help businesses with SEO, Ads, AI Automation & Web Design. Call: +91 94268 46035.',
     canonicalUrl: 'https://wholeup.in/contact',
     metaKeywords: 'contact digital marketing agency Surat, book marketing consultation, Wholeup contact, free marketing call India',
-    page: 'contact'
+    page: 'contact',
+    schemaMarkup: `<script type="application/ld+json">${JSON.stringify(schema)}</script>`
   });
 });
 
@@ -1462,6 +1616,87 @@ initTelegramWebhook();
 app.use((req, res) => {
   res.status(404).render('404', { title: 'Page Not Found | Whole Up', page: '404' });
 });
+
+// ─── Sitemap Generator ────────────────────────────────────────────────────────
+function generateSitemap() {
+  const fs = require('fs');
+  const baseUrl = 'https://wholeup.in';
+  const staticPages = [
+    { loc: '/', changefreq: 'weekly', priority: '1.0' },
+    { loc: '/about', changefreq: 'monthly', priority: '0.8' },
+    { loc: '/services', changefreq: 'monthly', priority: '0.9' },
+    { loc: '/ai-services', changefreq: 'monthly', priority: '0.9' },
+    { loc: '/portfolio', changefreq: 'monthly', priority: '0.8' },
+    { loc: '/pricing', changefreq: 'monthly', priority: '0.8' },
+    { loc: '/blog', changefreq: 'weekly', priority: '0.7' },
+    { loc: '/faq', changefreq: 'monthly', priority: '0.7' },
+    { loc: '/contact', changefreq: 'monthly', priority: '0.9' },
+    { loc: '/d2c-scale', changefreq: 'monthly', priority: '0.8' }
+  ];
+
+  let xml = `<?xml version="1.0" encoding="UTF-8"?>\n`;
+  xml += `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n`;
+
+  const today = new Date().toISOString().split('T')[0];
+
+  // Static pages
+  staticPages.forEach(page => {
+    xml += `  <url>\n`;
+    xml += `    <loc>${baseUrl}${page.loc}</loc>\n`;
+    xml += `    <lastmod>${today}</lastmod>\n`;
+    xml += `    <changefreq>${page.changefreq}</changefreq>\n`;
+    xml += `    <priority>${page.priority}</priority>\n`;
+    xml += `  </url>\n`;
+  });
+
+  // Dynamic blog posts
+  if (typeof blogPosts !== 'undefined' && Array.isArray(blogPosts)) {
+    blogPosts.forEach(post => {
+      xml += `  <url>\n`;
+      xml += `    <loc>${baseUrl}/blog/${post.slug}</loc>\n`;
+      xml += `    <lastmod>${today}</lastmod>\n`;
+      xml += `    <changefreq>weekly</changefreq>\n`;
+      xml += `    <priority>0.6</priority>\n`;
+      xml += `  </url>\n`;
+    });
+  }
+
+  // Dynamic services
+  if (typeof services !== 'undefined' && Array.isArray(services)) {
+    services.forEach(service => {
+      xml += `  <url>\n`;
+      xml += `    <loc>${baseUrl}/services/${service.slug}</loc>\n`;
+      xml += `    <lastmod>${today}</lastmod>\n`;
+      xml += `    <changefreq>monthly</changefreq>\n`;
+      xml += `    <priority>0.8</priority>\n`;
+      xml += `  </url>\n`;
+    });
+  }
+
+  // Dynamic portfolio cases
+  if (typeof portfolio !== 'undefined' && Array.isArray(portfolio)) {
+    portfolio.forEach(project => {
+      xml += `  <url>\n`;
+      xml += `    <loc>${baseUrl}/portfolio/${project.slug}</loc>\n`;
+      xml += `    <lastmod>${today}</lastmod>\n`;
+      xml += `    <changefreq>monthly</changefreq>\n`;
+      xml += `    <priority>0.7</priority>\n`;
+      xml += `  </url>\n`;
+    });
+  }
+
+  xml += `</urlset>\n`;
+
+  try {
+    fs.writeFileSync(path.join(__dirname, 'public', 'sitemap.xml'), xml);
+    console.log('✅ Dynamic sitemap.xml generated successfully!');
+  } catch (err) {
+    console.error('❌ Failed to generate sitemap.xml:', err.message);
+  }
+}
+
+// Generate sitemap on startup
+generateSitemap();
 
 // ─── Start ────────────────────────────────────────────────────────────────────
 app.listen(PORT, () => {

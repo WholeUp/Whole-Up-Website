@@ -38,7 +38,7 @@
     <!-- 1. MARKETING RETAINERS GRID -->
     <div id="marketing-pricing-grid" class="grid md:grid-cols-3 gap-8 items-stretch">
       {{#each pricing}}
-      <div class="relative rounded-[32px] border {{#if popular}}border-primary shadow-2xl shadow-primary/20{{else}}border-black/8 shadow-lg{{/if}} overflow-hidden gs-reveal flex flex-col" data-tilt data-tilt-max="3">
+      <div class="relative rounded-[32px] border {{#if popular}}border-primary shadow-2xl shadow-primary/20{{else}}border-black/8 shadow-lg{{/if}} overflow-hidden pricing-card-reveal flex flex-col" data-tilt data-tilt-max="3">
         {{#if popular}}
         <div class="bg-primary text-white text-[10px] font-black uppercase tracking-[0.3em] text-center py-3">⭐ Most Popular</div>
         {{/if}}
@@ -178,6 +178,12 @@
   </div>
 </section>
 
+<style>
+  .pricing-card-reveal {
+    opacity: 0;
+  }
+</style>
+
 <script>
   let yearlyBilling = false;
 
@@ -256,10 +262,14 @@
     // Only run if GSAP is available
     if (typeof gsap !== 'undefined') {
       // ════ STAGGERED PRICING CARDS REVEAL ════
-      gsap.from('#marketing-pricing-grid > div', {
+      gsap.fromTo('#marketing-pricing-grid .pricing-card-reveal', {
         y: 65,
         opacity: 0,
-        scale: 0.96,
+        scale: 0.96
+      }, {
+        y: 0,
+        opacity: 1,
+        scale: 1,
         duration: 1.1,
         stagger: 0.15,
         ease: 'power3.out',

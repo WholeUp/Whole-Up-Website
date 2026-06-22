@@ -11,9 +11,9 @@
 <!-- ALL SERVICES GRID -->
 <section class="py-24 bg-white px-6">
   <div class="max-w-7xl mx-auto">
-    <div class="grid md:grid-cols-2 gap-8 gs-stagger-parent">
+    <div class="grid md:grid-cols-2 gap-8 services-grid-parent">
       {{#each services}}
-      <div class="glass-card glass-card-glow rounded-[32px] p-10 gs-stagger-item transition-all duration-300" data-tilt data-tilt-max="3" style="--hover-glow: {{color}}; --hover-glow-rgba: {{bgColor}}">
+      <div class="glass-card glass-card-glow rounded-[32px] p-10 services-card-item transition-all duration-300" data-tilt data-tilt-max="3" style="--hover-glow: {{color}}; --hover-glow-rgba: {{bgColor}}">
         <div class="flex items-start gap-6 mb-8">
           <div class="w-16 h-16 rounded-2xl flex items-center justify-center text-3xl flex-shrink-0 service-icon" style="background:{{bgColor}};color:{{color}}">
             <i class="{{icon}}"></i>
@@ -67,7 +67,7 @@
 </section>
 
 <style>
-  .gs-stagger-item {
+  .services-card-item {
     opacity: 0;
   }
   .glass-card-glow {
@@ -173,7 +173,7 @@
     // Only run if GSAP is available
     if (typeof gsap !== 'undefined') {
       // ════ STAGGERED ALTERNATING SERVICES CARDS ENTRANCE ════
-      const cards = gsap.utils.toArray('.gs-stagger-parent .gs-stagger-item');
+      const cards = gsap.utils.toArray('.services-grid-parent .services-card-item');
       
       cards.forEach((card, idx) => {
         // Alternating entry: left vs right translations

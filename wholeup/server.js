@@ -1,5 +1,6 @@
 require('dotenv').config();
 const express = require('express');
+const compression = require('compression');
 const { engine } = require('express-handlebars');
 const bodyParser = require('body-parser');
 const cors = require('cors');
@@ -51,6 +52,7 @@ async function getGeminiResponse(prompt, systemInstruction = null, contentsArray
 }
 
 const app = express();
+app.use(compression());
 const PORT = process.env.PORT || 3000;
 
 // ─── Security & Middleware ───────────────────────────────────────────────────

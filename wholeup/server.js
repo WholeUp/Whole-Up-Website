@@ -407,15 +407,26 @@ app.get('/blog/:slug', (req, res) => {
 
 // FAQ
 app.get('/faq', (req, res) => {
+  const flatFaqs = [];
+  if (Array.isArray(faqs)) {
+    faqs.forEach(cat => {
+      if (cat.items && Array.isArray(cat.items)) {
+        cat.items.forEach(item => {
+          flatFaqs.push(item);
+        });
+      }
+    });
+  }
+
   const schema = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
-    "mainEntity": faqs.map(f => ({
+    "mainEntity": flatFaqs.map(f => ({
       "@type": "Question",
-      "name": f.question,
+      "name": f.q,
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": f.answer
+        "text": f.a
       }
     }))
   };

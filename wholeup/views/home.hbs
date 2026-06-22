@@ -101,6 +101,7 @@
   <!-- Glowing Background Ambience -->
   <div class="hero-blur-blob hero-blob-1"></div>
   <div class="hero-blur-blob hero-blob-2"></div>
+  <canvas id="hero-3d-canvas" class="absolute inset-0 w-full h-full pointer-events-none z-0"></canvas>
 
   <!-- Floating Interactive Decorative Particles -->
   <div class="absolute top-[15%] left-[20%] w-3 h-3 rounded-full bg-primary/20 anim-particle-1 pointer-events-none select-none z-0"></div>
@@ -285,7 +286,7 @@
 </section>
 
 <!-- ══ HOW WE WORK (Connected Timeline Flow) ═══════════════════════════════════ -->
-<section class="py-32 bg-dark text-white px-6 relative overflow-hidden">
+<section id="process-timeline" class="py-32 bg-dark text-white px-6 relative overflow-hidden">
   <!-- Soft background mesh -->
   <div class="absolute inset-0 bg-grid opacity-[0.02] pointer-events-none"></div>
 
@@ -338,7 +339,7 @@
 </section>
 
 <!-- ══ PORTFOLIO PREVIEW ══════════════════════════════════════════════════ -->
-<section class="py-32 bg-cream px-6 border-b border-black/5">
+<section id="portfolio-section" class="py-32 bg-cream px-6 border-b border-black/5">
   <div class="max-w-7xl mx-auto">
     
     <div class="text-center mb-20 gs-reveal">
@@ -403,7 +404,7 @@
 </section>
 
 <!-- ══ ROI CALCULATOR (Animated count up and visual profit bar chart) ═════════ -->
-<section class="py-32 bg-dark text-white px-6 relative overflow-hidden">
+<section id="roi-section" class="py-32 bg-dark text-white px-6 relative overflow-hidden">
   <div class="absolute inset-0 opacity-[0.03]" style="background-image:radial-gradient(#fff 1.5px,transparent 1.5px);background-size:24px 24px;"></div>
   <div class="max-w-[1400px] mx-auto relative z-10">
     
@@ -600,7 +601,7 @@
 </script>
 
 <!-- ══ TESTIMONIALS (Infinite Scrolling horizontal Marquee) ═══════════════════ -->
-<section class="py-32 bg-white px-6 relative overflow-hidden border-t border-black/5">
+<section id="testimonials-section" class="py-32 bg-white px-6 relative overflow-hidden border-t border-black/5">
   <div class="max-w-7xl mx-auto mb-16">
     
     <div class="text-center mb-6 gs-reveal">
@@ -663,7 +664,7 @@
 </section>
 
 <!-- ══ BLOG PREVIEW ══════════════════════════════════════════════════════ -->
-<section class="py-32 bg-cream px-6 border-y border-black/5">
+<section id="blog-section" class="py-32 bg-cream px-6 border-y border-black/5">
   <div class="max-w-7xl mx-auto">
     <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-16 gs-reveal">
       <div>
@@ -704,7 +705,7 @@
 </section>
 
 <!-- ══ CTA BANNER ════════════════════════════════════════════════════════ -->
-<section class="py-24 px-6 bg-[#EAF6ED] border-t border-black/5 relative overflow-hidden">
+<section id="cta-section" class="py-24 px-6 bg-[#EAF6ED] border-t border-black/5 relative overflow-hidden">
   <div class="absolute inset-0 opacity-[0.05]" style="background-image:radial-gradient(#000 1px,transparent 1px);background-size:30px 30px;"></div>
   <div class="max-w-4xl mx-auto text-center relative z-10 gs-reveal">
     <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-primary/10 border border-primary/20 text-[10px] font-bold tracking-[0.2em] text-primary uppercase mb-8">
@@ -726,13 +727,150 @@
 <!-- CLIENT SIDE GSAP ADVANCED HOMEPAGE TIMELINE & SCROLL SCRIPTS -->
 <script>
   window.addEventListener('DOMContentLoaded', () => {
+    // ════ 3D WEBGL PARTICLE SYSTEM (Three.js) ════
+    const canvas = document.getElementById('hero-3d-canvas');
+    if (canvas && typeof THREE !== 'undefined') {
+      const scene = new THREE.Scene();
+      const width = canvas.clientWidth || window.innerWidth;
+      const height = canvas.clientHeight || window.innerHeight;
+      const camera = new THREE.PerspectiveCamera(60, width / height, 0.1, 100);
+      camera.position.z = 7.5;
+
+      const renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true, antialias: true });
+      renderer.setSize(width, height);
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+      const count = 3000;
+      const positions1 = new Float32Array(count * 3);
+      const positions2 = new Float32Array(count * 3);
+      const currentPositions = new Float32Array(count * 3);
+      const colors = new Float32Array(count * 3);
+
+      const color1 = new THREE.Color('#16A34A');
+      const color2 = new THREE.Color('#06B6D4');
+
+      for (let i = 0; i < count; i++) {
+        const i3 = i * 3;
+        
+        // Shape 1: Double Helix (Hero)
+        const theta = (i / count) * Math.PI * 18;
+        const r = 2.3 + Math.sin(theta * 0.45) * 0.4;
+        positions1[i3] = Math.cos(theta) * r;
+        positions1[i3 + 1] = ((i / count) - 0.5) * 9.0;
+        positions1[i3 + 2] = Math.sin(theta) * r;
+
+        // Shape 2: Undulating Wave Grid (Scroll)
+        const u = (i % 55) / 55 - 0.5;
+        const v = Math.floor(i / 55) / 55 - 0.5;
+        positions2[i3] = u * 13;
+        positions2[i3 + 1] = Math.sin(u * 2.8) * Math.cos(v * 2.8) * 1.6;
+        positions2[i3 + 2] = v * 13;
+
+        // Brand color gradient
+        const mixedColor = color1.clone().lerp(color2, i / count);
+        colors[i3] = mixedColor.r;
+        colors[i3 + 1] = mixedColor.g;
+        colors[i3 + 2] = mixedColor.b;
+
+        // Initial positions
+        currentPositions[i3] = positions1[i3];
+        currentPositions[i3 + 1] = positions1[i3 + 1];
+        currentPositions[i3 + 2] = positions1[i3 + 2];
+      }
+
+      const geometry = new THREE.BufferGeometry();
+      geometry.setAttribute('position', new THREE.BufferAttribute(currentPositions, 3));
+      geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+
+      // Circular particle texture generator
+      const pCanvas = document.createElement('canvas');
+      pCanvas.width = 16; pCanvas.height = 16;
+      const pCtx = pCanvas.getContext('2d');
+      const grad = pCtx.createRadialGradient(8, 8, 0, 8, 8, 8);
+      grad.addColorStop(0, 'rgba(255, 255, 255, 1)');
+      grad.addColorStop(1, 'rgba(255, 255, 255, 0)');
+      pCtx.fillStyle = grad;
+      pCtx.fillRect(0, 0, 16, 16);
+      const texture = new THREE.CanvasTexture(pCanvas);
+
+      const material = new THREE.PointsMaterial({
+        size: 0.12,
+        vertexColors: true,
+        transparent: true,
+        opacity: 0.85,
+        map: texture,
+        depthWrite: false,
+        blending: THREE.AdditiveBlending
+      });
+
+      const points = new THREE.Points(geometry, material);
+      scene.add(points);
+
+      // Interactive mouse variables
+      let mouseX = 0, mouseY = 0;
+      let targetMouseX = 0, targetMouseY = 0;
+      window.addEventListener('mousemove', (e) => {
+        mouseX = (e.clientX / window.innerWidth - 0.5) * 2;
+        mouseY = -(e.clientY / window.innerHeight - 0.5) * 2;
+      });
+
+      let morphT = 0;
+      const clock = new THREE.Clock();
+
+      function animate() {
+        const time = clock.getElapsedTime();
+
+        // Map scroll percentage to morph factor
+        const scrollY = window.scrollY;
+        const maxScrollHeight = window.innerHeight;
+        const scrollT = Math.min(1, Math.max(0, scrollY / maxScrollHeight));
+        morphT += (scrollT - morphT) * 0.08;
+
+        // Smooth mouse parallax
+        targetMouseX += (mouseX - targetMouseX) * 0.05;
+        targetMouseY += (mouseY - targetMouseY) * 0.05;
+
+        points.rotation.y = time * 0.035 + targetMouseX * 0.45;
+        points.rotation.x = time * 0.01 + targetMouseY * 0.25;
+
+        const posAttr = geometry.attributes.position.array;
+        for (let i = 0; i < count; i++) {
+          const i3 = i * 3;
+          const x1 = positions1[i3], y1 = positions1[i3+1], z1 = positions1[i3+2];
+          const x2 = positions2[i3], y2 = positions2[i3+1], z2 = positions2[i3+2];
+
+          const tx = x1 * (1 - morphT) + x2 * morphT;
+          const ty = y1 * (1 - morphT) + y2 * morphT;
+          const tz = z1 * (1 - morphT) + z2 * morphT;
+
+          // Continuous micro-wiggles
+          const wave = Math.sin(time * 0.75 + i * 0.05) * 0.04;
+
+          posAttr[i3] = tx;
+          posAttr[i3 + 1] = ty + wave;
+          posAttr[i3 + 2] = tz;
+        }
+        geometry.attributes.position.needsUpdate = true;
+
+        renderer.render(scene, camera);
+        requestAnimationFrame(animate);
+      }
+      animate();
+
+      window.addEventListener('resize', () => {
+        const w = canvas.clientWidth || window.innerWidth;
+        const h = canvas.clientHeight || window.innerHeight;
+        camera.aspect = w / h;
+        camera.updateProjectionMatrix();
+        renderer.setSize(w, h);
+      });
+    }
+
     // Only run if GSAP is available
     if (typeof gsap !== 'undefined') {
-      
-      // 1. HERO LOAD ANIMATIONS (Reveal left texts and right graphics with premium delays)
+      // ════ HERO LOAD ANIMATIONS ════
       const heroTl = gsap.timeline();
       
-      // Set initial state
       gsap.set('.hero-reveal-item', { opacity: 0, y: 30 });
       gsap.set('.title-line-text', { translateY: '100%', opacity: 0 });
       gsap.set('#hero-visual-block .absolute', { opacity: 0, scale: 0.9 });
@@ -761,7 +899,7 @@
         ease: 'back.out(1.2)'
       }, "-=0.7");
 
-      // 2. HERO MOUSE PARALLAX EFFECT (Dashboard + Floating Particles)
+      // ════ HERO MOUSE PARALLAX EFFECT ════
       const heroSection = document.getElementById('home');
       if (heroSection) {
         heroSection.addEventListener('mousemove', e => {
@@ -769,24 +907,10 @@
           const moveX = (e.clientX - width / 2) / width;
           const moveY = (e.clientY - height / 2) / height;
           
-          gsap.to('.hero-parallax-1', {
-            x: moveX * 22,
-            y: moveY * 22,
-            duration: 0.7,
-            ease: 'power2.out'
-          });
-          gsap.to('.hero-parallax-2', {
-            x: moveX * -32,
-            y: moveY * -32,
-            duration: 0.7,
-            ease: 'power2.out'
-          });
-          gsap.to('.hero-parallax-3', {
-            x: moveX * 38,
-            y: moveY * -12,
-            duration: 0.7,
-            ease: 'power2.out'
-          });
+          gsap.to('.hero-parallax-1', { x: moveX * 22, y: moveY * 22, duration: 0.7, ease: 'power2.out' });
+          gsap.to('.hero-parallax-2', { x: moveX * -32, y: moveY * -32, duration: 0.7, ease: 'power2.out' });
+          gsap.to('.hero-parallax-3', { x: moveX * 38, y: moveY * -12, duration: 0.7, ease: 'power2.out' });
+          
           // Parallax for decorative background particles
           gsap.to('.anim-particle-1', { x: moveX * 45, y: moveY * 45, duration: 0.9, ease: 'power1.out' });
           gsap.to('.anim-particle-2', { x: moveX * -55, y: moveY * 55, duration: 0.9, ease: 'power1.out' });
@@ -809,7 +933,7 @@
         });
       }
 
-      // 3. SPOTLIGHT HOVER EFFECTS
+      // ════ SPOTLIGHT HOVER EFFECTS ════
       const updateSpotlight = (e, card) => {
         const rect = card.getBoundingClientRect();
         const x = e.clientX - rect.left;
@@ -822,8 +946,23 @@
         card.addEventListener('mousemove', e => updateSpotlight(e, card));
       });
 
-      // 4. STATS SECTION (ScrollTrigger count up)
+      // ════ STATS SECTION COUNT-UP & REVEAL ════
       if (typeof ScrollTrigger !== 'undefined') {
+        // Staggered fade and 3D tilt reveal for stat column cards
+        gsap.from('#stats-section .text-center', {
+          y: 45,
+          scale: 0.9,
+          rotationX: 15,
+          opacity: 0,
+          duration: 1.0,
+          stagger: 0.12,
+          ease: 'power3.out',
+          scrollTrigger: {
+            trigger: '#stats-section',
+            start: 'top 85%'
+          }
+        });
+
         gsap.utils.toArray('.stat-count').forEach(stat => {
           const target = parseFloat(stat.dataset.target);
           const decimals = parseInt(stat.dataset.decimals) || 0;
@@ -844,7 +983,7 @@
           });
         });
 
-        // 5. PROCESS TIMELINE CONNECTING LINE DRAW
+        // ════ PROCESS TIMELINE DRAWING ════
         const connector = document.getElementById('process-connector-line');
         if (connector) {
           gsap.fromTo(connector, {
@@ -854,15 +993,135 @@
             scaleX: 1,
             scrollTrigger: {
               trigger: '#process-timeline',
-              start: 'top 80%',
+              start: 'top 75%',
               end: 'bottom 60%',
               scrub: 1.2
             },
             ease: 'none'
           });
         }
+
+        // Sequential step lighting
+        document.querySelectorAll('.process-step-card').forEach((card, idx) => {
+          gsap.from(card, {
+            y: 40,
+            opacity: 0.15,
+            scale: 0.94,
+            duration: 0.8,
+            scrollTrigger: {
+              trigger: card,
+              start: 'top 80%',
+              toggleActions: 'play none none reverse'
+            },
+            ease: 'power2.out',
+            onStart: () => {
+              // Pulse the step number/icon
+              gsap.to(card.querySelector('.process-icon'), {
+                borderColor: '#16A34A',
+                backgroundColor: 'rgba(22, 163, 74, 0.2)',
+                scale: 1.1,
+                duration: 0.4,
+                yoyo: true,
+                repeat: 1
+              });
+            }
+          });
+        });
+
+        // ════ PORTFOLIO STAGGERED GRID REVEAL ════
+        gsap.from('#portfolio-section .gs-stagger-item', {
+          y: 80,
+          skewY: 2.5,
+          opacity: 0,
+          duration: 1.1,
+          stagger: 0.12,
+          ease: 'power4.out',
+          scrollTrigger: {
+            trigger: '#portfolio-section',
+            start: 'top 80%'
+          }
+        });
+
+        // ════ TESTIMONIALS VELOCITY SKEW EFFECT ════
+        let velocity = 0;
+        let lastScrollY = window.scrollY;
+        let skewTimeOut;
+        window.addEventListener('scroll', () => {
+          const currentY = window.scrollY;
+          velocity = currentY - lastScrollY;
+          lastScrollY = currentY;
+
+          const maxSkew = 12;
+          const skewVal = Math.min(maxSkew, Math.max(-maxSkew, velocity * 0.075));
+
+          gsap.to('.marquee-card', {
+            skewX: skewVal,
+            duration: 0.35,
+            ease: 'power1.out',
+            overwrite: 'auto'
+          });
+
+          // Reset skew after scroll stops
+          clearTimeout(skewTimeOut);
+          skewTimeOut = setTimeout(() => {
+            gsap.to('.marquee-card', {
+              skewX: 0,
+              duration: 0.45,
+              ease: 'power2.out'
+            });
+          }, 80);
+        });
+
+        // ════ BLOG GRID REVEALS ════
+        gsap.from('#blog-section .gs-stagger-item', {
+          scale: 0.94,
+          y: 40,
+          opacity: 0,
+          duration: 0.9,
+          stagger: 0.1,
+          ease: 'power2.out',
+          scrollTrigger: {
+            trigger: '#blog-section',
+            start: 'top 85%'
+          }
+        });
       }
 
+      // ════ ROI CALCULATOR HOLOGRAPHIC REFLECTION ════
+      const roiPanel = document.querySelector('#roi-section .lg:col-span-2');
+      if (roiPanel) {
+        roiPanel.addEventListener('mousemove', (e) => {
+          const rect = roiPanel.getBoundingClientRect();
+          const x = e.clientX - rect.left;
+          const y = e.clientY - rect.top;
+          const xPct = (x / rect.width) * 100;
+          const yPct = (y / rect.height) * 100;
+          roiPanel.style.background = `linear-gradient(${135 + xPct*0.18}deg, rgba(22, 163, 74, 0.18) 0%, rgba(6, 182, 212, 0.22) ${xPct}%, rgba(22, 163, 74, 0.1) 100%)`;
+        });
+        roiPanel.addEventListener('mouseleave', () => {
+          roiPanel.style.background = '';
+        });
+      }
+
+      // ════ CTA BUTTON GLOW AURA TRACKER ════
+      const ctaSection = document.getElementById('cta-section');
+      if (ctaSection) {
+        const glowAura = document.createElement('div');
+        glowAura.style.cssText = 'position:absolute; width:450px; height:450px; border-radius:50%; background:radial-gradient(circle, rgba(22,163,74,0.1) 0%, rgba(22,163,74,0) 70%); pointer-events:none; z-index:0; transition: transform 0.1s ease-out; opacity:0;';
+        ctaSection.insertBefore(glowAura, ctaSection.firstChild);
+
+        ctaSection.addEventListener('mousemove', (e) => {
+          const rect = ctaSection.getBoundingClientRect();
+          const x = e.clientX - rect.left - 225;
+          const y = e.clientY - rect.top - 225;
+          glowAura.style.opacity = '1';
+          glowAura.style.transform = `translate3d(${x}px, ${y}px, 0)`;
+        });
+
+        ctaSection.addEventListener('mouseleave', () => {
+          glowAura.style.opacity = '0';
+        });
+      }
     }
   });
 </script>

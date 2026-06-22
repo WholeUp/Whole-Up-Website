@@ -1,6 +1,7 @@
 <!-- PAGE HERO -->
-<section class="page-hero bg-cream px-6 border-b border-black/5">
-  <div class="max-w-7xl mx-auto text-center gs-reveal">
+<section class="page-hero bg-cream px-6 border-b border-black/5 relative overflow-hidden">
+  <canvas id="services-3d-canvas" class="absolute inset-0 w-full h-full pointer-events-none z-0"></canvas>
+  <div class="max-w-7xl mx-auto text-center gs-reveal relative z-10">
     <p class="text-xs font-bold tracking-[0.3em] uppercase text-primary mb-4">Full-Service Agency</p>
     <h1 class="text-5xl md:text-7xl font-black uppercase tracking-widest text-dark mb-6">Our <span class="text-primary">Services.</span></h1>
     <p class="text-dark/60 font-medium text-xl max-w-3xl mx-auto">Get results-driven digital marketing services in Surat and across India. We deliver custom strategy, execution, and ROI. All under one roof.</p>
@@ -94,3 +95,115 @@
     color: var(--hover-glow);
   }
 </style>
+
+<script>
+  window.addEventListener('DOMContentLoaded', () => {
+    // ════ 3D WEBGL ROTATING MESH (Three.js) ════
+    const canvas = document.getElementById('services-3d-canvas');
+    if (canvas && typeof THREE !== 'undefined') {
+      const scene = new THREE.Scene();
+      const width = canvas.clientWidth || window.innerWidth;
+      const height = canvas.clientHeight || window.innerHeight;
+      const camera = new THREE.PerspectiveCamera(55, width / height, 0.1, 100);
+      camera.position.z = 4.5;
+
+      const renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true, antialias: true });
+      renderer.setSize(width, height);
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+      // Torus Knot points mesh (plexus feel)
+      const geometry = new THREE.TorusKnotGeometry(1.5, 0.45, 120, 18);
+      
+      const pCanvas = document.createElement('canvas');
+      pCanvas.width = 16; pCanvas.height = 16;
+      const pCtx = pCanvas.getContext('2d');
+      const grad = pCtx.createRadialGradient(8, 8, 0, 8, 8, 8);
+      grad.addColorStop(0, 'rgba(255, 255, 255, 1)');
+      grad.addColorStop(1, 'rgba(255, 255, 255, 0)');
+      pCtx.fillStyle = grad;
+      pCtx.fillRect(0, 0, 16, 16);
+      const texture = new THREE.CanvasTexture(pCanvas);
+
+      const material = new THREE.PointsMaterial({
+        color: '#16A34A',
+        size: 0.04,
+        transparent: true,
+        opacity: 0.22,
+        map: texture,
+        depthWrite: false
+      });
+
+      const torusKnot = new THREE.Points(geometry, material);
+      scene.add(torusKnot);
+
+      // Mouse Parallax camera
+      let mouseX = 0, mouseY = 0;
+      window.addEventListener('mousemove', (e) => {
+        mouseX = (e.clientX / window.innerWidth - 0.5) * 1.2;
+        mouseY = -(e.clientY / window.innerHeight - 0.5) * 1.2;
+      });
+
+      const clock = new THREE.Clock();
+      function tick() {
+        const elapsed = clock.getElapsedTime();
+
+        // Slow mesh rotation
+        torusKnot.rotation.y = elapsed * 0.12;
+        torusKnot.rotation.x = elapsed * 0.06;
+
+        // Camera follow
+        camera.position.x += (mouseX - camera.position.x) * 0.05;
+        camera.position.y += (mouseY - camera.position.y) * 0.05;
+        camera.lookAt(scene.position);
+
+        renderer.render(scene, camera);
+        requestAnimationFrame(tick);
+      }
+      tick();
+
+      window.addEventListener('resize', () => {
+        const w = canvas.clientWidth || window.innerWidth;
+        const h = canvas.clientHeight || window.innerHeight;
+        camera.aspect = w / h;
+        camera.updateProjectionMatrix();
+        renderer.setSize(w, h);
+      });
+    }
+
+    // Only run if GSAP is available
+    if (typeof gsap !== 'undefined') {
+      // ════ STAGGERED ALTERNATING SERVICES CARDS ENTRANCE ════
+      const cards = gsap.utils.toArray('.gs-stagger-parent .gs-stagger-item');
+      
+      cards.forEach((card, idx) => {
+        // Alternating entry: left vs right translations
+        const xOffset = idx % 2 === 0 ? -60 : 60;
+        
+        gsap.from(card, {
+          opacity: 0,
+          x: xOffset,
+          scale: 0.96,
+          duration: 1.1,
+          ease: 'power3.out',
+          scrollTrigger: {
+            trigger: card,
+            start: 'top 85%'
+          }
+        });
+      });
+
+      // ════ MOUSE INTERACTIVE spotlight card glows ════
+      const updateGlow = (e, card) => {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        card.style.setProperty('--mouse-x', `${x}px`);
+        card.style.setProperty('--mouse-y', `${y}px`);
+      };
+
+      document.querySelectorAll('.glass-card-glow').forEach(card => {
+        card.addEventListener('mousemove', e => updateGlow(e, card));
+      });
+    }
+  });
+</script>

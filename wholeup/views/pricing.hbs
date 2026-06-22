@@ -1,6 +1,7 @@
 <!-- HERO -->
-<section class="page-hero bg-cream px-6 border-b border-black/5">
-  <div class="max-w-7xl mx-auto text-center gs-reveal">
+<section class="page-hero bg-cream px-6 border-b border-black/5 relative overflow-hidden">
+  <canvas id="pricing-3d-canvas" class="absolute inset-0 w-full h-full pointer-events-none z-0"></canvas>
+  <div class="max-w-7xl mx-auto text-center gs-reveal relative z-10">
     <p class="text-xs font-bold tracking-[0.3em] uppercase text-primary mb-4">Transparent Pricing</p>
     <h1 class="text-5xl md:text-7xl font-black uppercase tracking-widest text-dark mb-6">Simple, Honest <span class="text-primary">Pricing.</span></h1>
     <p class="text-dark/60 font-medium text-xl max-w-3xl mx-auto">No hidden fees. No lock-in contracts. Pick the plan that fits your stage of growth — and upgrade any time.</p>
@@ -173,14 +174,115 @@
   <div class="max-w-3xl mx-auto text-center gs-reveal">
     <h2 class="text-4xl font-black uppercase tracking-widest text-dark mb-4">Pricing Questions?</h2>
     <p class="text-dark/60 font-medium mb-8">We've answered the most common ones in our FAQ.</p>
-    <a href="/faq" class="inline-flex items-center gap-2 border-2 border-dark text-dark px-8 py-4 rounded-xl font-bold uppercase tracking-widest text-sm hover:bg-dark hover:text-white transition magnetic-btn">
-      View FAQ <i class="fas fa-arrow-right"></i>
     </a>
   </div>
 </section>
 
 <script>
   let yearlyBilling = false;
+
+  window.addEventListener('DOMContentLoaded', () => {
+    // ════ 3D WEBGL UNDULATING WAVE GRID (Three.js) ════
+    const canvas = document.getElementById('pricing-3d-canvas');
+    if (canvas && typeof THREE !== 'undefined') {
+      const scene = new THREE.Scene();
+      const width = canvas.clientWidth || window.innerWidth;
+      const height = canvas.clientHeight || window.innerHeight;
+      const camera = new THREE.PerspectiveCamera(50, width / height, 0.1, 100);
+      camera.position.set(0, 2, 6);
+
+      const renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true, antialias: true });
+      renderer.setSize(width, height);
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+      // Wireframe plane geometry
+      const geometry = new THREE.PlaneGeometry(16, 16, 22, 22);
+      const material = new THREE.MeshBasicMaterial({
+        color: '#16A34A',
+        wireframe: true,
+        transparent: true,
+        opacity: 0.08
+      });
+
+      const plane = new THREE.Mesh(geometry, material);
+      plane.rotation.x = -Math.PI / 2; // Flat on the floor
+      plane.position.y = -1;
+      scene.add(plane);
+
+      // Mouse position tracker
+      let mouseX = 0, mouseY = 0;
+      window.addEventListener('mousemove', (e) => {
+        mouseX = (e.clientX / window.innerWidth - 0.5) * 1.5;
+        mouseY = -(e.clientY / window.innerHeight - 0.5) * 1.0;
+      });
+
+      const clock = new THREE.Clock();
+      function tick() {
+        const time = clock.getElapsedTime();
+
+        // Animate grid plane vertices
+        const posAttr = geometry.attributes.position;
+        const count = posAttr.count;
+
+        for (let i = 0; i < count; i++) {
+          const x = posAttr.getX(i);
+          const y = posAttr.getY(i);
+          
+          // Generate wave noise based on coordinates and time
+          const z = Math.sin(x * 0.4 + time * 1.0) * Math.cos(y * 0.4 + time * 0.8) * 0.45;
+          posAttr.setZ(i, z);
+        }
+        posAttr.needsUpdate = true;
+
+        // Camera movements
+        camera.position.x += (mouseX - camera.position.x) * 0.05;
+        camera.position.y += (mouseY + 2 - camera.position.y) * 0.05;
+        camera.lookAt(new THREE.Vector3(0, 0, -2));
+
+        renderer.render(scene, camera);
+        requestAnimationFrame(tick);
+      }
+      tick();
+
+      window.addEventListener('resize', () => {
+        const w = canvas.clientWidth || window.innerWidth;
+        const h = canvas.clientHeight || window.innerHeight;
+        camera.aspect = w / h;
+        camera.updateProjectionMatrix();
+        renderer.setSize(w, h);
+      });
+    }
+
+    // Only run if GSAP is available
+    if (typeof gsap !== 'undefined') {
+      // ════ STAGGERED PRICING CARDS REVEAL ════
+      gsap.from('#marketing-pricing-grid > div', {
+        y: 65,
+        opacity: 0,
+        scale: 0.96,
+        duration: 1.1,
+        stagger: 0.15,
+        ease: 'power3.out',
+        scrollTrigger: {
+          trigger: '#marketing-pricing-grid',
+          start: 'top 85%'
+        }
+      });
+
+      // ════ MOUSE INTERACTIVE spotlight card glows ════
+      const updateGlow = (e, card) => {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        card.style.setProperty('--mouse-x', `${x}px`);
+        card.style.setProperty('--mouse-y', `${y}px`);
+      };
+
+      document.querySelectorAll('#marketing-pricing-grid > div, #web-pricing-grid > div').forEach(card => {
+        card.addEventListener('mousemove', e => updateGlow(e, card));
+      });
+    }
+  });
 
   function switchTab(tab) {
     const tabMarketing = document.getElementById('tab-marketing');
@@ -190,39 +292,76 @@
     const billingToggle = document.getElementById('billing-toggle-section');
 
     if (tab === 'marketing') {
+      // Toggle button classes
       tabMarketing.className = 'px-6 py-3 rounded-xl text-xs font-bold uppercase tracking-widest bg-primary text-white shadow-md transition-all duration-300 cursor-pointer';
       tabWeb.className = 'px-6 py-3 rounded-xl text-xs font-bold uppercase tracking-widest text-dark/50 hover:text-dark transition-all duration-300 cursor-pointer';
-      gridMarketing.classList.remove('hidden');
-      gridWeb.classList.add('hidden');
-      billingToggle.classList.remove('hidden');
+      
+      // GSAP grid transition
+      if (typeof gsap !== 'undefined') {
+        gsap.to(gridWeb, { opacity: 0, y: 15, duration: 0.25, onComplete: () => {
+          gridWeb.classList.add('hidden');
+          gridMarketing.classList.remove('hidden');
+          billingToggle.classList.remove('hidden');
+          gsap.fromTo(gridMarketing, { opacity: 0, y: -15 }, { opacity: 1, y: 0, duration: 0.45, ease: 'power2.out' });
+          gsap.fromTo(billingToggle, { opacity: 0 }, { opacity: 1, duration: 0.3 });
+        }});
+      } else {
+        gridMarketing.classList.remove('hidden');
+        gridWeb.classList.add('hidden');
+        billingToggle.classList.remove('hidden');
+      }
     } else {
       tabMarketing.className = 'px-6 py-3 rounded-xl text-xs font-bold uppercase tracking-widest text-dark/50 hover:text-dark transition-all duration-300 cursor-pointer';
       tabWeb.className = 'px-6 py-3 rounded-xl text-xs font-bold uppercase tracking-widest bg-primary text-white shadow-md transition-all duration-300 cursor-pointer';
-      gridMarketing.classList.add('hidden');
-      gridWeb.classList.remove('hidden');
-      billingToggle.classList.add('hidden');
+      
+      if (typeof gsap !== 'undefined') {
+        gsap.to(gridMarketing, { opacity: 0, y: 15, duration: 0.25 });
+        gsap.to(billingToggle, { opacity: 0, duration: 0.2, onComplete: () => {
+          gridMarketing.classList.add('hidden');
+          billingToggle.classList.add('hidden');
+          gridWeb.classList.remove('hidden');
+          gsap.fromTo(gridWeb, { opacity: 0, y: -15 }, { opacity: 1, y: 0, duration: 0.45, ease: 'power2.out' });
+        }});
+      } else {
+        gridMarketing.classList.add('hidden');
+        gridWeb.classList.remove('hidden');
+        billingToggle.classList.add('hidden');
+      }
     }
   }
 
   function toggleBilling() {
     yearlyBilling = !yearlyBilling;
     
-    // Animate Switch Toggle
     const dot = document.getElementById('switch-dot');
     const bg = document.getElementById('billing-switch');
     const labelMonthly = document.getElementById('label-monthly');
     const labelYearly = document.getElementById('label-yearly');
 
-    if (yearlyBilling) {
-      dot.style.transform = 'translateX(24px)';
-      bg.classList.replace('bg-black/10', 'bg-primary/20');
-      labelMonthly.classList.replace('text-dark/70', 'text-dark/45');
-      labelYearly.classList.replace('text-dark/45', 'text-dark/70');
+    // Bouncy spring toggle animation
+    if (typeof gsap !== 'undefined') {
+      gsap.to(dot, {
+        x: yearlyBilling ? 24 : 0,
+        duration: 0.4,
+        ease: 'back.out(1.8)'
+      });
+      
+      if (yearlyBilling) {
+        bg.classList.replace('bg-black/10', 'bg-primary/20');
+        labelMonthly.classList.replace('text-dark/70', 'text-dark/45');
+        labelYearly.classList.replace('text-dark/45', 'text-dark/70');
+      } else {
+        bg.classList.replace('bg-primary/20', 'bg-black/10');
+        labelMonthly.classList.replace('text-dark/45', 'text-dark/70');
+        labelYearly.classList.replace('text-dark/70', 'text-dark/45');
+      }
     } else {
-      dot.style.transform = 'translateX(0px)';
-      bg.classList.replace('bg-primary/20', 'bg-black/10');
-      labelMonthly.classList.replace('text-dark/45', 'text-dark/70');
-      labelYearly.classList.replace('text-dark/70', 'text-dark/45');
+      dot.style.transform = yearlyBilling ? 'translateX(24px)' : 'translateX(0px)';
+      if (yearlyBilling) {
+        bg.classList.replace('bg-black/10', 'bg-primary/20');
+      } else {
+        bg.classList.replace('bg-primary/20', 'bg-black/10');
+      }
     }
 
     // Update prices with smooth fade effect
@@ -234,22 +373,21 @@
       const yearly = el.dataset.yearly;
       const targetVal = yearlyBilling ? yearly : monthly;
 
-      // Simple smooth text transition
       if (typeof gsap !== 'undefined') {
         gsap.to(el, {
           opacity: 0,
+          scale: 0.95,
           y: -5,
           duration: 0.15,
           onComplete: () => {
             el.innerText = '₹' + targetVal;
-            gsap.to(el, { opacity: 1, y: 0, duration: 0.2 });
+            gsap.to(el, { opacity: 1, scale: 1, y: 0, duration: 0.25, ease: 'back.out(1.2)' });
           }
         });
       } else {
         el.innerText = '₹' + targetVal;
       }
 
-      // Show/Hide Billed Annually note
       if (yearlyBilling) {
         notes[index].classList.replace('opacity-0', 'opacity-100');
       } else {

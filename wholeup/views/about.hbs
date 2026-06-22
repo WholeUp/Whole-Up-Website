@@ -1,6 +1,7 @@
 <!-- HERO -->
 <section class="page-hero bg-cream px-6 border-b border-black/5 relative overflow-hidden">
   <div class="absolute inset-0 opacity-10 bg-grid pointer-events-none"></div>
+  <canvas id="about-3d-canvas" class="absolute inset-0 w-full h-full pointer-events-none z-0"></canvas>
   <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-16 items-center relative z-10">
     <div class="gs-reveal">
       <p class="text-xs font-bold tracking-[0.3em] uppercase text-primary mb-4">Who We Are</p>
@@ -91,7 +92,7 @@
 </section>
 
 <!-- METHODOLOGY / WORKFLOW -->
-<section class="py-24 bg-white px-6">
+<section id="methodology-section" class="py-24 bg-white px-6">
   <div class="max-w-7xl mx-auto">
     <div class="text-center mb-16 gs-reveal">
       <p class="text-xs font-bold tracking-[0.3em] uppercase text-primary mb-4">How We Operate</p>
@@ -251,10 +252,129 @@
 </style>
 
 <script>
-  // Dynamic Stats Counting Animation
   window.addEventListener('DOMContentLoaded', () => {
-    // GSAP ScrollTrigger to count stats when in view
-    if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+    // ════ 3D WEBGL DRIFTING CRYSTALS BACKGROUND (Three.js) ════
+    const canvas = document.getElementById('about-3d-canvas');
+    if (canvas && typeof THREE !== 'undefined') {
+      const scene = new THREE.Scene();
+      const width = canvas.clientWidth || window.innerWidth;
+      const height = canvas.clientHeight || window.innerHeight;
+      const camera = new THREE.PerspectiveCamera(50, width / height, 0.1, 100);
+      camera.position.z = 10;
+
+      const renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true, antialias: true });
+      renderer.setSize(width, height);
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+      // Create a few premium shiny crystals (Octahedron & Icosahedron)
+      const crystalsGroup = new THREE.Group();
+      scene.add(crystalsGroup);
+
+      const geometries = [
+        new THREE.OctahedronGeometry(1.2, 0),
+        new THREE.IcosahedronGeometry(0.9, 0),
+        new THREE.TetrahedronGeometry(1.0, 0)
+      ];
+
+      const colors = ['#16A34A', '#2563EB', '#06B6D4', '#9333EA'];
+      const meshes = [];
+
+      // Spawn 12 drifting crystals in space
+      for (let i = 0; i < 12; i++) {
+        const geo = geometries[i % geometries.length];
+        const color = new THREE.Color(colors[i % colors.length]);
+        
+        // Flat shading for crystal faceted look
+        const material = new THREE.MeshPhongMaterial({
+          color: color,
+          shininess: 90,
+          flatShading: true,
+          transparent: true,
+          opacity: 0.18,
+          wireframe: false
+        });
+
+        const mesh = new THREE.Mesh(geo, material);
+        
+        // Distribute randomly
+        mesh.position.x = (Math.random() - 0.5) * 16;
+        mesh.position.y = (Math.random() - 0.5) * 10;
+        mesh.position.z = (Math.random() - 0.5) * 5;
+
+        // Random rotation speed and direction
+        mesh.userData = {
+          rotX: (Math.random() - 0.5) * 0.015,
+          rotY: (Math.random() - 0.5) * 0.015,
+          driftX: (Math.random() - 0.5) * 0.004,
+          driftY: (Math.random() - 0.5) * 0.004
+        };
+
+        crystalsGroup.add(mesh);
+        meshes.push(mesh);
+      }
+
+      // Add lights
+      const dirLight1 = new THREE.DirectionalLight('#ffffff', 0.8);
+      dirLight1.position.set(5, 5, 5);
+      scene.add(dirLight1);
+
+      const dirLight2 = new THREE.DirectionalLight('#06B6D4', 0.5);
+      dirLight2.position.set(-5, -5, 5);
+      scene.add(dirLight2);
+
+      const ambientLight = new THREE.AmbientLight('#ffffff', 0.4);
+      scene.add(ambientLight);
+
+      // Mouse Parallax movement
+      let mouseX = 0, mouseY = 0;
+      window.addEventListener('mousemove', (e) => {
+        mouseX = (e.clientX / window.innerWidth - 0.5) * 1.5;
+        mouseY = -(e.clientY / window.innerHeight - 0.5) * 1.5;
+      });
+
+      const clock = new THREE.Clock();
+      function tick() {
+        const time = clock.getElapsedTime();
+
+        // Slow parallax camera movement
+        camera.position.x += (mouseX - camera.position.x) * 0.05;
+        camera.position.y += (mouseY - camera.position.y) * 0.05;
+        camera.lookAt(scene.position);
+
+        // Animate each crystal drift & rotate
+        meshes.forEach(mesh => {
+          mesh.rotation.x += mesh.userData.rotX;
+          mesh.rotation.y += mesh.userData.rotY;
+
+          // Drift positions slightly
+          mesh.position.x += mesh.userData.driftX;
+          mesh.position.y += mesh.userData.driftY;
+
+          // Boundary checks to loop positions
+          if (Math.abs(mesh.position.x) > 9) mesh.position.x = -Math.sign(mesh.position.x) * 8.5;
+          if (Math.abs(mesh.position.y) > 6) mesh.position.y = -Math.sign(mesh.position.y) * 5.5;
+
+          // Subtle floating wiggle
+          mesh.position.y += Math.sin(time + mesh.position.x) * 0.001;
+        });
+
+        renderer.render(scene, camera);
+        requestAnimationFrame(tick);
+      }
+      tick();
+
+      window.addEventListener('resize', () => {
+        const w = canvas.clientWidth || window.innerWidth;
+        const h = canvas.clientHeight || window.innerHeight;
+        camera.aspect = w / h;
+        camera.updateProjectionMatrix();
+        renderer.setSize(w, h);
+      });
+    }
+
+    // Only run if GSAP is loaded
+    if (typeof gsap !== 'undefined') {
+      // ════ STATS COUNTING ANIMATION ════
       const stats = document.querySelectorAll('.count-stat');
       stats.forEach(stat => {
         const val = parseFloat(stat.getAttribute('data-val'));
@@ -264,7 +384,7 @@
         gsap.to(targetObj, {
           value: val,
           duration: 2.2,
-          ease: 'power2.out',
+          ease: 'power3.out',
           scrollTrigger: {
             trigger: stat,
             start: 'top 90%',
@@ -279,11 +399,50 @@
           }
         });
       });
-    } else {
-      // Fallback
-      document.querySelectorAll('.count-stat').forEach(stat => {
-        const val = stat.getAttribute('data-val');
-        stat.textContent = val + (val.includes('.') ? 'x' : (val === '3' ? 'yrs' : (val === '78' ? '%' : '+')));
+
+      // ════ VALUES CARDS 3D REVEAL ════
+      gsap.from('.gs-stagger-parent .gs-stagger-item', {
+        y: 60,
+        rotationX: 10,
+        opacity: 0,
+        scale: 0.95,
+        duration: 1.0,
+        stagger: 0.15,
+        ease: 'power3.out',
+        scrollTrigger: {
+          trigger: '.gs-stagger-parent',
+          start: 'top 85%'
+        }
+      });
+
+      // ════ METHODOLOGY FOLD-IN ANIMATION ════
+      // Select methodology section children and animate them to reveal like a folding card
+      gsap.from('#methodology-section .gs-stagger-item', {
+        opacity: 0,
+        rotationY: -45,
+        transformOrigin: 'left center',
+        x: -40,
+        duration: 1.2,
+        stagger: 0.18,
+        ease: 'power4.out',
+        scrollTrigger: {
+          trigger: '#methodology-section',
+          start: 'top 80%'
+        }
+      });
+
+      // ════ ROLE CARDS FLY-IN ════
+      gsap.from('.py-24.bg-cream .gs-stagger-item', {
+        y: 40,
+        opacity: 0,
+        scale: 0.96,
+        duration: 0.85,
+        stagger: 0.1,
+        ease: 'back.out(1.4)',
+        scrollTrigger: {
+          trigger: '.py-24.bg-cream',
+          start: 'top 80%'
+        }
       });
     }
   });

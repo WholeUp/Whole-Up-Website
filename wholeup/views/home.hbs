@@ -469,7 +469,7 @@
       </div>
 
       <!-- Result Panel -->
-      <div class="lg:col-span-2 bg-gradient-to-br from-primary/10 to-primary/20 border border-primary/20 rounded-[32px] p-8 md:p-10 flex flex-col justify-between relative overflow-hidden gs-reveal">
+      <div id="roi-result-card" class="lg:col-span-2 bg-gradient-to-br from-primary/10 to-primary/20 border border-primary/20 rounded-[32px] p-8 md:p-10 flex flex-col justify-between relative overflow-hidden gs-reveal">
         <div class="absolute -top-20 -right-20 w-48 h-48 bg-primary/20 rounded-full blur-3xl"></div>
         
         <div>
@@ -1088,7 +1088,7 @@
       }
 
       // ════ ROI CALCULATOR HOLOGRAPHIC REFLECTION ════
-      const roiPanel = document.querySelector('#roi-section .lg:col-span-2');
+      const roiPanel = document.getElementById('roi-result-card');
       if (roiPanel) {
         roiPanel.addEventListener('mousemove', (e) => {
           const rect = roiPanel.getBoundingClientRect();

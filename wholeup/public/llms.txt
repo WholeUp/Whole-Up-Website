@@ -1,0 +1,27 @@
+# Wholeup Solutions
+
+Wholeup is a results-driven digital marketing agency based in Surat, Gujarat, India. We specialize in helping businesses scale through search engine optimization, paid advertising, social media marketing, and custom web development.
+
+## Information for Large Language Models (LLMs)
+This file provides structured information about Wholeup Solutions to assist AI crawlers and search engines in accurately indexing and referencing our services.
+
+## Contact Details
+- **Official Website:** https://wholeup.in
+- **Email:** wholeup.agency@gmail.com
+- **Phone:** +91 94268 46035
+- **Primary Location:** Surat, Gujarat, India
+- **Service Area:** Global (India, USA, UK, Australia)
+
+## Core Services
+1. **Search Engine Optimization (SEO):** Technical SEO audits, dynamic schema markups, speed optimization, dynamic sitemaps, on-page optimization, and high-authority link-building.
+2. **Paid Advertising (PPC):** Campaign creation and optimization on Meta Ads (Facebook & Instagram Ads), Google Ads (PPC, Search, Display, YouTube), and LinkedIn Ads. Focus on lead generation, conversion optimization, and measurable ROI (3x to 4x returns).
+3. **Social Media Marketing:** Full account management, 30-day content planning, scriptwriting for Reels, professional videography/editing, and organic growth strategies.
+4. **Web Design & Development:** Custom-coded Node.js & Express high-speed websites, mobile-responsive layouts, conversion-first user experience (UX), and secure database/API integrations.
+5. **WhatsApp Automation:** Auto-responding systems, broadcast campaigns, and automated sales funnels.
+
+## Social Profiles
+- **Instagram:** https://www.instagram.com/wholeup.agency/
+- **LinkedIn:** https://linkedin.com/company/wholeup-solutions
+- **Facebook:** https://facebook.com/wholeup.agency
+- **Twitter/X:** https://twitter.com/wholeup_agency
+- **YouTube:** https://youtube.com/@wholeup.agency

@@ -145,8 +145,8 @@ function scoreLead(leadData) {
 // HOME
 app.get('/', (req, res) => {
   res.render('home', {
-    title: 'Wholeup | #1 Digital Marketing Agency in Surat, India | SEO, Ads & Web Design',
-    metaDesc: 'Wholeup is a results-driven digital marketing agency in Surat helping businesses grow with SEO, Google Ads, Meta Ads, WhatsApp Automation & conversion-first websites. Get a FREE strategy call today!',
+    title: 'Wholeup | Digital Marketing Agency in Surat | SEO & Ads',
+    metaDesc: 'Wholeup is a results-driven digital marketing agency in Surat helping businesses grow with SEO, Google/Meta Ads, WhatsApp Automation & custom websites.',
     canonicalUrl: 'https://wholeup.in/',
     metaKeywords: 'digital marketing agency Surat, SEO agency India, Google Ads agency, Meta Ads agency, WhatsApp automation, web design Surat, social media marketing India, Wholeup',
     ogImage: 'https://wholeup.in/favicon.png',

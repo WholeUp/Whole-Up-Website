@@ -68,6 +68,30 @@
   </script>
   {{/if}}
 
+  <!-- Google Analytics / Tag Manager -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XXXXXXXXXX');
+  </script>
+
+  <!-- Facebook Pixel Code -->
+  <script>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', 'XXXXXXXXXXXXXXX');
+    fbq('track', 'PageView');
+  </script>
+  <noscript><img height="1" width="1" id="fb-pixel-noscript" style="display:none" src="https://www.facebook.com/tr?id=XXXXXXXXXXXXXXX&ev=PageView&noscript=1"/></noscript>
+
   <link rel="icon" type="image/png" href="https://wholeup.in/favicon.png">
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1000 700' fill='none'><defs><linearGradient id='fav-charcoal' x1='180' y1='270' x2='465' y2='590' gradientUnits='userSpaceOnUse'><stop offset='0%' stop-color='%232D2D2D' /><stop offset='100%' stop-color='%23121212' /></linearGradient><linearGradient id='fav-green' x1='465' y1='590' x2='900' y2='100' gradientUnits='userSpaceOnUse'><stop offset='0%' stop-color='%2316A34A' /><stop offset='60%' stop-color='%2322C55E' /><stop offset='100%' stop-color='%234ADE80' /></linearGradient></defs><path d='M 465 380 C 455 420, 500 590, 570 590 C 640 590, 710 350, 790 210' stroke='url(%23fav-green)' stroke-width='105' stroke-linecap='round' stroke-linejoin='round' /><path d='M 180 270 C 180 270, 260 590, 330 590 C 400 590, 440 480, 465 380' stroke='url(%23fav-charcoal)' stroke-width='105' stroke-linecap='round' stroke-linejoin='round' /><polygon points='712,165 850,106 868,255 790,210' fill='url(%23fav-green)' /><path d='M 880 25 Q 880 60 915 60 Q 880 60 880 95 Q 880 60 845 60 Q 880 60 880 25' fill='%2322C55E' /></svg>">
 

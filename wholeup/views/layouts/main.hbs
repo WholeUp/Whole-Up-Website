@@ -90,7 +90,7 @@
     fbq('init', '{{fbPixelId}}');
     fbq('track', 'PageView');
   </script>
-  <noscript><img height="1" width="1" id="fb-pixel-noscript" style="display:none" src="https://www.facebook.com/tr?id={{fbPixelId}}&ev=PageView&noscript=1"/></noscript>
+  <noscript><img height="1" width="1" id="fb-pixel-noscript" alt="Facebook Pixel" style="display:none" src="https://www.facebook.com/tr?id={{fbPixelId}}&ev=PageView&noscript=1"/></noscript>
 
   <link rel="icon" type="image/png" href="https://wholeup.in/favicon.png">
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1000 700' fill='none'><defs><linearGradient id='fav-charcoal' x1='180' y1='270' x2='465' y2='590' gradientUnits='userSpaceOnUse'><stop offset='0%' stop-color='%232D2D2D' /><stop offset='100%' stop-color='%23121212' /></linearGradient><linearGradient id='fav-green' x1='465' y1='590' x2='900' y2='100' gradientUnits='userSpaceOnUse'><stop offset='0%' stop-color='%2316A34A' /><stop offset='60%' stop-color='%2322C55E' /><stop offset='100%' stop-color='%234ADE80' /></linearGradient></defs><path d='M 465 380 C 455 420, 500 590, 570 590 C 640 590, 710 350, 790 210' stroke='url(%23fav-green)' stroke-width='105' stroke-linecap='round' stroke-linejoin='round' /><path d='M 180 270 C 180 270, 260 590, 330 590 C 400 590, 440 480, 465 380' stroke='url(%23fav-charcoal)' stroke-width='105' stroke-linecap='round' stroke-linejoin='round' /><polygon points='712,165 850,106 868,255 790,210' fill='url(%23fav-green)' /><path d='M 880 25 Q 880 60 915 60 Q 880 60 880 95 Q 880 60 845 60 Q 880 60 880 25' fill='%2322C55E' /></svg>">
@@ -901,7 +901,7 @@
     });
     
     html = html.replace(/\[CALL_CTA\]/g, `<a href="tel:+919725137538" class="inline-flex items-center gap-2 mt-3 px-4 py-2.5 bg-green-600 hover:bg-green-700 text-white font-semibold text-xs rounded-full shadow-lg shadow-green-600/25 hover:shadow-green-600/40 hover:-translate-y-0.5 active:translate-y-0 transition-all w-full justify-center cursor-pointer no-underline"><i class="fas fa-phone-alt animate-bounce"></i> Call +91 97251 37538 Now</a>`);
-    html = html.replace(/\[WHATSAPP_CTA\]/g, `<a href="https://wa.me/919426846035" target="_blank" class="inline-flex items-center gap-2 mt-2 px-4 py-2.5 bg-emerald-500 hover:bg-emerald-600 text-white font-semibold text-xs rounded-full shadow-lg shadow-emerald-500/25 hover:shadow-emerald-500/40 hover:-translate-y-0.5 active:translate-y-0 transition-all w-full justify-center cursor-pointer no-underline"><i class="fab fa-whatsapp text-sm"></i> Message on WhatsApp</a>`);
+    html = html.replace(/\[WHATSAPP_CTA\]/g, `<a href="https://wa.me/919426846035" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 mt-2 px-4 py-2.5 bg-emerald-500 hover:bg-emerald-600 text-white font-semibold text-xs rounded-full shadow-lg shadow-emerald-500/25 hover:shadow-emerald-500/40 hover:-translate-y-0.5 active:translate-y-0 transition-all w-full justify-center cursor-pointer no-underline"><i class="fab fa-whatsapp text-sm"></i> Message on WhatsApp</a>`);
     html = html.replace(/(<br>){3,}/g, '<br><br>');
     return html;
   }

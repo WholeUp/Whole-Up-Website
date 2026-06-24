@@ -65,6 +65,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 // Middleware to inject canonical URL to all rendered pages
 app.use((req, res, next) => {
   res.locals.canonicalUrl = `https://wholeup.in${req.path === '/' ? '' : req.path}`;
+  res.locals.gaId = process.env.GA_TRACKING_ID || 'G-XXXXXXXXXX';
+  res.locals.fbPixelId = process.env.FB_PIXEL_ID || 'XXXXXXXXXXXXXXX';
   next();
 });
 

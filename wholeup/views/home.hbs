@@ -417,7 +417,7 @@
           <!-- Parameter 1: Monthly Spend -->
           <div>
             <div class="flex justify-between items-center mb-3">
-              <label class="text-sm font-bold uppercase tracking-wider text-white/80">Monthly Ad Spend</label>
+              <label for="slider-spend" class="text-sm font-bold uppercase tracking-wider text-white/80">Monthly Ad Spend</label>
               <span class="text-xl font-black text-primary font-mono" id="val-spend">₹50,000</span>
             </div>
             <input type="range" min="10000" max="1000000" step="5000" value="50000" class="range-slider" id="slider-spend" oninput="calculateROI()">
@@ -431,7 +431,7 @@
           <!-- Parameter 2: Target ROAS -->
           <div>
             <div class="flex justify-between items-center mb-3">
-              <label class="text-sm font-bold uppercase tracking-wider text-white/80">Estimated ROAS Multiple</label>
+              <label for="slider-roas" class="text-sm font-bold uppercase tracking-wider text-white/80">Estimated ROAS Multiple</label>
               <span class="text-xl font-black text-primary font-mono" id="val-roas">3.5x</span>
             </div>
             <input type="range" min="1" max="10" step="0.1" value="3.5" class="range-slider" id="slider-roas" oninput="calculateROI()">
@@ -445,7 +445,7 @@
           <!-- Parameter 3: Conversion Rate -->
           <div>
             <div class="flex justify-between items-center mb-3">
-              <label class="text-sm font-bold uppercase tracking-wider text-white/80">Average Cost Per Lead (CPL)</label>
+              <label for="slider-cpl" class="text-sm font-bold uppercase tracking-wider text-white/80">Average Cost Per Lead (CPL)</label>
               <span class="text-xl font-black text-primary font-mono" id="val-cpl">₹300</span>
             </div>
             <input type="range" min="50" max="2000" step="10" value="300" class="range-slider" id="slider-cpl" oninput="calculateROI()">

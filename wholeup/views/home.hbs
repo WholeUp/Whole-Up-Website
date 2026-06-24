@@ -172,7 +172,7 @@
           <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary"><i class="fas fa-chart-pie"></i></div>
           <div>
             <p class="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Campaign ROAS</p>
-            <h3 class="text-2xl font-black text-dark">4.8x Return</h3>
+            <p class="text-2xl font-black text-dark">4.8x Return</p>
           </div>
         </div>
         <!-- Simulated Graph Bars -->
@@ -421,7 +421,7 @@
               <span class="text-xl font-black text-primary font-mono" id="val-spend">₹50,000</span>
             </div>
             <input type="range" min="10000" max="1000000" step="5000" value="50000" class="range-slider" id="slider-spend" oninput="calculateROI()">
-            <div class="flex justify-between text-[10px] text-white/30 font-bold uppercase mt-2">
+            <div class="flex justify-between text-[10px] text-white/60 font-bold uppercase mt-2">
               <span>₹10K</span>
               <span>₹500K</span>
               <span>₹1M+</span>
@@ -435,7 +435,7 @@
               <span class="text-xl font-black text-primary font-mono" id="val-roas">3.5x</span>
             </div>
             <input type="range" min="1" max="10" step="0.1" value="3.5" class="range-slider" id="slider-roas" oninput="calculateROI()">
-            <div class="flex justify-between text-[10px] text-white/30 font-bold uppercase mt-2">
+            <div class="flex justify-between text-[10px] text-white/60 font-bold uppercase mt-2">
               <span>1.0x (Break Even)</span>
               <span>5.0x (Scale)</span>
               <span>10.0x (Viral)</span>
@@ -449,7 +449,7 @@
               <span class="text-xl font-black text-primary font-mono" id="val-cpl">₹300</span>
             </div>
             <input type="range" min="50" max="2000" step="10" value="300" class="range-slider" id="slider-cpl" oninput="calculateROI()">
-            <div class="flex justify-between text-[10px] text-white/30 font-bold uppercase mt-2">
+            <div class="flex justify-between text-[10px] text-white/60 font-bold uppercase mt-2">
               <span>₹50 (Low Cost)</span>
               <span>₹1,000</span>
               <span>₹2,000 (Premium/B2B)</span>
@@ -622,15 +622,15 @@
         <div>
           <div class="flex items-center justify-between mb-5">
             <div class="flex text-yellow-400 text-sm gap-0.5">{{{stars rating}}}</div>
-            <span class="text-[10px] font-black text-primary tracking-widest">{{rating}}★</span>
+            <span class="text-[10px] font-black text-green-800 tracking-widest">{{rating}}★</span>
           </div>
           <p class="text-dark/80 mb-7 text-xs font-medium leading-relaxed italic">"{{review}}"</p>
         </div>
         <div class="flex items-center gap-3 border-t border-black/10 pt-5 mt-auto">
           <div class="w-10 h-10 rounded-full {{color}} text-white flex items-center justify-center text-xs font-black flex-shrink-0">{{initials}}</div>
           <div>
-            <h4 class="font-black text-dark text-xs leading-tight">{{name}}</h4>
-            <p class="text-[9px] text-primary font-bold tracking-widest uppercase mt-0.5">{{company}}</p>
+            <p class="font-black text-dark text-xs leading-tight">{{name}}</p>
+            <p class="text-[9px] text-green-800 font-bold tracking-widest uppercase mt-0.5">{{company}}</p>
           </div>
         </div>
       </div>
@@ -641,15 +641,15 @@
         <div>
           <div class="flex items-center justify-between mb-5">
             <div class="flex text-yellow-400 text-sm gap-0.5">{{{stars rating}}}</div>
-            <span class="text-[10px] font-black text-primary tracking-widest">{{rating}}★</span>
+            <span class="text-[10px] font-black text-green-800 tracking-widest">{{rating}}★</span>
           </div>
           <p class="text-dark/80 mb-7 text-xs font-medium leading-relaxed italic">"{{review}}"</p>
         </div>
         <div class="flex items-center gap-3 border-t border-black/10 pt-5 mt-auto">
           <div class="w-10 h-10 rounded-full {{color}} text-white flex items-center justify-center text-xs font-black flex-shrink-0">{{initials}}</div>
           <div>
-            <h4 class="font-black text-dark text-xs leading-tight">{{name}}</h4>
-            <p class="text-[9px] text-primary font-bold tracking-widest uppercase mt-0.5">{{company}}</p>
+            <p class="font-black text-dark text-xs leading-tight">{{name}}</p>
+            <p class="text-[9px] text-green-800 font-bold tracking-widest uppercase mt-0.5">{{company}}</p>
           </div>
         </div>
       </div>

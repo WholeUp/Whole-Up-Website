@@ -48,3 +48,15 @@ This file provides the complete context and deployment methods for the Wholeup w
 - **SPF Mail Record:** Added TXT record `v=spf1 include:_spf.google.com ~all` in the GoDaddy DNS zone.
 - **Google Business Profile:** Created and verified Google maps profile, targeting the service area "India" and linking `https://wholeup.in` as the official website.
 - **Search Console:** Submitted `https://wholeup.in` for indexing to crawl the new SEO changes.
+
+---
+
+## 🤖 5. AI Chatbot Integration (GrowBot)
+- **Frontend Component:** [chatbot.hbs](file:///C:/Users/NEEL/Downloads/wholeup-website/wholeup/views/partials/chatbot.hbs)
+- **Backend API Endpoint:** `/api/chat` (POST) in [server.js](file:///C:/Users/NEEL/Downloads/wholeup-website/wholeup/server.js).
+- **Core Technology:** Google Gemini AI using the official `@google/genai` SDK with `GEMINI_API_KEY` from `.env`.
+- **Key Features:**
+  - **Dynamic Lead Capture:** If the AI extracts a lead (Name, Phone, Email, or Service) during the conversation, it appends a structured tag like `[LEAD: name|phone|email|service]`. The server automatically parses this tag, logs the lead, and sends an email notification.
+  - **Interactive CTAs:** Supports dynamic rendering of click-to-call (`[CALL_CTA]`) and click-to-WhatsApp (`[WHATSAPP_CTA]`) buttons based on the user's queries.
+  - **Offline Fallback:** If the `GEMINI_API_KEY` is not found or empty, the bot automatically responds with a friendly offline message prompting the user to contact the growth team directly at `+91 97251 37538`.
+  - **Strict Niche Constraints:** The system prompt restricts the AI to only answer digital marketing, web design, and business growth-related queries, politely redirecting other off-topic questions.

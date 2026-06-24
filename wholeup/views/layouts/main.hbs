@@ -42,7 +42,7 @@
     "logo": "https://wholeup.in/favicon.png",
     "image": "https://wholeup.in/favicon.png",
     "description": "Wholeup is a results-driven digital marketing agency in Surat, India offering SEO, Google Ads, Meta Ads, WhatsApp Automation, AI Services and Web Design.",
-    "telephone": "+919426846035",
+    "telephone": "+919725137538",
     "email": "wholeup.agency@gmail.com",
     "address": {
       "@type": "PostalAddress",
@@ -295,7 +295,7 @@
         },
         "contactPoint": {
           "@type": "ContactPoint",
-          "telephone": "+919426846035",
+          "telephone": "+919725137538",
           "contactType": "sales",
           "email": "wholeup.agency@gmail.com",
           "areaServed": "IN",
@@ -654,7 +654,7 @@
       const t = document.getElementById('dm-typ');
       if (t) t.remove();
       
-      const reply = data.success ? data.reply : 'We apologize, but our servers are temporarily offline. Please contact us directly at +91 94268 46035.';
+      const reply = data.success ? data.reply : 'We apologize, but our servers are temporarily offline. Please contact us directly at +91 97251 37538.';
       
       // Update local conversational memory history state
       if (data.success) {
@@ -685,7 +685,7 @@
       if (t) t.remove();
       const aDiv=document.createElement('div');
       aDiv.className='dm-msg';
-      aDiv.innerHTML=`<div class="dm-av bot">AI</div><div class="dm-bubble bot">It seems there is a network connectivity issue. Please call us directly at +91 94268 46035.</div>`;
+      aDiv.innerHTML=`<div class="dm-av bot">AI</div><div class="dm-bubble bot">It seems there is a network connectivity issue. Please call us directly at +91 97251 37538.</div>`;
       msgs.appendChild(aDiv);
       msgs.scrollTop=msgs.scrollHeight;
     }
@@ -900,7 +900,7 @@
       return '<br>• ' + p1;
     });
     
-    html = html.replace(/\[CALL_CTA\]/g, `<a href="tel:+919426846035" class="inline-flex items-center gap-2 mt-3 px-4 py-2.5 bg-green-600 hover:bg-green-700 text-white font-semibold text-xs rounded-full shadow-lg shadow-green-600/25 hover:shadow-green-600/40 hover:-translate-y-0.5 active:translate-y-0 transition-all w-full justify-center cursor-pointer no-underline"><i class="fas fa-phone-alt animate-bounce"></i> Call +91 94268 46035 Now</a>`);
+    html = html.replace(/\[CALL_CTA\]/g, `<a href="tel:+919725137538" class="inline-flex items-center gap-2 mt-3 px-4 py-2.5 bg-green-600 hover:bg-green-700 text-white font-semibold text-xs rounded-full shadow-lg shadow-green-600/25 hover:shadow-green-600/40 hover:-translate-y-0.5 active:translate-y-0 transition-all w-full justify-center cursor-pointer no-underline"><i class="fas fa-phone-alt animate-bounce"></i> Call +91 97251 37538 Now</a>`);
     html = html.replace(/\[WHATSAPP_CTA\]/g, `<a href="https://wa.me/919426846035" target="_blank" class="inline-flex items-center gap-2 mt-2 px-4 py-2.5 bg-emerald-500 hover:bg-emerald-600 text-white font-semibold text-xs rounded-full shadow-lg shadow-emerald-500/25 hover:shadow-emerald-500/40 hover:-translate-y-0.5 active:translate-y-0 transition-all w-full justify-center cursor-pointer no-underline"><i class="fab fa-whatsapp text-sm"></i> Message on WhatsApp</a>`);
     html = html.replace(/(<br>){3,}/g, '<br><br>');
     return html;

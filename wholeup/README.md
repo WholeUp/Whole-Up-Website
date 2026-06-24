@@ -113,7 +113,7 @@ All form submissions are:
 ## 🛠️ Customization
 
 ### Update contact details
-Edit `views/layouts/main.hbs` → search for `DM_CONFIG` and `+91 94268 46035`
+Edit `views/layouts/main.hbs` → search for `DM_CONFIG` and `+91 97251 37538`
 
 ### Add/edit services
 Edit `data/services.json`

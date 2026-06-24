@@ -193,7 +193,7 @@ app.get('/services', (req, res) => {
       "name": "Wholeup",
       "url": "https://wholeup.in",
       "logo": "https://wholeup.in/favicon.png",
-      "telephone": "+919426846035",
+      "telephone": "+919725137538",
       "email": "wholeup.agency@gmail.com",
       "address": {
         "@type": "PostalAddress",
@@ -452,7 +452,7 @@ app.get('/contact', (req, res) => {
   };
   res.render('contact', {
     title: 'Contact Wholeup | Book a FREE Digital Marketing Strategy Call in Surat',
-    metaDesc: 'Contact Wholeup Digital Marketing Agency in Surat. Book a FREE 30-minute growth strategy call. We help businesses with SEO, Ads, AI Automation & Web Design. Call: +91 94268 46035.',
+    metaDesc: 'Contact Wholeup Digital Marketing Agency in Surat. Book a FREE 30-minute growth strategy call. We help businesses with SEO, Ads, AI Automation & Web Design. Call: +91 97251 37538.',
     canonicalUrl: 'https://wholeup.in/contact',
     metaKeywords: 'contact digital marketing agency Surat, book marketing consultation, Wholeup contact, free marketing call India',
     page: 'contact',
@@ -602,7 +602,7 @@ app.post('/api/chat', async (req, res) => {
   if (!apiKey || apiKey.trim() === '') {
     return res.json({
       success: true,
-      reply: 'Hello! 😊 My AI engine is currently offline. However, I can certainly assist you with your digital marketing, SEO, paid ads, or web development needs. Please feel free to contact our growth team directly: +91 94268 46035!'
+      reply: 'Hello! 😊 My AI engine is currently offline. However, I can certainly assist you with your digital marketing, SEO, paid ads, or web development needs. Please feel free to contact our growth team directly: +91 97251 37538!'
     });
   }
 
@@ -626,7 +626,8 @@ Strict Constraints:
 - You must ONLY answer questions related to digital marketing, websites, copywriting, and business growth.
 - If a user asks general knowledge, academic, coding (other than explaining web design or simple analytics snippets), recipes, sports, or completely unrelated questions, you must politely and creatively redirect them back to digital marketing. Say something like: "I am GrowBot, your virtual digital marketing consultant at Wholeup. I can only assist you with business growth, SEO, paid advertising, or web development queries. 😊"
 - Always encourage the user to book a Free Strategy Consultation or contact Wholeup directly:
-  - Phone/WhatsApp: +91 94268 46035
+  - Phone: +91 97251 37538
+- WhatsApp: +91 94268 46035
   - Email: wholeup.agency@gmail.com
   - Encourage them to fill out the contact form right here on the website, or click the WhatsApp / Call float buttons on the screen! Do NOT tell the user to visit the website URL "www.wholeup.in" because they are already browsing on it!
 
@@ -750,7 +751,7 @@ You are acting as Wholeup's Lead Business Consultant. Your task is to walk the u
     console.error('Gemini API Error:', error);
     res.status(500).json({
       success: false,
-      reply: 'Apologies, we are experiencing a temporary server connectivity issue. Please try again shortly or contact our growth experts directly at +91 94268 46035.'
+      reply: 'Apologies, we are experiencing a temporary server connectivity issue. Please try again shortly or contact our growth experts directly at +91 97251 37538.'
     });
   }
 });
@@ -852,7 +853,7 @@ Maintain a confident, highly professional tone. Do not write generic placeholder
               <p>We'll follow up with you within 24 hours to schedule a free 30-minute consultation call to walk you through these recommendations and answer any questions.</p>
               
               <div style="text-align:center;margin-top:24px;">
-                <a href="tel:+919426846035" style="background:#16A34A;color:white;padding:12px 24px;text-decoration:none;border-radius:6px;font-weight:bold;font-size:14px;display:inline-block;">Call Us Directly</a>
+                <a href="tel:+919725137538" style="background:#16A34A;color:white;padding:12px 24px;text-decoration:none;border-radius:6px;font-weight:bold;font-size:14px;display:inline-block;">Call Us Directly</a>
               </div>
             </div>
           </div>
@@ -928,7 +929,7 @@ Instructions:
 2. Explain how Wholeup Digital Marketing Agency can help scale their business specifically for their service interest (${lead.service}). Provide 2-3 high-level actionable strategy points (e.g. SEO optimization, conversion audits, premium Meta ad funnel setup).
 3. Sound extremely expert, professional, encouraging, and warm. 
 4. Pitch the value of scheduling a "Free 30-Minute Growth Strategy Call" to align further.
-5. End with a professional email signature for "Wholeup Digital Growth Team" and phone: +91 94268 46035 / email: wholeup.agency@gmail.com.
+5. End with a professional email signature for "Wholeup Digital Growth Team" and phone: +91 97251 37538 / email: wholeup.agency@gmail.com.
 6. Keep the email highly readable, clean, and concise (under 250 words total). Do NOT include generic placeholder brackets. Write the final email copy directly.`;
 
     proposalText = await getGeminiResponse(agentPrompt);
@@ -986,7 +987,7 @@ Please structure your response beautifully with:
 1. 🎨 **Visual Graphic / Reel Concept**: A brief, creative description of the image, video, or carousel hook that our designers should create to accompany this post.
 2. ✍️ **Engaging Hook & Caption**: A high-impact caption using paragraph spacing, bold text format where appropriate, and a friendly, expert Hinglish/English tone. 
 3. 🏷️ **Curated Hashtags**: 8-10 highly relevant, high-traffic digital marketing hashtags (e.g. #Wholeup, #DigitalMarketing, #SEO, #SocialMediaStrategy).
-4. 📞 **Strong Call-To-Action (CTA)**: Prompt the reader to DM Wholeup for a Free Growth Audit or call +91 94268 46035.`;
+4. 📞 **Strong Call-To-Action (CTA)**: Prompt the reader to DM Wholeup for a Free Growth Audit or call +91 97251 37538.`;
 
     const contentCopy = await getGeminiResponse(copilotPrompt);
 
@@ -1369,11 +1370,11 @@ app.post('/api/whatsapp/webhook', async (req, res) => {
     console.log(`💬 WhatsApp message from ${contactName} (${from}): ${msgBody}`);
 
     // Auto-reply using Gemini AI
-    let replyText = 'Thank you for reaching out to Wholeup! 😊 Our team will get back to you shortly. For instant help, call us at +91 94268 46035.';
+    let replyText = 'Thank you for reaching out to Wholeup! 😊 Our team will get back to you shortly. For instant help, call us at +91 97251 37538.';
 
     if (apiKey && apiKey.trim() !== '') {
       try {
-        const waPrompt = `You are Wholeup Digital Marketing Agency's WhatsApp AI assistant. A customer named "${contactName}" sent this message:\n\n"${msgBody}"\n\nReply in a friendly, professional, short manner (under 80 words). \n- If they ask about services, mention: SEO, Meta Ads, Google Ads, WhatsApp Automation, AI Services, Website Design.\n- If they want to book a call, give number: +91 94268 46035\n- If they ask pricing, say packages start from ₹8,000/month and invite them to book a free call.\n- Always end with a clear CTA. Speak naturally. Do NOT mention AI or that you are a bot.`;
+        const waPrompt = `You are Wholeup Digital Marketing Agency's WhatsApp AI assistant. A customer named "${contactName}" sent this message:\n\n"${msgBody}"\n\nReply in a friendly, professional, short manner (under 80 words). \n- If they ask about services, mention: SEO, Meta Ads, Google Ads, WhatsApp Automation, AI Services, Website Design.\n- If they want to book a call, give number: +91 97251 37538\n- If they ask pricing, say packages start from ₹8,000/month and invite them to book a free call.\n- Always end with a clear CTA. Speak naturally. Do NOT mention AI or that you are a bot.`;
         replyText = await getGeminiResponse(waPrompt);
       } catch(e) { console.warn('WhatsApp AI reply failed, using fallback:', e.message); }
     }

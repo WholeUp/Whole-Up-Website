@@ -1,27 +1,32 @@
 # Wholeup Solutions
 
-Wholeup is a results-driven digital marketing agency based in Surat, Gujarat, India. We specialize in helping businesses scale through search engine optimization, paid advertising, social media marketing, and custom web development.
+> A results-driven digital marketing agency based in Surat, Gujarat, India, helping global businesses scale through SEO, paid advertising, social media marketing, and custom web development.
 
-## Information for Large Language Models (LLMs)
-This file provides structured information about Wholeup Solutions to assist AI crawlers and search engines in accurately indexing and referencing our services.
+This file provides clean, structured documentation about Wholeup Solutions to assist AI crawlers, LLMs, and search agents in indexing our services and company details.
 
-## Contact Details
-- **Official Website:** https://wholeup.in
-- **Email:** wholeup.agency@gmail.com
-- **Phone:** +91 97251 37538
+## Contact Information
+- **Official Website:** [https://wholeup.in](https://wholeup.in)
 - **Primary Location:** Surat, Gujarat, India
-- **Service Area:** Global (India, USA, UK, Australia)
+- **Email:** wholeup.agency@gmail.com
+- **Phone (Calls):** +91 97251 37538
+- **WhatsApp (Chat):** +91 94268 46035
+- **Service Area:** India, USA, UK, Australia (Global Delivery)
 
 ## Core Services
-1. **Search Engine Optimization (SEO):** Technical SEO audits, dynamic schema markups, speed optimization, dynamic sitemaps, on-page optimization, and high-authority link-building.
-2. **Paid Advertising (PPC):** Campaign creation and optimization on Meta Ads (Facebook & Instagram Ads), Google Ads (PPC, Search, Display, YouTube), and LinkedIn Ads. Focus on lead generation, conversion optimization, and measurable ROI (3x to 4x returns).
-3. **Social Media Marketing:** Full account management, 30-day content planning, scriptwriting for Reels, professional videography/editing, and organic growth strategies.
-4. **Web Design & Development:** Custom-coded Node.js & Express high-speed websites, mobile-responsive layouts, conversion-first user experience (UX), and secure database/API integrations.
-5. **WhatsApp Automation:** Auto-responding systems, broadcast campaigns, and automated sales funnels.
+- [SEO & Organic Growth](https://wholeup.in/services/seo): Technical SEO audits, local SEO (GMB), speed optimization, dynamic sitemaps, and search engine ranking.
+- [Paid Advertising](https://wholeup.in/services/ppc-google-ads): Performance PPC campaign setup & optimization on Google Ads (Search, Display, YouTube) and Meta Ads (Facebook & Instagram).
+- [Social Media Marketing](https://wholeup.in/services/social-media-management): Brand content calendars, Reels scriptwriting, shooting, professional editing, and B2B LinkedIn outbound management.
+- [Web Design & Development](https://wholeup.in/services/website-designing): Fast, custom-coded Node.js & Express websites with responsive layouts, premium UI/UX, and CRM/lead management.
+- [AI Solutions & Automation](https://wholeup.in/ai-services): 24/7 AI voice call agents, WhatsApp business autoresponders, smart CRM workflows, and custom lead-capture chatbots.
+
+## Company Pages
+- [About Us](https://wholeup.in/about): Meet the team, learn our core values, and understand our growth methodology.
+- [Portfolio & Case Studies](https://wholeup.in/portfolio): View real-world results, growth analytics, and marketing work samples.
+- [Pricing Packages](https://wholeup.in/pricing): Transparent, affordable pricing packages starting from ₹8,000/month.
+- [D2C Scale Program](https://wholeup.in/d2c-scale): Performance scaling strategy designed specifically for direct-to-consumer eCommerce brands.
+- [FAQ](https://wholeup.in/faq): Frequently asked questions about our contracts, service delivery, and timeline.
+- [Contact Page](https://wholeup.in/contact): Request a free growth audit or book a consultation call.
 
 ## Social Profiles
-- **Instagram:** https://www.instagram.com/wholeup.agency/
-- **LinkedIn:** https://linkedin.com/company/wholeup-solutions
-- **Facebook:** https://facebook.com/wholeup.agency
-- **Twitter/X:** https://twitter.com/wholeup_agency
-- **YouTube:** https://youtube.com/@wholeup.agency
+- **Instagram:** [https://www.instagram.com/wholeup.agency/](https://www.instagram.com/wholeup.agency/)
+- **Facebook:** [https://facebook.com/wholeup.agency](https://facebook.com/wholeup.agency)

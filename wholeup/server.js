@@ -181,6 +181,7 @@ app.get('/about', (req, res) => {
     canonicalUrl: 'https://wholeup.in/about',
     metaKeywords: 'about Wholeup, digital marketing agency Surat, marketing team Gujarat, best marketing agency India',
     page: 'about',
+    loadThree: true,
     schemaMarkup: `<script type="application/ld+json">${JSON.stringify(schema)}</script>`
   });
 });
@@ -226,6 +227,7 @@ app.get('/services', (req, res) => {
     metaKeywords: 'SEO services Surat, Google Ads agency India, Meta Ads Surat, social media marketing, web design Surat, WhatsApp automation, digital marketing services',
     page: 'services',
     services,
+    loadThree: true,
     schemaMarkup: `<script type="application/ld+json">${JSON.stringify(schema)}</script>`
   });
 });
@@ -353,6 +355,7 @@ app.get('/pricing', (req, res) => {
     metaKeywords: 'digital marketing pricing India, SEO packages Surat, affordable marketing plans, Google Ads pricing, social media marketing cost India',
     page: 'pricing',
     pricing,
+    loadThree: true,
     schemaMarkup: `<script type="application/ld+json">${JSON.stringify(schema)}</script>`
   });
 });

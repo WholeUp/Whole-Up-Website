@@ -193,7 +193,7 @@ app.get('/services', (req, res) => {
     "@type": "Service",
     "provider": {
       "@type": "LocalBusiness",
-      "name": "Wholeup",
+      "name": "Wholeup - Digital Marketing In India",
       "url": "https://wholeup.in",
       "logo": "https://wholeup.in/favicon.png",
       "telephone": "+919725137538",
@@ -239,7 +239,7 @@ app.get('/ai-services', (req, res) => {
     "@type": "Service",
     "provider": {
       "@type": "LocalBusiness",
-      "name": "Wholeup",
+      "name": "Wholeup - Digital Marketing In India",
       "url": "https://wholeup.in",
       "logo": "https://wholeup.in/favicon.png"
     },
@@ -280,7 +280,7 @@ app.get('/services/:slug', (req, res) => {
     "description": service.description,
     "provider": {
       "@type": "LocalBusiness",
-      "name": "Wholeup",
+      "name": "Wholeup - Digital Marketing In India",
       "url": "https://wholeup.in",
       "logo": "https://wholeup.in/favicon.png"
     }
@@ -632,7 +632,7 @@ Strict Constraints:
 - If a user asks general knowledge, academic, coding (other than explaining web design or simple analytics snippets), recipes, sports, or completely unrelated questions, you must politely and creatively redirect them back to digital marketing. Say something like: "I am GrowBot, your virtual digital marketing consultant at Wholeup. I can only assist you with business growth, SEO, paid advertising, or web development queries. 😊"
 - Always encourage the user to book a Free Strategy Consultation or contact Wholeup directly:
   - Phone: +91 97251 37538
-- WhatsApp: +91 94268 46035
+  - WhatsApp: +91 97251 37538
   - Email: wholeup.agency@gmail.com
   - Encourage them to fill out the contact form right here on the website, or click the WhatsApp / Call float buttons on the screen! Do NOT tell the user to visit the website URL "www.wholeup.in" because they are already browsing on it!
 

@@ -10,6 +10,10 @@
   <meta name="robots" content="index, follow">
   <meta name="geo.region" content="IN-GJ">
   <meta name="geo.placename" content="Surat, Gujarat, India">
+  <meta name="geo.position" content="21.1702;72.8311">
+  <meta name="ICBM" content="21.1702, 72.8311">
+  <link rel="apple-touch-icon" href="https://wholeup.in/favicon.png">
+
 
   <!-- Open Graph -->
   <meta property="og:title" content="{{title}}">
@@ -37,7 +41,7 @@
   {
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
-    "name": "Wholeup Digital Marketing Agency",
+    "name": "Wholeup - Digital Marketing In India",
     "url": "https://wholeup.in",
     "logo": "https://wholeup.in/favicon.png",
     "image": "https://wholeup.in/favicon.png",
@@ -58,7 +62,9 @@
     "openingHours": "Mo-Sa 09:00-20:00",
     "priceRange": "₹₹",
     "sameAs": [
-      "https://www.instagram.com/wholeup.agency/"
+      "https://www.instagram.com/wholeup.agency/",
+      "https://www.facebook.com/wholeup.agency",
+      "https://www.linkedin.com/company/wholeup-solutions"
     ],
     "serviceArea": {
       "@type": "Place",
@@ -752,7 +758,7 @@
     });
     
     html = html.replace(/\[CALL_CTA\]/g, `<a href="tel:+919725137538" class="inline-flex items-center gap-2 mt-3 px-4 py-2.5 bg-green-600 hover:bg-green-700 text-white font-semibold text-xs rounded-full shadow-lg shadow-green-600/25 hover:shadow-green-600/40 hover:-translate-y-0.5 active:translate-y-0 transition-all w-full justify-center cursor-pointer no-underline"><i class="fas fa-phone-alt animate-bounce"></i> Call +91 97251 37538 Now</a>`);
-    html = html.replace(/\[WHATSAPP_CTA\]/g, `<a href="https://wa.me/919426846035" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 mt-2 px-4 py-2.5 bg-emerald-500 hover:bg-emerald-600 text-white font-semibold text-xs rounded-full shadow-lg shadow-emerald-500/25 hover:shadow-emerald-500/40 hover:-translate-y-0.5 active:translate-y-0 transition-all w-full justify-center cursor-pointer no-underline"><i class="fab fa-whatsapp text-sm"></i> Message on WhatsApp</a>`);
+    html = html.replace(/\[WHATSAPP_CTA\]/g, `<a href="https://wa.me/919725137538" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 mt-2 px-4 py-2.5 bg-emerald-500 hover:bg-emerald-600 text-white font-semibold text-xs rounded-full shadow-lg shadow-emerald-500/25 hover:shadow-emerald-500/40 hover:-translate-y-0.5 active:translate-y-0 transition-all w-full justify-center cursor-pointer no-underline"><i class="fab fa-whatsapp text-sm"></i> Message on WhatsApp</a>`);
     html = html.replace(/(<br>){3,}/g, '<br><br>');
     return html;
   }

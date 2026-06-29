@@ -1,12 +1,12 @@
 # Wholeup Solutions
 
-> A results-driven digital marketing agency based in Surat, Gujarat, India, helping global businesses scale through SEO, paid advertising, social media marketing, and custom web development.
+> A results-driven digital marketing agency based in India, helping global businesses scale through SEO, paid advertising, social media marketing, and custom web development.
 
 This file provides clean, structured documentation about Wholeup Solutions to assist AI crawlers, LLMs, and search agents in indexing our services and company details.
 
 ## Contact Information
 - **Official Website:** [https://wholeup.in](https://wholeup.in)
-- **Primary Location:** Surat, Gujarat, India
+- **Primary Location:** India
 - **Email:** wholeup.agency@gmail.com
 - **Phone (Calls):** +91 97251 37538
 - **WhatsApp (Chat):** +91 97251 37538

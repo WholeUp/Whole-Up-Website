@@ -334,30 +334,9 @@ app.get('/portfolio/:slug', (req, res) => {
   });
 });
 
-// PRICING
+// PRICING (Temporary Redirected to Home)
 app.get('/pricing', (req, res) => {
-  const schema = {
-    "@context": "https://schema.org",
-    "@type": "Product",
-    "name": "Digital Marketing Pricing Packages",
-    "description": "Transparent, affordable digital marketing pricing plans by Wholeup starting from ₹8,000/month.",
-    "offers": {
-      "@type": "AggregateOffer",
-      "lowPrice": "8000",
-      "highPrice": "40000",
-      "priceCurrency": "INR"
-    }
-  };
-  res.render('pricing', {
-    title: 'Digital Marketing Pricing Plans | Affordable SEO & Ads Packages | Wholeup',
-    metaDesc: 'Transparent, affordable digital marketing pricing — SEO, Google Ads, Meta Ads, Social Media & full-stack packages. No hidden fees. Plans starting from ₹8,000/month.',
-    canonicalUrl: 'https://wholeup.in/pricing',
-    metaKeywords: 'digital marketing pricing India, SEO packages India, affordable marketing plans, Google Ads pricing, social media marketing cost India',
-    page: 'pricing',
-    pricing,
-    loadThree: true,
-    schemaMarkup: `<script type="application/ld+json">${JSON.stringify(schema)}</script>`
-  });
+  res.redirect('/');
 });
 
 // BLOG

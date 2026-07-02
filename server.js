@@ -147,8 +147,8 @@ function scoreLead(leadData) {
 // HOME
 app.get('/', (req, res) => {
   res.render('home', {
-    title: 'Wholeup | SEO, Google Ads, Meta Ads, Web Design & Social Media',
-    metaDesc: 'Wholeup is a digital marketing agency. We offer SEO, Google Ads, Meta Ads, social media, and web design. View our paid ads case studies for proven growth.',
+    title: 'Wholeup | Best Digital Marketing Agency in India',
+    metaDesc: 'Wholeup is a digital marketing agency in India. We offer expert SEO, Google Ads, Meta Ads, Web Design, and WhatsApp Automation.',
     canonicalUrl: 'https://wholeup.in',
     metaKeywords: 'digital marketing agency India, SEO agency India, Google Ads agency, Meta Ads agency, paid ads, WhatsApp automation, web design India, social media marketing India, case studies, Wholeup',
     ogImage: 'https://wholeup.in/favicon.png',

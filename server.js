@@ -332,6 +332,8 @@ app.get('/portfolio/:slug', (req, res) => {
     related: portfolio.filter(p => p.slug !== project.slug).slice(0, 3),
     schemaMarkup: `<script type="application/ld+json">${JSON.stringify(schema)}</script>`
   });
+});
+
 // APEX STOCK SCANNER MOCKUP DASHBOARD
 app.get('/apex-scanner', (req, res) => {
   res.render('portfolio-single', {

@@ -1,307 +1,366 @@
-<style>
-  /* Mock Browser Custom Scroll */
-  .mock-browser-scroll::-webkit-scrollbar {
-    width: 4px;
-  }
-  .mock-browser-scroll::-webkit-scrollbar-track {
-    background: rgba(0, 0, 0, 0.02);
-  }
-  .mock-browser-scroll::-webkit-scrollbar-thumb {
-    background: rgba(0, 0, 0, 0.1);
-    border-radius: 2px;
-  }
-</style>
+<!-- PREMIUM INTERACTIVE STOCK MARKET DASHBOARD -->
+<section class="min-h-screen pt-32 pb-24 bg-[#0A0D14] px-4 md:px-6 relative overflow-hidden select-none text-white">
+  <!-- Glowing Background Ambience (Neon Green/Charcoal) -->
+  <div class="absolute w-[500px] h-[500px] rounded-full bg-emerald-500/10 blur-[120px] -top-48 -left-48 pointer-events-none"></div>
+  <div class="absolute w-[600px] h-[600px] rounded-full bg-green-500/5 blur-[150px] -bottom-48 -right-48 pointer-events-none"></div>
 
-<!-- CASE STUDY HERO -->
-<section class="page-hero px-6 relative overflow-hidden" style="background: linear-gradient(135deg, {{project.tagBg}}, transparent 70%), #FAF8F2;">
-  <!-- Ambient glowing mesh inside hero -->
-  <div class="absolute inset-0 opacity-[0.03]" style="background-image: radial-gradient(circle at 20% 20%, {{project.tagColor}} 0%, transparent 50%);"></div>
-  <div class="absolute inset-0 opacity-[0.03]" style="background-image: radial-gradient(#000 1px, transparent 1px); background-size: 24px 24px;"></div>
-  
-  <div class="max-w-5xl mx-auto relative z-10">
-    <a href="/portfolio" class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-dark/50 hover:text-primary mb-8 transition">
-      <i class="fas fa-arrow-left text-[10px]"></i> Back to Portfolio
-    </a>
+  <div class="max-w-[1400px] mx-auto relative z-10 space-y-8">
     
-    <div class="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-8">
+    <!-- Top Header Panel -->
+    <div class="flex flex-col md:flex-row justify-between items-start md:items-center bg-[#111622]/80 backdrop-blur-xl border border-white/5 rounded-[32px] p-6 md:p-8 shadow-2xl gap-6">
       <div class="flex items-center gap-4">
-        <div class="w-14 h-14 rounded-2xl flex items-center justify-center text-2xl flex-shrink-0 bg-white shadow-lg shadow-black/3" style="color: {{project.tagColor}}">
-          <i class="{{project.icon}}"></i>
+        <div class="w-14 h-14 rounded-2xl bg-gradient-to-tr from-emerald-600 to-green-400 text-white flex items-center justify-center text-2xl shadow-lg shadow-emerald-500/20">
+          <i class="fas fa-cubes-stacked"></i>
         </div>
         <div>
-          <span class="text-[10px] font-black tracking-[0.25em] uppercase px-3 py-1 rounded-full border border-black/5" style="background: {{project.tagBg}}; color: {{project.tagColor}}">
-            {{project.categoryLabel}}
+          <div class="flex items-center gap-2 mb-1">
+            <span class="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-[9px] font-black text-emerald-400 uppercase tracking-widest">
+              <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span> Live Scanner Active
+            </span>
+            <span class="text-[9px] font-black text-white/40 uppercase tracking-widest">Accuracy: 75-80%</span>
+          </div>
+          <h1 class="text-xl md:text-2xl font-black uppercase tracking-wider text-white leading-none">ApexAI Stock Scanner</h1>
+          <p class="text-xs text-white/40 font-medium mt-1">Multi-Indicator Real-time Breakout & Pattern Detector</p>
+        </div>
+      </div>
+      <div class="flex items-center gap-3 w-full md:w-auto">
+        <div class="bg-white/5 border border-white/5 px-4 py-2.5 rounded-xl text-center w-full md:w-auto">
+          <span class="block text-[8px] font-black uppercase tracking-widest text-white/40">Market Status</span>
+          <span class="text-xs font-bold text-emerald-400 uppercase tracking-wide flex items-center justify-center gap-1.5 mt-0.5">
+            <span class="w-2 h-2 rounded-full bg-emerald-400"></span> Nifty Live
           </span>
-          <h1 class="text-3xl md:text-5xl font-black uppercase tracking-tight text-dark leading-tight mt-3">{{project.title}}</h1>
         </div>
-      </div>
-    </div>
-    
-    <p class="text-sm md:text-base text-dark/70 font-normal max-w-3xl leading-relaxed">{{project.description}}</p>
-  </div>
-</section>
-
-<!-- MAIN CONTENT SECTION -->
-<section class="py-20 bg-white px-6">
-  <div class="max-w-5xl mx-auto grid lg:grid-cols-12 gap-12 items-start">
-    
-    <!-- Left Column: Strategy & Description (7 cols) -->
-    <div class="lg:col-span-7 flex flex-col gap-8">
-      
-      <div>
-        <h2 class="text-xs font-black uppercase tracking-widest text-dark/40 mb-3">The Challenge</h2>
-        <p class="text-dark/70 text-sm leading-relaxed">{{project.description}}</p>
-      </div>
-
-      <div>
-        <h2 class="text-xs font-black uppercase tracking-widest text-dark/40 mb-3">Our Strategy</h2>
-        <div class="bg-cream border border-black/5 p-6 rounded-2xl shadow-sm leading-relaxed text-dark/80 text-sm space-y-4">
-          {{project.caseInfo}}
-        </div>
-      </div>
-
-      <div>
-        <h2 class="text-xs font-black uppercase tracking-widest text-dark/40 mb-3">Expertises Delivered</h2>
-        <div class="flex flex-wrap gap-2">
-          {{#each project.services}}
-          <span class="bg-cream border border-black/5 text-dark/70 text-[10px] font-bold uppercase tracking-wider px-4 py-2 rounded-lg shadow-sm">
-            {{this}}
-          </span>
-          {{/each}}
-        </div>
-      </div>
-
-      <!-- GrowBot Integration CTA -->
-      <div class="pt-6 border-t border-black/5">
-        <a href="/contact" class="inline-flex items-center justify-center gap-2.5 text-white font-extrabold text-xs uppercase tracking-widest px-8 py-4 rounded-xl shadow-lg shadow-primary/25 hover:shadow-primary/45 transition-all duration-300 hover:scale-[1.02] active:scale-100" style="background-color: {{project.tagColor}}">
-          <i class="fas fa-comments"></i> Book Free Strategy Call For This Service
-        </a>
+        <button onclick="triggerSimulatedScan()" class="w-full md:w-auto bg-emerald-500 hover:bg-emerald-600 text-white px-6 py-3.5 rounded-xl font-bold text-xs uppercase tracking-widest transition-all duration-300 shadow-lg shadow-emerald-500/20 active:translate-y-0.5">
+          <i class="fas fa-rotate mr-1"></i> Scan Now
+        </button>
       </div>
     </div>
 
-    <!-- Right Column: Results & Previews (5 cols) -->
-    <div class="lg:col-span-5 flex flex-col gap-8">
+    <!-- Quick Market Overview (Indices Cards) -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
       
-      <!-- Key Metrics Display -->
-      <div>
-        <h2 class="text-xs font-black uppercase tracking-widest text-dark/40 mb-4">Verified Results</h2>
-        <div class="grid grid-cols-2 gap-4">
-          <!-- Metric 1 Card -->
-          <div class="border rounded-2xl p-5 text-center shadow-sm" style="border-color: color-mix(in srgb, {{project.tagColor}} 15%, transparent); background-color: color-mix(in srgb, {{project.tagColor}} 4%, transparent);">
-            <p class="text-[9px] font-black uppercase tracking-widest text-dark/40 mb-2">{{project.metric1}}</p>
-            <div class="text-2xl font-black flex items-center justify-center gap-0.5" style="color: {{project.tagColor}}">
-              <span>{{project.metric1}}</span>
-            </div>
-          </div>
-          <!-- Metric 2 Card -->
-          <div class="border rounded-2xl p-5 text-center shadow-sm" style="border-color: color-mix(in srgb, {{project.tagColor}} 15%, transparent); background-color: color-mix(in srgb, {{project.tagColor}} 4%, transparent);">
-            <p class="text-[9px] font-black uppercase tracking-widest text-dark/40 mb-2">{{project.metric2}}</p>
-            <div class="text-2xl font-black text-dark flex items-center justify-center gap-0.5">
-              <span>{{project.metric2}}</span>
-            </div>
-          </div>
+      <!-- Card 1 -->
+      <div class="bg-[#111622]/40 backdrop-blur-md rounded-3xl p-6 border border-white/5 hover:border-emerald-500/30 transition-all duration-300">
+        <p class="text-[9px] font-black uppercase tracking-widest text-white/40 mb-1">NIFTY 50</p>
+        <p class="text-2xl font-black font-mono text-white" id="nifty-val">24,385.20</p>
+        <div class="flex items-center gap-1.5 text-[10px] text-emerald-400 font-bold mt-2">
+          <i class="fas fa-arrow-trend-up"></i> <span id="nifty-change">+1.24% (+298.50)</span>
         </div>
       </div>
 
-      <!-- Mockup Section for Web & AI categories -->
-      {{#if (eq project.category 'web')}}
-      <div class="flex flex-col gap-3">
-        <h2 class="text-xs font-black uppercase tracking-widest text-dark/40">Interactive Wireframe Preview</h2>
-        
-        <div class="mockup-browser border border-black/10 bg-[#f0ede6] rounded-2xl overflow-hidden shadow-xl">
-          <div class="bg-[#e5dfd5] px-4 py-2.5 flex items-center gap-1.5 border-b border-black/5">
-            <span class="w-2.5 h-2.5 rounded-full bg-red-500/80"></span>
-            <span class="w-2.5 h-2.5 rounded-full bg-yellow-500/80"></span>
-            <span class="w-2.5 h-2.5 rounded-full bg-green-500/80"></span>
-            <div class="bg-white/60 px-4 py-1 rounded-full text-[9px] text-dark/40 ml-4 w-52 truncate tracking-wide border border-black/5">https://wholeup.in/showcase</div>
+      <!-- Card 2 -->
+      <div class="bg-[#111622]/40 backdrop-blur-md rounded-3xl p-6 border border-white/5 hover:border-emerald-500/30 transition-all duration-300">
+        <p class="text-[9px] font-black uppercase tracking-widest text-white/40 mb-1">SENSEX</p>
+        <p class="text-2xl font-black font-mono text-white" id="sensex-val">80,120.45</p>
+        <div class="flex items-center gap-1.5 text-[10px] text-emerald-400 font-bold mt-2">
+          <i class="fas fa-arrow-trend-up"></i> <span id="sensex-change">+1.08% (+856.10)</span>
+        </div>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="bg-[#111622]/40 backdrop-blur-md rounded-3xl p-6 border border-white/5 hover:border-emerald-500/30 transition-all duration-300">
+        <p class="text-[9px] font-black uppercase tracking-widest text-white/40 mb-1">AI Scan Success Rate</p>
+        <p class="text-2xl font-black font-mono text-emerald-400">78.4%</p>
+        <div class="flex items-center gap-1.5 text-[10px] text-white/40 font-bold mt-2">
+          <i class="fas fa-circle-check"></i> Based on last 250 signals
+        </div>
+      </div>
+
+      <!-- Card 4 -->
+      <div class="bg-[#111622]/40 backdrop-blur-md rounded-3xl p-6 border border-white/5 hover:border-emerald-500/30 transition-all duration-300">
+        <p class="text-[9px] font-black uppercase tracking-widest text-white/40 mb-1">Total Active Signals</p>
+        <p class="text-2xl font-black font-mono text-white" id="active-signals-count">8 Signals</p>
+        <div class="flex items-center gap-1.5 text-[10px] text-white/40 font-bold mt-2">
+          <i class="fas fa-hourglass-half"></i> Updated 10s ago
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Main Live Chart and Grid Section -->
+    <div class="grid lg:grid-cols-12 gap-8 items-start">
+      
+      <!-- Left: Real-time Interactive Technical Chart (7 cols) -->
+      <div class="lg:col-span-8 bg-[#111622]/60 backdrop-blur-xl border border-white/5 rounded-[32px] p-6 md:p-8 shadow-2xl space-y-6">
+        <div class="flex justify-between items-center flex-wrap gap-4">
+          <div>
+            <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-[9px] font-black text-emerald-400 uppercase tracking-widest mb-1.5">
+              Live Tracker
+            </span>
+            <h2 class="text-lg font-black uppercase tracking-wide text-white flex items-center gap-2">
+              <span id="selected-chart-symbol">TATA MOTORS</span>
+              <span class="text-xs text-white/40 font-mono" id="selected-chart-price">₹984.50</span>
+            </h2>
           </div>
           
-          <div class="mock-browser-scroll h-64 overflow-y-auto bg-[#faf8f2] p-4 relative scroll-smooth flex flex-col gap-4">
-            {{#if (eq project.slug 'fintech-saas-webgl')}}
-            <!-- Fintech SaaS Mockup -->
-            <div class="border border-black/5 bg-black/5 rounded-xl p-4 flex flex-col gap-2">
-              <div class="h-2 w-12 rounded bg-cyan-600"></div>
-              <div class="h-4 w-40 rounded bg-dark/10"></div>
-              <div class="h-2.5 w-full rounded bg-dark/5"></div>
-              <div class="h-2.5 w-4/5 rounded bg-dark/5"></div>
-              <div class="flex gap-2 mt-2">
-                <div class="h-6 w-20 rounded bg-cyan-500"></div>
-                <div class="h-6 w-16 rounded border border-black/10 bg-black/5"></div>
-              </div>
-            </div>
-            <div class="border border-cyan-500/20 bg-cyan-50/50 rounded-xl p-4 flex flex-col gap-3">
-              <div class="flex justify-between items-center">
-                <div class="h-2.5 w-24 rounded bg-dark/20"></div>
-                <span class="text-[8px] text-cyan-600 font-bold uppercase tracking-widest border border-cyan-500/20 bg-cyan-500/5 px-2 py-0.5 rounded">WebGL Canvas</span>
-              </div>
-              <div class="h-28 border border-black/5 bg-white rounded-lg p-3 flex items-end gap-1.5 relative overflow-hidden shadow-sm">
-                <div class="absolute inset-0 flex items-center justify-center">
-                  <span class="text-[8px] text-dark/15 uppercase font-bold tracking-widest animate-pulse">Dynamic Financial Ledger Canvas</span>
-                </div>
-                <div class="w-full bg-cyan-500/20 rounded-t h-[30%]"></div>
-                <div class="w-full bg-cyan-500/40 rounded-t h-[55%]"></div>
-                <div class="w-full bg-cyan-500/30 rounded-t h-[40%]"></div>
-                <div class="w-full bg-cyan-500/60 rounded-t h-[85%]"></div>
-                <div class="w-full bg-cyan-500 rounded-t h-[95%]"></div>
-              </div>
-            </div>
-            {{else}}
-            <!-- eCommerce Mockup -->
-            <div class="border border-black/5 bg-black/5 rounded-xl px-3 py-2 flex justify-between items-center">
-              <div class="h-3 w-16 rounded bg-dark/10"></div>
-              <div class="flex gap-2">
-                <div class="h-2.5 w-6 rounded bg-dark/5"></div>
-                <div class="h-2.5 w-6 rounded bg-dark/5"></div>
-                <div class="h-2.5 w-6 rounded bg-violet-500/80"></div>
-              </div>
-            </div>
-            <div class="border border-black/5 bg-black/5 rounded-xl p-4 flex flex-col gap-3">
-              <div class="h-32 border border-black/5 bg-white rounded-lg relative overflow-hidden flex items-center justify-center shadow-sm">
-                <div class="absolute inset-0 bg-gradient-to-tr from-violet-500/5 to-transparent"></div>
-                <i class="fas fa-shopping-bag text-2xl text-violet-400"></i>
-              </div>
-              <div class="h-4 w-32 rounded bg-dark/15"></div>
-              <div class="flex justify-between items-center">
-                <div class="h-3 w-12 rounded bg-violet-50"></div>
-                <div class="h-6 w-20 rounded bg-violet-600 flex items-center justify-center text-[8px] font-black text-white uppercase tracking-wider">Buy Now</div>
-              </div>
-            </div>
-            {{/if}}
+          <div class="flex gap-2">
+            <span class="text-[10px] font-bold px-3 py-1.5 rounded-lg bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 uppercase">RSI: 62 (Bullish)</span>
+            <span class="text-[10px] font-bold px-3 py-1.5 rounded-lg bg-white/5 border border-white/5 text-white/60 uppercase">1D Interval</span>
+          </div>
+        </div>
+
+        <!-- Custom Styled Chart Canvas -->
+        <div class="relative h-[320px] md:h-[380px] w-full bg-[#0A0D14]/80 border border-white/5 rounded-2xl p-4">
+          <canvas id="apex-live-chart"></canvas>
+        </div>
+
+        <!-- Indicator Dashboard Stats -->
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+          <div class="bg-white/5 border border-white/5 rounded-xl p-3 text-center">
+            <span class="block text-[8px] font-black uppercase tracking-widest text-white/40">MACD Trend</span>
+            <span class="text-xs font-bold text-emerald-400 uppercase mt-0.5 inline-block">Bullish Crossover</span>
+          </div>
+          <div class="bg-white/5 border border-white/5 rounded-xl p-3 text-center">
+            <span class="block text-[8px] font-black uppercase tracking-widest text-white/40">Bollinger Band</span>
+            <span class="text-xs font-bold text-white/60 uppercase mt-0.5 inline-block">Mid-Band Bounce</span>
+          </div>
+          <div class="bg-white/5 border border-white/5 rounded-xl p-3 text-center">
+            <span class="block text-[8px] font-black uppercase tracking-widest text-white/40">200 EMA Support</span>
+            <span class="text-xs font-bold text-emerald-400 uppercase mt-0.5 inline-block">Above Support</span>
+          </div>
+          <div class="bg-white/5 border border-white/5 rounded-xl p-3 text-center">
+            <span class="block text-[8px] font-black uppercase tracking-widest text-white/40">Sentiment Analysis</span>
+            <span class="text-xs font-bold text-emerald-400 uppercase mt-0.5 inline-block">82% Positive</span>
           </div>
         </div>
       </div>
-      {{/if}}
 
-      {{#if (eq project.category 'ai')}}
-      <div class="flex flex-col gap-3">
-        <h2 class="text-xs font-black uppercase tracking-widest text-dark/40">Interactive Wireframe Preview</h2>
-        
-        <div class="mockup-browser border border-black/10 bg-[#f0ede6] rounded-2xl overflow-hidden shadow-xl">
-          <div class="bg-[#e5dfd5] px-4 py-2.5 flex items-center gap-1.5 border-b border-black/5">
-            <span class="w-2.5 h-2.5 rounded-full bg-red-500/80"></span>
-            <span class="w-2.5 h-2.5 rounded-full bg-yellow-500/80"></span>
-            <span class="w-2.5 h-2.5 rounded-full bg-green-500/80"></span>
-            <div class="bg-white/60 px-4 py-1 rounded-full text-[9px] text-dark/40 ml-4 w-52 truncate tracking-wide border border-black/5">https://wholeup.in/showcase</div>
-          </div>
+      <!-- Right: Real-time Breakout Signals Grid (5 cols) -->
+      <div class="lg:col-span-4 bg-[#111622]/60 backdrop-blur-xl border border-white/5 rounded-[32px] p-6 md:p-8 shadow-2xl space-y-6">
+        <div>
+          <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-[9px] font-black text-emerald-400 uppercase tracking-widest mb-1.5">
+            AI Scan Results
+          </span>
+          <h2 class="text-lg font-black uppercase tracking-wide text-white">Trending Breakout Signals</h2>
+          <p class="text-xs text-white/40 mt-1">Automatic patterns detected on high volume breakouts.</p>
+        </div>
+
+        <div class="space-y-4 max-h-[500px] overflow-y-auto pr-1 scrollbar-thin" id="signals-scroll-box">
           
-          <div class="mock-browser-scroll h-64 overflow-y-auto bg-[#faf8f2] p-4 relative scroll-smooth flex flex-col gap-4">
-            {{#if (eq project.slug 'ai-lead-automation')}}
-            <!-- AI Chatbot Mockup -->
-            <div class="border border-black/5 bg-black/5 rounded-xl p-4 flex flex-col gap-2">
-              <div class="h-3.5 w-36 rounded bg-emerald-500"></div>
-              <div class="h-2 w-full rounded bg-dark/5"></div>
+          <!-- Signal 1 -->
+          <div onclick="selectStock('TATA MOTORS', [920, 935, 942, 955, 968, 984.50], '984.50', '+2.4%')" class="flex items-start gap-4 p-4 border border-emerald-500/30 rounded-2xl bg-emerald-500/5 hover:border-emerald-400 transition-all duration-200 cursor-pointer group">
+            <div class="w-10 h-10 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center text-lg flex-shrink-0">
+              <i class="fas fa-arrow-trend-up"></i>
             </div>
-            <div class="border border-emerald-500/20 bg-emerald-50/50 rounded-xl p-4 flex flex-col gap-3">
-              <span class="text-[8px] text-emerald-600 font-extrabold uppercase tracking-widest bg-emerald-500/5 border border-emerald-500/20 px-2 py-0.5 rounded self-start">Live GrowBot Chat</span>
-              <div class="flex flex-col gap-2">
-                <div class="bg-white border border-black/5 rounded-lg p-2.5 self-start max-w-[80%] flex flex-col gap-1.5 shadow-sm">
-                  <div class="h-1.5 w-10 rounded bg-emerald-500"></div>
-                  <div class="h-1 w-24 rounded bg-dark/10"></div>
+            <div class="flex-grow">
+              <div class="flex justify-between items-start">
+                <div>
+                  <h4 class="text-sm font-black uppercase tracking-wider text-white group-hover:text-emerald-400 transition-colors">TATA MOTORS</h4>
+                  <p class="text-[9px] text-white/40 font-mono">CMP: ₹984.50 | Vol: 2.4M</p>
                 </div>
-                <div class="bg-emerald-600 rounded-lg p-2.5 self-end max-w-[80%] flex flex-col gap-1.5 text-white">
-                  <div class="h-1 w-20 rounded bg-white/80"></div>
-                </div>
+                <span class="text-[9px] font-black px-2.5 py-0.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 uppercase tracking-widest">Bullish</span>
+              </div>
+              <div class="flex items-center justify-between mt-3 text-[10px] text-white/60 font-semibold border-t border-white/5 pt-2">
+                <span>Pattern: <strong>Cup & Handle</strong></span>
+                <span class="text-emerald-400">Prob: 81.2%</span>
               </div>
             </div>
-            {{/if}}
-
-            {{#if (eq project.slug 'ai-voice-calling')}}
-            <!-- AI Voice Calling Mockup -->
-            <div class="border border-green-500/20 bg-green-50/55 rounded-xl px-3 py-2 flex justify-between items-center">
-              <div class="flex items-center gap-2">
-                <span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
-                <span class="text-[8px] text-green-700 font-extrabold tracking-wider uppercase">Voice Agent Active</span>
-              </div>
-              <div class="h-1.5 w-10 rounded bg-dark/10"></div>
-            </div>
-            <div class="flex flex-col gap-2 border border-black/5 bg-white rounded-xl p-3 shadow-sm">
-              <p class="text-[7px] text-dark/30 font-bold uppercase tracking-wider mb-0.5">Live Call Transcript</p>
-              <div class="flex flex-col gap-2">
-                <div class="bg-green-50 border border-green-500/10 rounded-lg p-2 self-start max-w-[90%] text-[8px] leading-relaxed text-dark/80">
-                  <strong class="text-green-700">Voice AI:</strong> "Hello, Amit! I saw you checked our SEO plans. Do you have any questions?"
-                </div>
-                <div class="bg-black/5 border border-black/5 rounded-lg p-2 self-end max-w-[90%] text-[8px] leading-relaxed text-dark/80">
-                  <strong>Amit:</strong> "Yes, I need ranking for my clinic. Can we do a call?"
-                </div>
-              </div>
-            </div>
-            {{/if}}
-
-            {{#if (eq project.slug 'ai-competitor-tracker')}}
-            <!-- AI Competitor Tracker Mockup -->
-            <div class="border border-violet-500/20 bg-violet-50/50 rounded-xl px-3 py-2 flex justify-between items-center">
-              <span class="text-[8px] text-violet-700 font-extrabold tracking-wider uppercase">Competitor Intelligence</span>
-              <div class="h-3.5 w-12 rounded bg-violet-600 flex items-center justify-center text-[7px] font-bold text-white tracking-widest uppercase">Scanning</div>
-            </div>
-            <div class="flex flex-col gap-1.5 border border-black/5 bg-white rounded-xl p-3 shadow-sm">
-              <p class="text-[7px] text-dark/30 font-bold uppercase tracking-wider mb-0.5">Scraper Alerts</p>
-              <div class="flex items-center justify-between border-b border-black/5 pb-1.5">
-                <div class="flex flex-col gap-0.5">
-                  <span class="text-[8px] font-bold text-dark">Brand X (Skincare)</span>
-                  <span class="text-[7px] text-red-500 font-semibold">Price drop: -15% on Serum</span>
-                </div>
-              </div>
-            </div>
-            {{/if}}
           </div>
+
+          <!-- Signal 2 -->
+          <div onclick="selectStock('RELIANCE', [2810, 2835, 2820, 2845, 2880, 2912], '2,912.00', '+1.8%')" class="flex items-start gap-4 p-4 border border-white/5 rounded-2xl bg-[#0A0D14]/40 hover:border-emerald-500/30 transition-all duration-200 cursor-pointer group">
+            <div class="w-10 h-10 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center text-lg flex-shrink-0">
+              <i class="fas fa-arrow-trend-up"></i>
+            </div>
+            <div class="flex-grow">
+              <div class="flex justify-between items-start">
+                <div>
+                  <h4 class="text-sm font-black uppercase tracking-wider text-white group-hover:text-emerald-400 transition-colors">RELIANCE</h4>
+                  <p class="text-[9px] text-white/40 font-mono">CMP: ₹2,912.00 | Vol: 1.8M</p>
+                </div>
+                <span class="text-[9px] font-black px-2.5 py-0.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 uppercase tracking-widest">Bullish</span>
+              </div>
+              <div class="flex items-center justify-between mt-3 text-[10px] text-white/60 font-semibold border-t border-white/5 pt-2">
+                <span>Pattern: <strong>Double Bottom</strong></span>
+                <span class="text-emerald-400">Prob: 77.8%</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Signal 3 -->
+          <div onclick="selectStock('HDFC BANK', [1480, 1495, 1490, 1510, 1532, 1528], '1,528.00', '+0.7%')" class="flex items-start gap-4 p-4 border border-white/5 rounded-2xl bg-[#0A0D14]/40 hover:border-emerald-500/30 transition-all duration-200 cursor-pointer group">
+            <div class="w-10 h-10 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center text-lg flex-shrink-0">
+              <i class="fas fa-arrow-trend-up"></i>
+            </div>
+            <div class="flex-grow">
+              <div class="flex justify-between items-start">
+                <div>
+                  <h4 class="text-sm font-black uppercase tracking-wider text-white group-hover:text-emerald-400 transition-colors">HDFC BANK</h4>
+                  <p class="text-[9px] text-white/40 font-mono">CMP: ₹1,528.00 | Vol: 4.1M</p>
+                </div>
+                <span class="text-[9px] font-black px-2.5 py-0.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 uppercase tracking-widest">Bullish</span>
+              </div>
+              <div class="flex items-center justify-between mt-3 text-[10px] text-white/60 font-semibold border-t border-white/5 pt-2">
+                <span>Pattern: <strong>Flag Pattern</strong></span>
+                <span class="text-emerald-400">Prob: 75.4%</span>
+              </div>
+            </div>
+          </div>
+
         </div>
       </div>
-      {{/if}}
 
     </div>
+
   </div>
 </section>
 
-<!-- Related Case Studies -->
-{{#if related}}
-<section class="py-20 bg-cream px-6 border-t border-black/5">
-  <div class="max-w-5xl mx-auto">
-    <h2 class="text-base font-black uppercase tracking-widest text-dark mb-8 gs-reveal">Related Case Studies</h2>
-    <div class="grid md:grid-cols-3 gap-5">
-      {{#each related}}
-      <a href="/portfolio/{{slug}}" class="glass-card rounded-2xl p-6 gs-reveal block hover:-translate-y-1 transition-all group">
-        <div class="w-10 h-10 rounded-xl flex items-center justify-center text-lg mb-4" style="background: {{tagBg}}; color: {{tagColor}}">
-          <i class="{{icon}}"></i>
-        </div>
-        <h3 class="text-sm font-black uppercase tracking-wide text-dark mb-2 group-hover:text-primary transition">{{title}}</h3>
-        <p class="text-dark/55 text-xs font-normal leading-relaxed mb-3">{{description}}</p>
-        <span class="text-primary text-xs font-semibold">Read Case Study →</span>
-      </a>
-      {{/each}}
-    </div>
-  </div>
-</section>
-{{/if}}
-
-<!-- CTA Strip -->
-<section class="py-16 px-6 bg-[#EAF6ED] border-t border-black/5 relative overflow-hidden">
-  <div class="absolute inset-0 opacity-[0.05]" style="background-image: radial-gradient(#000 1px, transparent 1px); background-size: 28px 28px;"></div>
-  <div class="max-w-3xl mx-auto text-center relative z-10 gs-reveal">
-    <h2 class="text-xl md:text-2xl font-black text-dark uppercase tracking-widest mb-3">Want to achieve similar results?</h2>
-    <p class="text-dark/70 text-sm font-normal mb-7 max-w-xl mx-auto leading-relaxed">Book a free strategy session with Wholeup. We'll audit your current channels and layout a personalized growth roadmap.</p>
-    <a href="/contact" class="bg-primary text-white px-8 py-4 rounded-xl font-black uppercase tracking-widest text-xs shadow-xl shadow-primary/25 hover:bg-green-600 transition magnetic-btn inline-flex items-center gap-2">
-      Book Free Strategy Call <i class="fas fa-arrow-right"></i>
-    </a>
-  </div>
-</section>
-
+<!-- Web Synth Audio & Simulation Scripts -->
 <script>
+  let mainChartInstance = null;
+
+  // Initialize live chart on load
   window.addEventListener('DOMContentLoaded', () => {
-    const viewport = document.querySelector('.mock-browser-scroll');
-    if (viewport && typeof gsap !== 'undefined') {
-      // Auto Scroll inside simulated browser frame
-      const tl = gsap.timeline({ delay: 1.0 });
-      tl.to(viewport, {
-        scrollTop: viewport.scrollHeight - viewport.clientHeight,
-        duration: 5.0,
-        ease: 'power1.inOut'
-      });
-      tl.to(viewport, {
-        scrollTop: 0,
-        duration: 2.5,
-        ease: 'power2.out',
-        delay: 0.5
-      });
-    }
+    const ctx = document.getElementById('apex-live-chart').getContext('2d');
+    
+    // Create initial chart data
+    mainChartInstance = new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: ['10:00', '11:00', '12:00', '13:00', '14:00', '15:00'],
+        datasets: [{
+          label: 'TATA MOTORS Price (₹)',
+          data: [920, 935, 942, 955, 968, 984.50],
+          borderColor: '#10B981',
+          borderWidth: 3,
+          backgroundColor: (context) => {
+            const chart = context.chart;
+            const {ctx, chartArea} = chart;
+            if (!chartArea) return null;
+            const gradient = ctx.createLinearGradient(0, chartArea.top, 0, chartArea.bottom);
+            gradient.addColorStop(0, 'rgba(16, 185, 129, 0.25)');
+            gradient.addColorStop(1, 'rgba(16, 185, 129, 0.0)');
+            return gradient;
+          },
+          fill: true,
+          tension: 0.4,
+          pointRadius: 6,
+          pointBackgroundColor: '#10B981',
+          pointHoverRadius: 8
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: { display: false }
+        },
+        scales: {
+          x: {
+            grid: { color: 'rgba(255, 255, 255, 0.05)' },
+            ticks: { color: 'rgba(255, 255, 255, 0.4)' }
+          },
+          y: {
+            grid: { color: 'rgba(255, 255, 255, 0.05)' },
+            ticks: { color: 'rgba(255, 255, 255, 0.4)' }
+          }
+        }
+      }
+    });
+
+    // Start auto indices simulation
+    setInterval(simulateIndicesFluc, 4000);
   });
+
+  // Handle stock selection and update chart dynamically
+  function selectStock(symbol, chartData, price, changeText) {
+    document.getElementById('selected-chart-symbol').textContent = symbol;
+    document.getElementById('selected-chart-price').textContent = '₹' + price;
+    
+    // Update chart dataset
+    if (mainChartInstance) {
+      mainChartInstance.data.datasets[0].label = `${symbol} Price (₹)`;
+      mainChartInstance.data.datasets[0].data = chartData;
+      mainChartInstance.update();
+    }
+
+    // Play sleek click synth sound
+    playBeepSound(440, 0.15); // A4 note
+  }
+
+  // Simulate market indices fluctuation
+  function simulateIndicesFluc() {
+    const nifty = document.getElementById('nifty-val');
+    const sensex = document.getElementById('sensex-val');
+    
+    if (nifty && sensex) {
+      const currentNifty = parseFloat(nifty.textContent.replace(/,/g, ''));
+      const currentSensex = parseFloat(sensex.textContent.replace(/,/g, ''));
+      
+      const flucNifty = (currentNifty + (Math.random() * 20 - 10)).toFixed(2);
+      const flucSensex = (currentSensex + (Math.random() * 80 - 40)).toFixed(2);
+      
+      nifty.textContent = parseFloat(flucNifty).toLocaleString('en-IN', {minimumFractionDigits: 2});
+      sensex.textContent = parseFloat(flucSensex).toLocaleString('en-IN', {minimumFractionDigits: 2});
+    }
+  }
+
+  // Live scanner stimulation logic
+  function triggerSimulatedScan() {
+    const box = document.getElementById('signals-scroll-box');
+    const stockNames = ["INFOSYS", "SBI BANK", "ITC", "TCS", "BAJAJ FINANCE", "WIPRO", "MARUTI", "JIO FINANCIAL"];
+    const patterns = ["Bullish Flag", "Triangle Breakout", "Double Bottom", "Rounding Bottom", "Wedge Pattern"];
+    
+    const randomStock = stockNames[Math.floor(Math.random() * stockNames.length)];
+    const randomPattern = patterns[Math.floor(Math.random() * patterns.length)];
+    const randomPrice = (Math.random() * 2000 + 300).toFixed(2);
+    const randomVol = (Math.random() * 4 + 0.5).toFixed(1) + "M";
+    const randomProb = (Math.random() * 8 + 74).toFixed(1) + "%";
+    
+    // Generate random price list for chart
+    const pricesList = Array.from({length: 6}, () => Math.floor(Math.random() * 50 + parseFloat(randomPrice) - 25));
+    pricesList.push(parseFloat(randomPrice));
+
+    // Create new signal card
+    const div = document.createElement('div');
+    div.className = "flex items-start gap-4 p-4 border border-emerald-500/30 rounded-2xl bg-emerald-500/5 hover:border-emerald-400 transition-all duration-200 cursor-pointer group bg-emerald-500/10";
+    div.onclick = () => selectStock(randomStock, pricesList, parseFloat(randomPrice).toLocaleString('en-IN', {minimumFractionDigits: 2}), '+1.5%');
+    div.innerHTML = `
+      <div class="w-10 h-10 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center text-lg flex-shrink-0">
+        <i class="fas fa-arrow-trend-up"></i>
+      </div>
+      <div class="flex-grow">
+        <div class="flex justify-between items-start">
+          <div>
+            <h4 class="text-sm font-black uppercase tracking-wider text-white group-hover:text-emerald-400 transition-colors">${randomStock}</h4>
+            <p class="text-[9px] text-white/40 font-mono">CMP: ₹${parseFloat(randomPrice).toLocaleString('en-IN', {minimumFractionDigits: 2})} | Vol: ${randomVol}</p>
+          </div>
+          <span class="text-[9px] font-black px-2.5 py-0.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 uppercase tracking-widest">Bullish</span>
+        </div>
+        <div class="flex items-center justify-between mt-3 text-[10px] text-white/60 font-semibold border-t border-white/5 pt-2">
+          <span>Pattern: <strong>${randomPattern}</strong></span>
+          <span class="text-emerald-400">Prob: ${randomProb}</span>
+        </div>
+      </div>
+    `;
+
+    // Prepend and animate
+    box.insertBefore(div, box.firstChild);
+    playBeepSound(880, 0.25); // Trigger sound alert
+
+    if (typeof gsap !== 'undefined') {
+      gsap.from(div, { opacity: 0, scale: 0.9, duration: 0.45, ease: 'back.out(1.5)' });
+      gsap.to(div, { backgroundColor: 'rgba(16, 185, 129, 0.05)', delay: 1.2, duration: 0.8 });
+    }
+  }
+
+  // Web Audio synth player
+  function playBeepSound(freq, duration) {
+    try {
+      const context = new (window.AudioContext || window.webkitAudioContext)();
+      const osc = context.createOscillator();
+      const gain = context.createGain();
+      
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(freq, context.currentTime);
+      gain.gain.setValueAtTime(0.08, context.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.001, context.currentTime + duration);
+      
+      osc.connect(gain);
+      gain.connect(context.destination);
+      
+      osc.start();
+      osc.stop(context.currentTime + duration);
+    } catch(e) {}
+  }
 </script>

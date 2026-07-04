@@ -49,32 +49,132 @@
     {{{schemaMarkup}}}
   {{else}}
   <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "LocalBusiness",
-    "name": "Wholeup - Digital Marketing In India",
-    "url": "https://wholeup.in",
-    "logo": "https://wholeup.in/favicon.png",
-    "image": "https://wholeup.in/favicon.png",
-    "description": "Wholeup is a results-driven digital marketing agency in India offering SEO, Google Ads, Meta Ads, WhatsApp Automation, AI Services and Web Design.",
-    "telephone": "+919725137538",
-    "email": "wholeup.agency@gmail.com",
-    "address": {
-      "@type": "PostalAddress",
-      "addressLocality": "India",
-      "addressRegion": "India",
-      "addressCountry": "IN"
+  [
+    {
+      "@context": "https://schema.org",
+      "@type": "LocalBusiness",
+      "@id": "https://wholeup.in/#localbusiness",
+      "name": "Wholeup - Digital Marketing In India",
+      "url": "https://wholeup.in",
+      "logo": "https://wholeup.in/favicon.png",
+      "image": "https://wholeup.in/favicon.png",
+      "description": "Wholeup is a results-driven digital marketing agency in India offering SEO, Google Ads, Meta Ads, WhatsApp Automation, AI Services and Web Design.",
+      "telephone": "+919725137538",
+      "email": "wholeup.agency@gmail.com",
+      "priceRange": "₹8000 - ₹50000",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "India",
+        "addressRegion": "India",
+        "addressCountry": "IN"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": "22.3072",
+        "longitude": "73.1812"
+      },
+      "openingHoursSpecification": [
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+          "opens": "09:00",
+          "closes": "20:00"
+        }
+      ],
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.9",
+        "reviewCount": "82",
+        "bestRating": "5",
+        "worstRating": "1"
+      },
+      "sameAs": [
+        "https://www.instagram.com/wholeup.agency/",
+        "https://www.facebook.com/wholeup.agency",
+        "https://www.linkedin.com/company/wholeup-solutions"
+      ],
+      "serviceArea": {
+        "@type": "Place",
+        "name": "India"
+      }
     },
-    "sameAs": [
-      "https://www.instagram.com/wholeup.agency/",
-      "https://www.facebook.com/wholeup.agency",
-      "https://www.linkedin.com/company/wholeup-solutions"
-    ],
-    "serviceArea": {
-      "@type": "Place",
-      "name": "India"
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "@id": "https://wholeup.in/#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "How do I get started with Wholeup?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "It's simple — book a free 30-minute strategy call. We'll audit your current digital presence, understand your goals, and recommend the right package. No obligation, no hard sell."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do you work with small businesses and startups?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Absolutely. We work with everyone from funded startups to established enterprises. We have package options starting from ₹8,000/month to suit every stage of growth."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How long does it take to see results?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Paid ads can show results within the first week. SEO typically takes 3–6 months for significant movement. Social media growth is usually visible within 30 days. We set honest expectations in every proposal."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do you manage ad spend, or do we control our own budget?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "You always control your own ad budget. Your ad accounts remain in your name. We manage the campaigns as an authorized manager — we never take control of your billing or budget without your approval."
+          }
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "@id": "https://wholeup.in/#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://wholeup.in"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Services",
+          "item": "https://wholeup.in/services"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Portfolio",
+          "item": "https://wholeup.in/portfolio"
+        },
+        {
+          "@type": "ListItem",
+          "position": 4,
+          "name": "Blog",
+          "item": "https://wholeup.in/blog"
+        },
+        {
+          "@type": "ListItem",
+          "position": 5,
+          "name": "Contact",
+          "item": "https://wholeup.in/contact"
+        }
+      ]
     }
-  }
+  ]
   </script>
   {{/if}}
 
@@ -156,7 +256,9 @@
           "addressCountry": "IN"
         },
         "sameAs": [
-          "https://www.instagram.com/wholeup.agency/"
+          "https://www.instagram.com/wholeup.agency/",
+          "https://www.facebook.com/wholeup.agency",
+          "https://www.linkedin.com/company/wholeup-solutions"
         ]
       },
       {
@@ -168,6 +270,80 @@
         "publisher": {
           "@id": "https://wholeup.in/#organization"
         }
+      },
+      {
+        "@type": "FAQPage",
+        "@id": "https://wholeup.in/#faq",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "How do I get started with Wholeup?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "It's simple — book a free 30-minute strategy call. We'll audit your current digital presence, understand your goals, and recommend the right package. No obligation, no hard sell."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Do you work with small businesses and startups?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Absolutely. We work with everyone from funded startups to established enterprises. We have package options starting from ₹8,000/month to suit every stage of growth."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How long does it take to see results?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Paid ads can show results within the first week. SEO typically takes 3–6 months for significant movement. Social media growth is usually visible within 30 days. We set honest expectations in every proposal."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Do you manage ad spend, or do we control our own budget?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "You always control your own ad budget. Your ad accounts remain in your name. We manage the campaigns as an authorized manager — we never take control of your billing or budget without your approval."
+            }
+          }
+        ]
+      },
+      {
+        "@type": "BreadcrumbList",
+        "@id": "https://wholeup.in/#breadcrumb",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://wholeup.in"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Services",
+            "item": "https://wholeup.in/services"
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "Portfolio",
+            "item": "https://wholeup.in/portfolio"
+          },
+          {
+            "@type": "ListItem",
+            "position": 4,
+            "name": "Blog",
+            "item": "https://wholeup.in/blog"
+          },
+          {
+            "@type": "ListItem",
+            "position": 5,
+            "name": "Contact",
+            "item": "https://wholeup.in/contact"
+          }
+        ]
       }
     ]
   }

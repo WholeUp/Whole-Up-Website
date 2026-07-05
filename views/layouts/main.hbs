@@ -210,7 +210,7 @@
     fbq('track', 'PageView');
   </script>
   <script src="https://cdn.tailwindcss.com"></script>
-  <noscript><img height="1" width="1" id="fb-pixel-noscript" alt="Facebook Pixel" style="display:none" src="https://www.facebook.com/tr?id={{fbPixelId}}&ev=PageView&noscript=1"/></noscript>
+  <noscript><img height="1" width="1" id="fb-pixel-noscript" alt="Facebook Pixel" class="hidden" src="https://www.facebook.com/tr?id={{fbPixelId}}&ev=PageView&noscript=1"/></noscript>
   <script>
     tailwind.config = {
       theme: {
@@ -423,17 +423,17 @@
   </div>
 </div>
 
-<div id="debug-error-panel" style="display: none; background: #fee2e2; color: #991b1b; border: 2px solid #f87171; padding: 20px; font-family: monospace; font-size: 14px; position: fixed; top: 80px; left: 20px; right: 20px; z-index: 9999999; border-radius: 12px; box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1); max-height: 400px; overflow-y: auto;">
-  <h3 style="margin-top: 0; font-weight: bold; font-size: 16px;">⚠️ Client-Side JS Error Detected:</h3>
-  <pre id="debug-error-log" style="white-space: pre-wrap; margin: 0;"></pre>
-  <button onclick="document.getElementById('debug-error-panel').style.display='none'" style="margin-top: 12px; background: #ef4444; color: white; border: none; padding: 6px 12px; border-radius: 6px; cursor: pointer; font-weight: bold;">Close Panel</button>
+<div id="debug-error-panel" class="hidden bg-[#fee2e2] text-[#991b1b] border-2 border-[#f87171] p-5 font-mono text-sm fixed top-20 left-5 right-5 z-[9999999] rounded-xl shadow-lg max-h-[400px] overflow-y-auto">
+  <h3 class="mt-0 font-bold text-base">⚠️ Client-Side JS Error Detected:</h3>
+  <pre id="debug-error-log" class="whitespace-pre-wrap m-0"></pre>
+  <button onclick="document.getElementById('debug-error-panel').classList.add('hidden')" class="mt-3 bg-[#ef4444] text-white border-none py-1.5 px-3 rounded-md cursor-pointer font-bold">Close Panel</button>
 </div>
 <script>
   window.addEventListener('error', function(event) {
     const panel = document.getElementById('debug-error-panel');
     const log = document.getElementById('debug-error-log');
     if (panel && log) {
-      panel.style.display = 'block';
+      panel.classList.remove('hidden');
       log.textContent += event.message + '\n  at ' + event.filename + ':' + event.lineno + ':' + event.colno + '\n\n';
     }
   });
@@ -441,7 +441,7 @@
     const panel = document.getElementById('debug-error-panel');
     const log = document.getElementById('debug-error-log');
     if (panel && log) {
-      panel.style.display = 'block';
+      panel.classList.remove('hidden');
       log.textContent += 'Unhandled Promise Rejection: ' + event.reason + '\n\n';
     }
   });

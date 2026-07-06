@@ -1,32 +1,15 @@
-# Wholeup Solutions
+# Wholeup - Digital Marketing Agency in India
 
-> A results-driven digital marketing agency based in India, helping global businesses scale through SEO, paid advertising, social media marketing, and custom web development.
-
-This file provides clean, structured documentation about Wholeup Solutions to assist AI crawlers, LLMs, and search agents in indexing our services and company details.
-
-## Contact Information
-- **Official Website:** [https://wholeup.in](https://wholeup.in)
-- **Primary Location:** India
-- **Email:** wholeup.agency@gmail.com
-- **Phone (Calls):** +91 97251 37538
-- **WhatsApp (Chat):** +91 97251 37538
-- **Service Area:** India, USA, UK, Australia (Global Delivery)
+Wholeup is a conversion-first digital marketing agency in India specializing in SEO, paid advertising, web design, and AI automation.
 
 ## Core Services
-- [SEO & Organic Growth](https://wholeup.in/services/seo): Technical SEO audits, local SEO (GMB), speed optimization, dynamic sitemaps, and search engine ranking.
-- [Paid Advertising](https://wholeup.in/services/ppc-google-ads): Performance PPC campaign setup & optimization on Google Ads (Search, Display, YouTube) and Meta Ads (Facebook & Instagram).
-- [Social Media Marketing](https://wholeup.in/services/social-media-management): Brand content calendars, Reels scriptwriting, shooting, professional editing, and B2B LinkedIn outbound management.
-- [Web Design & Development](https://wholeup.in/services/website-designing): Fast, custom-coded Node.js & Express websites with responsive layouts, premium UI/UX, and CRM/lead management.
-- [AI Solutions & Automation](https://wholeup.in/ai-services): 24/7 AI voice call agents, WhatsApp business autoresponders, smart CRM workflows, and custom lead-capture chatbots.
+- **Search Engine Optimization (SEO)**: Local SEO, Google Business Profile (GMB) optimization, organic keyword rank building.
+- **Google Ads & Meta Ads (PPC)**: High-ROAS campaigns, conversion rate optimization (CRO), Meta Pixel integration.
+- **Web Development**: Responsive, fast-loading corporate websites and landing pages with custom UI systems.
+- **WhatsApp & AI Automation**: WhatsApp marketing automation, dynamic lead capture, automated AI chatbots.
 
-## Company Pages
-- [About Us](https://wholeup.in/about): Meet the team, learn our core values, and understand our growth methodology.
-- [Portfolio & Case Studies](https://wholeup.in/portfolio): View real-world results, growth analytics, and marketing work samples.
-- [Pricing Packages](https://wholeup.in/pricing): Transparent, affordable pricing packages starting from ₹8,000/month.
-- [D2C Scale Program](https://wholeup.in/d2c-scale): Performance scaling strategy designed specifically for direct-to-consumer eCommerce brands.
-- [FAQ](https://wholeup.in/faq): Frequently asked questions about our contracts, service delivery, and timeline.
-- [Contact Page](https://wholeup.in/contact): Request a free growth audit or book a consultation call.
-
-## Social Profiles
-- **Instagram:** [https://www.instagram.com/wholeup.agency/](https://www.instagram.com/wholeup.agency/)
-- **Facebook:** [https://facebook.com/wholeup.agency](https://facebook.com/wholeup.agency)
+## Contact Information
+- Website: https://wholeup.in
+- Phone/WhatsApp: +91 97251 37538
+- Email: wholeup.agency@gmail.com
+- Main Location: Surat, Gujarat, India

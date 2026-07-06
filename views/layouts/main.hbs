@@ -206,11 +206,11 @@
     t.src=v;s=b.getElementsByTagName(e)[0];
     s.parentNode.insertBefore(t,s)}(window, document,'script',
     'https://connect.facebook.net/en_US/fbevents.js');
-    fbq('init', '{{fbPixelId}}');
+    fbq('init', '{{#if fbPixelId}}{{fbPixelId}}{{else}}287654321012345{{/if}}');
     fbq('track', 'PageView');
   </script>
   <script src="https://cdn.tailwindcss.com"></script>
-  <noscript><img height="1" width="1" id="fb-pixel-noscript" alt="Facebook Pixel" class="hidden" src="https://www.facebook.com/tr?id={{fbPixelId}}&ev=PageView&noscript=1"/></noscript>
+  <noscript><img height="1" width="1" id="fb-pixel-noscript" alt="Facebook Pixel" class="hidden" src="https://www.facebook.com/tr?id={{#if fbPixelId}}{{fbPixelId}}{{else}}287654321012345{{/if}}&ev=PageView&noscript=1"/></noscript>
   <script>
     tailwind.config = {
       theme: {

@@ -269,6 +269,38 @@ app.get('/ai-services', (req, res) => {
   });
 });
 
+// Single Service Metadata Mapping for Local SEO Optimization
+const serviceMeta = {
+  "seo": {
+    title: "SEO Services & SEO Company in Surat, India | Wholeup",
+    metaDesc: "Wholeup is the best SEO agency in Surat. Get top Google rankings, organic search growth, and local Maps SEO. Book your free audit!"
+  },
+  "website-designing": {
+    title: "Website Designing & Development Company in Surat, India | Wholeup",
+    metaDesc: "Professional website designing and web development services in Surat. We build fast, high-converting, mobile-responsive websites."
+  },
+  "meta-ads": {
+    title: "Meta (Facebook & Instagram) Ads Agency in Surat | Wholeup",
+    metaDesc: "Get higher ROAS and qualified leads with Surat's top Meta ads agency. Expert campaign setups, retargeting funnels, and creative optimization."
+  },
+  "ppc-google-ads": {
+    title: "Google Ads & PPC Management Company in Surat | Wholeup",
+    metaDesc: "Boost sales instantly with expert Google Ads management in Surat. High-ROI search, display, and shopping campaigns. Call today!"
+  },
+  "whatsapp-marketing": {
+    title: "WhatsApp Marketing Automation & API Services in Surat | Wholeup",
+    metaDesc: "Reach customers directly on their mobile screens with 98% open rates. Official WhatsApp API setup and automated broadcasts in Surat."
+  },
+  "local-seo": {
+    title: "Local SEO & Google Maps Rankings Company in Surat | Wholeup",
+    metaDesc: "Dominate Google Maps 3-Pack and near me searches. Drive store footfall and inquiries with professional local SEO in Surat."
+  },
+  "social-media-management": {
+    title: "Social Media Management & SMM Agency in Surat | Wholeup",
+    metaDesc: "Engage your audience and grow followers with top social media management in Surat. Content scheduling, graphic design, and custom captions."
+  }
+};
+
 // Single Service
 app.get('/services/:slug', (req, res) => {
   const service = services.find(s => s.slug === req.params.slug);
@@ -285,9 +317,13 @@ app.get('/services/:slug', (req, res) => {
       "logo": "https://wholeup.in/favicon.png"
     }
   };
-  res.render('service-single', {
+  const meta = serviceMeta[service.slug] || {
     title: `${service.title} in India | Wholeup Digital Marketing`,
-    metaDesc: `${service.description} Wholeup provides expert ${service.title} services in India. Get a FREE consultation today!`,
+    metaDesc: `${service.description} Wholeup provides expert ${service.title} services in India. Get a FREE consultation today!`
+  };
+  res.render('service-single', {
+    title: meta.title,
+    metaDesc: meta.metaDesc,
     canonicalUrl: `https://wholeup.in/services/${service.slug}`,
     page: 'services',
     service,

@@ -148,7 +148,7 @@ function scoreLead(leadData) {
 app.get('/', (req, res) => {
   res.render('home', {
     title: 'Wholeup | Digital Marketing Agency | SEO, Ads & Web Design',
-    metaDesc: 'Wholeup is a digital marketing agency in Surat. We offer expert SEO, Google Ads, Meta Ads, Web Design, and WhatsApp Automation.',
+    metaDesc: 'Wholeup is a digital marketing agency in India. We offer expert SEO, Google Ads, Meta Ads, Web Design, and WhatsApp Automation.',
     canonicalUrl: 'https://wholeup.in',
     metaKeywords: 'digital marketing agency Surat, SEO agency Surat, Google Ads agency, Meta Ads agency, paid ads, WhatsApp automation, web design Surat, social media marketing Surat, case studies, Wholeup',
     ogImage: 'https://wholeup.in/favicon.png',
@@ -166,7 +166,7 @@ app.get('/about', (req, res) => {
     "@context": "https://schema.org",
     "@type": "AboutPage",
     "name": "About Wholeup",
-    "description": "Learn about Wholeup — a results-driven digital marketing agency in Surat. Our expert team helps businesses grow.",
+    "description": "Learn about Wholeup — a results-driven digital marketing agency in India. Our expert team helps businesses grow.",
     "url": "https://wholeup.in/about",
     "publisher": {
       "@type": "Organization",
@@ -176,10 +176,10 @@ app.get('/about', (req, res) => {
     }
   };
   res.render('about', {
-    title: 'About Wholeup | Best Digital Marketing Agency in Surat',
-    metaDesc: 'Learn about Wholeup — a results-driven digital marketing agency in Surat. Our expert team helps businesses grow with SEO, paid ads, AI automation & creative strategies.',
+    title: 'About Wholeup | Best Digital Marketing Agency in India',
+    metaDesc: 'Learn about Wholeup — a results-driven digital marketing agency in India. Our expert team helps businesses grow with SEO, paid ads, AI automation & creative strategies.',
     canonicalUrl: 'https://wholeup.in/about',
-    metaKeywords: 'about Wholeup, digital marketing agency Surat, marketing team Surat, best marketing agency Surat',
+    metaKeywords: 'about Wholeup, digital marketing agency India, marketing team India, best marketing agency India',
     page: 'about',
     loadThree: true,
     schemaMarkup: `<script type="application/ld+json">${JSON.stringify(schema)}</script>`
@@ -193,7 +193,7 @@ app.get('/services', (req, res) => {
     "@type": "Service",
     "provider": {
       "@type": "LocalBusiness",
-      "name": "Wholeup - Digital Marketing In Surat",
+      "name": "Wholeup - Digital Marketing In India",
       "url": "https://wholeup.in",
       "logo": "https://wholeup.in/favicon.png",
       "telephone": "+919725137538",
@@ -206,7 +206,7 @@ app.get('/services', (req, res) => {
       }
     },
     "serviceType": "Digital Marketing Services",
-    "areaServed": "Surat",
+    "areaServed": "India",
     "hasOfferCatalog": {
       "@type": "OfferCatalog",
       "name": "Digital Marketing Services Catalog",
@@ -221,10 +221,10 @@ app.get('/services', (req, res) => {
     }
   };
   res.render('services', {
-    title: 'Digital Marketing Services in Surat | SEO, Ads, Web Design | Wholeup',
-    metaDesc: 'Wholeup offers full-stack digital marketing services in Surat — SEO, Google Ads, Meta Ads, Social Media Marketing, WhatsApp Automation, AI Voice Agents & Conversion-Optimized Websites. Start growing today!',
+    title: 'Digital Marketing Services in India | SEO, Ads, Web Design | Wholeup',
+    metaDesc: 'Wholeup offers full-stack digital marketing services in India — SEO, Google Ads, Meta Ads, Social Media Marketing, WhatsApp Automation, AI Voice Agents & Conversion-Optimized Websites. Start growing today!',
     canonicalUrl: 'https://wholeup.in/services',
-    metaKeywords: 'SEO services Surat, Google Ads agency Surat, Meta Ads Surat, social media marketing, web design Surat, WhatsApp automation, digital marketing services',
+    metaKeywords: 'SEO services India, Google Ads agency India, Meta Ads India, social media marketing, web design India, WhatsApp automation, digital marketing services',
     page: 'services',
     services,
     loadThree: true,
@@ -239,12 +239,12 @@ app.get('/ai-services', (req, res) => {
     "@type": "Service",
     "provider": {
       "@type": "LocalBusiness",
-      "name": "Wholeup - Digital Marketing In Surat",
+      "name": "Wholeup - Digital Marketing In India",
       "url": "https://wholeup.in",
       "logo": "https://wholeup.in/favicon.png"
     },
     "serviceType": "AI Business Automation",
-    "areaServed": "Surat",
+    "areaServed": "India",
     "hasOfferCatalog": {
       "@type": "OfferCatalog",
       "name": "AI Solutions Catalog",
@@ -312,14 +312,14 @@ app.get('/services/:slug', (req, res) => {
     "description": service.description,
     "provider": {
       "@type": "LocalBusiness",
-      "name": "Wholeup - Digital Marketing In Surat",
+      "name": "Wholeup - Digital Marketing In India",
       "url": "https://wholeup.in",
       "logo": "https://wholeup.in/favicon.png"
     }
   };
   const meta = serviceMeta[service.slug] || {
-    title: `${service.title} in Surat | Wholeup Digital Marketing`,
-    metaDesc: `${service.description} Wholeup provides expert ${service.title} services in Surat. Get a FREE consultation today!`
+    title: `${service.title} in India | Wholeup Digital Marketing`,
+    metaDesc: `${service.description} Wholeup provides expert ${service.title} services in India. Get a FREE consultation today!`
   };
   res.render('service-single', {
     title: meta.title,
@@ -336,9 +336,9 @@ app.get('/services/:slug', (req, res) => {
 app.get('/portfolio', (req, res) => {
   res.render('portfolio', {
     title: 'Portfolio & Case Studies | Real Results by Wholeup Digital Marketing',
-    metaDesc: 'Explore Wholeup\'s portfolio — real case studies showing how we helped businesses in Surat achieve 2x–5x growth with SEO, paid ads & digital marketing.',
+    metaDesc: 'Explore Wholeup\'s portfolio — real case studies showing how we helped businesses in India achieve 2x–5x growth with SEO, paid ads & digital marketing.',
     canonicalUrl: 'https://wholeup.in/portfolio',
-    metaKeywords: 'digital marketing case studies Surat, SEO results, ad campaign results, Wholeup portfolio',
+    metaKeywords: 'digital marketing case studies India, SEO results, ad campaign results, Wholeup portfolio',
     page: 'portfolio',
     portfolio
   });
@@ -391,7 +391,7 @@ app.get('/blog', (req, res) => {
     title: 'Digital Marketing Blog | SEO Tips, Ads Strategies & Growth Insights | Wholeup',
     metaDesc: 'Read expert digital marketing tips, SEO strategies, Google & Meta Ads guides, and business growth insights from Wholeup — India\'s trusted digital marketing agency.',
     canonicalUrl: 'https://wholeup.in/blog',
-    metaKeywords: 'digital marketing blog Surat, SEO tips, Google Ads guide, Meta Ads strategy, social media marketing tips, business growth Surat',
+    metaKeywords: 'digital marketing blog India, SEO tips, Google Ads guide, Meta Ads strategy, social media marketing tips, business growth Surat',
     page: 'blog',
     posts: blogPosts
   });
@@ -464,7 +464,7 @@ app.get('/faq', (req, res) => {
     title: 'FAQs | Digital Marketing Agency Questions Answered | Wholeup',
     metaDesc: 'Got questions about digital marketing? Wholeup answers everything — SEO timelines, ad budgets, pricing, process, and how we help your business grow. Read our FAQs.',
     canonicalUrl: 'https://wholeup.in/faq',
-    metaKeywords: 'digital marketing FAQ, SEO questions, Google Ads FAQ, marketing agency questions Surat',
+    metaKeywords: 'digital marketing FAQ, SEO questions, Google Ads FAQ, marketing agency questions India',
     page: 'faq',
     faqs,
     schemaMarkup: `<script type="application/ld+json">${JSON.stringify(schema)}</script>`
@@ -477,14 +477,14 @@ app.get('/contact', (req, res) => {
     "@context": "https://schema.org",
     "@type": "ContactPage",
     "name": "Contact Wholeup",
-    "description": "Contact Wholeup Digital Marketing Agency in Surat. Book a FREE 30-minute growth strategy call. We help businesses with SEO, Ads, AI Automation & Web Design.",
+    "description": "Contact Wholeup Digital Marketing Agency in India. Book a FREE 30-minute growth strategy call. We help businesses with SEO, Ads, AI Automation & Web Design.",
     "url": "https://wholeup.in/contact"
   };
   res.render('contact', {
     title: 'Contact Wholeup | Book a FREE Digital Marketing Strategy Call',
     metaDesc: 'Contact Wholeup Digital Marketing Agency. Book a FREE 30-minute growth strategy call. We help businesses with SEO, Ads, AI Automation & Web Design. Call: +91 97251 37538.',
     canonicalUrl: 'https://wholeup.in/contact',
-    metaKeywords: 'contact digital marketing agency Surat, book marketing consultation, Wholeup contact, free marketing call Surat',
+    metaKeywords: 'contact digital marketing agency India, book marketing consultation, Wholeup contact, free marketing call India',
     page: 'contact',
     schemaMarkup: `<script type="application/ld+json">${JSON.stringify(schema)}</script>`
   });
@@ -560,7 +560,7 @@ app.get('/d2c-scale', (req, res) => {
     title: 'Scale Your D2C & E-commerce Brand with AI Automation | Wholeup',
     metaDesc: 'Stop running ads manually. Use Wholeup\'s AI Agents — 24/7 voice calls, WhatsApp automation & smart lead capture — to scale your D2C or E-commerce brand on autopilot. Get FREE demo!',
     canonicalUrl: 'https://wholeup.in/d2c-scale',
-    metaKeywords: 'D2C marketing Surat, ecommerce AI automation, AI voice agent D2C, WhatsApp automation ecommerce, scale D2C brand Surat',
+    metaKeywords: 'D2C marketing India, ecommerce AI automation, AI voice agent D2C, WhatsApp automation ecommerce, scale D2C brand India',
     page: 'd2c-scale'
   });
 });

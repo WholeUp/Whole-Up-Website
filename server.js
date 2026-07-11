@@ -259,8 +259,8 @@ app.get('/ai-services', (req, res) => {
     }
   };
   res.render('ai-services', {
-    title: 'AI Services for Business | 24/7 Voice AI, WhatsApp Automation, AI Chatbot | Wholeup',
-    metaDesc: 'Automate your business with Wholeup AI Services — 24/7 AI Voice Call Agents, WhatsApp AI Chatbots, AI Lead Generation, Smart CRM & more. Never miss a lead again. Get FREE demo!',
+    title: 'Automate Your Revenue | AI Business Solutions & Voice AI | Wholeup',
+    metaDesc: 'Deploy 24/7 AI Voice Call Agents, intelligent WhatsApp Chatbots, and automated lead qualifiers. Cut operational costs and never miss a buyer. Get a demo!',
     canonicalUrl: 'https://wholeup.in/ai-services',
     metaKeywords: 'AI voice agent, WhatsApp automation business, AI chatbot, AI lead generation, business automation, 24/7 AI system',
     page: 'ai-services',
@@ -272,32 +272,32 @@ app.get('/ai-services', (req, res) => {
 // Single Service Metadata Mapping for Local SEO Optimization
 const serviceMeta = {
   "seo": {
-    title: "SEO Services & SEO Company in Surat | Wholeup",
-    metaDesc: "Wholeup is the best SEO agency. Get top Google rankings, organic search growth, and local Maps SEO. Book your free audit!"
+    title: "Rank #1 on Google | SEO Services & Search Growth | Wholeup",
+    metaDesc: "Stop being invisible on Google. Get sustainable organic traffic, keyword rankings & custom technical SEO optimization. Claim your free SEO audit today!"
   },
   "website-designing": {
-    title: "Website Designing & Development Company in Surat | Wholeup",
-    metaDesc: "Professional website designing and web development services. We build fast, high-converting, mobile-responsive websites."
+    title: "High-Converting Web Design & Custom Web Development | Wholeup",
+    metaDesc: "We build ultra-fast, mobile-responsive websites designed to convert visitors into high-paying customers. Get a high-end custom web design today!"
   },
   "meta-ads": {
-    title: "Meta (Facebook & Instagram) Ads Agency | Wholeup",
-    metaDesc: "Get higher ROAS and qualified leads with our expert Meta ads management. Expert campaign setups, retargeting funnels, and creative optimization."
+    title: "Scale Your Sales | Meta, Facebook & Instagram Ads Agency | Wholeup",
+    metaDesc: "Tired of burning ad budget? Get expert Meta Ads management with custom retargeting funnels, high-converting creatives, and maximum ROAS. Start scaling!"
   },
   "ppc-google-ads": {
-    title: "Google Ads & PPC Management Company | Wholeup",
-    metaDesc: "Boost sales instantly with expert Google Ads management. High-ROI search, display, and shopping campaigns. Call today!"
+    title: "High-ROAS Google Ads & PPC Management Agency | Wholeup",
+    metaDesc: "Capture ready-to-buy customers instantly. Certified Google Ads experts setup high-converting Search, Shopping, and YouTube PPC campaigns. Call now!"
   },
   "whatsapp-marketing": {
-    title: "WhatsApp Marketing Automation & API Services | Wholeup",
-    metaDesc: "Reach customers directly on their mobile screens with 98% open rates. Official WhatsApp API setup and automated broadcasts."
+    title: "WhatsApp Marketing Automation & Official API Setup | Wholeup",
+    metaDesc: "Get 98% open rates! Automate customer broadcasts, support chats & abandoned cart alerts using official WhatsApp Business API integration. Book a demo!"
   },
   "local-seo": {
-    title: "Local SEO & Google Maps Rankings Company | Wholeup",
-    metaDesc: "Dominate Google Maps 3-Pack and near me searches. Drive store footfall and inquiries with professional local SEO."
+    title: "Dominate \"Near Me\" Searches | Local SEO & Google Maps Rankings | Wholeup",
+    metaDesc: "Get found by local buyers in your city. Dominate the Google Maps 3-Pack and drive calls, store visits, and local leads with expert Local SEO setups."
   },
   "social-media-management": {
-    title: "Social Media Management & SMM Agency | Wholeup",
-    metaDesc: "Engage your audience and grow followers with top social media management. Content scheduling, graphic design, and custom captions."
+    title: "Build A Magnetic Brand | Social Media Management Agency | Wholeup",
+    metaDesc: "Stop posting random pictures. Get custom content calendars, premium graphic designs, and reels strategy to grow organic followers and engagement."
   }
 };
 

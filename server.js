@@ -197,7 +197,7 @@ app.get('/services', (req, res) => {
       "url": "https://wholeup.in",
       "logo": "https://wholeup.in/favicon.png",
       "telephone": "+919725137538",
-      "email": "wholeup.agency@gmail.com",
+      "email": "neel1578007@gmail.com",
       "address": {
         "@type": "PostalAddress",
         "addressLocality": "Gujarat",
@@ -593,7 +593,7 @@ app.post('/api/contact', contactLimiter, async (req, res) => {
       });
       await transporter.sendMail({
         from: `"Wholeup Website" <${process.env.SMTP_USER}>`,
-        to: 'wholeup.agency@gmail.com',
+        to: 'neel1578007@gmail.com',
         subject: `New Lead from ${name} — ${service || 'General Inquiry'}`,
         html: `
           <div style="font-family:Inter,sans-serif;max-width:600px;margin:0 auto;">
@@ -658,7 +658,7 @@ Strict Constraints:
 - Always encourage the user to book a Free Strategy Consultation or contact Wholeup directly:
   - Phone: +91 97251 37538
   - WhatsApp: +91 97251 37538
-  - Email: wholeup.agency@gmail.com
+  - Email: neel1578007@gmail.com
   - Encourage them to fill out the contact form right here on the website, or click the WhatsApp / Call float buttons on the screen! Do NOT tell the user to visit the website URL "www.wholeup.in" because they are already browsing on it!
 
 Interactive Call-To-Actions (CTAs):
@@ -748,7 +748,7 @@ You are acting as Wholeup's Lead Business Consultant. Your task is to walk the u
           });
           await transporter.sendMail({
             from: `"Wholeup AI Chatbot" <${process.env.SMTP_USER}>`,
-            to: 'wholeup.agency@gmail.com',
+            to: 'neel1578007@gmail.com',
             subject: `🤖 NEW CHAT LEAD: ${name || 'Inquiry'} — ${service || 'General'}`,
             html: `
               <div style="font-family:Inter,sans-serif;max-width:600px;margin:0 auto;">
@@ -864,7 +864,7 @@ Maintain a confident, highly professional tone. Do not write generic placeholder
       await transporter.sendMail({
         from: `"Wholeup Solutions" <${process.env.SMTP_USER}>`,
         to: email,
-        cc: 'wholeup.agency@gmail.com',
+        cc: 'neel1578007@gmail.com',
         subject: `Your Free Website Growth Audit Report for ${url}`,
         html: `
           <div style="font-family:Inter,sans-serif;max-width:600px;margin:0 auto;color:#333;">
@@ -959,7 +959,7 @@ Instructions:
 2. Explain how Wholeup Digital Marketing Agency can help scale their business specifically for their service interest (${lead.service}). Provide 2-3 high-level actionable strategy points (e.g. SEO optimization, conversion audits, premium Meta ad funnel setup).
 3. Sound extremely expert, professional, encouraging, and warm. 
 4. Pitch the value of scheduling a "Free 30-Minute Growth Strategy Call" to align further.
-5. End with a professional email signature for "Wholeup Digital Growth Team" and phone: +91 97251 37538 / email: wholeup.agency@gmail.com.
+5. End with a professional email signature for "Wholeup Digital Growth Team" and phone: +91 97251 37538 / email: neel1578007@gmail.com.
 6. Keep the email highly readable, clean, and concise (under 250 words total). Do NOT include generic placeholder brackets. Write the final email copy directly.`;
 
     proposalText = await getGeminiResponse(agentPrompt);
@@ -978,7 +978,7 @@ Instructions:
         await transporter.sendMail({
           from: `"Wholeup Sales Agent" <${process.env.SMTP_USER}>`,
           to: lead.email,
-          cc: 'wholeup.agency@gmail.com',
+          cc: 'neel1578007@gmail.com',
           subject: `Scaling Wholeup's ${lead.service} Strategy for ${lead.name}`,
           text: proposalText
         });

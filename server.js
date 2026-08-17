@@ -1510,20 +1510,23 @@ app.get('/api/cron/news', async (req, res) => {
 
   const botToken = process.env.TELEGRAM_BOT_TOKEN;
   const allowedUser = process.env.TELEGRAM_ALLOWED_USERS;
-  const apiKey = process.env.GEMINI_API_KEY;
 
-  if (!botToken || !allowedUser || !apiKey) return res.sendStatus(500);
+  if (!botToken || !allowedUser) return res.sendStatus(500);
 
   try {
-    // Helper function to fetch and parse feeds using regex
-    const fetchFeed = async (url) => {
+    // Helper function to fetch and parse live RSS feeds
+    const fetchFeed = async (url, maxItems = 3) => {
       try {
-        const response = await fetch(url, { headers: { 'User-Agent': 'Mozilla/5.0' } });
+        const response = await fetch(url, {
+          headers: {
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
+          }
+        });
         const xml = await response.text();
         const items = [];
         const itemRegex = /<item>([\s\S]*?)<\/item>/g;
         let match;
-        while ((match = itemRegex.exec(xml)) !== null && items.length < 3) {
+        while ((match = itemRegex.exec(xml)) !== null && items.length < maxItems) {
           const itemContent = match[1];
           const titleMatch = itemContent.match(/<title>([\s\S]*?)<\/title>/);
           const linkMatch = itemContent.match(/<link>([\s\S]*?)<\/link>/);
@@ -1531,54 +1534,62 @@ app.get('/api/cron/news', async (req, res) => {
           let link = linkMatch ? linkMatch[1] : "";
           if (title.startsWith("<![CDATA[")) title = title.substring(9, title.length - 3);
           if (link.startsWith("<![CDATA[")) link = link.substring(9, link.length - 3);
-          
-          // Clean HTML entities
-          title = title.replace(/&#8217;/g, "'").replace(/&#8216;/g, "'").replace(/&amp;/g, "&").trim();
+
+          // Clean HTML entities & source tags
+          title = title.replace(/&#8217;/g, "'").replace(/&#8216;/g, "'").replace(/&amp;/g, "&").replace(/&quot;/g, '"').trim();
           link = link.trim();
-          items.push({ title, link });
+          if (title && link) {
+            items.push({ title, link });
+          }
         }
         return items;
       } catch (e) {
-        console.error("Feed error:", url, e.message);
+        console.error("Live Feed fetch error:", url, e.message);
         return [];
       }
     };
 
-    const seoNews = await fetchFeed("https://searchengineland.com/feed");
-    const aiNews = await fetchFeed("https://techcrunch.com/category/artificial-intelligence/feed/");
-    
+    // Use Google News real-time 24h search feeds (guaranteed fresh daily, never blocked)
+    const marketingNews = await fetchFeed("https://news.google.com/rss/search?q=digital+marketing+OR+seo+OR+google+ads+OR+meta+ads+when:1d&hl=en-IN&gl=IN&ceid=IN:en", 3);
+    const aiNews = await fetchFeed("https://news.google.com/rss/search?q=artificial+intelligence+OR+openai+OR+google+gemini+OR+meta+ai+when:1d&hl=en-IN&gl=IN&ceid=IN:en", 3);
+
     let feedContext = "";
-    if (seoNews.length > 0) {
-      feedContext += "Google SEO & Marketing News:\n";
-      seoNews.forEach(item => {
-        feedContext += `- Title: ${item.title}\n  Source: ${item.link}\n`;
+    if (marketingNews.length > 0) {
+      feedContext += "📢 Latest Digital Marketing & SEO News (Past 24 Hours):\n";
+      marketingNews.forEach((item, idx) => {
+        feedContext += `${idx + 1}. Title: ${item.title}\n   Source URL: ${item.link}\n`;
       });
     }
     if (aiNews.length > 0) {
-      feedContext += "\nArtificial Intelligence (AI) News:\n";
-      aiNews.forEach(item => {
-        feedContext += `- Title: ${item.title}\n  Source: ${item.link}\n`;
+      feedContext += "\n🤖 Latest Artificial Intelligence (AI) Breaking News (Past 24 Hours):\n";
+      aiNews.forEach((item, idx) => {
+        feedContext += `${idx + 1}. Title: ${item.title}\n   Source URL: ${item.link}\n`;
       });
     }
-
-    const { GoogleGenerativeAI } = require('@google/generative-ai');
-    const genAI = new GoogleGenerativeAI(apiKey);
-    const model = genAI.getGenerativeModel({ model: 'gemini-3.1-flash-lite' });
 
     const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', timeZone: 'Asia/Kolkata' };
     const todayDateStr = new Date().toLocaleDateString('en-US', options);
 
-    const prompt = `Today's Date is ${todayDateStr}. Here are the latest breaking headlines in digital marketing and AI today:\n\n${feedContext}\n\n` +
-      `Instructions:\n` +
-      `1. Write the entire response in friendly and professional Hinglish (Hindi + English mixed, using Latin script, e.g., 'Google ne Search ad policy ko change kiya hai...').\n` +
-      `2. Summarize each news story into 2 clear, high-impact bullet points explaining what happened and how it impacts agency owners / e-commerce businesses.\n` +
-      `3. Include the source link provided for each story so the user can read more.\n` +
-      `4. CRITICAL: Do NOT mention 2024 or any outdated years. Frame all summaries as current June 2026 news.`;
+    const prompt = `Today's Date is ${todayDateStr}.
+Here are the REAL, FRESH breaking news stories captured from live news feeds in the past 24 hours:
 
-    const result = await model.generateContent(prompt);
-    await sendTelegramMessage(botToken, allowedUser, `📰 *Daily Digital Marketing & AI News Digest* \n\nHere is what you need to know today:\n\n${result.response.text()}`);
+${feedContext}
+
+INSTRUCTIONS:
+1. Write the entire daily news briefing in engaging, professional, and friendly Hinglish (Hindi + English mixed in Latin script, e.g. "Google ne naya update rollout kiya hai jisse...").
+2. For EVERY news story listed above:
+   - Provide a clear 1-2 line summary of what happened.
+   - Explain its practical **Impact** on digital marketing agency owners, media buyers, and business growth.
+   - Include the **Source link** provided so the reader can click to read full details.
+3. Keep the tone sharp, executive, and high-energy.
+4. Do NOT repeat old news or hallucinate stories. Strictly base your digest on the fresh live headlines provided above.`;
+
+    const digestText = await getGeminiResponse(prompt);
+
+    await sendTelegramMessage(botToken, allowedUser, `📰 *Daily Digital Marketing & AI News Digest* (${todayDateStr})\n\n${digestText}`);
     res.send('News cron executed successfully.');
   } catch (err) {
+    console.error('News cron error:', err);
     res.status(500).send(`Error: ${err.message}`);
   }
 });

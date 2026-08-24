@@ -60,7 +60,7 @@ app.use(helmet({ contentSecurityPolicy: false }));
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(process.cwd(), 'public')));
 
 // Middleware to inject canonical URL to all rendered pages
 app.use((req, res, next) => {
@@ -78,11 +78,12 @@ const contactLimiter = rateLimit({
 });
 
 // ─── Template Engine ─────────────────────────────────────────────────────────
+const viewsPath = path.join(process.cwd(), 'views');
 app.engine('hbs', engine({
   extname: '.hbs',
   defaultLayout: 'main',
-  layoutsDir: path.join(__dirname, 'views/layouts'),
-  partialsDir: path.join(__dirname, 'views/partials'),
+  layoutsDir: path.join(viewsPath, 'layouts'),
+  partialsDir: path.join(viewsPath, 'partials'),
   helpers: {
     eq: (a, b) => a === b,
     json: (obj) => JSON.stringify(obj),
@@ -97,7 +98,7 @@ app.engine('hbs', engine({
   }
 }));
 app.set('view engine', 'hbs');
-app.set('views', path.join(__dirname, 'views'));
+app.set('views', viewsPath);
 
 // ─── Data ────────────────────────────────────────────────────────────────────
 const services = require('./data/services.json');

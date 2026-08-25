@@ -24,10 +24,10 @@
       <!-- Share -->
       <div class="mt-16 pt-8 border-t border-black/5">
         <p class="text-xs font-bold uppercase tracking-widest text-dark/40 mb-4">Share this article</p>
-        <div class="flex gap-4">
-          <a href="https://twitter.com/intent/tweet?text={{post.title}}&url=https://wholeup.in/blog/{{post.slug}}" target="_blank" rel="noopener noreferrer" class="w-12 h-12 rounded-full bg-dark text-white flex items-center justify-center hover:bg-primary transition"><i class="fab fa-twitter text-sm"></i></a>
-          <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://wholeup.in/blog/{{post.slug}}" target="_blank" rel="noopener noreferrer" class="w-12 h-12 rounded-full bg-dark text-white flex items-center justify-center hover:bg-primary transition"><i class="fab fa-linkedin-in text-sm"></i></a>
-          <a href="https://wa.me/?text={{post.title}}%20-%20https://wholeup.in/blog/{{post.slug}}" target="_blank" rel="noopener noreferrer" class="w-12 h-12 rounded-full bg-dark text-white flex items-center justify-center hover:bg-primary transition"><i class="fab fa-whatsapp text-sm"></i></a>
+        <div class="flex gap-3">
+          <a href="https://twitter.com/intent/tweet?text={{post.title}}&url={{post.slug}}" target="_blank" class="w-10 h-10 rounded-full bg-dark text-white flex items-center justify-center hover:bg-primary transition"><i class="fab fa-twitter text-sm"></i></a>
+          <a href="https://www.linkedin.com/sharing/share-offsite/?url={{post.slug}}" target="_blank" class="w-10 h-10 rounded-full bg-dark text-white flex items-center justify-center hover:bg-primary transition"><i class="fab fa-linkedin-in text-sm"></i></a>
+          <a href="https://wa.me/?text={{post.title}}" target="_blank" class="w-10 h-10 rounded-full bg-dark text-white flex items-center justify-center hover:bg-primary transition"><i class="fab fa-whatsapp text-sm"></i></a>
         </div>
       </div>
     </div>
@@ -73,7 +73,4 @@
   .prose h2 { font-size:1.7rem; font-weight:900; text-transform:uppercase; letter-spacing:.05em; color:#111; margin:2.5rem 0 1rem; }
   .prose h3 { font-size:1.2rem; font-weight:800; color:#111; margin:2rem 0 .75rem; }
   .prose p { margin-bottom:1.25rem; color:rgba(17,17,17,.7); }
-  .prose a { color: #16A34A; text-decoration: underline; font-weight: 700; transition: color 0.2s ease; }
-  .prose a:hover { color: #15803d; }
 </style>
-

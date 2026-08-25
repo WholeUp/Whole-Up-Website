@@ -5,231 +5,51 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{{title}}</title>
   <meta name="description" content="{{metaDesc}}">
-  <meta name="keywords" content="{{#if metaKeywords}}{{metaKeywords}}{{else}}digital marketing agency, SEO services, Google Ads agency, Meta Ads, WhatsApp automation, web design, Wholeup{{/if}}">
-  <meta name="author" content="Wholeup Digital Marketing Agency">
-  <meta name="robots" content="index, follow">
-  <meta name="geo.region" content="IN">
-  
-  <meta name="geo.position" content="22.3072;73.1812">
-  <meta name="ICBM" content="22.3072, 73.1812">
-  <!-- Favicon & Brand Icons -->
-  <link rel="shortcut icon" href="/favicon.ico">
-  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="192x192" href="/android-chrome-192x192.png">
-  <link rel="icon" type="image/png" sizes="512x512" href="/favicon.png">
-  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-  <link rel="manifest" href="/site.webmanifest">
-  <meta name="msapplication-config" content="/browserconfig.xml">
-  <meta name="msapplication-TileColor" content="#FAF8F2">
-  <meta name="theme-color" content="#16a34a">
-
-  <!-- Chart.js for Interactive Dashboard Charts -->
-  <script src="https://cdn.jsdelivr.net/npm/chart.js" defer></script>
-
-
-  <!-- Open Graph -->
   <meta property="og:title" content="{{title}}">
   <meta property="og:description" content="{{metaDesc}}">
   <meta property="og:type" content="website">
-  <meta property="og:image" content="{{#if ogImage}}{{ogImage}}{{else}}https://wholeup.in/favicon.png{{/if}}">
-  <meta property="og:url" content="{{#if canonicalUrl}}{{canonicalUrl}}{{else}}https://wholeup.in{{/if}}">
-  <meta property="og:site_name" content="Wholeup Digital Marketing">
-  <meta property="og:locale" content="en_IN">
+  <link rel="icon" type="image/png" href="/favicon.png">
+  <link rel="canonical" href="{{canonicalUrl}}">
 
-  <!-- Twitter Card -->
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="{{title}}">
-  <meta name="twitter:description" content="{{metaDesc}}">
-  <meta name="twitter:image" content="{{#if ogImage}}{{ogImage}}{{else}}https://wholeup.in/favicon.png{{/if}}">
-
-  <!-- Canonical -->
-  <link rel="canonical" href="{{#if canonicalUrl}}{{canonicalUrl}}{{else}}https://wholeup.in{{/if}}">
-  <link rel="alternate" hreflang="en-in" href="https://wholeup.in">
-  <link rel="alternate" hreflang="x-default" href="https://wholeup.in">
-
-  <!-- Trustpilot Domain Verification -->
-  <meta name="trustpilot-one-time-domain-verification-id" content="b97aad6f-5af2-4249-b300-4fe018c10a16"/>
-  <!-- Meta / Facebook Domain Verification -->
-  <meta name="facebook-domain-verification" content="d148236x0l7nn62csud80d2q0uojy2" />
-
-  <!-- Schema Markup (Dynamic/Page-Specific) -->
-  {{#if schemaMarkup}}
-    {{{schemaMarkup}}}
-  {{else}}
+  <!-- Advanced JSON-LD Schema (0.1% Agency SEO) -->
   <script type="application/ld+json">
-  [
-    {
-      "@context": "https://schema.org",
-      "@type": "LocalBusiness",
-      "@id": "https://wholeup.in/#localbusiness",
-      "name": "Wholeup - Digital Marketing",
-      "url": "https://wholeup.in",
-      "logo": "https://wholeup.in/favicon.png",
-      "image": "https://wholeup.in/favicon.png",
-      "description": "Wholeup is a results-driven digital marketing agency offering SEO, Google Ads, Meta Ads, WhatsApp Automation, AI Services and Web Design.",
-      "telephone": "+919725137538",
-      "email": "wholeup.agency\u0040gmail\u002ecom",
-      "priceRange": "₹8000 - ₹50000",
-      "address": {
-        "@type": "PostalAddress",
-        "addressLocality": "",
-        "addressRegion": "",
-        "addressCountry": "IN"
-      },
-      "geo": {
-        "@type": "GeoCoordinates",
-        "latitude": "22.3072",
-        "longitude": "73.1812"
-      },
-      "openingHoursSpecification": [
-        {
-          "@type": "OpeningHoursSpecification",
-          "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
-          "opens": "09:00",
-          "closes": "20:00"
-        }
+  {
+    "@context": "https://schema.org",
+    "@type": "ProfessionalService",
+    "name": "Wholeup",
+    "url": "https://www.wholeup.in",
+    "logo": "https://www.wholeup.in/favicon.png",
+    "image": "https://www.wholeup.in/favicon.png",
+    "description": "Wholeup is a results-driven digital marketing agency helping businesses scale with SEO, paid ads, social media, and conversion-first websites.",
+    "telephone": "+91-94268-46035",
+    "email": "wholeup.agency@gmail.com",
+    "priceRange": "$$",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Surat",
+      "addressRegion": "Gujarat",
+      "addressCountry": "IN"
+    },
+    "openingHoursSpecification": {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": [
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday"
       ],
-      "aggregateRating": {
-        "@type": "AggregateRating",
-        "ratingValue": "4.9",
-        "reviewCount": "82",
-        "bestRating": "5",
-        "worstRating": "1"
-      },
-      "sameAs": [
-        "https://www.instagram.com/wholeup.agency/",
-        "https://www.facebook.com/wholeup.agency",
-        "https://www.linkedin.com/company/wholeup-solutions",
-        "https://x.com/wholeup_agency",
-        "https://www.youtube.com/@wholeup_agency"
-      ],
-      "serviceArea": {
-        "@type": "Place",
-        "name": "Worldwide"
-      }
+      "opens": "10:00",
+      "closes": "19:00"
     },
-    {
-      "@context": "https://schema.org",
-      "@type": "Person",
-      "@id": "https://wholeup.in/#neelshah",
-      "name": "Neel Shah",
-      "jobTitle": "Founder & Performance Marketer",
-      "description": "Neel Shah is the Founder and Head of Performance Marketing at WholeUp Digital Marketing Agency in Surat, Gujarat, specializing in Meta Ads, SEO, and High-Converting Web Engineering.",
-      "worksFor": {
-        "@type": "Organization",
-        "name": "WholeUp Digital Marketing Agency",
-        "url": "https://wholeup.in"
-      },
-      "sameAs": [
-        "https://www.linkedin.com/in/neel-shah-66a806327/",
-        "https://www.instagram.com/wholeup.agency/"
-      ]
-    },
-    {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      "@id": "https://wholeup.in/#faq",
-      "mainEntity": [
-        {
-          "@type": "Question",
-          "name": "How do I get started with Wholeup?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "It's simple — book a free 30-minute strategy call. We'll audit your current digital presence, understand your goals, and recommend the right package. No obligation, no hard sell."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Do you work with small businesses and startups?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Absolutely. We work with everyone from funded startups to established enterprises. We have package options starting from ₹8,000/month to suit every stage of growth."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "How long does it take to see results?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Paid ads can show results within the first week. SEO typically takes 3–6 months for significant movement. Social media growth is usually visible within 30 days. We set honest expectations in every proposal."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Do you manage ad spend, or do we control our own budget?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "You always control your own ad budget. Your ad accounts remain in your name. We manage the campaigns as an authorized manager — we never take control of your billing or budget without your approval."
-          }
-        }
-      ]
-    },
-    {
-      "@context": "https://schema.org",
-      "@type": "BreadcrumbList",
-      "@id": "https://wholeup.in/#breadcrumb",
-      "itemListElement": [
-        {
-          "@type": "ListItem",
-          "position": 1,
-          "name": "Home",
-          "item": "https://wholeup.in"
-        },
-        {
-          "@type": "ListItem",
-          "position": 2,
-          "name": "Services",
-          "item": "https://wholeup.in/services"
-        },
-        {
-          "@type": "ListItem",
-          "position": 3,
-          "name": "Portfolio",
-          "item": "https://wholeup.in/portfolio"
-        },
-        {
-          "@type": "ListItem",
-          "position": 4,
-          "name": "Blog",
-          "item": "https://wholeup.in/blog"
-        },
-        {
-          "@type": "ListItem",
-          "position": 5,
-          "name": "Contact",
-          "item": "https://wholeup.in/contact"
-        }
-      ]
-    }
-  ]
-  </script>
-  {{/if}}
-
-  <!-- Google Analytics / Tag Manager -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id={{gaId}}"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', '{{gaId}}');
+    "sameAs": [
+      "https://www.instagram.com/wholeup.india"
+    ]
+  }
   </script>
 
-  <!-- Facebook Pixel Code -->
-  <script>
-    !function(f,b,e,v,n,t,s)
-    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-    n.queue=[];t=b.createElement(e);t.async=!0;
-    t.src=v;s=b.getElementsByTagName(e)[0];
-    s.parentNode.insertBefore(t,s)}(window, document,'script',
-    'https://connect.facebook.net/en_US/fbevents.js');
-    fbq('init', '{{#if fbPixelId}}{{fbPixelId}}{{else}}1537497547856167{{/if}}');
-    fbq('track', 'PageView');
-  </script>
   <script src="https://cdn.tailwindcss.com"></script>
-  <noscript><img height="1" width="1" id="fb-pixel-noscript" alt="Facebook Pixel" class="hidden" src="https://www.facebook.com/tr?id={{#if fbPixelId}}{{fbPixelId}}{{else}}1537497547856167{{/if}}&ev=PageView&noscript=1"/></noscript>
   <script>
     tailwind.config = {
       theme: {
@@ -242,8 +62,7 @@
           },
           fontFamily: {
             sans: ['DM Sans', 'sans-serif'],
-            heading: ['Inter', 'sans-serif'],
-            josefin: ['Josefin Sans', 'sans-serif']
+            heading: ['Inter', 'sans-serif']
           }
         }
       }
@@ -251,208 +70,214 @@
   </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+  <link rel="preconnect" href="https://unpkg.com">
+  <!-- Dynamic DNS Prefetching and Non-Blocking Font/Icon loading to boost Mobile Load Speed -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" media="print" onload="this.media='all'">
 
-  <link rel="stylesheet" href="/style.css">
+  <style>
+    *, *::before, *::after { box-sizing:border-box; }
+    html { -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale; text-rendering:optimizeLegibility; }
+    body { background-color:#FAF8F2; color:#0D0D0D; font-family:'DM Sans',sans-serif; overflow-x:hidden; }
+    h1,h2,h3,h4,h5,h6,.heading { font-family:'Inter',sans-serif; }
+    @media(min-width:768px){ body{ cursor:none; } }
+    html.lenis { height:auto; }
+    .lenis.lenis-smooth { scroll-behavior:auto!important; }
+    .lenis.lenis-stopped { overflow:hidden; }
 
-  <!-- Structured Data / Schema Markup -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@graph": [
-      {
-        "@type": "Organization",
-        "@id": "https://wholeup.in/#organization",
-        "name": "Wholeup",
-        "url": "https://wholeup.in",
-        "logo": {
-          "@type": "ImageObject",
-          "url": "https://wholeup.in/favicon.png",
-          "caption": "Wholeup Logo"
-        },
-        "contactPoint": {
-          "@type": "ContactPoint",
-          "telephone": "+919725137538",
-          "contactType": "sales",
-          "email": "wholeup.agency\u0040gmail\u002ecom",
-          "areaServed": "IN",
-          "availableLanguage": ["en", "hi"]
-        },
-        "address": {
-          "@type": "PostalAddress",
-          "addressLocality": "",
-          "addressRegion": "",
-          "addressCountry": "IN"
-        },
-        "sameAs": [
-          "https://www.instagram.com/wholeup.agency/",
-          "https://www.facebook.com/wholeup.agency",
-          "https://www.linkedin.com/company/wholeup-solutions",
-          "https://x.com/wholeup_agency",
-          "https://www.youtube.com/@wholeup_agency"
-        ]
-      },
-      {
-        "@type": "WebSite",
-        "@id": "https://wholeup.in/#website",
-        "url": "https://wholeup.in",
-        "name": "Whole Up",
-        "description": "Results-driven digital marketing agency helping businesses scale with SEO, paid ads, social media, and conversion-first websites.",
-        "publisher": {
-          "@id": "https://wholeup.in/#organization"
-        }
-      },
-      {
-        "@type": "FAQPage",
-        "@id": "https://wholeup.in/#faq",
-        "mainEntity": [
-          {
-            "@type": "Question",
-            "name": "How do I get started with Wholeup?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "It's simple — book a free 30-minute strategy call. We'll audit your current digital presence, understand your goals, and recommend the right package. No obligation, no hard sell."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "Do you work with small businesses and startups?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Absolutely. We work with everyone from funded startups to established enterprises. We have package options starting from ₹8,000/month to suit every stage of growth."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "How long does it take to see results?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Paid ads can show results within the first week. SEO typically takes 3–6 months for significant movement. Social media growth is usually visible within 30 days. We set honest expectations in every proposal."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "Do you manage ad spend, or do we control our own budget?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "You always control your own ad budget. Your ad accounts remain in your name. We manage the campaigns as an authorized manager — we never take control of your billing or budget without your approval."
-            }
-          }
-        ]
-      },
-      {
-        "@type": "BreadcrumbList",
-        "@id": "https://wholeup.in/#breadcrumb",
-        "itemListElement": [
-          {
-            "@type": "ListItem",
-            "position": 1,
-            "name": "Home",
-            "item": "https://wholeup.in"
-          },
-          {
-            "@type": "ListItem",
-            "position": 2,
-            "name": "Services",
-            "item": "https://wholeup.in/services"
-          },
-          {
-            "@type": "ListItem",
-            "position": 3,
-            "name": "Portfolio",
-            "item": "https://wholeup.in/portfolio"
-          },
-          {
-            "@type": "ListItem",
-            "position": 4,
-            "name": "Blog",
-            "item": "https://wholeup.in/blog"
-          },
-          {
-            "@type": "ListItem",
-            "position": 5,
-            "name": "Contact",
-            "item": "https://wholeup.in/contact"
-          }
-        ]
-      }
-    ]
-  }
-  </script>
+    /* Cursor */
+    .cursor-dot { width:8px; height:8px; background:#16A34A; position:fixed; border-radius:50%; pointer-events:none; z-index:99999; transform:translate(-50%,-50%); transition:width .2s,height .2s; }
+    .cursor-shadow { width:40px; height:40px; border:1.5px solid rgba(22,163,74,.4); border-radius:50%; position:fixed; pointer-events:none; z-index:99998; transform:translate(-50%,-50%); transition:.1s ease-out,width .3s,height .3s; }
+    .cursor-hover .cursor-dot { width:0; height:0; }
+    .cursor-hover .cursor-shadow { width:60px; height:60px; border-color:#16A34A; background:rgba(22,163,74,.1); }
+
+    /* Global font rules — Inter for headings, DM Sans for body */
+    h1,h2,h3,h4,h5,h6 { font-family:'Inter',sans-serif; }
+    p, a, span, li, label, input, textarea, select, button { font-family:'DM Sans',sans-serif; }
+    .font-heading { font-family:'Inter',sans-serif !important; }
+    .font-body { font-family:'DM Sans',sans-serif !important; }
+
+    /* BG Grid — subtler */
+    .bg-grid { background-image:radial-gradient(rgba(0,0,0,0.06) 1px,transparent 1px); background-size:32px 32px; }
+
+    /* Glass — enhanced */
+    .glass-card { background:rgba(255,255,255,.9); backdrop-filter:blur(16px) saturate(180%); -webkit-backdrop-filter:blur(16px) saturate(180%); border:1px solid rgba(255,255,255,.8); box-shadow:0 8px 32px rgba(0,0,0,.06),0 1px 0 rgba(255,255,255,.8) inset; transition:all .35s cubic-bezier(.25,.46,.45,.94); transform-style:preserve-3d; }
+    .glass-card:hover { border-color:rgba(22,163,74,.25); box-shadow:0 20px 48px rgba(22,163,74,.1),0 1px 0 rgba(255,255,255,.8) inset; transform:translateY(-2px); }
+
+    /* Float animations — smoother */
+    @keyframes float1 { 0%,100%{transform:translateY(0) rotate(0deg)} 33%{transform:translateY(-12px) rotate(1deg)} 66%{transform:translateY(-6px) rotate(-0.5deg)} }
+    @keyframes float2 { 0%,100%{transform:translateY(0) rotate(0deg)} 40%{transform:translateY(10px) rotate(-1.5deg)} 70%{transform:translateY(4px) rotate(0.5deg)} }
+    @keyframes float3 { 0%,100%{transform:translateX(0) scale(1)} 50%{transform:translateX(8px) scale(1.03)} }
+    @keyframes shimmer { 0%{background-position:-200% 0} 100%{background-position:200% 0} }
+    .anim-float-1 { animation:float1 7s cubic-bezier(.37,0,.63,1) infinite; }
+    .anim-float-2 { animation:float2 9s cubic-bezier(.37,0,.63,1) infinite; }
+    .anim-float-3 { animation:float3 11s cubic-bezier(.37,0,.63,1) infinite; }
+
+    /* Smooth page transitions */
+    main { animation: pageFadeIn 0.5s ease forwards; }
+    @keyframes pageFadeIn { from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:translateY(0)} }
+
+    /* Button hover enhancements */
+    .magnetic-btn { transition: all 0.28s cubic-bezier(.25,.46,.45,.94); }
+    a, button { transition: all 0.22s ease; }
+
+    /* Hover lift for cards */
+    [data-tilt] { will-change: transform; }
+
+    /* Selection */
+    ::selection { background:#16A34A; color:white; }
+
+    /* Text gradient */
+    .text-gradient { background:linear-gradient(to right,#16A34A,#4ade80); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
+
+    /* Mobile nav */
+    .mobile-menu { display:none; flex-direction:column; gap:0; background:#FBF9F1; position:absolute; top:100%; left:0; right:0; border-top:1px solid rgba(0,0,0,.08); box-shadow:0 10px 30px rgba(0,0,0,.08); z-index:9999; }
+    .mobile-menu.open { display:flex; }
+    .mobile-menu a { padding:1rem 1.5rem; font-size:.9rem; font-weight:700; text-transform:uppercase; letter-spacing:.1em; color:#111; border-bottom:1px solid rgba(0,0,0,.05); transition:background .2s; }
+    .mobile-menu a:hover { background:rgba(22,163,74,.07); color:#16A34A; }
+    .hamburger { display:flex; flex-direction:column; gap:5px; cursor:pointer; padding:4px; }
+    .hamburger span { display:block; width:24px; height:2px; background:#111; border-radius:2px; transition:all .3s; }
+    .hamburger.active span:nth-child(1) { transform:translateY(7px) rotate(45deg); }
+    .hamburger.active span:nth-child(2) { opacity:0; }
+    .hamburger.active span:nth-child(3) { transform:translateY(-7px) rotate(-45deg); }
+
+    /* Active nav link */
+    .nav-active { color:#16A34A!important; }
+
+    /* Float btns - Stacked vertically above the AI Chatbot button to save horizontal space and look extremely clean on mobile */
+    .float-btn-group { position:fixed; bottom:96px; right:24px; display:flex; flex-direction:column; gap:12px; z-index:9990; }
+    .float-btn { width:54px; height:54px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:20px; color:white; box-shadow:0 4px 20px rgba(0,0,0,.15); transition:transform .2s,box-shadow .2s; text-decoration:none; position:relative; }
+    .float-btn:hover { transform:scale(1.1); }
+    .float-btn.phone { background:#16A34A; }
+    
+    /* Premium Pulsing WhatsApp Button for Conversion (70% Indian Brands Conversion on WhatsApp) */
+    .float-btn.whatsapp { 
+      background:#25D366; 
+      animation: whatsapp-glow 2s infinite; 
+    }
+    @keyframes whatsapp-glow {
+      0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7), 0 4px 20px rgba(0,0,0,.15); }
+      70% { box-shadow: 0 0 0 15px rgba(37, 211, 102, 0), 0 4px 20px rgba(0,0,0,.15); }
+      100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0), 0 4px 20px rgba(0,0,0,.15); }
+    }
+    
+    /* WhatsApp Conversion Badge on Desktop */
+    .whatsapp-badge {
+      position: absolute;
+      right: calc(100% + 14px);
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(255, 255, 255, 0.95);
+      color: #0D0D0D;
+      border: 1px solid rgba(37, 211, 102, 0.35);
+      font-size: 0.75rem;
+      font-weight: 800;
+      letter-spacing: 0.02em;
+      padding: 0.5rem 0.9rem;
+      border-radius: 20px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+      white-space: nowrap;
+      pointer-events: none;
+      animation: badge-slide-left 2s infinite;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      z-index: 10;
+    }
+    .whatsapp-badge::after {
+      content: '';
+      position: absolute;
+      left: 100%;
+      top: 50%;
+      transform: translateY(-50%);
+      border-width: 6px;
+      border-style: solid;
+      border-color: transparent transparent transparent rgba(255, 255, 255, 0.95);
+    }
+    @keyframes badge-slide-left {
+      0%, 100% { transform: translateY(-50%) translateX(0); }
+      50% { transform: translateY(-50%) translateX(-6px); }
+    }
+
+    .float-btn-label { position:absolute; right:calc(100% + 10px); top:50%; transform:translateY(-50%); white-space:nowrap; background:#111; color:white; font-size:.7rem; font-weight:700; letter-spacing:.05em; padding:.4rem .75rem; border-radius:8px; opacity:0; pointer-events:none; transition:opacity .2s; }
+    .float-btn:hover .float-btn-label { opacity:1; }
+
+    /* Chatbot - Green & Light Cream Theme */
+    #dm-chat-btn { position:fixed; bottom:24px; right:24px; width:58px; height:58px; border-radius:50%; background:#16A34A; border:none; cursor:pointer; box-shadow:0 4px 16px rgba(22,163,74,.35); display:flex; align-items:center; justify-content:center; z-index:9999; transition:transform .2s,background .2s; }
+    #dm-chat-btn:hover { background:#15803D; transform:scale(1.07); }
+    #dm-chat-btn svg { width:26px; height:26px; fill:white; }
+    #dm-badge { position:absolute; top:-4px; right:-4px; background:#ef4444; color:white; border-radius:50%; width:18px; height:18px; font-size:11px; font-weight:700; display:flex; align-items:center; justify-content:center; }
+    #dm-chat-box { position:fixed; bottom:92px; right:24px; width:360px; max-height:520px; background:#FAF8F2; border-radius:16px; box-shadow:0 8px 40px rgba(0,0,0,.15); display:none; flex-direction:column; z-index:9998; overflow:hidden; border:1px solid rgba(22,163,74,.2); animation:slideUp .25s ease; }
+    @keyframes slideUp { from{opacity:0;transform:translateY(16px)} to{opacity:1;transform:translateY(0)} }
+    #dm-header { background:#16A34A; padding:14px 16px; display:flex; align-items:center; gap:10px; color:white; }
+    #dm-header .avatar { width:36px; height:36px; border-radius:50%; background:rgba(255,255,255,.2); display:flex; align-items:center; justify-content:center; font-weight:700; font-size:14px; }
+    #dm-header .info .name { font-weight:700; font-size:14px; }
+    #dm-header .info .status { font-size:11px; opacity:.9; }
+    #dm-close { margin-left:auto; background:none; border:none; color:white; cursor:pointer; font-size:18px; opacity:.8; }
+    #dm-close:hover { opacity:1; }
+    #dm-quick { padding:10px 12px; display:flex; gap:6px; flex-wrap:wrap; border-bottom:1px solid rgba(22,163,74,.1); background:#fff; }
+    .dm-qbtn { background:#EFF8F2; border:1px solid #D1EBD6; border-radius:20px; padding:5px 10px; font-size:11px; cursor:pointer; color:#16A34A; font-weight:600; transition:all .2s; white-space:nowrap; }
+    .dm-qbtn:hover { background:#D1EBD6; }
+    #dm-messages { flex:1; overflow-y:auto; padding:16px 12px; display:flex; flex-direction:column; gap:12px; }
+    .dm-msg { display:flex; gap:8px; align-items:flex-end; }
+    .dm-msg.user { flex-direction:row-reverse; }
+    .dm-av { width:28px; height:28px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:11px; font-weight:700; flex-shrink:0; }
+    .dm-av.bot { background:#16A34A; color:white; }
+    .dm-av.user { background:#15803D; color:white; }
+    .dm-bubble { max-width:80%; padding:10px 14px; border-radius:16px; font-size:13px; line-height:1.5; }
+    .dm-bubble.bot { background:#fff; color:#2E3A2F; border-bottom-left-radius:4px; border:1px solid rgba(22,163,74,.1); }
+    .dm-bubble.user { background:#16A34A; color:white; border-bottom-right-radius:4px; }
+    .dm-typing { display:flex; gap:4px; padding:4px 0; }
+    .dm-typing span { width:8px; height:8px; border-radius:50%; background:#16A34A; opacity:0.5; animation:typingDot 1s infinite; }
+    .dm-typing span:nth-child(2) { animation-delay:.15s; }
+    .dm-typing span:nth-child(3) { animation-delay:.3s; }
+    @keyframes typingDot { 0%,80%,100%{transform:scale(1);opacity:.5} 40%{transform:scale(1.2);opacity:1} }
+    #dm-input-row { display:flex; padding:10px 12px; gap:8px; border-top:1px solid rgba(22,163,74,.1); background:#fff; }
+    #dm-input { flex:1; border:1px solid #e2e8f0; border-radius:24px; padding:8px 14px; font-size:13px; outline:none; }
+    #dm-input:focus { border-color:#16A34A; box-shadow: 0 0 0 2px rgba(22,163,74,0.1); }
+    #dm-send { width:36px; height:36px; border-radius:50%; background:#16A34A; border:none; cursor:pointer; display:flex; align-items:center; justify-content:center; flex-shrink:0; transition:background .2s; }
+    #dm-send:hover { background:#15803D; }
+    #dm-send svg { width:16px; height:16px; fill:white; }
+
+    /* Page hero */
+    .page-hero { padding-top: 140px; padding-bottom: 80px; }
+
+    @media(max-width:767px) {
+      html,body { overflow-x:hidden!important; width:100%!important; }
+      .cursor-dot,.cursor-shadow { display:none!important; }
+      /* Stacked vertically above the Chatbot button on mobile */
+      .float-btn-group { bottom:82px; right:16px; gap:8px; }
+      .float-btn { width:46px!important; height:46px!important; font-size:17px!important; }
+      .whatsapp-badge { display:none!important; } /* Hide the badge text on mobile to avoid clutter */
+      #dm-chat-box { width:calc(100vw - 32px); right:16px; }
+      #dm-chat-btn { bottom:16px; right:16px; }
+    }
+
+    /* Scroll progress bar */
+    #progress-bar { position:fixed; top:0; left:0; height:3px; background:#16A34A; z-index:100000; width:0%; transition:width .1s; }
+
+    /* Custom range slider styling */
+    .range-slider { -webkit-appearance: none; width: 100%; height: 6px; border-radius: 9999px; background: rgba(0, 0, 0, 0.08); outline: none; }
+    .range-slider::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 18px; height: 18px; border-radius: 50%; background: #16A34A; cursor: pointer; box-shadow: 0 0 10px rgba(22, 163, 74, 0.4); transition: transform 0.1s ease; }
+    .range-slider::-webkit-slider-thumb:hover { transform: scale(1.25); }
+    .range-slider::-moz-range-thumb { width: 18px; height: 18px; border-radius: 50%; background: #16A34A; cursor: pointer; border: none; box-shadow: 0 0 10px rgba(22, 163, 74, 0.4); transition: transform 0.1s ease; }
+    .range-slider::-moz-range-thumb:hover { transform: scale(1.25); }
+  </style>
 </head>
 <body class="antialiased selection:bg-primary selection:text-white bg-grid">
 
-<!-- Premium Branded Page Preloader -->
-<div id="preloader" class="fixed inset-0 bg-[#FAF8F2] z-[9999999] flex flex-col items-center justify-center pointer-events-auto select-none overflow-hidden">
-  <div class="z-10 flex flex-col items-center text-center px-6">
-    <!-- Sleek Custom Animated W Growth Logo -->
-    <div class="relative" id="loader-logo-wrap">
-      <svg class="w-64 h-64 md:w-80 md:h-80" viewBox="0 0 1000 700" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <defs>
-          <!-- Shadow Filter for Overlap Depth -->
-          <filter id="overlap-shadow" x="-30%" y="-30%" width="160%" height="160%">
-            <feDropShadow dx="-12" dy="12" stdDeviation="16" flood-color="#0D0D0D" flood-opacity="0.35"/>
-          </filter>
-
-          <!-- Dark Charcoal Gradient for left wing with userSpaceOnUse -->
-          <linearGradient id="charcoal-loader-grad" x1="180" y1="270" x2="465" y2="590" gradientUnits="userSpaceOnUse">
-            <stop offset="0%" stop-color="#2D2D2D" />
-            <stop offset="100%" stop-color="#121212" />
-          </linearGradient>
-          
-          <!-- Bright Green Gradient for right wing and arrowhead with userSpaceOnUse -->
-          <linearGradient id="green-loader-grad" x1="465" y1="590" x2="900" y2="100" gradientUnits="userSpaceOnUse">
-            <stop offset="0%" stop-color="#1E521F" />
-            <stop offset="60%" stop-color="#4EAB30" />
-            <stop offset="100%" stop-color="#55C235" />
-          </linearGradient>
-        </defs>
-
-        <!-- Right Green Wing (Rendered first so it is in the background) -->
-        <path d="M 465 380 C 455 420, 500 590, 570 590 C 640 590, 710 350, 790 210" 
-              stroke="url(#green-loader-grad)" 
-              stroke-width="105" 
-              stroke-linecap="butt" 
-              stroke-linejoin="round" 
-              id="loader-right-wing" 
-              style="stroke-dasharray: 1000; stroke-dashoffset: 1000;" />
-
-        <!-- Left Black Wing (Rendered on top of green wing, with shadow filter) -->
-        <path d="M 180 270 C 180 270, 260 590, 330 590 C 400 590, 440 480, 465 380" 
-              stroke="url(#charcoal-loader-grad)" 
-              stroke-width="105" 
-              stroke-linecap="round" 
-              stroke-linejoin="round" 
-              filter="url(#overlap-shadow)"
-              id="loader-left-wing" 
-              style="stroke-dasharray: 1000; stroke-dashoffset: 1000;" />
-
-        <!-- Solid Arrow Head (Polygon matching the image ditto to ditto) -->
-        <polygon points="712,165 850,106 868,255 790,210" 
-                 fill="url(#green-loader-grad)"
-                 id="loader-arrow-head" 
-                 style="opacity: 0;" />
-
-        <!-- Single Sparkle Star (Top Right) -->
-        <path d="M 880 25 Q 880 60 915 60 Q 880 60 880 95 Q 880 60 845 60 Q 880 60 880 25" 
-              fill="#55C235" 
-              id="loader-star" 
-              style="opacity: 0;" />
-      </svg>
-    </div>
-  </div>
-</div>
-
-<div id="debug-error-panel" class="hidden bg-[#fee2e2] text-[#991b1b] border-2 border-[#f87171] p-5 font-mono text-sm fixed top-20 left-5 right-5 z-[9999999] rounded-xl shadow-lg max-h-[400px] overflow-y-auto">
-  <h3 class="mt-0 font-bold text-base">⚠️ Client-Side JS Error Detected:</h3>
-  <pre id="debug-error-log" class="whitespace-pre-wrap m-0"></pre>
-  <button onclick="document.getElementById('debug-error-panel').classList.add('hidden')" class="mt-3 bg-[#ef4444] text-white border-none py-1.5 px-3 rounded-md cursor-pointer font-bold">Close Panel</button>
+<div id="debug-error-panel" style="display: none; background: #fee2e2; color: #991b1b; border: 2px solid #f87171; padding: 20px; font-family: monospace; font-size: 14px; position: fixed; top: 80px; left: 20px; right: 20px; z-index: 9999999; border-radius: 12px; box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1); max-height: 400px; overflow-y: auto;">
+  <h3 style="margin-top: 0; font-weight: bold; font-size: 16px;">⚠️ Client-Side JS Error Detected:</h3>
+  <pre id="debug-error-log" style="white-space: pre-wrap; margin: 0;"></pre>
+  <button onclick="document.getElementById('debug-error-panel').style.display='none'" style="margin-top: 12px; background: #ef4444; color: white; border: none; padding: 6px 12px; border-radius: 6px; cursor: pointer; font-weight: bold;">Close Panel</button>
 </div>
 <script>
   window.addEventListener('error', function(event) {
     const panel = document.getElementById('debug-error-panel');
     const log = document.getElementById('debug-error-log');
     if (panel && log) {
-      panel.classList.remove('hidden');
+      panel.style.display = 'block';
       log.textContent += event.message + '\n  at ' + event.filename + ':' + event.lineno + ':' + event.colno + '\n\n';
     }
   });
@@ -460,7 +285,7 @@
     const panel = document.getElementById('debug-error-panel');
     const log = document.getElementById('debug-error-log');
     if (panel && log) {
-      panel.classList.remove('hidden');
+      panel.style.display = 'block';
       log.textContent += 'Unhandled Promise Rejection: ' + event.reason + '\n\n';
     }
   });
@@ -480,20 +305,20 @@
 {{> chatbot}}
 {{> floatbtns}}
 
-<!-- Non-render-blocking JS Scripts loaded at the bottom of the body -->
+<!-- Heavy UI scripts loaded at bottom of page to prevent render-blocking -->
 <script src="https://unpkg.com/@studio-freight/lenis@1.0.33/dist/lenis.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.0/vanilla-tilt.min.js"></script>
-{{#if loadThree}}
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-{{/if}}
 
 <script>
-  // Ultra smooth scroll
+  // Mobile / Mid-range Device Performance Optimizations
+  const isMobile = window.innerWidth < 768 || ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
+
+  // Ultra smooth scroll - Deactivated on Mobile to optimize performance
   let lenis;
   try {
-    if (typeof Lenis !== 'undefined') {
+    if (typeof Lenis !== 'undefined' && !isMobile) {
       lenis = new Lenis({
         duration: 1.6,
         easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
@@ -512,15 +337,26 @@
           pBar.style.width = (progress*100) + '%';
         });
       }
+    } else {
+      // Fallback scroll progress bar for native mobile scroll
+      const pBar = document.getElementById('progress-bar');
+      if (pBar) {
+        window.addEventListener('scroll', () => {
+          const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+          const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+          const scrolled = height > 0 ? (winScroll / height) * 100 : 0;
+          pBar.style.width = scrolled + '%';
+        });
+      }
     }
   } catch (e) {
     console.warn('Lenis failed to initialize:', e);
   }
 
-  // Cursor
+  // Cursor - Completely deactivated on mobile to prevent requestAnimationFrame CPU drain
   const dot = document.querySelector('.cursor-dot');
   const shadow = document.querySelector('.cursor-shadow');
-  if(dot && shadow) {
+  if(dot && shadow && !isMobile) {
     let mx=0,my=0,sx=0,sy=0;
     document.addEventListener('mousemove',e=>{ mx=e.clientX; my=e.clientY; });
     function animateCursor(){
@@ -530,14 +366,6 @@
       requestAnimationFrame(animateCursor);
     }
     animateCursor();
-    
-    // Add Click ripple effect
-    document.addEventListener('mousedown', () => {
-      shadow.classList.add('cursor-click');
-    });
-    document.addEventListener('mouseup', () => {
-      setTimeout(() => shadow.classList.remove('cursor-click'), 150);
-    });
     document.querySelectorAll('a,button,.magnetic-btn').forEach(el=>{
       el.addEventListener('mouseenter',()=>document.body.classList.add('cursor-hover'));
       el.addEventListener('mouseleave',()=>{
@@ -553,9 +381,12 @@
         }
       });
     });
+  } else {
+    if (dot) dot.style.display = 'none';
+    if (shadow) shadow.style.display = 'none';
   }
 
-  // GSAP ScrollTrigger — ultra smooth staggered reveals
+  // GSAP ScrollTrigger — ultra smooth reveals (Bypassed on mobile to prevent layout lag)
   try {
     if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
       gsap.registerPlugin(ScrollTrigger);
@@ -567,33 +398,22 @@
 
       // Staggered reveal for groups
       gsap.utils.toArray('.gs-reveal').forEach((el, i) => {
-        gsap.fromTo(el,
-          { y: 32, opacity: 0, scale: 0.98 },
-          { y: 0, opacity: 1, scale: 1, duration: 0.9, ease: 'power2.out',
-            scrollTrigger: { trigger: el, start: 'top 88%', once: true }
-          }
-        );
-      });
-
-      // Staggered cascade reveal for grids
-      gsap.utils.toArray('.gs-stagger-parent').forEach((parent) => {
-        const children = parent.querySelectorAll('.gs-stagger-item');
-        gsap.fromTo(children,
-          { y: 45, opacity: 0, scale: 0.96 },
-          { 
-            y: 0, 
-            opacity: 1, 
-            scale: 1, 
-            duration: 0.85, 
-            stagger: 0.08,
-            ease: 'power3.out',
-            scrollTrigger: { trigger: parent, start: 'top 85%', once: true }
-          }
-        );
+        if (isMobile) {
+          // Instantly show elements on mobile to bypass ScrollTrigger layout calculation overhead
+          el.style.opacity = '1';
+          el.style.transform = 'none';
+        } else {
+          gsap.fromTo(el,
+            { y: 32, opacity: 0, scale: 0.98 },
+            { y: 0, opacity: 1, scale: 1, duration: 0.9, ease: 'power2.out',
+              scrollTrigger: { trigger: el, start: 'top 88%', once: true }
+            }
+          );
+        }
       });
     } else {
       // Fallback: make all reveals visible immediately
-      document.querySelectorAll('.gs-reveal, .gs-stagger-item').forEach(el => {
+      document.querySelectorAll('.gs-reveal').forEach(el => {
         el.style.opacity = '1';
         el.style.transform = 'none';
       });
@@ -601,15 +421,15 @@
   } catch (e) {
     console.warn('GSAP/ScrollTrigger initialization failed:', e);
     // Fallback: make all reveals visible immediately
-    document.querySelectorAll('.gs-reveal, .gs-stagger-item').forEach(el => {
+    document.querySelectorAll('.gs-reveal').forEach(el => {
       el.style.opacity = '1';
       el.style.transform = 'none';
     });
   }
 
-  // Enhanced VanillaTilt
+  // Enhanced VanillaTilt - Already restricted to Desktop (>=768px)
   try {
-    if(window.innerWidth>=768 && typeof VanillaTilt !== 'undefined'){
+    if(!isMobile && typeof VanillaTilt !== 'undefined'){
       VanillaTilt.init(document.querySelectorAll('[data-tilt]'),{
         glare:true,'max-glare':.04,scale:1.025,speed:400,perspective:1200
       });
@@ -632,68 +452,24 @@
   });
 
   // Chatbot - Dynamic Gemini API with History & Interactive CTAs
-  let dmOpen = false;
+  let dmOpen=false;
   let dmHistory = []; // Local array to persist conversation turns
-  let dmContext = 'default';
-  let wizardStep = 0;
-  let wizardData = { goal: '', website: '', budget: '' };
-
-  const chipData = {
-    'default': [
-      { text: "📱 Social Media / SMM", action: () => openChatbotWithContext("social") },
-      { text: "💰 Paid Ads (PPC)", action: () => openChatbotWithContext("ppc") },
-      { text: "🔍 Free SEO Check", action: () => openChatbotWithContext("seo") },
-      { text: "💻 Need a Website", action: () => openChatbotWithContext("webdev") },
-      { text: "💡 Find My Service", action: () => openChatbotWithContext("consultant") }
-    ],
-    'seo': [
-      { text: "🔍 Audit My Website", action: () => dmAsk("Can you perform a free technical SEO audit of my website?") },
-      { text: "📍 Local SEO / GMB", action: () => dmAsk("How can we attract local customers using Google Maps and Local SEO?") },
-      { text: "📈 Rank on Page 1", action: () => dmAsk("Dominate Google search results on Page 1 by targeting buyer-intent keywords.") },
-      { text: "🔙 Main Menu", action: () => openChatbotWithContext("default") }
-    ],
-    'ppc': [
-      { text: "💰 Maximize ROAS", action: () => dmAsk("How can we double our Return on Ad Spend (ROAS) with paid ads?") },
-      { text: "📱 Meta/Instagram Ads", action: () => dmAsk("What is the setup process and pricing details for Instagram and Facebook Ads?") },
-      { text: "🎯 Lead Gen Campaigns", action: () => dmAsk("How do we set up Google Ads and a landing page funnel for lead generation?") },
-      { text: "🔙 Main Menu", action: () => openChatbotWithContext("default") }
-    ],
-    'social': [
-      { text: "🎬 Reels Viral Hooks", action: () => dmAsk("Can you share high-retention hooks and script ideas for short-form Reels?") },
-      { text: "📈 Instagram Growth", action: () => dmAsk("How can we implement a strategy to grow followers and boost social engagement?") },
-      { text: "📅 Content Strategy", action: () => dmAsk("What are the details and monthly pricing for brand content calendars?") },
-      { text: "🔙 Main Menu", action: () => openChatbotWithContext("default") }
-    ],
-    'webdev': [
-      { text: "⚡ Speed Optimization", action: () => dmAsk("My website load time is slow. How can we improve performance and speed index?") },
-      { text: "🎨 Premium UI/UX Design", action: () => dmAsk("Fast, responsive, modern glassmorphic theme conversion-focused landing page layout.") },
-      { text: "🛒 Shopify eCommerce", action: () => dmAsk("E-commerce website build and Shopify setups setup pricing details.") },
-      { text: "🔙 Main Menu", action: () => openChatbotWithContext("default") }
-    ]
-  };
 
   function dmToggle(){ dmOpen=!dmOpen; document.getElementById('dm-chat-box').style.display=dmOpen?'flex':'none'; document.getElementById('dm-badge').style.display='none'; if(dmOpen) document.getElementById('dm-input').focus(); }
   function dmAsk(t){ document.getElementById('dm-input').value=t; dmSend(); }
-
   async function dmSend(){
     const input=document.getElementById('dm-input');
     const text=input.value.trim(); if(!text) return; input.value='';
     const msgs=document.getElementById('dm-messages');
     
-    // Add user message to UI
+    // 1. Add user message to UI
     const uDiv=document.createElement('div');
     uDiv.className='dm-msg user';
     uDiv.innerHTML=`<div class="dm-av user">Ap</div><div class="dm-bubble user">${escapeHtml(text)}</div>`;
     msgs.appendChild(uDiv);
     msgs.scrollTop=msgs.scrollHeight;
     
-    await dmSendText(text);
-  }
-
-  async function dmSendText(text) {
-    const msgs=document.getElementById('dm-messages');
-    
-    // Add typing indicator
+    // 2. Add typing indicator
     const typDiv=document.createElement('div');
     typDiv.className='dm-msg';
     typDiv.id='dm-typ';
@@ -701,13 +477,14 @@
     msgs.appendChild(typDiv);
     msgs.scrollTop=msgs.scrollHeight;
     
+    // 3. Prepare client-side user message state for history
     const userMsg = { role: 'user', parts: [{ text: text }] };
     
     try {
       const response = await fetch('/api/chat', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ message: text, history: dmHistory, context: dmContext })
+        body: JSON.stringify({ message: text, history: dmHistory })
       });
       
       const data = await response.json();
@@ -716,235 +493,34 @@
       const t = document.getElementById('dm-typ');
       if (t) t.remove();
       
-      const reply = data.success ? data.reply : 'We apologize, but our servers are temporarily offline. Please contact us directly at +91 97251 37538.';
+      const reply = data.success ? data.reply : 'Maaf kijiye, humare servers temporary down hain. Kripya humse directly contact karein: +91 94268 46035!';
       
-      // Update local conversational memory history state
+      // 4. Update local conversational memory history state
       if (data.success) {
         dmHistory.push(userMsg);
         dmHistory.push({ role: 'model', parts: [{ text: reply }] });
         
-        // Cap history to keep payload size reasonable
+        // Cap history to keep payload size reasonable (last 10 turns = 20 entries)
         if (dmHistory.length > 20) {
           dmHistory = dmHistory.slice(dmHistory.length - 20);
         }
       }
       
-      // Add bot response to UI
+      // 5. Add bot response to UI
       const aDiv=document.createElement('div');
       aDiv.className='dm-msg';
       aDiv.innerHTML=`<div class="dm-av bot">AI</div><div class="dm-bubble bot">${formatReply(reply)}</div>`;
       msgs.appendChild(aDiv);
       msgs.scrollTop=msgs.scrollHeight;
-
-      // If we completed consultant wizard, go back to default context and load default chips
-      if (dmContext === 'consultant') {
-        dmContext = 'default';
-      }
-      loadSuggestionChips(dmContext);
     } catch(err) {
       console.error(err);
       const t = document.getElementById('dm-typ');
       if (t) t.remove();
       const aDiv=document.createElement('div');
       aDiv.className='dm-msg';
-      aDiv.innerHTML=`<div class="dm-av bot">AI</div><div class="dm-bubble bot">It seems there is a network connectivity issue. Please call us directly at +91 97251 37538.</div>`;
+      aDiv.innerHTML=`<div class="dm-av bot">AI</div><div class="dm-bubble bot">Net connection me koi problem lag rahi hai. Kripya hume direct call karein: +91 94268 46035.</div>`;
       msgs.appendChild(aDiv);
       msgs.scrollTop=msgs.scrollHeight;
-    }
-  }
-
-  function loadSuggestionChips(contextVal) {
-    const container = document.getElementById('dm-chips-container');
-    if (!container) return;
-    container.innerHTML = '';
-    
-    let ctxKey = contextVal || 'default';
-    if (ctxKey === 'web') ctxKey = 'webdev';
-    if (ctxKey === 'ads') ctxKey = 'ppc';
-    if (ctxKey === 'smm') ctxKey = 'social';
-    
-    const chips = chipData[ctxKey] || chipData['default'];
-    
-    chips.forEach(chip => {
-      const btn = document.createElement('button');
-      btn.className = 'dm-chip';
-      btn.innerText = chip.text;
-      btn.onclick = chip.action;
-      container.appendChild(btn);
-    });
-  }
-
-  function openChatbotWithContext(slugOrContext) {
-    let contextVal = 'default';
-    if (slugOrContext === 'local-seo' || slugOrContext === 'seo' || slugOrContext === 'content-writing') {
-      contextVal = 'seo';
-    } else if (slugOrContext === 'meta-ads' || slugOrContext === 'ppc-google-ads' || slugOrContext === 'whatsapp-marketing' || slugOrContext === 'ecommerce-marketing' || slugOrContext === 'amazon-marketing') {
-      contextVal = 'ppc';
-    } else if (slugOrContext === 'reel-shoot-edit' || slugOrContext === 'linkedin-marketing' || slugOrContext === 'social-media-management') {
-      contextVal = 'social';
-    } else if (slugOrContext === 'website-designing' || slugOrContext === 'graphic-designing' || slugOrContext === 'generative-ai-video' || slugOrContext === 'automation') {
-      contextVal = 'webdev';
-    } else if (slugOrContext === 'consultant') {
-      contextVal = 'consultant';
-    } else {
-      contextVal = slugOrContext;
-    }
-
-    dmContext = contextVal;
-    
-    // Open chatbox
-    dmOpen = true;
-    document.getElementById('dm-chat-box').style.display = 'flex';
-    document.getElementById('dm-badge').style.display = 'none';
-    
-    const msgs = document.getElementById('dm-messages');
-    
-    // Clear chips container first
-    const container = document.getElementById('dm-chips-container');
-    if (container) container.innerHTML = '';
-
-    if (contextVal === 'consultant') {
-      wizardStep = 1;
-      wizardData = { goal: '', website: '', budget: '' };
-      dmHistory = [];
-      
-      const aDiv = document.createElement('div');
-      aDiv.className = 'dm-msg';
-      aDiv.innerHTML = `
-        <div class="dm-av bot">AI</div>
-        <div class="dm-bubble bot">
-          <strong>Wholeup Consultant Wizard 🚀</strong><br><br>
-          Hello! I will help suggest the right digital marketing service package for your business.<br><br>
-          First, please tell us: <strong>What is your main business goal?</strong>
-        </div>
-      `;
-      msgs.appendChild(aDiv);
-      msgs.scrollTop = msgs.scrollHeight;
-      
-      renderConsultantChips();
-    } else {
-      let greeting = '';
-      if (contextVal === 'seo') {
-        greeting = "Hello! 👋 I am Wholeup's <strong>SEO Specialist</strong> assistant. How can I help you with Google search rankings and organic business growth?";
-      } else if (contextVal === 'ppc') {
-        greeting = "Hello! 👋 I am Wholeup's <strong>Paid Ads Strategist</strong> assistant. What would you like to know about scaling Meta, Google, and WhatsApp marketing campaigns?";
-      } else if (contextVal === 'social') {
-        greeting = "Hello! 👋 I am Wholeup's <strong>Social Media Growth Expert</strong> assistant. Do you have questions about Reels production, content strategy, or outbound B2B LinkedIn plans?";
-      } else if (contextVal === 'webdev') {
-        greeting = "Hello! 👋 I am Wholeup's <strong>Full-Stack Web Dev Expert</strong> assistant. Ask me about website speed, automation flows, graphic design, or modern conversion layouts.";
-      } else {
-        greeting = "Hello! 👋 I am Wholeup's <strong>GrowBot</strong> AI assistant.<br><br>I will partner with you to scale your business and reach your target customers. What would you like to scale today?";
-      }
-      
-      const aDiv = document.createElement('div');
-      aDiv.className = 'dm-msg';
-      aDiv.innerHTML = `
-        <div class="dm-av bot">AI</div>
-        <div class="dm-bubble bot">${greeting}</div>
-      `;
-      msgs.appendChild(aDiv);
-      msgs.scrollTop = msgs.scrollHeight;
-      
-      loadSuggestionChips(contextVal);
-    }
-    document.getElementById('dm-input').focus();
-  }
-
-  function renderConsultantChips() {
-    const container = document.getElementById('dm-chips-container');
-    if (!container) return;
-    container.innerHTML = '';
-    
-    if (wizardStep === 1) {
-      const options = [
-        { text: "📈 Leads & Clients", value: "Grow Leads & Clients" },
-        { text: "🛒 Sales Online", value: "Online Sales (E-commerce)" },
-        { text: "📱 Brand Followers", value: "Brand Awareness & Followers" }
-      ];
-      options.forEach(opt => {
-        const btn = document.createElement('button');
-        btn.className = 'dm-chip';
-        btn.innerText = opt.text;
-        btn.onclick = () => selectWizardOption(opt.value);
-        container.appendChild(btn);
-      });
-    } else if (wizardStep === 2) {
-      const options = [
-        { text: "🌐 Active Website", value: "I have an active website" },
-        { text: "🆕 New Website", value: "I need a new website" },
-        { text: "❌ Website Nahi", value: "I do not need a website" }
-      ];
-      options.forEach(opt => {
-        const btn = document.createElement('button');
-        btn.className = 'dm-chip';
-        btn.innerText = opt.text;
-        btn.onclick = () => selectWizardOption(opt.value);
-        container.appendChild(btn);
-      });
-    } else if (wizardStep === 3) {
-      const options = [
-        { text: "💵 Under ₹15,000", value: "Under ₹15,000" },
-        { text: "💵 ₹15k - ₹40k", value: "₹15,000 - ₹40,000" },
-        { text: "💵 ₹40k+", value: "₹40,000+" }
-      ];
-      options.forEach(opt => {
-        const btn = document.createElement('button');
-        btn.className = 'dm-chip';
-        btn.innerText = opt.text;
-        btn.onclick = () => selectWizardOption(opt.value);
-        container.appendChild(btn);
-      });
-    }
-  }
-
-  function selectWizardOption(value) {
-    const msgs = document.getElementById('dm-messages');
-    
-    const uDiv = document.createElement('div');
-    uDiv.className = 'dm-msg user';
-    uDiv.innerHTML = `<div class="dm-av user">Ap</div><div class="dm-bubble user">${escapeHtml(value)}</div>`;
-    msgs.appendChild(uDiv);
-    msgs.scrollTop = msgs.scrollHeight;
-    
-    if (wizardStep === 1) {
-      wizardData.goal = value;
-      wizardStep = 2;
-      setTimeout(() => {
-        const aDiv = document.createElement('div');
-        aDiv.className = 'dm-msg';
-        aDiv.innerHTML = `
-          <div class="dm-av bot">AI</div>
-          <div class="dm-bubble bot">Great choice! 👍 Do you currently have an active website, or are you planning a new one?</div>
-        `;
-        msgs.appendChild(aDiv);
-        msgs.scrollTop = msgs.scrollHeight;
-        renderConsultantChips();
-      }, 500);
-    } else if (wizardStep === 2) {
-      wizardData.website = value;
-      wizardStep = 3;
-      setTimeout(() => {
-        const aDiv = document.createElement('div');
-        aDiv.className = 'dm-msg';
-        aDiv.innerHTML = `
-          <div class="dm-av bot">AI</div>
-          <div class="dm-bubble bot">Perfect. One last question: What is your monthly marketing budget range?</div>
-        `;
-        msgs.appendChild(aDiv);
-        msgs.scrollTop = msgs.scrollHeight;
-        renderConsultantChips();
-      }, 500);
-    } else if (wizardStep === 3) {
-      wizardData.budget = value;
-      wizardStep = 0;
-      
-      const query = `I need a marketing consultation. My Goal: ${wizardData.goal}, My Website Status: ${wizardData.website}, My Budget: ${wizardData.budget}. Please recommend the best marketing services and strategy packages for me.`;
-      
-      setTimeout(() => {
-        const container = document.getElementById('dm-chips-container');
-        if (container) container.innerHTML = '';
-        dmSendText(query);
-      }, 500);
     }
   }
 
@@ -962,158 +538,16 @@
       return '<br>• ' + p1;
     });
     
-    html = html.replace(/\[CALL_CTA\]/g, `<a href="tel:+919725137538" class="inline-flex items-center gap-2 mt-3 px-4 py-2.5 bg-green-600 hover:bg-green-700 text-white font-semibold text-xs rounded-full shadow-lg shadow-green-600/25 hover:shadow-green-600/40 hover:-translate-y-0.5 active:translate-y-0 transition-all w-full justify-center cursor-pointer no-underline"><i class="fas fa-phone-alt animate-bounce"></i> Call +91 97251 37538 Now</a>`);
-    html = html.replace(/\[WHATSAPP_CTA\]/g, `<a href="https://wa.me/919725137538" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 mt-2 px-4 py-2.5 bg-emerald-500 hover:bg-emerald-600 text-white font-semibold text-xs rounded-full shadow-lg shadow-emerald-500/25 hover:shadow-emerald-500/40 hover:-translate-y-0.5 active:translate-y-0 transition-all w-full justify-center cursor-pointer no-underline"><i class="fab fa-whatsapp text-sm"></i> Message on WhatsApp</a>`);
+    // Parse CALL_CTA tag into a gorgeous Tailwind green glowing button
+    html = html.replace(/\[CALL_CTA\]/g, `<a href="tel:+919426846035" class="inline-flex items-center gap-2 mt-3 px-4 py-2.5 bg-green-600 hover:bg-green-700 text-white font-semibold text-xs rounded-full shadow-lg shadow-green-600/25 hover:shadow-green-600/40 hover:-translate-y-0.5 active:translate-y-0 transition-all w-full justify-center cursor-pointer no-underline"><i class="fas fa-phone-alt animate-bounce"></i> +91 94268 46035 Par Call Karein</a>`);
+    
+    // Parse WHATSAPP_CTA tag into a gorgeous Tailwind emerald glowing button
+    html = html.replace(/\[WHATSAPP_CTA\]/g, `<a href="https://wa.me/919426846035" target="_blank" class="inline-flex items-center gap-2 mt-2 px-4 py-2.5 bg-emerald-500 hover:bg-emerald-600 text-white font-semibold text-xs rounded-full shadow-lg shadow-emerald-500/25 hover:shadow-emerald-500/40 hover:-translate-y-0.5 active:translate-y-0 transition-all w-full justify-center cursor-pointer no-underline"><i class="fab fa-whatsapp text-sm"></i> WhatsApp Par Message Karein</a>`);
+    
+    // Remove consecutive double br if formatting leaves them
     html = html.replace(/(<br>){3,}/g, '<br><br>');
     return html;
   }
-
-  // Initialize chips on DOMContentLoaded
-  window.addEventListener('DOMContentLoaded', () => {
-    loadSuggestionChips('default');
-  });
-
-  // Premium Branded Preloader Script (W Growth Animation - All Pages, Every Load)
-  (function() {
-    const preloader = document.getElementById('preloader');
-    if (!preloader) return;
-    
-    // Prevent scrolling while preloader runs
-    document.body.style.overflow = 'hidden';
-    
-    // Check and stop Lenis scroll dynamically
-    if (typeof lenis !== 'undefined' && lenis) {
-      lenis.stop();
-    } else {
-      const checkLenis = setInterval(() => {
-        if (typeof lenis !== 'undefined' && lenis) {
-          lenis.stop();
-          clearInterval(checkLenis);
-        }
-      }, 50);
-      setTimeout(() => clearInterval(checkLenis), 3000);
-    }
-    
-    // Start drawing animation on DOM Content Loaded
-    window.addEventListener('DOMContentLoaded', () => {
-      if (typeof gsap === 'undefined') {
-        setTimeout(finishLoading, 2200);
-        return;
-      }
-
-      // Cross-browser safe initialization of scale and origin
-      gsap.set('#loader-arrow-head', { scale: 0, transformOrigin: '50% 50%', opacity: 1 });
-      gsap.set('#loader-star', { scale: 0, transformOrigin: '50% 50%', opacity: 1 });
-
-      const tl = gsap.timeline({
-        onComplete: () => {
-          // Wait exactly 400ms after the W completes, then start the exit transition!
-          setTimeout(startExit, 400);
-        }
-      });
-      
-      // 1. Draw Left Black Wing (starts immediately)
-      tl.to('#loader-left-wing', {
-        strokeDashoffset: 0,
-        duration: 1.0,
-        ease: 'power3.out'
-      }, 0);
-      
-      // 2. Draw Right Green Wing (starts simultaneously at 0.0)
-      tl.to('#loader-right-wing', {
-        strokeDashoffset: 0,
-        duration: 1.0,
-        ease: 'power3.out'
-      }, 0);
-      
-      // 3. Arrowhead Pop In, Scale Up & Bounce (starts at 0.8s, near the end of wing drawing)
-      tl.to('#loader-arrow-head', {
-        scale: 1,
-        duration: 0.55,
-        ease: 'back.out(1.7)'
-      }, 0.8);
-
-      // 4. Sparkle Star Pop In, Spin/Scale and Shine (starts at 0.9s, staggered)
-      tl.to('#loader-star', {
-        scale: 1,
-        rotation: 45,
-        duration: 0.55,
-        ease: 'back.out(1.5)'
-      }, 0.9);
-    });
-
-    function startExit() {
-      if (typeof gsap !== 'undefined' && preloader) {
-        const exitTl = gsap.timeline({
-          onComplete: () => {
-            preloader.style.display = 'none';
-            document.body.style.overflow = '';
-            if (typeof lenis !== 'undefined' && lenis) {
-              lenis.start();
-            }
-            if (typeof ScrollTrigger !== 'undefined') {
-              ScrollTrigger.refresh();
-            }
-          }
-        });
-        
-        // Parallax logo exit (slides up slightly faster & fades out)
-        exitTl.to('#loader-logo-wrap', {
-          y: -100,
-          opacity: 0,
-          duration: 0.45,
-          ease: 'power2.in'
-        });
-        
-        // Premium curtain slide-up
-        exitTl.to(preloader, {
-          yPercent: -100,
-          duration: 0.75,
-          ease: 'power4.inOut'
-        }, "-=0.3");
-
-        // Premium parallax page reveal (fades and rises up dynamically)
-        exitTl.fromTo('main', {
-          y: 40,
-          opacity: 0
-        }, {
-          y: 0,
-          opacity: 1,
-          duration: 0.75,
-          ease: 'power3.out'
-        }, "-=0.55");
-      } else {
-        finishLoading();
-      }
-    }
-
-    function finishLoading() {
-      if (preloader) {
-        preloader.style.transition = 'transform 0.65s cubic-bezier(0.77, 0, 0.175, 1)';
-        preloader.style.transform = 'translateY(-100%)';
-        setTimeout(() => {
-          preloader.style.display = 'none';
-          document.body.style.overflow = '';
-          if (typeof lenis !== 'undefined' && lenis) {
-            lenis.start();
-          }
-        }, 700);
-      }
-    }
-  })();
-
-  // Load Fonts & Icons asynchronously
-  (function() {
-    const gfLink = document.createElement('link');
-    gfLink.rel = 'stylesheet';
-    gfLink.href = 'https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=DM+Sans:wght@300;400;500;600;700&family=Josefin+Sans:wght@100;200;300;400;500;600;700&display=swap';
-    document.head.appendChild(gfLink);
-
-    const faLink = document.createElement('link');
-    faLink.rel = 'stylesheet';
-    faLink.href = 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css';
-    document.head.appendChild(faLink);
-  })();
 </script>
 </body>
 </html>

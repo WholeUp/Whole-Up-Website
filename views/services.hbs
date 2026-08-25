@@ -1,21 +1,20 @@
 <!-- PAGE HERO -->
-<section class="page-hero bg-cream px-6 border-b border-black/5 relative overflow-hidden">
-  <canvas id="services-3d-canvas" class="absolute inset-0 w-full h-full pointer-events-none z-0"></canvas>
-  <div class="max-w-7xl mx-auto text-center gs-reveal relative z-10">
+<section class="page-hero bg-cream px-6 border-b border-black/5">
+  <div class="max-w-7xl mx-auto text-center gs-reveal">
     <p class="text-xs font-bold tracking-[0.3em] uppercase text-primary mb-4">Full-Service Agency</p>
     <h1 class="text-5xl md:text-7xl font-black uppercase tracking-widest text-dark mb-6">Our <span class="text-primary">Services.</span></h1>
-    <p class="text-dark/60 font-medium text-xl max-w-3xl mx-auto">Get results-driven digital marketing services. We deliver custom strategy, execution, and ROI. All under one roof.</p>
+    <p class="text-dark/60 font-medium text-xl max-w-3xl mx-auto">Everything your brand needs to dominate online — strategy, execution, and measurable results. All under one roof.</p>
   </div>
 </section>
 
 <!-- ALL SERVICES GRID -->
 <section class="py-24 bg-white px-6">
   <div class="max-w-7xl mx-auto">
-    <div class="grid md:grid-cols-2 gap-8 services-grid-parent">
+    <div class="grid md:grid-cols-2 gap-8">
       {{#each services}}
-      <div class="glass-card glass-card-glow rounded-[32px] p-10 services-card-item transition-all duration-300" data-tilt data-tilt-max="3" style="--hover-glow: {{color}}; --hover-glow-rgba: {{bgColor}}">
+      <div class="glass-card rounded-[32px] p-10 gs-reveal hover:-translate-y-1 transition-all duration-300" data-tilt data-tilt-max="3">
         <div class="flex items-start gap-6 mb-8">
-          <div class="w-16 h-16 rounded-2xl flex items-center justify-center text-3xl flex-shrink-0 service-icon" style="background:{{bgColor}};color:{{color}}">
+          <div class="w-16 h-16 rounded-2xl flex items-center justify-center text-3xl flex-shrink-0" style="background:{{bgColor}};color:{{color}}">
             <i class="{{icon}}"></i>
           </div>
           <div>
@@ -26,17 +25,14 @@
         <p class="text-dark/70 font-medium leading-relaxed mb-8">{{description}}</p>
         <div class="grid grid-cols-2 gap-3 mb-8">
           {{#each features}}
-          <div class="flex items-center gap-2 text-sm font-medium text-dark feature-item">
+          <div class="flex items-center gap-2 text-sm font-medium text-dark">
             <i class="fas fa-check-circle text-primary text-xs flex-shrink-0"></i>{{this}}
           </div>
           {{/each}}
         </div>
-        <button onclick="openChatbotWithContext('{{slug}}')" class="w-full mb-6 py-2.5 rounded-xl border border-primary/20 text-xs font-bold uppercase tracking-wider transition duration-300 flex items-center justify-center gap-2" style="background: color-mix(in srgb, var(--hover-glow) 5%, transparent); border-color: color-mix(in srgb, var(--hover-glow) 20%, transparent); color: var(--hover-glow);">
-          <i class="fas fa-robot animate-pulse"></i> Ask {{title}} Expert
-        </button>
         <div class="flex items-center justify-between pt-6 border-t border-black/5">
           <div>
-            <p class="text-[10px] font-bold uppercase tracking-widest text-gray-400 mb-1">Typical Result <i class="fas fa-chart-line text-[9px] ml-1 opacity-70"></i></p>
+            <p class="text-[10px] font-bold uppercase tracking-widest text-gray-400 mb-1">Typical Result</p>
             <p class="text-lg font-black text-primary">{{result}}</p>
           </div>
           <a href="/services/{{slug}}" class="bg-dark text-white px-6 py-3 rounded-xl font-bold text-sm uppercase tracking-widest hover:bg-primary transition magnetic-btn">
@@ -50,163 +46,13 @@
 </section>
 
 <!-- CTA -->
-<section class="py-24 px-6 bg-[#EAF6ED] border-t border-black/5 relative overflow-hidden">
-  <div class="absolute inset-0 opacity-[0.05]" style="background-image:radial-gradient(#000 1px,transparent 1px);background-size:30px 30px;"></div>
+<section class="py-24 px-6 bg-primary relative overflow-hidden">
+  <div class="absolute inset-0 opacity-10" style="background-image:radial-gradient(#fff 1px,transparent 1px);background-size:30px 30px;"></div>
   <div class="max-w-3xl mx-auto text-center relative z-10 gs-reveal">
-    <h2 class="text-4xl md:text-5xl font-black text-dark uppercase tracking-widest mb-6">Not Sure Which Service You Need?</h2>
-    <p class="text-dark/70 text-lg font-medium mb-10">Book a free consultation. We'll audit your business and tell you exactly what will drive the most growth.</p>
-    <div class="flex flex-col sm:flex-row justify-center items-center gap-4">
-      <a href="/contact" class="bg-primary text-white px-10 py-5 rounded-xl font-black uppercase tracking-widest text-sm shadow-xl shadow-primary/25 hover:bg-green-600 transition magnetic-btn inline-flex items-center gap-2">
-        Book Free Audit <i class="fas fa-arrow-right"></i>
-      </a>
-      <button onclick="openChatbotWithContext('consultant')" class="border-2 border-dark/20 text-dark hover:bg-dark/5 px-10 py-[18px] rounded-xl font-black uppercase tracking-widest text-sm transition magnetic-btn inline-flex items-center gap-2">
-        <i class="fas fa-robot"></i> Ask GrowBot Wizard
-      </button>
-    </div>
+    <h2 class="text-4xl md:text-5xl font-black text-white uppercase tracking-widest mb-6">Not Sure Which Service You Need?</h2>
+    <p class="text-white/80 text-lg font-medium mb-10">Book a free consultation. We'll audit your business and tell you exactly what will drive the most growth.</p>
+    <a href="/contact" class="bg-white text-primary px-10 py-5 rounded-xl font-black uppercase tracking-widest text-sm shadow-xl hover:bg-cream transition magnetic-btn inline-flex items-center gap-2">
+      Book Free Audit <i class="fas fa-arrow-right"></i>
+    </a>
   </div>
 </section>
-
-<style>
-  .services-card-item {
-    opacity: 0;
-  }
-  .glass-card-glow {
-    position: relative;
-    transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1) !important;
-  }
-  .glass-card-glow:hover {
-    transform: translateY(-8px) scale(1.01) !important;
-    box-shadow: 0 30px 60px -15px rgba(0, 0, 0, 0.12), 0 0 40px -5px color-mix(in srgb, var(--hover-glow) 25%, transparent) !important;
-    border-color: var(--hover-glow) !important;
-    background: rgba(255, 255, 255, 0.98);
-  }
-  .glass-card-glow:hover .service-icon {
-    transform: scale(1.12) rotate(6deg);
-    box-shadow: 0 10px 24px -6px color-mix(in srgb, var(--hover-glow) 40%, transparent);
-  }
-  .service-icon {
-    transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-  }
-  .feature-item {
-    transition: transform 0.25s ease, color 0.25s ease;
-  }
-  .glass-card-glow:hover .feature-item:hover {
-    transform: translateX(4px);
-    color: var(--hover-glow);
-  }
-</style>
-
-<script>
-  window.addEventListener('DOMContentLoaded', () => {
-    // ════ 3D WEBGL ROTATING MESH (Three.js) ════
-    const canvas = document.getElementById('services-3d-canvas');
-    if (canvas && typeof THREE !== 'undefined') {
-      const scene = new THREE.Scene();
-      const width = canvas.clientWidth || window.innerWidth;
-      const height = canvas.clientHeight || window.innerHeight;
-      const camera = new THREE.PerspectiveCamera(55, width / height, 0.1, 100);
-      camera.position.z = 4.5;
-
-      const renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true, antialias: true });
-      renderer.setSize(width, height);
-      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-
-      // Torus Knot points mesh (plexus feel)
-      const geometry = new THREE.TorusKnotGeometry(1.5, 0.45, 120, 18);
-      
-      const pCanvas = document.createElement('canvas');
-      pCanvas.width = 16; pCanvas.height = 16;
-      const pCtx = pCanvas.getContext('2d');
-      const grad = pCtx.createRadialGradient(8, 8, 0, 8, 8, 8);
-      grad.addColorStop(0, 'rgba(255, 255, 255, 1)');
-      grad.addColorStop(1, 'rgba(255, 255, 255, 0)');
-      pCtx.fillStyle = grad;
-      pCtx.fillRect(0, 0, 16, 16);
-      const texture = new THREE.CanvasTexture(pCanvas);
-
-      const material = new THREE.PointsMaterial({
-        color: '#16A34A',
-        size: 0.04,
-        transparent: true,
-        opacity: 0.22,
-        map: texture,
-        depthWrite: false
-      });
-
-      const torusKnot = new THREE.Points(geometry, material);
-      scene.add(torusKnot);
-
-      // Mouse Parallax camera
-      let mouseX = 0, mouseY = 0;
-      window.addEventListener('mousemove', (e) => {
-        mouseX = (e.clientX / window.innerWidth - 0.5) * 1.2;
-        mouseY = -(e.clientY / window.innerHeight - 0.5) * 1.2;
-      });
-
-      const clock = new THREE.Clock();
-      function tick() {
-        const elapsed = clock.getElapsedTime();
-
-        // Slow mesh rotation
-        torusKnot.rotation.y = elapsed * 0.12;
-        torusKnot.rotation.x = elapsed * 0.06;
-
-        // Camera follow
-        camera.position.x += (mouseX - camera.position.x) * 0.05;
-        camera.position.y += (mouseY - camera.position.y) * 0.05;
-        camera.lookAt(scene.position);
-
-        renderer.render(scene, camera);
-        requestAnimationFrame(tick);
-      }
-      tick();
-
-      window.addEventListener('resize', () => {
-        const w = canvas.clientWidth || window.innerWidth;
-        const h = canvas.clientHeight || window.innerHeight;
-        camera.aspect = w / h;
-        camera.updateProjectionMatrix();
-        renderer.setSize(w, h);
-      });
-    }
-
-    // Only run if GSAP is available
-    if (typeof gsap !== 'undefined') {
-      // ════ STAGGERED ALTERNATING SERVICES CARDS ENTRANCE ════
-      const cards = gsap.utils.toArray('.services-grid-parent .services-card-item');
-      
-      cards.forEach((card, idx) => {
-        // Alternating entry: left vs right translations
-        const xOffset = idx % 2 === 0 ? -60 : 60;
-        gsap.fromTo(card, {
-          opacity: 0,
-          x: xOffset,
-          scale: 0.96
-        }, {
-          opacity: 1,
-          x: 0,
-          scale: 1,
-          duration: 1.1,
-          ease: 'power3.out',
-          scrollTrigger: {
-            trigger: card,
-            start: 'top 85%'
-          }
-        });
-      });
-
-      // ════ MOUSE INTERACTIVE spotlight card glows ════
-      const updateGlow = (e, card) => {
-        const rect = card.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
-        card.style.setProperty('--mouse-x', `${x}px`);
-        card.style.setProperty('--mouse-y', `${y}px`);
-      };
-
-      document.querySelectorAll('.glass-card-glow').forEach(card => {
-        card.addEventListener('mousemove', e => updateGlow(e, card));
-      });
-    }
-  });
-</script>

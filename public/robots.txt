@@ -1,4 +1,30 @@
+# Directives for major search engines
 User-agent: *
 Allow: /
+Disallow: /api/
+Sitemap: https://www.wholeup.in/sitemap.xml
 
-Sitemap: https://wholeup.in/sitemap.xml
+# Block competitor intelligence crawlers (Prevent SEO reverse-engineering)
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: SemrushBot
+Disallow: /
+
+User-agent: SemrushBot-SA
+Disallow: /
+
+User-agent: Rogerbot
+Disallow: /
+
+User-agent: DotBot
+Disallow: /
+
+User-agent: MJ12bot
+Disallow: /
+
+User-agent: MegaIndex.ru
+Disallow: /
+
+User-agent: MegaIndex.ru/2.0
+Disallow: /

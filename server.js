@@ -761,3 +761,4 @@ app.use((req, res) => {
 app.listen(PORT, () => {
   console.log(`✅ Wholeup server running at http://localhost:${PORT}`);
 });
+module.exports = app;  

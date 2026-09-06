@@ -73,10 +73,25 @@
           <h3 class="text-2xl font-black uppercase tracking-widest text-dark mb-2">Request a Free Audit</h3>
           <p class="text-dark/50 font-medium text-sm mb-8">Fill in your details and we'll get back to you within 24 hours.</p>
 
-          <div id="form-success" class="hidden bg-primary/10 border border-primary/30 rounded-2xl p-8 text-center mb-6">
-            <div class="w-16 h-16 bg-primary rounded-full flex items-center justify-center text-white text-2xl mx-auto mb-4"><i class="fas fa-check"></i></div>
-            <h4 class="text-xl font-black text-dark mb-2 uppercase tracking-widest">Request Received!</h4>
-            <p class="text-dark/70 font-medium">We'll contact you within 24 hours. Check your email for confirmation.</p>
+          <div id="form-success" class="hidden bg-emerald-50/80 border-2 border-emerald-500/30 rounded-3xl p-8 sm:p-10 text-center mb-6 shadow-xl space-y-4">
+            <div class="w-16 h-16 bg-[#25D366] text-white rounded-full flex items-center justify-center text-3xl mx-auto shadow-lg shadow-emerald-500/30">
+              <i class="fab fa-whatsapp"></i>
+            </div>
+            <h4 class="text-2xl sm:text-3xl font-black text-dark uppercase tracking-wider">Inquiry Submitted!</h4>
+            <p class="text-dark/70 font-medium text-sm sm:text-base max-w-lg mx-auto leading-relaxed">
+              Thank you, <strong id="lead-name-display" class="text-dark font-black"></strong>! We've saved your details and are opening WhatsApp to connect directly with <strong>Neel Shah (+91 94268 46035)</strong>.
+            </p>
+            
+            <div class="pt-2">
+              <a id="wa-direct-btn" href="#" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center gap-3 bg-[#25D366] hover:bg-green-600 text-white font-black uppercase tracking-wider py-4 px-8 rounded-2xl shadow-xl hover:shadow-2xl transition transform hover:-translate-y-0.5 text-sm sm:text-base w-full sm:w-auto">
+                <i class="fab fa-whatsapp text-2xl"></i>
+                <span>Open WhatsApp Chat Now</span>
+              </a>
+            </div>
+
+            <p class="text-xs text-dark/40 font-medium pt-2">
+              If WhatsApp didn't open automatically, click the green button above to message Neel Shah directly.
+            </p>
           </div>
 
           <form id="contact-form" class="space-y-5">
@@ -146,44 +161,71 @@ window.addEventListener('DOMContentLoaded', () => {
   }
 });
 
-document.getElementById('contact-form').addEventListener('submit', async function(e) {
+document.getElementById('contact-form').addEventListener('submit', function(e) {
   e.preventDefault();
   const btn = document.getElementById('submit-btn');
   const btnText = document.getElementById('btn-text');
   const btnIcon = document.getElementById('btn-icon');
   const errBox = document.getElementById('form-error');
 
-  btnText.textContent = 'Sending...';
+  const formData = new FormData(this);
+  const data = Object.fromEntries(formData.entries());
+
+  if (!data.name || !data.email || !data.message) {
+    errBox.textContent = 'Please fill in all required fields.';
+    errBox.classList.remove('hidden');
+    return;
+  }
+
+  btnText.textContent = 'Redirecting to WhatsApp...';
   btnIcon.className = 'fas fa-spinner fa-spin';
   btn.disabled = true;
   errBox.classList.add('hidden');
 
-  const formData = new FormData(this);
-  const data = Object.fromEntries(formData.entries());
+  // Format WhatsApp message for Neel Shah (+91 94268 46035)
+  const phoneVal = (data.phone || '').trim() || 'Not provided';
+  const cityVal = (data.city || '').trim() || 'Not specified';
+  const serviceVal = (data.service || '').trim() || 'General Growth Strategy';
 
+  const waMsg = `*🚀 New Growth Inquiry — WholeUp*\n\n` +
+    `👤 *Client Name:* ${data.name.trim()}\n` +
+    `📞 *Phone:* ${phoneVal}\n` +
+    `📧 *Email:* ${data.email.trim()}\n` +
+    `📍 *City:* ${cityVal}\n` +
+    `🎯 *Service:* ${serviceVal}\n\n` +
+    `📝 *Business Requirement:*\n${data.message.trim()}\n\n` +
+    `🌐 *Sent from:* wholeup.in/contact`;
+
+  const waUrl = `https://api.whatsapp.com/send?phone=919426846035&text=${encodeURIComponent(waMsg)}`;
+
+  // 1. Asynchronously save lead to backend & notify via email
   try {
-    const res = await fetch('/api/contact', {
+    fetch('/api/contact', {
       method: 'POST',
+      keepalive: true,
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(data)
+    }).catch(function(err) {
+      console.error('Lead save error:', err);
     });
-    const result = await res.json();
-    if (result.success) {
-      this.style.display = 'none';
-      document.getElementById('form-success').classList.remove('hidden');
-    } else {
-      errBox.textContent = result.message || 'Something went wrong. Please try again.';
-      errBox.classList.remove('hidden');
-      btnText.textContent = 'Submit Request';
-      btnIcon.className = 'fas fa-arrow-right';
-      btn.disabled = false;
-    }
   } catch(err) {
-    errBox.textContent = 'Network error. Please try again or contact us directly.';
-    errBox.classList.remove('hidden');
-    btnText.textContent = 'Submit Request';
-    btnIcon.className = 'fas fa-arrow-right';
-    btn.disabled = false;
+    console.error('Fetch error:', err);
+  }
+
+  // 2. Update and show success UI
+  const leadName = document.getElementById('lead-name-display');
+  if (leadName) leadName.textContent = data.name.trim();
+  const waBtn = document.getElementById('wa-direct-btn');
+  if (waBtn) waBtn.href = waUrl;
+
+  this.style.display = 'none';
+  document.getElementById('form-success').classList.remove('hidden');
+
+  // 3. Open WhatsApp directly in a new tab/app
+  try {
+    window.open(waUrl, '_blank');
+  } catch (err) {
+    console.error('Popup error:', err);
   }
 });
 </script>

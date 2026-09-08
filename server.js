@@ -224,6 +224,15 @@ app.get('/contact', (req, res) => {
   });
 });
 
+// THANK YOU / CONVERSION CONFIRMATION PAGE
+app.get('/thank-you', (req, res) => {
+  res.render('thank-you', {
+    title: 'Thank You | Your Growth Blueprint is in Motion | WholeUp',
+    metaDesc: 'Thank you for requesting a growth strategy consultation with WholeUp. Our performance marketing team will review your business and reach out shortly.',
+    page: 'thank-you'
+  });
+});
+
 // PRIVACY POLICY
 app.get('/privacy', (req, res) => {
   res.render('privacy', {

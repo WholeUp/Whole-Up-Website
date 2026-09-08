@@ -177,7 +177,7 @@ document.getElementById('contact-form').addEventListener('submit', function(e) {
     return;
   }
 
-  btnText.textContent = 'Redirecting to WhatsApp...';
+  btnText.textContent = 'Securing Your Priority Audit...';
   btnIcon.className = 'fas fa-spinner fa-spin';
   btn.disabled = true;
   errBox.classList.add('hidden');
@@ -197,35 +197,28 @@ document.getElementById('contact-form').addEventListener('submit', function(e) {
     `🌐 *Sent from:* wholeup.in/contact`;
 
   const waUrl = `https://api.whatsapp.com/send?phone=919426846035&text=${encodeURIComponent(waMsg)}`;
+  const thankYouUrl = `/thank-you?name=${encodeURIComponent(data.name.trim())}&service=${encodeURIComponent(serviceVal)}&phone=${encodeURIComponent(phoneVal)}`;
 
-  // 1. Asynchronously save lead to backend & notify via email
+  // 1. Save lead to backend & redirect to /thank-you conversion page
   try {
     fetch('/api/contact', {
       method: 'POST',
       keepalive: true,
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(data)
-    }).catch(function(err) {
-      console.error('Lead save error:', err);
+    }).finally(function() {
+      // Try opening WhatsApp in new tab for instant connection
+      try {
+        window.open(waUrl, '_blank');
+      } catch (err) {
+        console.warn('Popup blocked:', err);
+      }
+      // Redirect to dedicated /thank-you conversion tracking page
+      window.location.href = thankYouUrl;
     });
   } catch(err) {
-    console.error('Fetch error:', err);
-  }
-
-  // 2. Update and show success UI
-  const leadName = document.getElementById('lead-name-display');
-  if (leadName) leadName.textContent = data.name.trim();
-  const waBtn = document.getElementById('wa-direct-btn');
-  if (waBtn) waBtn.href = waUrl;
-
-  this.style.display = 'none';
-  document.getElementById('form-success').classList.remove('hidden');
-
-  // 3. Open WhatsApp directly in a new tab/app
-  try {
-    window.open(waUrl, '_blank');
-  } catch (err) {
-    console.error('Popup error:', err);
+    console.error('Submission error:', err);
+    window.location.href = thankYouUrl;
   }
 });
 </script>

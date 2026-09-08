@@ -78,7 +78,8 @@ app.get('/sitemap.xml', (req, res) => {
     { loc: '/pricing', priority: '0.9', changefreq: 'weekly' },
     { loc: '/blog', priority: '0.8', changefreq: 'daily' },
     { loc: '/faq', priority: '0.7', changefreq: 'monthly' },
-    { loc: '/contact', priority: '0.9', changefreq: 'monthly' }
+    { loc: '/contact', priority: '0.9', changefreq: 'monthly' },
+    { loc: '/thank-you', priority: '0.5', changefreq: 'monthly' }
   ];
 
   let xml = '<?xml version="1.0" encoding="UTF-8"?>\n';

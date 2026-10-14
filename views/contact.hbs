@@ -8,8 +8,9 @@
 </section>
 
 <!-- CONTACT SECTION -->
-<section class="py-24 bg-white px-6">
-  <div class="max-w-6xl mx-auto">
+<section class="py-24 bg-white px-6 relative overflow-hidden">
+  <canvas id="contact-mesh-canvas" class="absolute inset-0 w-full h-full pointer-events-none z-0"></canvas>
+  <div class="max-w-6xl mx-auto relative z-10">
     <div class="grid md:grid-cols-5 gap-16 items-start">
 
       <!-- Left Info -->
@@ -17,25 +18,25 @@
         <h2 class="text-3xl font-black uppercase tracking-widest text-dark mb-8">Get In <span class="text-primary">Touch.</span></h2>
 
         <div class="space-y-6 mb-12">
-          <a href="tel:+919426846035" class="flex items-center gap-5 group">
+          <a href="tel:+919725137538" class="flex items-center gap-5 group">
             <div class="w-14 h-14 bg-primary/10 rounded-2xl flex items-center justify-center text-primary text-xl group-hover:bg-primary group-hover:text-white transition"><i class="fas fa-phone-alt"></i></div>
             <div>
               <p class="text-xs font-bold uppercase tracking-widest text-dark/40 mb-1">Call Us</p>
-              <p class="font-black text-dark text-lg">+91 94268 46035</p>
+              <p class="font-black text-dark text-lg">+91 97251 37538</p>
             </div>
           </a>
-          <a href="mailto:wholeup.agency@gmail.com" class="flex items-center gap-5 group">
+          <a href="mailto:&#119;&#104;&#111;&#108;&#101;&#117;&#112;&#46;&#97;&#103;&#101;&#110;&#99;&#121;&#64;&#103;&#109;&#97;&#105;&#108;&#46;&#99;&#111;&#109;" class="flex items-center gap-5 group">
             <div class="w-14 h-14 bg-primary/10 rounded-2xl flex items-center justify-center text-primary text-xl group-hover:bg-primary group-hover:text-white transition"><i class="fas fa-envelope"></i></div>
             <div>
               <p class="text-xs font-bold uppercase tracking-widest text-dark/40 mb-1">Email</p>
-              <p class="font-black text-dark">wholeup.agency@gmail.com</p>
+              <p class="font-black text-dark">&#119;&#104;&#111;&#108;&#101;&#117;&#112;&#46;&#97;&#103;&#101;&#110;&#99;&#121;&#64;&#103;&#109;&#97;&#105;&#108;&#46;&#99;&#111;&#109;</p>
             </div>
           </a>
-          <a href="https://wa.me/919426846035" target="_blank" class="flex items-center gap-5 group">
+          <a href="https://wa.me/919426846035" target="_blank" rel="noopener noreferrer" class="flex items-center gap-5 group">
             <div class="w-14 h-14 bg-primary/10 rounded-2xl flex items-center justify-center text-primary text-xl group-hover:bg-[#25D366] group-hover:text-white transition"><i class="fab fa-whatsapp"></i></div>
             <div>
               <p class="text-xs font-bold uppercase tracking-widest text-dark/40 mb-1">WhatsApp</p>
-              <p class="font-black text-dark">Chat with us directly</p>
+              <p class="font-black text-dark">+91 94268 46035</p>
             </div>
           </a>
           <div class="flex items-center gap-5">
@@ -73,51 +74,36 @@
           <h3 class="text-2xl font-black uppercase tracking-widest text-dark mb-2">Request a Free Audit</h3>
           <p class="text-dark/50 font-medium text-sm mb-8">Fill in your details and we'll get back to you within 24 hours.</p>
 
-          <div id="form-success" class="hidden bg-emerald-50/80 border-2 border-emerald-500/30 rounded-3xl p-8 sm:p-10 text-center mb-6 shadow-xl space-y-4">
-            <div class="w-16 h-16 bg-[#25D366] text-white rounded-full flex items-center justify-center text-3xl mx-auto shadow-lg shadow-emerald-500/30">
-              <i class="fab fa-whatsapp"></i>
-            </div>
-            <h4 class="text-2xl sm:text-3xl font-black text-dark uppercase tracking-wider">Inquiry Submitted!</h4>
-            <p class="text-dark/70 font-medium text-sm sm:text-base max-w-lg mx-auto leading-relaxed">
-              Thank you, <strong id="lead-name-display" class="text-dark font-black"></strong>! We've saved your details and are opening WhatsApp to connect directly with <strong>Neel Shah (+91 94268 46035)</strong>.
-            </p>
-            
-            <div class="pt-2">
-              <a id="wa-direct-btn" href="#" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center gap-3 bg-[#25D366] hover:bg-green-600 text-white font-black uppercase tracking-wider py-4 px-8 rounded-2xl shadow-xl hover:shadow-2xl transition transform hover:-translate-y-0.5 text-sm sm:text-base w-full sm:w-auto">
-                <i class="fab fa-whatsapp text-2xl"></i>
-                <span>Open WhatsApp Chat Now</span>
-              </a>
-            </div>
-
-            <p class="text-xs text-dark/40 font-medium pt-2">
-              If WhatsApp didn't open automatically, click the green button above to message Neel Shah directly.
-            </p>
+          <div id="form-success" class="hidden bg-primary/10 border border-primary/30 rounded-2xl p-8 text-center mb-6">
+            <div class="w-16 h-16 bg-primary rounded-full flex items-center justify-center text-white text-2xl mx-auto mb-4"><i class="fas fa-check"></i></div>
+            <h4 class="text-xl font-black text-dark mb-2 uppercase tracking-widest">Request Received!</h4>
+            <p class="text-dark/70 font-medium">We'll contact you within 24 hours. Check your email for confirmation.</p>
           </div>
 
           <form id="contact-form" class="space-y-5">
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
               <div>
-                <label class="block text-xs font-bold uppercase tracking-widest text-dark/50 mb-2">Full Name *</label>
-                <input type="text" name="name" required placeholder="Rahul Sharma" class="w-full bg-white border border-black/10 rounded-xl px-5 py-4 text-dark focus:outline-none focus:border-primary transition font-medium">
+                <label for="contact-name" class="block text-xs font-bold uppercase tracking-widest text-dark/50 mb-2">Full Name *</label>
+                <input id="contact-name" type="text" name="name" required placeholder="Rahul Sharma" class="w-full bg-white border border-black/10 rounded-xl px-5 py-4 text-dark focus:outline-none focus:border-primary transition font-medium">
               </div>
               <div>
-                <label class="block text-xs font-bold uppercase tracking-widest text-dark/50 mb-2">Phone *</label>
-                <input type="tel" name="phone" required placeholder="+91 98765 43210" class="w-full bg-white border border-black/10 rounded-xl px-5 py-4 text-dark focus:outline-none focus:border-primary transition font-medium">
+                <label for="contact-phone" class="block text-xs font-bold uppercase tracking-widest text-dark/50 mb-2">Phone *</label>
+                <input id="contact-phone" type="tel" name="phone" required placeholder="+91 98765 43210" class="w-full bg-white border border-black/10 rounded-xl px-5 py-4 text-dark focus:outline-none focus:border-primary transition font-medium">
               </div>
             </div>
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
               <div>
-                <label class="block text-xs font-bold uppercase tracking-widest text-dark/50 mb-2">Email Address *</label>
-                <input type="email" name="email" required placeholder="rahul@business.com" class="w-full bg-white border border-black/10 rounded-xl px-5 py-4 text-dark focus:outline-none focus:border-primary transition font-medium">
+                <label for="contact-email" class="block text-xs font-bold uppercase tracking-widest text-dark/50 mb-2">Email Address *</label>
+                <input id="contact-email" type="email" name="email" required placeholder="rahul@business.com" class="w-full bg-white border border-black/10 rounded-xl px-5 py-4 text-dark focus:outline-none focus:border-primary transition font-medium">
               </div>
               <div>
-                <label class="block text-xs font-bold uppercase tracking-widest text-dark/50 mb-2">City</label>
-                <input type="text" name="city" placeholder="Mumbai" class="w-full bg-white border border-black/10 rounded-xl px-5 py-4 text-dark focus:outline-none focus:border-primary transition font-medium">
+                <label for="contact-city" class="block text-xs font-bold uppercase tracking-widest text-dark/50 mb-2">City</label>
+                <input id="contact-city" type="text" name="city" placeholder="Mumbai" class="w-full bg-white border border-black/10 rounded-xl px-5 py-4 text-dark focus:outline-none focus:border-primary transition font-medium">
               </div>
             </div>
             <div>
-              <label class="block text-xs font-bold uppercase tracking-widest text-dark/50 mb-2">Service Interested In</label>
-              <select name="service" class="w-full bg-white border border-black/10 rounded-xl px-5 py-4 text-dark focus:outline-none focus:border-primary transition font-medium appearance-none">
+              <label for="contact-service" class="block text-xs font-bold uppercase tracking-widest text-dark/50 mb-2">Service Interested In</label>
+              <select id="contact-service" name="service" class="w-full bg-white border border-black/10 rounded-xl px-5 py-4 text-dark focus:outline-none focus:border-primary transition font-medium appearance-none">
                 <option value="">Select a service...</option>
                 <option>SEO & Organic Growth</option>
                 <option>Paid Advertising (Google / Meta)</option>
@@ -130,8 +116,8 @@
               </select>
             </div>
             <div>
-              <label class="block text-xs font-bold uppercase tracking-widest text-dark/50 mb-2">Tell Us About Your Business *</label>
-              <textarea name="message" required rows="5" placeholder="What does your business do? What are your current marketing challenges? What results are you looking for?" class="w-full bg-white border border-black/10 rounded-xl px-5 py-4 text-dark focus:outline-none focus:border-primary transition font-medium resize-none"></textarea>
+              <label for="contact-message" class="block text-xs font-bold uppercase tracking-widest text-dark/50 mb-2">Tell Us About Your Business *</label>
+              <textarea id="contact-message" name="message" required rows="5" placeholder="What does your business do? What are your current marketing challenges? What results are you looking for?" class="w-full bg-white border border-black/10 rounded-xl px-5 py-4 text-dark focus:outline-none focus:border-primary transition font-medium resize-none"></textarea>
             </div>
             <div id="form-error" class="hidden bg-red-50 border border-red-200 text-red-700 rounded-xl px-5 py-4 text-sm font-medium"></div>
             <button type="submit" id="submit-btn" class="w-full bg-dark hover:bg-primary text-white font-black uppercase tracking-widest py-5 rounded-xl shadow-lg transition flex items-center justify-center gap-3">
@@ -159,66 +145,197 @@ window.addEventListener('DOMContentLoaded', () => {
       msgArea.value = `I calculated my ROI using the calculator. My parameters: Monthly Ad Spend: ₹${parseInt(spend).toLocaleString('en-IN')}, Target ROAS: ${roas}x, Average CPL: ₹${cpl}. I'd like a custom marketing strategy based on these details.`;
     }
   }
+
+  // ════ 2D PLEXUS CANVAS SYSTEM ════
+  const canvas = document.getElementById('contact-mesh-canvas');
+  if (canvas) {
+    const ctx = canvas.getContext('2d');
+    let width = canvas.width = canvas.offsetWidth;
+    let height = canvas.height = canvas.offsetHeight;
+
+    window.addEventListener('resize', () => {
+      width = canvas.width = canvas.offsetWidth;
+      height = canvas.height = canvas.offsetHeight;
+    });
+
+    const particles = [];
+    const maxParticles = 45;
+
+    class Particle {
+      constructor() {
+        this.x = Math.random() * width;
+        this.y = Math.random() * height;
+        this.vx = (Math.random() - 0.5) * 0.45;
+        this.vy = (Math.random() - 0.5) * 0.45;
+        this.radius = Math.random() * 2 + 1;
+      }
+      update() {
+        this.x += this.vx;
+        this.y += this.vy;
+        if (this.x < 0 || this.x > width) this.vx *= -1;
+        if (this.y < 0 || this.y > height) this.vy *= -1;
+      }
+      draw() {
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+        ctx.fillStyle = 'rgba(22, 163, 74, 0.12)';
+        ctx.fill();
+      }
+    }
+
+    for (let i = 0; i < maxParticles; i++) {
+      particles.push(new Particle());
+    }
+
+    let mouse = { x: null, y: null };
+    const contactSection = canvas.parentElement;
+    contactSection.addEventListener('mousemove', (e) => {
+      const rect = canvas.getBoundingClientRect();
+      mouse.x = e.clientX - rect.left;
+      mouse.y = e.clientY - rect.top;
+    });
+    contactSection.addEventListener('mouseleave', () => {
+      mouse.x = null;
+      mouse.y = null;
+    });
+
+    function drawPlexus() {
+      ctx.clearRect(0, 0, width, height);
+
+      particles.forEach(p => {
+        p.update();
+        p.draw();
+      });
+
+      // Draw lines between close particles
+      for (let i = 0; i < particles.length; i++) {
+        for (let j = i + 1; j < particles.length; j++) {
+          const dx = particles[i].x - particles[j].x;
+          const dy = particles[i].y - particles[j].y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+
+          if (dist < 105) {
+            const alpha = (1 - dist / 105) * 0.08;
+            ctx.beginPath();
+            ctx.moveTo(particles[i].x, particles[i].y);
+            ctx.lineTo(particles[j].x, particles[j].y);
+            ctx.strokeStyle = `rgba(22, 163, 74, ${alpha})`;
+            ctx.lineWidth = 1;
+            ctx.stroke();
+          }
+        }
+      }
+
+      // Draw lines to mouse cursor
+      if (mouse.x !== null && mouse.y !== null) {
+        particles.forEach(p => {
+          const dx = p.x - mouse.x;
+          const dy = p.y - mouse.y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+
+          if (dist < 160) {
+            const alpha = (1 - dist / 160) * 0.15;
+            ctx.beginPath();
+            ctx.moveTo(p.x, p.y);
+            ctx.lineTo(mouse.x, mouse.y);
+            ctx.strokeStyle = `rgba(22, 163, 74, ${alpha})`;
+            ctx.lineWidth = 1.2;
+            ctx.stroke();
+          }
+        });
+      }
+
+      requestAnimationFrame(drawPlexus);
+    }
+    drawPlexus();
+  }
+
+  // ════ FLOATING LABEL INPUT GLOWS ════
+  const inputs = document.querySelectorAll('#contact-form input, #contact-form textarea, #contact-form select');
+  inputs.forEach(input => {
+    const parent = input.parentElement;
+    const label = parent ? parent.querySelector('label') : null;
+    
+    if (label) {
+      input.addEventListener('focus', () => {
+        label.style.color = '#16A34A';
+        label.style.transform = 'translateY(-2px) scale(0.98)';
+        label.style.transformOrigin = 'left center';
+        label.style.transition = 'all 0.3s ease';
+        input.style.boxShadow = '0 0 0 4px rgba(22, 163, 74, 0.1)';
+      });
+      input.addEventListener('blur', () => {
+        label.style.color = '';
+        label.style.transform = '';
+        input.style.boxShadow = '';
+      });
+    }
+  });
+
+  // ════ MAGNETIC SUBMIT BUTTON ════
+  const submitBtn = document.getElementById('submit-btn');
+  if (submitBtn && typeof gsap !== 'undefined') {
+    submitBtn.addEventListener('mousemove', (e) => {
+      const rect = submitBtn.getBoundingClientRect();
+      const x = e.clientX - rect.left - rect.width / 2;
+      const y = e.clientY - rect.top - rect.height / 2;
+      
+      gsap.to(submitBtn, {
+        x: x * 0.35,
+        y: y * 0.35,
+        duration: 0.3,
+        ease: 'power2.out'
+      });
+    });
+    submitBtn.addEventListener('mouseleave', () => {
+      gsap.to(submitBtn, {
+        x: 0,
+        y: 0,
+        duration: 0.5,
+        ease: 'elastic.out(1, 0.5)'
+      });
+    });
+  }
 });
 
-document.getElementById('contact-form').addEventListener('submit', function(e) {
+document.getElementById('contact-form').addEventListener('submit', async function(e) {
   e.preventDefault();
   const btn = document.getElementById('submit-btn');
   const btnText = document.getElementById('btn-text');
   const btnIcon = document.getElementById('btn-icon');
   const errBox = document.getElementById('form-error');
 
-  const formData = new FormData(this);
-  const data = Object.fromEntries(formData.entries());
-
-  if (!data.name || !data.email || !data.message) {
-    errBox.textContent = 'Please fill in all required fields.';
-    errBox.classList.remove('hidden');
-    return;
-  }
-
-  btnText.textContent = 'Securing Your Priority Audit...';
+  btnText.textContent = 'Sending...';
   btnIcon.className = 'fas fa-spinner fa-spin';
   btn.disabled = true;
   errBox.classList.add('hidden');
 
-  // Format WhatsApp message for Neel Shah (+91 94268 46035)
-  const phoneVal = (data.phone || '').trim() || 'Not provided';
-  const cityVal = (data.city || '').trim() || 'Not specified';
-  const serviceVal = (data.service || '').trim() || 'General Growth Strategy';
+  const formData = new FormData(this);
+  const data = Object.fromEntries(formData.entries());
 
-  const waMsg = `*🚀 New Growth Inquiry — WholeUp*\n\n` +
-    `👤 *Client Name:* ${data.name.trim()}\n` +
-    `📞 *Phone:* ${phoneVal}\n` +
-    `📧 *Email:* ${data.email.trim()}\n` +
-    `📍 *City:* ${cityVal}\n` +
-    `🎯 *Service:* ${serviceVal}\n\n` +
-    `📝 *Business Requirement:*\n${data.message.trim()}\n\n` +
-    `🌐 *Sent from:* wholeup.in/contact`;
-
-  const waUrl = `https://api.whatsapp.com/send?phone=919426846035&text=${encodeURIComponent(waMsg)}`;
-  const thankYouUrl = `/thank-you?name=${encodeURIComponent(data.name.trim())}&service=${encodeURIComponent(serviceVal)}&phone=${encodeURIComponent(phoneVal)}`;
-
-  // 1. Save lead to backend & redirect to /thank-you conversion page
   try {
-    fetch('/api/contact', {
+    const res = await fetch('/api/contact', {
       method: 'POST',
-      keepalive: true,
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(data)
-    }).finally(function() {
-      // Try opening WhatsApp in new tab for instant connection
-      try {
-        window.open(waUrl, '_blank');
-      } catch (err) {
-        console.warn('Popup blocked:', err);
-      }
-      // Redirect to dedicated /thank-you conversion tracking page
-      window.location.href = thankYouUrl;
     });
+    const result = await res.json();
+    if (result.success) {
+      this.style.display = 'none';
+      document.getElementById('form-success').classList.remove('hidden');
+    } else {
+      errBox.textContent = result.message || 'Something went wrong. Please try again.';
+      errBox.classList.remove('hidden');
+      btnText.textContent = 'Submit Request';
+      btnIcon.className = 'fas fa-arrow-right';
+      btn.disabled = false;
+    }
   } catch(err) {
-    console.error('Submission error:', err);
-    window.location.href = thankYouUrl;
+    errBox.textContent = 'Network error. Please try again or contact us directly.';
+    errBox.classList.remove('hidden');
+    btnText.textContent = 'Submit Request';
+    btnIcon.className = 'fas fa-arrow-right';
+    btn.disabled = false;
   }
 });
 </script>

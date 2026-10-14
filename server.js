@@ -60,7 +60,7 @@ app.use(helmet({ contentSecurityPolicy: false }));
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-app.use(express.static(path.join(process.cwd(), 'public')));
+app.use(express.static(path.join(__dirname, 'public')));
 
 // Middleware to inject canonical URL to all rendered pages
 app.use((req, res, next) => {
@@ -78,7 +78,7 @@ const contactLimiter = rateLimit({
 });
 
 // ─── Template Engine ─────────────────────────────────────────────────────────
-const viewsPath = path.join(process.cwd(), 'views');
+const viewsPath = path.join(__dirname, 'views');
 app.engine('hbs', engine({
   extname: '.hbs',
   defaultLayout: 'main',
@@ -1763,7 +1763,9 @@ function generateSitemap() {
 }
 
 // Generate sitemap on startup
-generateSitemap();
+if (!process.env.VERCEL) {
+  generateSitemap();
+}
 
 // ─── Start ────────────────────────────────────────────────────────────────────
 if (process.env.NODE_ENV !== 'production' || !process.env.VERCEL) {

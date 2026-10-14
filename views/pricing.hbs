@@ -174,20 +174,16 @@
   <div class="max-w-3xl mx-auto text-center gs-reveal">
     <h2 class="text-4xl font-black uppercase tracking-widest text-dark mb-4">Pricing Questions?</h2>
     <p class="text-dark/60 font-medium mb-8">We've answered the most common ones in our FAQ.</p>
+    <a href="/faq" class="inline-flex items-center gap-2 bg-dark text-white px-8 py-3.5 rounded-xl font-bold uppercase tracking-widest text-xs hover:bg-primary transition shadow-md">
+      View All FAQs <i class="fas fa-arrow-right"></i>
     </a>
   </div>
 </section>
 
-<style>
-  .pricing-card-reveal {
-    opacity: 0;
-  }
-</style>
-
 <script>
   let yearlyBilling = false;
 
-  window.addEventListener('DOMContentLoaded', () => {
+  function initPricingPage() {
     // ════ 3D WEBGL UNDULATING WAVE GRID (Three.js) ════
     const canvas = document.getElementById('pricing-3d-canvas');
     if (canvas && typeof THREE !== 'undefined') {
@@ -292,7 +288,13 @@
         card.addEventListener('mousemove', e => updateGlow(e, card));
       });
     }
-  });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initPricingPage);
+  } else {
+    initPricingPage();
+  }
 
   function switchTab(tab) {
     const tabMarketing = document.getElementById('tab-marketing');

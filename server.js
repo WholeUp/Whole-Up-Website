@@ -381,9 +381,17 @@ app.get('/apex-scanner', (req, res) => {
   });
 });
 
-// PRICING (Temporary Redirected to Home)
+// PRICING
 app.get('/pricing', (req, res) => {
-  res.redirect('/');
+  res.render('pricing', {
+    title: 'Transparent Pricing & Retainer Plans | Digital Marketing Packages | Wholeup',
+    metaDesc: 'Explore Wholeup\'s transparent digital marketing and website pricing. Affordable, ROI-driven packages for SEO, Meta Ads, Google Ads, and web development with zero hidden fees.',
+    canonicalUrl: 'https://wholeup.in/pricing',
+    metaKeywords: 'digital marketing pricing, marketing retainer Surat, SEO package price, social media management cost, Wholeup pricing packages',
+    page: 'pricing',
+    pricing,
+    loadThree: true
+  });
 });
 
 // BLOG

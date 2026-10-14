@@ -394,65 +394,65 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- End Google Tag Manager (noscript) -->
 
 <!-- Premium Branded Page Preloader -->
-<div id="preloader" class="fixed inset-0 bg-[#FAF8F2] z-[9999999] flex flex-col items-center justify-center pointer-events-auto select-none overflow-hidden">
-  <div class="z-10 flex flex-col items-center text-center px-6">
+<div id="preloader" class="fixed inset-0 bg-[#FAF8F2] z-[9999999] flex flex-col items-center justify-center pointer-events-auto select-none overflow-hidden" style="will-change: transform; -webkit-transform: translateZ(0); transform: translateZ(0);">
+  <div class="z-10 flex flex-col items-center text-center px-6" style="will-change: transform, opacity;">
     <!-- Sleek Custom Animated W Growth Logo -->
-    <div class="relative" id="loader-logo-wrap">
-      <svg class="w-64 h-64 md:w-80 md:h-80" viewBox="0 0 1000 700" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <div class="relative" id="loader-logo-wrap" style="will-change: transform, opacity;">
+      <svg class="w-60 h-60 md:w-72 md:h-72" viewBox="0 0 1000 700" fill="none" xmlns="http://www.w3.org/2000/svg" style="overflow: visible;">
         <defs>
-          <!-- Shadow Filter for Overlap Depth -->
-          <filter id="overlap-shadow" x="-30%" y="-30%" width="160%" height="160%">
-            <feDropShadow dx="-12" dy="12" stdDeviation="16" flood-color="#0D0D0D" flood-opacity="0.35"/>
+          <!-- Soft, Subtle Clean Overlap Shadow (Lightweight & feather-rendered) -->
+          <filter id="overlap-shadow" x="-10%" y="-10%" width="130%" height="130%">
+            <feDropShadow dx="6" dy="5" stdDeviation="5" flood-color="#000000" flood-opacity="0.22"/>
           </filter>
 
-          <!-- Dark Charcoal Gradient for left wing with userSpaceOnUse -->
-          <linearGradient id="charcoal-loader-grad" x1="180" y1="270" x2="465" y2="590" gradientUnits="userSpaceOnUse">
-            <stop offset="0%" stop-color="#2D2D2D" />
-            <stop offset="100%" stop-color="#121212" />
+          <!-- Dark Charcoal Gradient for left wing -->
+          <linearGradient id="charcoal-loader-grad" x1="180" y1="270" x2="470" y2="590" gradientUnits="userSpaceOnUse">
+            <stop offset="0%" stop-color="#282828" />
+            <stop offset="100%" stop-color="#0F0F0F" />
           </linearGradient>
           
-          <!-- Bright Green Gradient for right wing and arrowhead with userSpaceOnUse -->
-          <linearGradient id="green-loader-grad" x1="465" y1="590" x2="900" y2="100" gradientUnits="userSpaceOnUse">
-            <stop offset="0%" stop-color="#1E521F" />
-            <stop offset="60%" stop-color="#4EAB30" />
+          <!-- Bright Green Gradient for right wing and arrowhead -->
+          <linearGradient id="green-loader-grad" x1="465" y1="590" x2="880" y2="100" gradientUnits="userSpaceOnUse">
+            <stop offset="0%" stop-color="#1B6622" />
+            <stop offset="60%" stop-color="#369726" />
             <stop offset="100%" stop-color="#55C235" />
           </linearGradient>
         </defs>
 
         <!-- Right Green Wing (Rendered first so it is in the background) -->
-        <path d="M 465 380 C 455 420, 500 590, 570 590 C 640 590, 710 350, 790 210" 
+        <path d="M 465 370 C 455 420, 500 590, 570 590 C 640 590, 710 350, 790 210" 
               stroke="url(#green-loader-grad)" 
               stroke-width="105" 
-              stroke-linecap="butt" 
+              stroke-linecap="round" 
               stroke-linejoin="round" 
               id="loader-right-wing" 
-              style="stroke-dasharray: 1000; stroke-dashoffset: 1000;" />
+              style="stroke-dasharray: 1000; stroke-dashoffset: 1000; will-change: stroke-dashoffset;" />
 
-        <!-- Left Black Wing (Rendered on top of green wing, with shadow filter) -->
-        <path d="M 180 270 C 180 270, 260 590, 330 590 C 400 590, 440 480, 465 380" 
+        <!-- Left Black Wing (Rendered on top of green wing, with crisp refined shadow) -->
+        <path d="M 180 270 C 180 270, 260 590, 330 590 C 400 590, 440 480, 470 350" 
               stroke="url(#charcoal-loader-grad)" 
               stroke-width="105" 
               stroke-linecap="round" 
               stroke-linejoin="round" 
               filter="url(#overlap-shadow)"
               id="loader-left-wing" 
-              style="stroke-dasharray: 1000; stroke-dashoffset: 1000;" />
+              style="stroke-dasharray: 1000; stroke-dashoffset: 1000; will-change: stroke-dashoffset;" />
 
-        <!-- Solid Arrow Head (Polygon matching the image ditto to ditto) -->
+        <!-- Solid Arrow Head (Scaled smoothly from its base) -->
         <polygon points="712,165 850,106 868,255 790,210" 
                  fill="url(#green-loader-grad)"
                  id="loader-arrow-head" 
-                 style="opacity: 0;" />
+                 style="opacity: 0; transform-origin: 790px 210px; will-change: transform, opacity;" />
 
         <!-- Single Sparkle Star (Top Right) -->
         <path d="M 880 25 Q 880 60 915 60 Q 880 60 880 95 Q 880 60 845 60 Q 880 60 880 25" 
               fill="#55C235" 
               id="loader-star" 
-              style="opacity: 0;" />
+              style="opacity: 0; transform-origin: 880px 60px; will-change: transform, opacity;" />
       </svg>
     </div>
     <!-- Brand Typography Reveal -->
-    <div id="loader-brand-text" class="select-none pointer-events-none mt-1" style="opacity: 0; transform: translateY(12px);">
+    <div id="loader-brand-text" class="select-none pointer-events-none mt-2" style="opacity: 0; transform: translateY(10px); will-change: transform, opacity;">
       <div class="text-2xl sm:text-3xl font-black tracking-tight flex items-center justify-center gap-1 font-heading">
         <span class="text-[#111827]">Whole</span><span class="text-[#16A34A]">Up</span>
       </div>
@@ -996,172 +996,153 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     loadSuggestionChips('default');
   });
 
-  // Premium Branded Preloader Script (W Growth Animation - All Pages, Every Load)
+  // Premium Branded Preloader Script (Silky Smooth W Growth Reveal)
   (function() {
     const preloader = document.getElementById('preloader');
     if (!preloader) return;
     
-    // Prevent scrolling while preloader runs
+    // Prevent scrolling during preloader
     document.body.style.overflow = 'hidden';
+    if (typeof lenis !== 'undefined' && lenis) lenis.stop();
     
-    // Check and stop Lenis scroll dynamically
-    if (typeof lenis !== 'undefined' && lenis) {
-      lenis.stop();
-    } else {
-      const checkLenis = setInterval(() => {
-        if (typeof lenis !== 'undefined' && lenis) {
-          lenis.stop();
-          clearInterval(checkLenis);
-        }
-      }, 50);
-      setTimeout(() => clearInterval(checkLenis), 3000);
-    }
-    
-    // Start drawing animation on DOM Content Loaded
-    window.addEventListener('DOMContentLoaded', () => {
-      if (typeof gsap === 'undefined') {
-        setTimeout(finishLoading, 2200);
-        return;
+    let isFinished = false;
+
+    function finishLoading() {
+      if (isFinished) return;
+      isFinished = true;
+      if (preloader) {
+        preloader.style.transition = 'transform 0.45s cubic-bezier(0.77, 0, 0.175, 1), opacity 0.45s ease';
+        preloader.style.transform = 'translateY(-100%)';
+        preloader.style.opacity = '0';
+        setTimeout(() => {
+          preloader.style.display = 'none';
+          document.body.style.overflow = '';
+          if (typeof lenis !== 'undefined' && lenis) lenis.start();
+        }, 460);
       }
-
-      // Cross-browser safe initialization of scale and origin
-      gsap.set('#loader-arrow-head', { scale: 0, transformOrigin: '50% 50%', opacity: 1 });
-      gsap.set('#loader-star', { scale: 0, transformOrigin: '50% 50%', opacity: 1 });
-      gsap.set('#loader-brand-text', { y: 12, opacity: 0 });
-
-      const tl = gsap.timeline({
-        onComplete: () => {
-          // Wait exactly 400ms after the W completes, then start the exit transition!
-          setTimeout(startExit, 400);
-        }
-      });
-      
-      // 1. Draw Left Black Wing (starts immediately)
-      tl.to('#loader-left-wing', {
-        strokeDashoffset: 0,
-        duration: 1.0,
-        ease: 'power3.out'
-      }, 0);
-      
-      // 2. Draw Right Green Wing (starts simultaneously at 0.0)
-      tl.to('#loader-right-wing', {
-        strokeDashoffset: 0,
-        duration: 1.0,
-        ease: 'power3.out'
-      }, 0);
-      
-      // 3. Arrowhead Pop In, Scale Up & Bounce (starts at 0.8s, near the end of wing drawing)
-      tl.to('#loader-arrow-head', {
-        scale: 1,
-        duration: 0.55,
-        ease: 'back.out(1.7)'
-      }, 0.8);
-
-      // 4. Sparkle Star Pop In, Spin/Scale and Shine (starts at 0.9s, staggered)
-      tl.to('#loader-star', {
-        scale: 1,
-        rotation: 45,
-        duration: 0.55,
-        ease: 'back.out(1.5)'
-      }, 0.9);
-
-      // 5. Brand text reveal
-      tl.to('#loader-brand-text', {
-        y: 0,
-        opacity: 1,
-        duration: 0.45,
-        ease: 'power2.out'
-      }, 0.95);
-    });
+    }
 
     function startExit() {
+      if (isFinished) return;
       if (typeof gsap !== 'undefined' && preloader) {
+        isFinished = true;
         const exitTl = gsap.timeline({
           onComplete: () => {
             preloader.style.display = 'none';
             document.body.style.overflow = '';
-            if (typeof lenis !== 'undefined' && lenis) {
-              lenis.start();
-            }
-            if (typeof ScrollTrigger !== 'undefined') {
-              ScrollTrigger.refresh();
-            }
+            if (typeof lenis !== 'undefined' && lenis) lenis.start();
+            if (typeof ScrollTrigger !== 'undefined') ScrollTrigger.refresh();
           }
         });
         
-        // Parallax logo exit (slides up slightly faster & fades out)
+        // Logo & brand text glide up and fade out smoothly
         exitTl.to(['#loader-logo-wrap', '#loader-brand-text'], {
-          y: -80,
+          y: -35,
           opacity: 0,
-          duration: 0.45,
+          duration: 0.3,
           ease: 'power2.in'
-        });
+        }, 0);
         
-        // Premium curtain slide-up
+        // Luxury curtain slides up swiftly without lingering
         exitTl.to(preloader, {
           yPercent: -100,
-          duration: 0.75,
-          ease: 'power4.inOut'
-        }, "-=0.3");
+          duration: 0.5,
+          ease: 'power3.inOut'
+        }, 0.1);
 
-        // Premium parallax page reveal (fades and rises up dynamically)
+        // Page content subtle dynamic reveal
         exitTl.fromTo('main', {
-          y: 40,
-          opacity: 0
+          y: 20,
+          opacity: 0.8
         }, {
           y: 0,
           opacity: 1,
-          duration: 0.75,
-          ease: 'power3.out'
-        }, "-=0.55");
+          duration: 0.45,
+          ease: 'power2.out'
+        }, 0.15);
       } else {
         finishLoading();
       }
     }
 
-    function finishLoading() {
-      if (preloader) {
-        preloader.style.transition = 'transform 0.65s cubic-bezier(0.77, 0, 0.175, 1)';
-        preloader.style.transform = 'translateY(-100%)';
-        setTimeout(() => {
-          preloader.style.display = 'none';
-          document.body.style.overflow = '';
-          if (typeof lenis !== 'undefined' && lenis) {
-            lenis.start();
-          }
-        }, 700);
+    function runAnimation() {
+      if (isFinished) return;
+      if (typeof gsap === 'undefined') {
+        setTimeout(finishLoading, 600);
+        return;
       }
+
+      gsap.set('#loader-arrow-head', { scale: 0, opacity: 1 });
+      gsap.set('#loader-star', { scale: 0, opacity: 1 });
+      gsap.set('#loader-brand-text', { y: 10, opacity: 0 });
+
+      const tl = gsap.timeline({
+        onComplete: () => {
+          // Elegant, brief 140ms hold so user clearly sees the logo, then swift fluid exit
+          setTimeout(startExit, 140);
+        }
+      });
+      
+      // 1. Draw Left and Right Wings simultaneously (fast, crisp, 0.65s)
+      tl.to('#loader-left-wing', {
+        strokeDashoffset: 0,
+        duration: 0.65,
+        ease: 'power2.out'
+      }, 0);
+      
+      tl.to('#loader-right-wing', {
+        strokeDashoffset: 0,
+        duration: 0.65,
+        ease: 'power2.out'
+      }, 0);
+      
+      // 2. Arrowhead pops out right as green stroke reaches top
+      tl.to('#loader-arrow-head', {
+        scale: 1,
+        duration: 0.35,
+        ease: 'back.out(1.6)'
+      }, 0.42);
+
+      // 3. Sparkle Star pops and rotates
+      tl.to('#loader-star', {
+        scale: 1,
+        rotation: 45,
+        duration: 0.35,
+        ease: 'back.out(1.8)'
+      }, 0.48);
+
+      // 4. WholeUp Agency brand text fades in
+      tl.to('#loader-brand-text', {
+        y: 0,
+        opacity: 1,
+        duration: 0.3,
+        ease: 'power2.out'
+      }, 0.52);
     }
 
-    // Fail-safe timeout in case DOMContentLoaded or GSAP gets delayed
-    setTimeout(finishLoading, 2800);
+    // Run animation as soon as GSAP is available (zero waiting for blocking events)
+    if (typeof gsap !== 'undefined') {
+      runAnimation();
+    } else {
+      let attempts = 0;
+      const checkInterval = setInterval(() => {
+        attempts++;
+        if (typeof gsap !== 'undefined') {
+          clearInterval(checkInterval);
+          runAnimation();
+        } else if (attempts > 50) { // Max 1s wait
+          clearInterval(checkInterval);
+          finishLoading();
+        }
+      }, 20);
+    }
 
-    // Snitch-Style Page Transitions on clicking internal nav links
-    document.addEventListener('click', (e) => {
-      const link = e.target.closest('a');
-      if (!link) return;
+    // Hard fallback timeout: NEVER allow preloader to linger past 1.4s
+    setTimeout(finishLoading, 1400);
 
-      const href = link.getAttribute('href');
-      const target = link.getAttribute('target');
-      
-      // Bypass external, mail, tel, whatsapp, hash, download, or modifier key clicks
-      if (!href || href.startsWith('#') || href.startsWith('tel:') || href.startsWith('mailto:') || href.startsWith('javascript:')) return;
-      if (target === '_blank' || e.ctrlKey || e.metaKey || e.shiftKey || e.altKey) return;
-      if (link.hostname && link.hostname !== window.location.hostname) return;
-
-      // Don't trigger if clicking current exact URL
-      if (link.pathname === window.location.pathname && !link.search) return;
-
-      // Reset & show preloader before navigating
-      if (preloader) {
-        preloader.style.display = 'flex';
-        preloader.style.transform = 'translateY(0%)';
-      }
-    });
-
-    // Handle back/forward navigation cache (bfcache)
+    // Handle back/forward navigation cache (bfcache) - instantly dismiss preloader
     window.addEventListener('pageshow', (event) => {
-      if (event.persisted && preloader) {
+      if (preloader) {
         preloader.style.display = 'none';
         document.body.style.overflow = '';
       }
